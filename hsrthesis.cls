@@ -4,7 +4,10 @@
 \ProcessOptions
 
 \LoadClass[a4paper,oneside]{scrbook}
-\usepackage[left=2.5cm,right=2.5cm]{geometry}
+%\LoadClass[a4paper, oneside]{report}
+\usepackage[left=1.8cm,right=1.8cm]{geometry}
+
+
 
 \RequirePackage{ifthen}
 \RequirePackage{graphicx}
@@ -47,6 +50,9 @@
 
 \usepackage{epigraph}
 
+\usepackage{lipsum}
+
+\usepackage[final]{pdfpages}
 
 %\tcbuselibrary{minted,skins,xparse}
 

@@ -23,9 +23,10 @@
 % <http://www.gnu.org/licenses/>.
 %
 
-\newcommand{\kiru}{Kirusanth Poopalasingam }
-\newcommand{\styp}{Martin Stypinski }
+\newcommand{\kiru}{Kirusanth Poopalasingam}
+\newcommand{\styp}{Martin Stypinski}
 \newcommand{\aeme}{Marcel Amsler}
+
 
 \documentclass[11pt]{hsrthesis}
 
@@ -34,6 +35,46 @@
 
 \begin{document}
 \input{chapter/00preamble/01title}
+\newpage
+
+\pagenumbering{roman}
+
+
+% The main content
+%%%%%%%%%%%%%%%%%%
+
+
+\input{chapter/00preamble/02confirmation}
+\input{chapter/00preamble/03thank}
+\input{chapter/01abstract/01abstract}
+\input{chapter/02mgtsum/01mgtsum}
+\input{chapter/03task/01task}
+
+% Table of content
+% % % % % % % % %
+\newpage
+\addcontentsline{toc}{chapter}{Inhaltsverzeichnis}
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+
+
+\part{Technischer Bericht}
+
+\part{Anhang}
+\newpage
+\renewcommand \thechapter{\Alph{chapter}}
+
+
+\input{chapter/51prjplan/01plan}
+
+
+\chapter{Sitzungsprotokolle}
+\includepdf[pages=-]{chapter/52protocol/protokoll_w01.pdf} 
+
 
 
 
