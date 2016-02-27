@@ -1,0 +1,41 @@
+\newpage
+\chapter{Umsetzung}
+
+\section{Multicopter Hardware}
+
+Um unsere Plattform testen zu können, haben wir zwei identische Quadcopter aufgebaut.
+Wichtig dabei ist, dass für die Benutzung unserer Plattform kein identischer Aufbau nötig ist. Es wird lediglich ein Flight-Controller mit einer MAV-Link kompatiblen Firmware benötigt. z.B. ArduCopter, PX4, usw. 
+
+\subsection{Frame und Antrieb}
+
+Der Frame, die Motoren und ESCs wurden als Kit gekauft. Es handelt sich dabei um ein DJI Flamewheel 450 Frame mit DJI 2312 960kV Motoren und ESeries 420 20A ESCs. Dieses Kit ist weltweit gut verfügbar und deshalb ideal geeignet um einen Versuchsaufbau zu erstellen.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth] {images/hardware/f450.jpg} 
+	\caption{DJI F450 Flamewheel Kit}
+	\label{fig:f450}
+\end{figure}
+
+
+\subsection{Flight-Controller}
+
+Der Flight-Controller ist das Herzstück eines Quadcopters. Im Unterschied zu anderen Ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst alle Befehle, die von der Fernbedienung kommen, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung zu erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches abfliegen von Wegpunkten.
+
+Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open-Source ist und auch bei vielen anderen Projekten eingesetzt wird. Sie unterstützt ausserdem das MAV-Link Protokoll, das es ermöglicht verschiedene Hardware über den USB Port anzusprechen.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\textwidth] {images/hardware/pixhawk.jpg} 
+	\caption{Pixhawk Flight-Controller}
+	\label{fig:pixhawk}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.3\textwidth] {images/hardware/gps-module.jpg} 
+	\caption{GPS-Modul für Pixhawk}
+	\label{fig:gps-module}
+\end{figure}
+
+
