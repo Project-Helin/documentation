@@ -24,7 +24,9 @@
 %\usepackage[latin1]{inputenc}
 
 \usepackage[utf8]{inputenc}
+
 \usepackage[T1]{fontenc}
+
 \usepackage{textcomp}
 \usepackage{lmodern}
 \usepackage{titlesec}
