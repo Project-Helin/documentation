@@ -58,7 +58,7 @@ Es kann angenommen werden, dass der Zeitplan im Rahmen der regulären Bachelorar
 \newpage
 
 \section{Meilensteinplanung}
-Grundsätzlich wird während der gesammten Arbeit Scrum als Projektmanagement eingsetzt. Ein Scrum-Sprint dauer in der Regel 2 Wochen. Die Meilensteine helfen nur zu definieren welche Tasks prioritär behandelt werden sollen.
+Grundsätzlich wird während der gesamten Arbeit Agiles-Projektmanagement mit Scrum als Methode eingsetzt. Ein Scrum-Sprint dauert in der Regel 2 Wochen. Die Meilensteine helfen nur zu definieren welche Tasks prioritär behandelt werden sollen.
 
 \begin{figure}[ht]
 %\begin{figure}[H]
@@ -130,31 +130,31 @@ Als Konsequenz kann folgende Aufteilung getroffen werden:
 Für die hohen und mittleren Risiken wurden folgende Massnahmen festgelegt:
 \begin{itemize}
 	\item{\textbf{R03 - Internet auf Mobilgerät:} \\
-	\textbf{Massnahmen:} Es muss sichergestellt werden, dass die Drohne nicht auf eine permanente Serververbindung angewiesen ist. Monitor und Datenlogging dürfen kurze Unterbrechungen aufweisen. Die Mission darf aber zu keinem Zeitpunkt gefährdet werden, die Drohne muss selbstständig am Bestimmungsort landen.}
+	\textbf{Massnahmen:} Es muss sichergestellt werden, dass die Drohne nicht auf eine permanente Serververbindung angewiesen ist. Monitor und Datenlogging dürfen Unterbrechungen aufweisen. Die Mission darf aber zu keinem Zeitpunkt gefährdet werden, die Drohne muss selbstständig ihre Aufgabe erfüllen können und danach wieder zurückkehren.}
 	
 	\item{\textbf{R06 - Absturz und Schäden:} \\
-	\textbf{Massnahmen:} Bei der Wahl der Drohne wurde auf eine Verfügbarkeit der Ersatzteile geachtet. Ebenfalls wurde darauf geachtet, dass die Bezugsquellen in der Schweiz einen adequaten Lagerbestand aufweisen.}
+	\textbf{Massnahmen:} Bei der Wahl der Drohne wurde auf die Verfügbarkeit der Ersatzteile geachtet, sofern dies möglich war. }
 
 	\item{\textbf{R01 - JMS auf Mobilgerät:} \\
-	\textbf{Massnahmen:} Bei der Evaluierung der Komponenten wird ein JMS Implementierung gewählt, die auf einem Android Betriebssystem lauffähig ist. Dies wird in einem Proof of Concept überprüft.}
+	\textbf{Massnahmen:} Bei der Evaluierung der Komponenten wird eine JMS Implementierung gewählt, die auf einem Android Betriebssystem lauffähig ist. Dies wird in einem Proof of Concept überprüft.}
 	
-	\item{\textbf{R04 - Infrastruktur Problme:} \\
-	\textbf{Massnahmen:} Auf Grund von Erfahrungen aus früheren Projekten, wird auf die Serverinfrastruktur der HSR verzichtet, dies garantiert eine volle Kontrolle über den Server. Es muss jedoch berücksichtig werden, dass der administrativ Aufwand höher ist und somit mehr Zeit in Anspruch nehmen wird.}
+	\item{\textbf{R04 - Infrastruktur Probleme:} \\
+	\textbf{Massnahmen:} Auf Grund von Erfahrungen aus früheren Projekten, wird auf die Serverinfrastruktur der HSR verzichtet, dies garantiert eine volle Kontrolle über den Server. Es muss jedoch berücksichtig werden, dass der administrative Aufwand höher ist und somit mehr Zeit in Anspruch nehmen wird.}
 	
 	\item{\textbf{R05 - Kapazität der Drohne:} \\
-	\textbf{Massnahmen:} Sollte die Drohne nicht ein Gewicht transportieren, dass einer Demonstration würdig ist, wird ein Akkupack mit mehr Spannung angeschaft.}	
+	\textbf{Massnahmen:} Es werden Güter verwendet, deren Gewicht von der Drohne Transportiert werden kann.}	
 	
 	\item{\textbf{R07 - Positionsungenauigkeit:} \\
-	\textbf{Massnahmen:} Bei Flugkoridoren und Landepunkten genügend Sicherheitsmarge einrechnen, damit die GPS Ungenauigkeit keine unvorhergesehnen Probleme bereiten kann.}
+	\textbf{Massnahmen:} Bei Flugkorridoren und Landepunkten wird genügend Sicherheitsmarge eingerechnet um die Ungenauigkeit zu relativieren.}
 	
 	\item{\textbf{R08 - Ardupilot Handhabung:} \\
-	\textbf{Massnahmen:} Von Anfang an die gesammte Route an Ardupilot übertragen. Dies muss in einem Proof of Concept genauer eruiert werden.}
+	\textbf{Massnahmen:}  Im Proof of Concept wird überprüft, wann und wie Updates gemacht werden können. Falls Updates während des Flugs nicht möglich sind, wird von Anfang an die gesammte Route an Ardupilot übertragen.}
 	
 	\item{\textbf{R09 - Ardupilot API:} \\
 	\textbf{Massnahmen:} Früh in einem Proof of Concept die Möglichkeiten und Grenzen des APIs nachvollziehen.}
 	
 	\item{\textbf{R10 - Entwicklungsprozesse:} \\
-	\textbf{Massnahmen:} Bewusster Umgang mit der Resource Zeit. Gegebenenfalls Arbeitsplatz im Freien, um Zeit während des Deployments auf die Drohne zu sparen.}
+	\textbf{Massnahmen:} Es wird während des Proof of Concepts versucht einen Simulator zu verwenden um Zeit zu sparen. Gegebenenfalls Arbeitsplatz im Freien, um Zeit während des Deployments auf die Drohne zu sparen.}
 	
 	\item{\textbf{R12 - Ablademanagement:} \\
 	\textbf{Massnahmen:} Prüfung einer Abwurfmöglichkeit. Gegebenenfalls Benutzer mit GUI auf Mobile begleiten um einen sicheren und unfallfreien Ablad zu garantieren.}
@@ -162,7 +162,7 @@ Für die hohen und mittleren Risiken wurden folgende Massnahmen festgelegt:
 
 \section{Qualitätsmassnahmen}	
 \subsection{Dokumentation}
-Die Dokumentation wird vollständig in Latex geschrieben und befindet sich zu jedem Zeitpunkt auf dem Project-Helin github repository: github.com/project-helin.
+Die Dokumentation wird vollständig in Latex geschrieben und befindet sich zu jedem Zeitpunkt auf dem Project-Helin github repository: github.com/project-helin. Alle grösseren Änderungen werden immer von einem anderen Teammitglied gelesen und überprüft.
 
 \subsection{Projektmanagement}
 Für das Projektmanagement wird Jira von Atlassian verwendet. \\
@@ -171,12 +171,14 @@ Als Projektmanagmenet Methodik wird Scrum verwendet, jedoch werden einige Meilen
 \subsection{Entwicklung}
 Die Qualität der Entwicklung wird durch folgende Massnahmen sichergestellt:
 \begin{itemize}
-	\item{\textbf{Code Review:} Bei kritischen Komponenten werden Code Reviews durchgeführt um sich Designentscheidungen bewusst vor Augen zu führen.}
+	\item{\textbf{Code Review:} Bei kritischen Komponenten werden Code Reviews durchgeführt.}
 	
-	\item{\textbf{Testing:} Das gesammte Projekt wird in Java entwickelt. Als Unit-Test Framework wird folglich JUnit4 verwendet.}
+	\item{\textbf{Feature Review:} Bei allen Features bzw. umgesetzten User-Stories führt ein anderes Teammitglied eine Qualitätskontrolle durch. Diese kontrolliert hauptsächlich die Erfüllung der Acceptance-Criterias.}
+	
+	\item{\textbf{Testing:} Das gesammte Projekt wird in Java entwickelt. Als Unit-Test Framework JUnit4 verwendet.}
 	
 	\item{\textbf{Versionierung:} Der gesammte Quellcode wird mithilfe von github versioniert.}
 	
-	\item{\textbf{Deployment:} Die Serverkomponenten werden mithilfe eines Build Systems deployt. Die Komponenten auf den Mobiltelefonen werden manuell deployt. Jedoch werden auf dem Build-System ebenfalls Unit-Tests zu Verfügung gestellt.}
+	\item{\textbf{Deployment:} Die Serverkomponenten werden mithilfe eines Build Systems deployt. Die Komponenten auf den Mobiltelefonen werden manuell deployt. Jedoch wird auf dem Build-System für alle Komponenten die Ausführung von Unit-Tests ermöglicht.}
 	
 \end{itemize}
