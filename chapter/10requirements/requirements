@@ -1,1 +1,95 @@
 \chapter{Anforderungen}
+
+\section{Benutzer und Personas}
+
+
+Die Benutzer der Project Helin Plattform teilen sich in zwei Gruppen auf, welche in dieser Arbeit berücksichtigt werden.
+
+\subsection{Service-Nutzer}
+
+Service-Nutzer verwenden nur die Service App um einen Service oder ein Gut an ihre Position zu bestellen. 
+
+\subsubsection{Persona Diego}
+
+\begin{wrapfigure}{L}{.35\textwidth} 
+\vspace{-.5cm}
+\includegraphics[width=.35\textwidth]{images/014m.jpg} 
+\captionsetup{textformat=empty,labelformat=blank}
+\caption[Persona Diego: Freie Lizenz; Quelle \href{http://blog.placeit.net/free-avatar-pack/}{http://blog.placeit.net/free-avatar-pack/}]{}
+
+\vspace{-2cm}
+\end{wrapfigure}
+
+Er ist \textbf{23 Jahre alt} wohnt in einem modernen Quartier in Zürich.
+
+Robert liest gerne und geht mindestens vier Mal pro Jahr in ein Museum. Er unternimmt am Wochenende gerne etwas in der Schweiz mit seiner Frau und/oder seinen Kindern.
+
+Er arbeitet als Buchhalter in einem Treuhandbüro in Thalwil. 
+
+\paragraph{Technisches Verhalten} 
+
+Arbeitet täglich acht Stunden mit dem PC. Nutzt gerne neue Technologien. Besitzt ein iPad und iPhone. Probiert gerne neue Apps aus, wenn sie ihm einen Zusatznutzen bringen. Im Durchschnitt installiert er ein neues App im Monat. Er verwendet zum Beispiel regelmässig die Kindle App, WhatsApp und Runkeeper. Wenn er nicht weiterkommt, fragt er jeweils seinen 15-jährigen Sohn. Mittlerweile kommt er mit den Apple Produkten zurecht, allerdings verwirrt es ihn, wenn in einem App nicht die \textbf{Standard-Steuerelemente} von iOS verwendet werden, wie z.B. Spinner. Die \textbf{iOS Updates macht er immer sofort}, da er die Aufforderungen mittlerweile kennt.\\
+
+\paragraph{Kommunikationsverhalten }
+
+Nutzt hauptsächlich Email, WhatsApp und Telefon. WhatsApp hat SMS fast komplett ersetzt, da es sehr einfach zu bedienen ist und es die meisten Bekannten nutzen. Die Telefonfunktion in WhatsApp verwendet er immer wieder aus Versehen, da das Hörersymbol für ihn irreführend ist.\\ 
+
+\paragraph{Ziele} 
+
+Möchte bei seinen Unternehmungen möglichst viel Neues erfahren und erleben. Möchte jederzeit eine Führung durch ein Museum oder eine Stadt machen können, welche zusätzliche Informationen vermittelt. Möchte sich messen mit Freunden. Will Fokus auf Content, nicht auf App Features.\\
+
+\subsection{Promoters}
+
+Promotoren sind die zahlende Kundschaft von drallo, wie zum Beispiel lokale Tourismusbüros oder Museumsbetreiber. Sie verwenden die drallo-Plattform hauptsächlich, um neue drallos zu erstellen und Teilnahmestatistiken anzusehen.
+
+\subsubsection{Persona Carmen}
+\begin{wrapfigure}{R}{.35\textwidth}  \vspace{-.5cm}
+\includegraphics[width=.35\textwidth]{images/014f.jpg}
+\captionsetup{textformat=empty,labelformat=blank}
+\caption[Persona Carmen: Freie Lizenz; Quelle \href{http://blog.placeit.net/free-avatar-pack/}{http://blog.placeit.net/free-avatar-pack/}]{}
+\vspace{-2cm}
+\end{wrapfigure}
+
+Carmen ist \textbf{35 Jahre alt} und lebt alleine in Zürich.
+
+Sie unternimmt viel mit Freunden und reist gerne. Sie ist auf dem Land aufgewachsen und wohnt jetzt in Zürich. 
+
+Carmen arbeitet 80 Prozent bei Zürich-Tourismus und hat Tourismus an einer höheren Fachschule studiert.
+
+\paragraph{Technisches Verhalten} 
+Sie nutzt den PC täglich bei der Arbeit, vor allem Excel für Auswertungen und ein Buchhaltungsprogramm. Ausserdem ist sie zu Recherchezwecken viel im Internet unterwegs. Sie hat keinen Lieblingsbrowser, nutzt aber immer Chrome, da dieser im Geschäft vom Informatiker empfohlen wurde. Carmen nutzt Technologie in der Freizeit nur wo sie nützlich ist, deshalb installiert sie nur selten neue Apps (ca. alle drei Monate eine neue App). Seit vier Jahren besitzt sie ein iPhone 4s. Ihr privates Notebook ist fünf Jahre alt. Sie überlegt sich nun ein neues Telefon zu kaufen und tendiert zu einem Android, da ihr dies von Freunden empfohlen wurde. 
+
+\paragraph{Kommunikationsverhalten}
+Täglich nutzt sie mehrere Stunden WhatsApp und Facebook, um mit ihren Bekannten im In- und Ausland in Kontakt zu bleiben.
+
+\paragraph{Ziele} 
+Sie möchte mit neuen Ideen ihre Destination für Touristen spannender machen, will den Menschen Zürich näher bringen und spannendes Wissen vermitteln. Möchte spezielle Anlässe mit neuen Medien unterstützen können. Möchte sich mit innovativen Projekten von der Konkurrenz abgrenzen. Möchte möglichst wenig Zeit im Editor verbringen, da es nur eine Aufgabe von Vielen ist.
+
+\section{User-Stories}
+
+Die funktionalen Anforderungen wurden in Absprache mit dem Industriepartner und dem Landesmuseum Zürich im Laufe des Projekts erarbeitet. Es ergab sich eine Liste an User-Stories pro Persona. Es wurde absichtlich die Kurzform ohne Nutzen gewählt um die User-Stories zu beschreiben.
+
+\subsection{Promoter}
+\begin{itemize}
+\item Ich als Promoter kann eine Multiplayer Challenge auf der drallo Plattform anlegen und mit einer Singleplayer Challenge verknüpfen.
+\item Ich als Promoter kann Titel, Mindest- und Maximalanzahl an Player für ein Multiplayer drallo definieren.
+\item Ich als Promoter kann Aufgaben für alle Teammitglieder definieren.
+\item Ich als Promoter kann Aufgaben für einzelne Spieler definieren.
+\item Ich als Promoter kann textuelles und multimediales Feedback für den ausführenden Player und den Rest definieren.
+\item Ich als Promoter kann Objekte auf der Karte erstellen und diese bei Conditions ein- oder ausblenden.
+\item Ich als Promoter kann ein bestehendes drallo verändern.
+\item Ich als Promoter kann meine erstellten drallos finden.
+\end{itemize}
+
+\subsection{Player}
+\begin{itemize}
+\item Ich als Player werde im Singleplayer-Modus zu einem Multiplayer Spiel eingeladen und kann entscheiden, ob ich einem Team beitreten möchte.
+\item Ich als Player erhalte nach dem Spielstart Aufgaben im Multiplayer-Modus.
+\item Ich als Player habe die Möglichkeit Aufgaben im gleichen Stil wie im Singleplayer-Modus zu erfüllen.
+\item Ich als Player sehe Objekte auf der Karte, wenn diese für die Erfüllung meiner Aufgabe notwendig sind.
+\item Ich als Player erhalte eine Nachricht, wenn Teammitglieder eine Aufgabe erledigt haben.
+\item Ich als Player werde benachrichtigt, wenn ein Teammitglied das Spiel verlässt.
+\item Ich als Player erhalte am Ende des Spiels eine Punkteauswertung.
+\item Ich als Player kann während eines Multiplayer Spiels meine Mitspieler auf der Karte finden.
+\item Ich als Player kann ein Multiplayer Spiel verlassen.
+\end{itemize}
