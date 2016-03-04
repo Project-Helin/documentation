@@ -54,6 +54,8 @@
 
 \usepackage{lipsum}
 
+\usepackage{lscape}
+
 \usepackage[final]{pdfpages}
 
 %\tcbuselibrary{minted,skins,xparse}

@@ -38,7 +38,7 @@ Thumbs.db
 
 # LaTex Files #
 ###############
-*.pdf
+main.pdf
 *.aux
 *.glo
 *.idx
