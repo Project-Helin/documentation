@@ -40,7 +40,7 @@
 \usepackage{adjustbox}
 \usepackage{multirow}
 \usepackage{rotating}
-\usepackage[table,xcdraw]{xcolor}
+%\usepackage[table,xcdraw]{xcolor}
 
 \usepackage{color}
 %\usepackage{listings} \lstset{backgroundcolor=\color{lightgrey}} \lstset{language=Java}
@@ -55,6 +55,13 @@
 \usepackage{lipsum}
 
 \usepackage{lscape}
+\usepackage{pdflscape}
+
+\usepackage{fp}
+\usepackage{tikz}
+\usepackage{xcolor}
+
+\usepackage{pifont}
 
 \usepackage[final]{pdfpages}
 

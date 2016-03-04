@@ -1,3 +1,27 @@
+\definecolor{boxred}{RGB}{234,99,99}
+\definecolor{boxorange}{RGB}{255,242,204}
+\definecolor{boxgreen}{RGB}{217,234,211}
+
+
+\newcommand{\greenbox}{
+\begin{tikzpicture}
+\draw[line width=0pt, fill=boxgreen]
+(0, 0) rectangle (0.3, 0.3);
+\end{tikzpicture}}
+
+\newcommand{\orangebox}{
+\begin{tikzpicture}
+\draw[line width=0pt, fill=boxorange]
+(0, 0) rectangle (0.3, 0.3);
+\end{tikzpicture}}
+
+\newcommand{\redbox}{
+\begin{tikzpicture}
+\draw[line width=0pt, fill=boxred]
+(0, 0) rectangle (0.3, 0.3);
+\end{tikzpicture}}
+
+
 \chapter{Projektplan}
 \section{Änderungsgeschichte}
 \begin{tabularx}{\textwidth}{|c|c|X|c|}
@@ -23,7 +47,7 @@ Der Lieferumfang dieser Arbeit entspricht den Vorgaben der HSR:
 	\item{Poster - Enthält Zusammenfassung der Arbeit}
 	\item{Abstract für die Bachelorarbeitsbrochure}
 \end{itemize}
-Zusätzlich ist es uns ein Anliegen, dass der Sourcecode und die Erfahrungen über den Zeitraum der Bachelorarbeit hinaus bestehen bleiben. Daher wurde ein github-repository eingerichtet, dass nach beendigung der Arbeit sämtliche Teile enthält: \textbf{\url{https://github.com/Project-Helin}}
+Zusätzlich ist es uns ein Anliegen, dass der Sourcecode und die Erfahrungen über den Zeitraum der Bachelorarbeit hinaus bestehen bleiben. Daher wurde ein GitHub-Repository eingerichtet, dass nach Beendigung der Arbeit sämtliche Teile enthält: \textbf{\url{https://github.com/Project-Helin}}
 
 \subsection{Annahmen und Einschränkungen}
 Es kann angenommen werden, dass der Zeitplan im Rahmen der regulären Bachelorarbeit Zeit gültig ist. Es wird dabei berücksichtigt das ein Zeithorizont von 17 Wochen zuverfügung steht und die maximale Arbeitszeit von 360 Stunden pro Person nicht überschritten werden soll.
@@ -40,6 +64,7 @@ Es kann angenommen werden, dass der Zeitplan im Rahmen der regulären Bachelorar
 	\caption{Grobübersicht über den Projektplan}
 	\label{Risk result}
 \end{figure}
+
 
 \begin{tabularx}{\textwidth}{|c|c|X|}
   \hline
@@ -105,8 +130,9 @@ Grundsätzlich wird während der gesamten Arbeit Agiles-Projektmanagement mit Sc
 
 \newpage
 
-\section{Risikomanagement}
+
 \begin{landscape}
+\section{Risikomanagement}
 \subsection{Risiken}
 \LTXtable{\textwidth}{risk.tex}
 \end{landscape}

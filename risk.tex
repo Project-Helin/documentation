@@ -1,40 +1,42 @@
-\begin{longtable}{llccX}
+\setlength\LTleft{-0in}            % default: \parindent
+\setlength\LTright{-1in}           % default: \fill
+\begin{longtable}{llcccXccccc}
 %\begin{longtable}{\linewidth}{llccX}
 \toprule
-	& Name & P \footnote[1]{Probability (Eintrittswahrscheinlichkeit)} & C \footnote[2]{Cost (Kosten im Eintrittsfall)} & Beschreibung \\
+	& {\rotatebox{90}{\textbf{Name}}} & {\rotatebox{90}{\textbf{Wahrscheinlichkeit}}} & {\rotatebox{90}{\textbf{Kosten}}} & {\rotatebox{90}{\textbf{Risiko}}} & {\rotatebox{90}{\textbf{Beschreibung}}} &
+	\multicolumn{5}{c}{{\rotatebox{90}{\textbf{Stand in Sprint}}}} \\
+\midrule
+	& \textbf{NFR} & & & & & 1 & 2 & 3 & 4 & 5\\
+\midrule
+R01 & JMS auf Mobilgerät & 3 \footnote[1]{Skala von 1-5, 1 sehr unwahrscheinlich bis 5 sicher} & 4 \footnote[2]{Skala von 1-5, 1 nahezu konsequenzfrei bis 5 katastrophale Folgen} & \orangebox & Eine JMS Verbindung auf dem Mobilgerät könnte sich als schwierig herausstellen &&&&&\\
+R02 & Play Framework & 2 & 1 & \greenbox & Das Play Framework könnte eine zeitaufwendiger Handhabung mit sich bringen. &&&&&\\
+R03 & Internet auf Mobilegerät & 5 & 4 & \redbox & Die Internetverbindung auf dem Mobilgerät könnte instabil sein. &&&&&\\
+R04 & Infrastruktur Probleme & 5 & 1 & \orangebox & Für das Backend wird ein Server mit JMS Broker benötigt, dies könnte auf Grund von geschlossenen Ports zu Problemen führen. &&&&&\\
+
+\midrule
+	& \textbf{Hardware} & & & & & 1 & 2 & 3 & 4 & 5\\
+\midrule
+R05 & Kapazität der Drohne & 4 & 2 & \orangebox & Die Drohne kann das Gewicht des zu transportierenden Gutes nicht heben. &&&&&\\
+R06 & Absturz und Schäden & 5 & 5 & \redbox & Die Drohne kann Abstürzen und Reparaturarbeiten könnten lange dauern, wenn Ersatzteile nicht verfügbar sind. &&&&&\\
+R07 & Postitionsungenauigkeiten & 5 & 2 & \orangebox & GPS könnte auf der Drohne ungenau sein. &&&&&\\
+R08 & Ardupilot Handhabung & 3 & 4 & \orangebox & Ardupilot könnte Updates während dem Betrieb verweigern. Konkret heisst das, dass während des Fluges keine neuen Positionsdaten an den Autopiloten übergeben werden können.  &&&&&\\
+R09 & Ardupilot API & 4 & 2 & \orangebox & Die vorhandene Dokumentation und das API der Ardupilot Komponente könnte unausreichend sein. &&&&&\\
 
 
 \midrule
-	& \textbf{NFR} &  & & \\
+	& \textbf{Workflow} & & & & & 1 & 2 & 3 & 4 & 5\\
 \midrule
-R01 & JMS auf Mobilgerät & 3 \footnote[3]{Skala von 1-5, 1 sehr unwahrscheinlich bis 5 sicher} & 4 \footnote[4]{Skala von 1-5, 1 nahezu konsequenzfrei bis 5 katastrophale Folgen} & Eine JMS Verbindung auf dem Mobilgerät könnte sich als schwierig herausstellen\\
-R02 & Play Framework & 2 & 1 & Das Play Framework könnte eine zeitaufwendiger Handhabung mit sich bringen.\\
-R03 & Internet auf Mobilegerät & 5 & 4 & Die Internetverbindung auf dem Mobilgerät könnte instabil sein.\\
-R04 & Infrastruktur Probleme & 5 & 1 & Für das Backend wird ein Server mit JMS Broker benötigt, dies könnte auf Grund von geschlossenen Ports zu Problemen führen. \\
-
-\midrule
-	& \textbf{Hardware} &  & & \\
-\midrule
-R05 & Kapazität der Drohne & 4 & 2 & Die Drohne kann das Gewicht des zu transportierenden Gutes nicht heben.\\
-R06 & Absturz und Schäden & 5 & 5 & Die Drohne kann Abstürzen und Reparaturarbeiten könnten lange dauern, wenn Ersatzteile nicht verfügbar sind.\\
-R07 & Postitionsungenauigkeiten & 5 & 2 & GPS könnte auf der Drohne ungenau sein.\\
-R08 & Ardupilot Handhabung & 3 & 4 & Ardupilot könnte Updates während dem Betrieb verweigern. Konkret heisst das, dass während des Fluges keine neuen Positionsdaten an den Autopiloten übergeben werden können. \\
-R09 & Ardupilot API & 4 & 2 & Die vorhandene Dokumentation und das API der Ardupilot Komponente könnte unausreichend sein.\\
+R10 & Entwicklungsprozesse & 5 & 2 & \orangebox & Der Entwicklungsprozess kann sehr umständlich sein. Die Drohne muss im Gebäude programmiert werden, der Testflug aber auf offenem Gelände. Dies könnte viel Zeit in Anspruch nehmen.  &&&&&\\
+R11 & Kommunikation im Team & 1 & 1 & \greenbox
+ & Die Teamgrösse von 3 Personen könnte zu Komplikationen in der Kommunikation führen. &&&&&\\
 
 
 \midrule
-	& \textbf{Workflow} & & & \\
+	& \textbf{GUI} & & & & & 1 & 2 & 3 & 4 & 5\\
 \midrule
-R10 & Entwicklungsprozesse & 5 & 2 & Der Entwicklungsprozess kann sehr umständlich sein. Die Drohne muss im Gebäude programmiert werden, der Testflug aber auf offenem Gelände. Dies könnte viel Zeit in Anspruch nehmen. \\
-R11 & Kommunikation im Team & 1 & 1 & Die Teamgrösse von 3 Personen könnte zu Komplikationen in der Kommunikation führen.\\
-
-
-\midrule
-	& \textbf{GUI} &  & & \\
-\midrule
-R12 & Ablademanagement & 3 & 3 & Das Ablademanagement könnte sich schwieriger Gestalten als Angenommen, es müssen viele Sicherheitsfunktionen für den Verbraucher gewährleistet werden, die schwierig zu evaluieren sind. \\
-R13 & Zonedefinition & 2 & 2 & Die Gestaltung von Zonen und deren Handhabung könnte einige offene Fragen aufwerfen. \\
-R14 & Höhenproblematik & 2 & 2 & Mehrere Drohnen in der selben Flugzone, folgern eine Verwendung von unterschiedlicher Flughöhe um Kollisionen zu vermeiden \\
+R12 & Ablademanagement & 3 & 3 & \orangebox & Das Ablademanagement könnte sich schwieriger Gestalten als Angenommen, es müssen viele Sicherheitsfunktionen für den Verbraucher gewährleistet werden, die schwierig zu evaluieren sind.  &&&&&\\
+R13 & Zonedefinition & 2 & 2 & \greenbox & Die Gestaltung von Zonen und deren Handhabung könnte einige offene Fragen aufwerfen.  &&&&&\\
+R14 & Höhenproblematik & 2 & 2 & \greenbox & Mehrere Drohnen in der selben Flugzone, folgern eine Verwendung von unterschiedlicher Flughöhe um Kollisionen zu vermeiden  &&&&&\\
 
 \bottomrule
 \end{longtable}
