@@ -11,7 +11,7 @@ Service-Nutzer verwenden nur die Service App um einen Service oder ein Gut an ih
 
 \subsubsection{Persona Diego}
 
-\begin{figure}
+\begin{figure}[h]
 \includegraphics[width=.35\textwidth]{images/persona-diego.jpg} 
 \caption{Persona Diego: Freie Lizenz; Quelle }
 	%\url{http://blog.placeit.net/free-avatar-pack/}}
@@ -34,7 +34,7 @@ Möchte sich weiterbilden und neue Herausforderungen finden. Möchte Neue Techno
 
 Administratoren verwenden die Project Helin Plattform um eine Flotte von Drohnen zu verwalten. Sie nutzen dazu die Webseite der Plattform und kümmern sich um das definieren von Flugzonen, Services und Gütern.
 
-\subsubsection{Persona Stefanie}
+\subsubsection{Persona Stefanie}[h]
 \begin{figure}
 	\includegraphics[width=.35\textwidth]{images/persona-stefanie.jpg} 
 	\caption{Persona Stefanie: Freie Lizenz; Quelle} %\url{http://blog.placeit.net/free-avatar-pack/}}
@@ -57,7 +57,7 @@ Sie kommuniziert geschäftlich hauptsächlich per E-Mail. Mit Freunden kommunizi
 \paragraph{Ziele} 
 Sie möchte mit neuen und innovativen Ideen Events für Besucher spannender gestalten.
 
-\section{User-Stories}
+\section{Funktionale Anforderungen}
 
 Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den mit dem Betreuer diskutierten Ideen ab. 
 
@@ -86,9 +86,54 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 \item Ich als Service-Nutzer kann eine Bestellung stornieren.
 \end{itemize}
 
+\section{Nichtfunktionale Anforderungen}
+
+%\subsubsection{NFRs detailed}
+\subsection{iPhone Kompatibilität}
+\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
+	%Szenario & Iphone Kompatibilität \\ \hline
+	Synopsis & Die iOS App muss iOS ab Version 8.0 und ab iPhone 5 ohne Einschränkungen lauffähig sein. Die App muss mit 64-Bit lauffähig sein. \\ \hline
+	Relevante QA & Compatibility   \\ \hline
+	Messbarkeit & Die Software lässt sich auf der angegebenen Plattform (iPhone 5, iOS 8.0) installieren, starten und spielen. \\ \hline
+	offene Probleme & Kompatibilität aller neu verwendeten Komponenten muss gewährleistet sein.  \\ \hline
+\end{tabular}
+
+
+\subsection{Android Kompatibilität}
+\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
+	%Szenario & Android Kompatibilität \\ \hline
+	Synopsis & Android App muss ab Android 4.4 ohne Einschränkungen lauffähig sein. \\ \hline
+	Relevante QA & Compatibility   \\ \hline
+	Messbarkeit & Die Software lässt sich auf der angegebenen Plattform (Android 4.4) installieren, starten und spielen. \\ \hline
+	offene Probleme & Kompatibilität aller neu verwendeten Komponenten muss gewährleistet sein.  \\ \hline
+\end{tabular}
+
+
+\subsection{Fehlertoleranz}
+\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
+	%Szenario & Fehlertoleranz \\ \hline
+	Synopsis & Der Singleplayer Teil eines drallos muss weiterhin funktionieren, auch wenn ein oder mehrere Spieler die Verbindung verlieren. Bei zwei oder mehr verbleibenden Spielern muss auch das Multiplayer Spiel weiterlaufen. \\ \hline
+	Relevante QA & Robustness  \\ \hline
+	Messbarkeit & In der Messung wird ein drallo mit einem vierer Team gestartet. Zwei Spieler schalten das Gerät mitten im Spiel aus. Die Verbleibenden müssen das Spiel fertig spielen können. \\ \hline
+	offene Probleme & Was passiert beim Wiedereintritt eines ausgefallenen Spielers?  \\ \hline
+\end{tabular}
+
+
+\subsection{Erweiterbarkeit}
+\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
+	%Szenario & Erweiterbarkeit \\ \hline
+	Synopsis & Die Teamplay Komponente wird so gebaut, dass weitere Teamplay Spielarten mit vergleichbaren Anforderungen einfach auf der bestehenden Komponente aufgebaut werden können.\\ \hline
+	Relevante QA & Extensibility   \\ \hline
+	
+	Messbarkeit & Der Implementationsaufwand weiterer Spielarten soll erheblich kleiner sein als der, der ersten Teamplay-Variante. \\ \hline
+	offene Probleme &  Kann im Rahmen der Studienarbeit nicht gemessen werden, da die zu Verfügung stehende Zeit nicht ausreicht. \\ \hline
+\end{tabular}
+
 \section{Domain-Model}
 
-\begin{figure}
+Aus den Funktionalen Anforderungen ergibt sich das folgende Domainmodel.
+
+\begin{figure}[h]
 	\includegraphics[width=1.0\textwidth]{images/domainmodell.png} 
 	\caption{Domain-Model} 
 	\label{fig:domain-model}
