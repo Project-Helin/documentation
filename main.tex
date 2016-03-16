@@ -27,8 +27,9 @@
 \newcommand{\styp}{Martin Stypinski}
 \newcommand{\aeme}{Marcel Amsler}
 
-\newcommand{\checkgood}{\ding{51}}%
-\newcommand{\checkbad}{\ding{55}}%
+% TODO Martin: explain this
+\newcommand{\checkgood}{\ding{51}} 
+\newcommand{\checkbad}{\ding{55}} 
 
 
 \documentclass[11pt]{hsrthesis}
@@ -40,7 +41,7 @@
 
 
 \begin{document}
-\input{chapter/00preamble/01title}
+\input{chapter/00_preamble/01title}
 \newpage
 
 \pagenumbering{roman}
@@ -50,11 +51,11 @@
 %%%%%%%%%%%%%%%%%%
 
 
-\input{chapter/00preamble/02confirmation}
-\input{chapter/00preamble/03thank}
-\input{chapter/01abstract/01abstract}
-\input{chapter/02mgtsum/01mgtsum}
-\input{chapter/03task/01task}
+\input{chapter/00_preamble/02confirmation}
+\input{chapter/00_preamble/03thank}
+\input{chapter/01_abstract/01abstract}
+\input{chapter/02_mgtsum/01mgtsum}
+\input{chapter/03_task/01task}
 
 % Table of content
 % % % % % % % % %
@@ -69,28 +70,27 @@
 
 
 \part{Technischer Bericht}
-\input{chapter/10requirements/requirements}
-\input{chapter/11architecture/architecture}
-\input{chapter/12Implementation/12Implementation}
+\input{chapter/10_requirements/requirements}
+\input{chapter/11_architecture/architecture}
+\input{chapter/12_Implementation/12Implementation}
 
 \part{Anhang}
 \newpage
 \renewcommand \thechapter{\Alph{chapter}}
 
 
-\input{chapter/51prjplan/01plan}
+\input{chapter/51_prjplan/01plan}
 
 
 \chapter{Sitzungsprotokolle}
-\includepdf[pages=-]{chapter/52protocol/protokoll_w01.pdf} 
-\includepdf[pages=-]{chapter/52protocol/protokoll_w02.pdf} 
-
+\includepdf[pages=-]{chapter/52_protocol/protokoll_w01.pdf}
+\includepdf[pages=-]{chapter/52_protocol/protokoll_w02.pdf}
 
 
 % Templates
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
-\input{chapter/99demo/demo}
+\input{chapter/99_demo/demo}
 
 % List of figures & glossary
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -108,4 +108,4 @@
 
 
 
-\end{document}
+\end{document} 
