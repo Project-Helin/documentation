@@ -3,15 +3,9 @@
 \chapter{Infrastruktur}
 
 \section{Server}
-Aufgrund von Port-Problemen wurde ein externer Server eingemietet. 
-Dieser dient als Continous Integration server.
-
-alle komponente beschreiben
-warum gebraucht, nicht detalliert
-
-
-
-
-
+Aufgrund von Port-Problemen mit dem internen HSR Server, wurde ein externer Server eingemietet. Auf diesem laufen folgende Komponente. \\
+\bf{Team City: } Dient als Continous Integration server, führt bei jedem commit alle Tests durch. Ausswerdem sind auch Bulids jobs eingereicht, um ein Deployment anzustossen.
+\bf{RabbitMQ: } Der RabbitMQ Broker läuft auf demselben server, wurde mit der Management Console eingerichtet, um die aktiven Queues zu überwachen.
+\bf{Helin Server: } Der aktive Helin Server. Dieser wird bei bedarf mit dem neusten Code deployt.
 
 
