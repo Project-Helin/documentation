@@ -28,8 +28,8 @@
 \newcommand{\aeme}{Marcel Amsler}
 
 % TODO Martin: explain this
-\newcommand{\checkgood}{\ding{51}} 
-\newcommand{\checkbad}{\ding{55}} 
+\newcommand{\checkgood}{\ding{51}}
+\newcommand{\checkbad}{\ding{55}}
 
 
 \documentclass[11pt]{hsrthesis}
@@ -54,7 +54,7 @@
 \input{chapter/00_preamble/02confirmation}
 \input{chapter/00_preamble/03thank}
 \input{chapter/01_abstract/01abstract}
-\input{chapter/02_mgtsum/01mgtsum}
+\input{chapter/02_management_summary/01mgtsum}
 \input{chapter/03_task/01task}
 
 % Table of content
@@ -72,14 +72,16 @@
 \part{Technischer Bericht}
 \input{chapter/10_requirements/requirements}
 \input{chapter/11_architecture/architecture}
-\input{chapter/12_Implementation/12Implementation}
+\input{chapter/12_implementation/12Implementation}
+\input{chapter/12_implementation/decision}
 
 \part{Anhang}
 \newpage
 \renewcommand \thechapter{\Alph{chapter}}
 
+\input{chapter/20_infrastructure/infrastructure}
 
-\input{chapter/51_prjplan/01plan}
+\input{chapter/51_projectplan/01plan}
 
 
 \chapter{Sitzungsprotokolle}
