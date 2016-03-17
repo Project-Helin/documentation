@@ -66,3 +66,5 @@ main.pdf
 *.fls
 *.fdb_latexmk
 *.pygtex
+
+documentation.iml
