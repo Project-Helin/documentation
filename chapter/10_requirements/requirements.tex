@@ -89,44 +89,31 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 \section{Nichtfunktionale Anforderungen}
 
 %\subsubsection{NFRs detailed}
-\subsection{iPhone Kompatibilität}
+
+\subsection{Verbindungsabbruch}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
-	%Szenario & Iphone Kompatibilität \\ \hline
-	Synopsis & Die iOS App muss iOS ab Version 8.0 und ab iPhone 5 ohne Einschränkungen lauffähig sein. Die App muss mit 64-Bit lauffähig sein. \\ \hline
-	Relevante QA & Compatibility   \\ \hline
-	Messbarkeit & Die Software lässt sich auf der angegebenen Plattform (iPhone 5, iOS 8.0) installieren, starten und spielen. \\ \hline
-	offene Probleme & Kompatibilität aller neu verwendeten Komponenten muss gewährleistet sein.  \\ \hline
+	Synopsis & Verbindungsabbruch der On-Board App zum Server sollten keine negativen Auswirkungen auf die Mission haben.  \\ \hline
+		
+	Messbarkeit & Nach dem Start der Mission sollte die Drohne auch ohne die Verbindung zum Server die Mission abschliessen können. \\ \hline
+	
+	offene Probleme & Was passiert wenn die Mission geändert wurde? \\ \hline
 \end{tabular}
 
-
-\subsection{Android Kompatibilität}
+\subsection{Nutzlast der Drohne}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
-	%Szenario & Android Kompatibilität \\ \hline
-	Synopsis & Android App muss ab Android 4.4 ohne Einschränkungen lauffähig sein. \\ \hline
-	Relevante QA & Compatibility   \\ \hline
-	Messbarkeit & Die Software lässt sich auf der angegebenen Plattform (Android 4.4) installieren, starten und spielen. \\ \hline
-	offene Probleme & Kompatibilität aller neu verwendeten Komponenten muss gewährleistet sein.  \\ \hline
+	Synopsis & Eine 1/2 Liter PET Flasche sollte ohne Probleme innerhalb von einem 5min Radius geliefert werden können. \\ \hline
+	% Relevante QA & Compatibility   \\ \hline
+	Messbarkeit & Im App kann ein Produkt mit Nutzlast 0.5kg bestellt, und geliefert werden. \\ \hline
+	offene Probleme &   \\ \hline
 \end{tabular}
 
-
-\subsection{Fehlertoleranz}
+\subsection{Open Source}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
 	%Szenario & Fehlertoleranz \\ \hline
-	Synopsis & Der Singleplayer Teil eines drallos muss weiterhin funktionieren, auch wenn ein oder mehrere Spieler die Verbindung verlieren. Bei zwei oder mehr verbleibenden Spielern muss auch das Multiplayer Spiel weiterlaufen. \\ \hline
-	Relevante QA & Robustness  \\ \hline
-	Messbarkeit & In der Messung wird ein drallo mit einem vierer Team gestartet. Zwei Spieler schalten das Gerät mitten im Spiel aus. Die Verbleibenden müssen das Spiel fertig spielen können. \\ \hline
-	offene Probleme & Was passiert beim Wiedereintritt eines ausgefallenen Spielers?  \\ \hline
-\end{tabular}
-
-
-\subsection{Erweiterbarkeit}
-\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
-	%Szenario & Erweiterbarkeit \\ \hline
-	Synopsis & Die Teamplay Komponente wird so gebaut, dass weitere Teamplay Spielarten mit vergleichbaren Anforderungen einfach auf der bestehenden Komponente aufgebaut werden können.\\ \hline
-	Relevante QA & Extensibility   \\ \hline
-	
-	Messbarkeit & Der Implementationsaufwand weiterer Spielarten soll erheblich kleiner sein als der, der ersten Teamplay-Variante. \\ \hline
-	offene Probleme &  Kann im Rahmen der Studienarbeit nicht gemessen werden, da die zu Verfügung stehende Zeit nicht ausreicht. \\ \hline
+	Synopsis &  \\ \hline
+	% Relevante QA & Robustness  \\ \hline
+	Messbarkeit &  \\ \hline
+	offene Probleme &  \\ \hline
 \end{tabular}
 
 \section{Domain-Model}
