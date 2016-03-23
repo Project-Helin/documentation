@@ -89,20 +89,25 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 \section{Nichtfunktionale Anforderungen}
 
 \subsection{Verbindungsabbruch}
+
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
-	Synopsis & Verbindungsabbruch der On-Board App zum Server sollten keine negativen Auswirkungen auf die Mission haben.  \\ \hline
+	Synopsis & Verbindungsabbruch der Onboard App zum Server soll keine negativen Auswirkungen auf die Mission haben.  \\ \hline
 		
-	Messbarkeit & Nach dem Start der Mission sollte die Drohne auch ohne die Verbindung zum Server die Mission abschliessen können. \\ \hline
-	
-	offene Probleme & Was passiert wenn die Mission geändert wurde? \\ \hline
+	Messbarkeit & Nach dem Start der Mission muss die Drohne auch ohne Verbindung zum Server die Mission abschliessen können. \\ \hline
 \end{tabular}
+
+\subsection{Verbindungswiederherstellung}
+\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
+	Synopsis & Nach einem Verbindungsabbruch zwischen dem Server und der Onboard App soll die Verbindung wiederhergestellt werden sobald wieder Internet verfügbar ist. \\ \hline
+	
+	Messbarkeit & Die Verbindung zwischen Server und App wird nach dem deaktivieren und wieder aktivieren der Internetverbindung innert 30 Sekunden wiederhergestellt.\\ \hline
+\end{tabular}
+
 
 \subsection{Nutzlast der Drohne}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
-	Synopsis & Eine 1/2 Liter PET Flasche sollte Probleme innerhalb von einem 5min Radius geliefert werden können. \\ \hline
-	% Relevante QA & Compatibility   \\ \hline
-	Messbarkeit & Im App kann ein Produkt mit Nutzlast 0.5kg bestellt, und geliefert werden. \\ \hline
-	offene Probleme &   \\ \hline
+	Synopsis & Eine 1/2 Liter PET Flasche soll innerhalb von einem 500m Radius geliefert werden können. \\ \hline
+	Messbarkeit & Im App kann ein Produkt mit einem Gewicht von 500g bestellt, und geliefert werden. \\ \hline
 \end{tabular}
 
 
