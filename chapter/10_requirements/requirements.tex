@@ -63,28 +63,47 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 
 \subsection{Administrator}
 \begin{itemize}
-\item Ich als Administrator kann auf der Webseite einen Account erstellen.
-\item Ich als Administrator kann ein Projekt erfassen.
-\item Ich als Administrator kann auf eine Drohne dem Projekt hinzufügen.
-\item Ich als Administrator kann alle Drohnen verwalten (RUD).
-\item Ich als Administrator kann Güter verwalten (CRUD).
-\item Ich als Administrator kann Services verwalten (CRUD) (optional).
-\item Ich als Administrator kann Flug-, Lade- und Abwurfzonen verwalten.
-\item Ich als Administrator kann Bestellungen verwalten (CRUD).
-\item Ich als Administrator kann Missionen vor, nach, und während der Ausführung ansehen.
-\item Ich als Administrator kann Missionen abbrechen.
+\item Als Administrator möchte ich auf der Webseite einen Account erstellen können.
+\item Als Administrator möchte ich ein Projekt erfassen können.
+\item Als Administrator möchte ich auf eine Drohne dem Projekt hinzufügen können.
+\item Als Administrator möchte ich alle Drohnen verwalten können (RUD).
+\item Als Administrator möchte ich Güter verwalten können(CRUD).
+\item Als Administrator möchte ich Services verwalten können (CRUD) (optional).
+\item Als Administrator möchte ich Flug-, Lade- und Abwurfzonen verwalten können.
+\item Als Administrator möchte ich Bestellungen verwalten können(CRUD).
+\item Als Administrator möchte ich Missionen vor, nach, und während der Ausführung ansehen können.
+\item Als Administrator möchte ich Missionen abbrechen können.
 \end{itemize}
 
 \subsection{Kunde}
 \begin{itemize}
-\item Ich als Service-Nutzer kann eine App aus dem Google Play Store herunterladen.
-\item Ich als Service-Nutzer kann die App nutzen ohne mich anzumelden.
-\item Ich als Service-Nutzer kann in der App aus einer Auswahl von Gütern und Services eine Auswahl treffen.
-\item Ich als Service-Nutzer kann eine Bestellung tätigen.
-\item Ich als Service-Nutzer kann auf der Karte des Smartphones die Bewegung der Drohne verfolgen.
-\item Ich als Service-Nutzer erhalte textuelle Updates über den Status meiner Bestellung.
-\item Ich als Service-Nutzer kann eine Bestellung stornieren.
+\item Als Service-Nutzer möchte ich eine App aus dem Google Play Store herunterladen können.
+\item Als Service-Nutzer möchte ich die App nutzen ohne mich anzumelden zu müssen.
+\item Als Service-Nutzer möchte ich in der App, aus einer Auswahl von Gütern und Services, eine Auswahl treffen können.
+\item Als Service-Nutzer möchte ich eine Bestellung tätigen können.
+\item Als Service-Nutzer möchte ich auf der Karte des Smartphones die Bewegung der Drohne verfolgen können.
+\item Als Service-Nutzer möchte ich textuelle Updates über den Status meiner Bestellung erhalten.
+\item Als Service-Nutzer möchte ich eine Bestellung stornieren können.
 \end{itemize}
+
+\subsection{Drone-Operator}
+\begin{itemize}
+	\item Als Drone-Operator möchte ich eine Android App mit Hilfe der heruntergeladenen APK installieren können.
+	\item Als Drone-Operator möchte ich das Gerät bzw. die Drohne beim Server registrieren können.
+	\item Als Drone-Operator möchte ich das Gerät bzw. die Drohne zu einer Organisation hinzufügen können.
+	\item Als Drone-Operator möchte ich das OTG-Fähige Smartphone an einen MAV-Link kompatiblen Flight-Controller über USB anschliessen können.
+	\item Als Drone-Operator möchte ich eine Verbindung zwischen App und Server über das Internet herstellen könnnen.
+	\item Als Drone-Operator möchte ich eine Verbindung zwischen App und Flight-Controller herstellen können.
+	\item Als Drone-Operator möchte ich den aktuellen Zustand der Verbindungen zur Drohne und zum Server sehen.
+	\item Als Drone-Operator mpchte ich den aktuellen Status des Flight-Controllers, beispielsweise GPS und Batteriespannung sehen.
+	\item Als Drone-Operator sehe wenn der Drohne eine neue Mission zugeteilt wurde.
+	\item Als Drone-Operator möchte ich eine Liste von Gütern anzeigen lassen, die für die aktuelle Mission geladen werden müssen.
+	\item Als Drone-Operator möchte ich eine Mission annehmen oder ablehnen können.
+	\item Als Drone-Operator möchte ich die Beladung einer Drohne bestätigen können.
+	\item Als Drone-Operator erhalte ich ein visuelles und akustisches Countdown-Signal bevor die Drohne startet.
+	\item Als Drone-Operator möchte ich den Start der Drohne während des Countdowns verhindern können.
+\end{itemize}
+
 
 \section{Nichtfunktionale Anforderungen}
 
@@ -94,6 +113,13 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 	Synopsis & Verbindungsabbruch der Onboard App zum Server soll keine negativen Auswirkungen auf die Mission haben.  \\ \hline
 		
 	Messbarkeit & Nach dem Start der Mission muss die Drohne auch ohne Verbindung zum Server die Mission abschliessen können. \\ \hline
+\end{tabular}
+
+\subsection{Sicherheit im Mittelpunkt}
+\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
+	Synopsis & Eine Drohne führt vor dem Freigeben der Motoren (Arming) einen Check durch, der prüft ob alle nötigen Voraussetzungen für einen Start erfüllt sind. Ausserdem müssen vor einem Start ebenfalls Voraussetzungen der Mission erfüllt sein, beispielsweise muss der Drone-Operator den Start freigeben. Sollte eine dieser Vorraussetzungen nicht erfüllt sein, darf die Drohne nicht starten.  \\ \hline
+	
+	Messbarkeit & Drohne darf nicht starten, falls der Pre-Flight-Check des Autopiloten nicht erfolgreich war oder Voraussetzungen für die aktuelle Mission nicht erfüllt sind. \\ \hline
 \end{tabular}
 
 \subsection{Verbindungswiederherstellung}
