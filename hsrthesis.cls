@@ -65,6 +65,8 @@
 
 \usepackage[final]{pdfpages}
 
+\usepackage{sidecap}
+
 %\tcbuselibrary{minted,skins,xparse}
 
 

@@ -1,61 +1,60 @@
 \chapter{Anforderungen}
-
 \section{Benutzer und Personas}
-
-
-Die Benutzer der Project Helin Plattform teilen sich in zwei Gruppen auf, welche in dieser Arbeit berücksichtigt werden.
-
-\subsection{Service-Nutzer}
-
-Service-Nutzer verwenden nur die Service App um einen Service oder ein Gut an ihre Position zu bestellen.
-
-\subsubsection{Persona Diego}
-
-\begin{figure}[h]
-\includegraphics[width=.35\textwidth]{images/persona-diego.jpg}
-\caption{Persona Diego: Freie Lizenz; Quelle }
+Die Benutzer der Project Helin Plattform teilen sich in drei Gruppen auf, welche in dieser Arbeit berücksichtigt werden. Die Gruppen werden nach der primären Funktion unterschieden.
+\begin{itemize}
+	\item{\textbf{Kunde:} Der Kunde hat primär interesse an einem Produkterwerb. Er möchte Projekt Helin als Transportplattform für seinen Auftrag verwenden. Er besitzt weder eine Drohne noch ein passendes Geschäftsmodel, welches eine Drohne nutzen möchte.}
+	\item{\textbf{Administrator:} Administratoren verwenden die Project Helin Plattform um eine Flotte von Drohnen zu verwalten. Sie nutzen dazu die Webseite der Plattform und kümmern sich um das Definieren von Flugzonen, Services und Gütern.}
+	\item{\textbf{Drone-Operator:} Der Drone-Operator kümmert sich primär um die Drone und verwendet dafür die Onboard-App um die Drohne einem Organisationsinventar hinzuzufügen.}
+\end{itemize}
+\subsection{Persona Diego: Kunde}
+\begin{minipage}{0.3\textwidth}
+%\begin{figure}
+\includegraphics[width=0.95\textwidth]{images/persona-diego.jpg}
+%\caption{Persona Diego: Freie Lizenz; Quelle }
 	%\url{http://blog.placeit.net/free-avatar-pack/}}
 \label{fig:diego}
-\end{figure}
-
-Er ist \textbf{23 Jahre alt} wohnt in einer WG in Uster.\\
-
+%\end{figure}
+\end{minipage}
+\begin{minipage}{0.7\textwidth}
+\end{minipage}
+Diego ist \textbf{23 Jahre alt} wohnt in einer WG in Uster.
 Diego hat eine Informatik-Lehre mit BMS abgeschlossen und ist auf der Suche nach einer neuen beruflichen oder schulischen Herausforderung.
-
 \paragraph{Technisches Verhalten}
-
-Arbeitet täglich acht Stunden mit dem PC. Nutzt gerne neue Technologien. Besitzt ein Android-Smartphone der neusten Generation. Die Android Updates macht er immer sofort. Interessiert sich für neue Technologien und sieht sich regelmässig Kickstarter Projekte an.\\
-
+Arbeitet täglich acht Stunden mit dem PC. Nutzt gerne neue Technologien. Besitzt ein Android-Smartphone der neusten Generation. Die Android Updates macht er immer sofort. Interessiert sich für neue Technologien und sieht sich regelmässig Kickstarter Projekte an.
 \paragraph{Ziele}
-
-Möchte sich weiterbilden und neue Herausforderungen finden. Möchte neue Technologien entdecken und einsetzen.\\
-
-\subsection{Administratoren}
-
-Administratoren verwenden die Project Helin Plattform um eine Flotte von Drohnen zu verwalten. Sie nutzen dazu die Webseite der Plattform und kümmern sich um das definieren von Flugzonen, Services und Gütern.
-
-\subsubsection{Persona Stefanie}
+Möchte sich weiterbilden und neue Herausforderungen finden. Möchte neue Technologien entdecken und einsetzen.
+\paragraph{Szenario}
+Diego möchte an einem Openair frisches Bier für sich und seine Frenude bestellen, er hat aus der Zeitung von Projekt Helin erfahren und möchte aufgrund seines technischen Interesses den Dienst in Anspruch nehmen.
+\subsection{Persona Carmen: Administratoren}
 \begin{figure}[h]
 	\includegraphics[width=.35\textwidth]{images/persona-stefanie.jpg}
 	\caption{Persona Stefanie: Freie Lizenz; Quelle} %\url{http://blog.placeit.net/free-avatar-pack/}}
 	\label{fig:stefanie}
 \end{figure}
-
-
 Carmen ist \textbf{35 Jahre alt} und lebt alleine in Zürich.
-
 Sie unternimmt viel mit Freunden und reist gerne. Sie ist auf dem Land aufgewachsen und wohnt jetzt in Zürich.
-
 Carmen arbeitet bei einer Eventagentur und hat eine Ausbildung als Eventmanagerin abgeschlossen.
 
 \paragraph{Technisches Verhalten}
 Sie nutzt den PC täglich bei der Arbeit, vor allem Planungstools und das E-Mail-Programm. Ausserdem ist sie zu Recherchezwecken viel im Internet unterwegs. Sie nutzt Chrome als Browser im Geschäft. Sie besitzt ein Samsung Galaxy S4, dass sie schon seit einigen Jahren verwendet. Zuhause hat sie keinen PC.
-
 \paragraph{Kommunikationsverhalten}
-Sie kommuniziert geschäftlich hauptsächlich per E-Mail. Mit Freunden kommuniziert sie über WhattsApp.
-
+Sie kommuniziert geschäftlich hauptsächlich per E-Mail. Mit Freunden unterhält sie sich oft über WhatsApp.
 \paragraph{Ziele}
 Sie möchte mit neuen und innovativen Ideen Events für Besucher spannender gestalten.
+
+\subsection{Persona Ricardo: Drone Operator}
+\begin{figure}[h]
+	\includegraphics[width=.35\textwidth]{images/persona-ricardo.jpg}
+	\caption{Persona Ricardo: Freie Lizenz; Quelle} %\url{http://blog.placeit.net/free-avatar-pack/}}
+	\label{fig:ricardo}
+\end{figure}
+Ricardo ist 26 Jahre alt und wohnhaft in Wetzikon. Der ausgebildete Schlosser hat zur Zeit keinen festen Job. Er lebt das Leben von Tag zu Tag und geniest es keine festen Verpflichtungen zu haben.
+\paragraph{Technisches Verhalten}
+Er nutzt den PC selten, vorallem aber zum Surfen im Internet. Als Mobiltelefon besitzt er ein altes Telefon mit Android. Er möchte sich auch kein neues Gerät kaufen, da er ausser Whatsapp und der Taschenlampe das Gerät sowieso nicht verwendet.
+\paragraph{Kommunikationsverhalten}
+Sie kommuniziert geschäftlich hauptsächlich per E-Mail. Mit Freunden unterhält sie sich oft über WhatsApp.
+\paragraph{Ziele}
+Ricardo möchte noch im kommenden Jahr als Matrose auf einem Kreuzfahrtschiff anheuern und so die Welt entdecken.
 
 \section{Funktionale Anforderungen}
 
@@ -67,30 +66,33 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 \item Als Administrator möchte ich ein Projekt erfassen können.
 \item Als Administrator möchte ich auf eine Drohne dem Projekt hinzufügen können.
 \item Als Administrator möchte ich alle Drohnen verwalten können (RUD).
-\item Als Administrator möchte ich Güter verwalten können(CRUD).
-\item Als Administrator möchte ich Services verwalten können (CRUD) (optional).
+\item Als Administrator möchte ich Güter verwalten können (CRUD).
+\item Als Administrator möchte ich Services verwalten können (CRUD). (optional)
 \item Als Administrator möchte ich Flug-, Lade- und Abwurfzonen verwalten können.
-\item Als Administrator möchte ich Bestellungen verwalten können(CRUD).
+\item Als Administrator möchte ich Bestellungen verwalten können (CRUD).
+
+%add where - what de fuck is a mission mst, 01.04.2016
+
 \item Als Administrator möchte ich Missionen vor, nach, und während der Ausführung ansehen können.
 \item Als Administrator möchte ich Missionen abbrechen können.
 \end{itemize}
 
 \subsection{Kunde}
 \begin{itemize}
-\item Als Service-Nutzer möchte ich eine App aus dem Google Play Store herunterladen können.
-\item Als Service-Nutzer möchte ich die App nutzen ohne mich anzumelden zu müssen.
-\item Als Service-Nutzer möchte ich in der App, aus einer Auswahl von Gütern und Services, eine Auswahl treffen können.
-\item Als Service-Nutzer möchte ich eine Bestellung tätigen können.
-\item Als Service-Nutzer möchte ich die bestellte Ware direkt bezahlen können ( optional )
-\item Als Service-Nutzer möchte ich auf der Karte des Smartphones die Bewegung der Drohne verfolgen können.
-\item Als Service-Nutzer möchte ich textuelle Updates über den Status meiner Bestellung erhalten.
-\item Als Service-Nutzer möchte ich eine Bestellung stornieren können.
-
+\item Als Kunde möchte ich eine App aus dem Google Play Store herunterladen können.
+\item Als Kunde möchte ich die App nutzen ohne mich anmelden zu müssen.
+\item Als Kunde möchte ich in der App, aus einer Liste von Gütern und Services, eine Auswahl treffen können.
+\item Als Kunde möchte ich eine Bestellung tätigen können.
+\item Als Kunde möchte ich die bestellte Ware direkt bezahlen können. (optional)
+\item Als Kunde möchte ich auf der Karte des Smartphones die Bewegung der Drohne verfolgen können.
+\item Als Kunde möchte ich textuelle Updates über den Status meiner Bestellung erhalten.
+\item Als Kunde möchte ich eine Bestellung stornieren können.
 \end{itemize}
 
 \subsection{Drone-Operator}
 \begin{itemize}
 	\item Als Drone-Operator möchte ich eine Android App mit Hilfe der heruntergeladenen APK installieren können.
+	%APK in GLOSSAR!
 	\item Als Drone-Operator möchte ich das Gerät bzw. die Drohne beim Server registrieren können.
 	\item Als Drone-Operator möchte ich das Gerät bzw. die Drohne zu einer Organisation hinzufügen können.
 	\item Als Drone-Operator möchte ich das OTG-Fähige Smartphone an einen MAV-Link kompatiblen Flight-Controller über USB anschliessen können.
@@ -105,12 +107,9 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 	\item Als Drone-Operator erhalte ich ein visuelles und akustisches Countdown-Signal bevor die Drohne startet.
 	\item Als Drone-Operator möchte ich den Start der Drohne während des Countdowns verhindern können.
 \end{itemize}
-
-
+\newpage
 \section{Nichtfunktionale Anforderungen}
-
 \subsection{Verbindungsabbruch}
-
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
 	Synopsis & Verbindungsabbruch der Onboard App zum Server soll keine negativen Auswirkungen auf die Mission haben.  \\ \hline
 		
@@ -123,34 +122,29 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 	
 	Messbarkeit & Drohne darf nicht starten, falls der Pre-Flight-Check des Autopiloten nicht erfolgreich war oder Voraussetzungen für die aktuelle Mission nicht erfüllt sind. \\ \hline
 \end{tabular}
-
 \subsection{Verbindungswiederherstellung}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
 	Synopsis & Nach einem Verbindungsabbruch zwischen dem Server und der Onboard App soll die Verbindung wiederhergestellt werden sobald wieder Internet verfügbar ist. \\ \hline
 	
 	Messbarkeit & Die Verbindung zwischen Server und App wird nach dem deaktivieren und wieder aktivieren der Internetverbindung innert 30 Sekunden wiederhergestellt.\\ \hline
 \end{tabular}
-
-
 \subsection{Nutzlast der Drohne}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
 	Synopsis & Eine 1/2 Liter PET Flasche soll innerhalb von einem 500m Radius geliefert werden können. \\ \hline
 	Messbarkeit & Im App kann ein Produkt mit einem Gewicht von 500g bestellt, und geliefert werden. \\ \hline
 \end{tabular}
-
 \subsection{Security}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
 	Synopsis & Es darf nicht möglich sein, dass jemand die Steuerung einer beim Server registrierten Drohne übernehmen kann.\\ \hline
 	Messbarkeit & Der Übertragungskanal vom Server zur Drohne muss verschlüsselt sein und es dürfen sich keine weiteren Producer anmelden können.\\ \hline
 \end{tabular}
-
 \section{Domain-Model}
-
-Aus den Funktionalen Anforderungen ergibt sich das folgende Domainmodel.
-
+Aus den funktionalen Anforderungen ergibt sich das folgende Domainmodel.
+\begin{landscape}
 \begin{figure}[h]
-	\includegraphics[width=1.0\textwidth]{images/domainmodell.png}
+	\includegraphics[width=0.75\paperheight]{images/domainmodell.png}
 	\caption{Domain-Model}
 	\label{fig:domain-model}
 \end{figure}
+\end{landscape}
 
