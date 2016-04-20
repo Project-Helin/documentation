@@ -19,13 +19,50 @@ Die Abbildung \ref{fig:architecture-overview} zeigt eine Übersicht der verschie
 
 \section{Komponenten Übersicht}
 
-Abbildung 
+Abbildung \ref{fig:logical-architecture-overview} zeigt die Hauptkomponenten, sowie eine Übersicht der enthaltenen Layer und Packages. Ausserdem sind die Abhängigkeiten zu den wichtigsten externen Komponenten in verschiedenen Farben gekennzeichnet. Wichtig ist hier vor allem die gemeinsame Verwendung der Messages-Komponente. 
 
 \begin{figure}[h]
 	\includegraphics[width=1.0\textwidth]{images/logical-architecture-overview.png}
 	\caption{Vereinfachte Übersicht der logischen Architektur und deren Komponenten }
 	\label{fig:logical-architecture-overview}
 \end{figure}
+
+\section{Server-Komponente}
+
+\subsection{Anforderungen}
+
+Aus den in den Anforderungen definierten Zielen ergeben sich für diese Komponente folgende Anforderungen:
+
+\begin{itemize}
+	\item Bietet Benutzeroberfläche für Administratoren
+	\item Verwaltet CRUD für alle nötigen Klassen (siehe Domain Model)
+	\item Verwaltet Verbindungen zu Onboard-Apps und Customer-Apps
+	\item Berechnet Flugrouten basierend auf den erhaltenen Bestellungs-Koordinaten
+\end{itemize}
+
+\subsection{Logische Architektur}
+
+Die Architektur des Servers basiert auf dem MVC Pattern, da dieses für CRUD Applikationen besonders geeignet ist und dafür viele geeignete Frameworks zur Verfügung stehen. %TODO Referenz auf Literaturverzeichnis für MVC
+Die Verantwortlichkeiten der drei Standardlayer sind durch die MVC definition gegeben, die weiteren Layer werden nun genauer definiert.
+
+\subsubsection{Service-Layer}
+
+\begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
+	Verantwortlichkeiten & Zusammenarbeit \\ \hline
+	
+	\begin{itemize}
+		\item Verwaltet Verbindungen zu den Drohnen
+		\item Verarbeitet eingehende Nachrichten von Drohnen
+		\item Verarbeitet eingehende Nachrichten von Customers	
+		\item Berechnet Flugrouten basierend auf den vorgegebenen Flugzonen
+	\end{itemize}&
+	\begin{itemize}
+		\item AMQP-Library
+		\item Messages
+	\end{itemize}
+	\\ \hline
+\end{tabular}
+
 
 \section{Kommunikations-Architektur}
 Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht. Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. Bei den mobilen Geräten wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen. Dies ist nötig, damit Kunden und Administratoren die Bewegungen der Drohne live verfolgen können. Die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Smartphones muss ausserdem den Nicht-Funktionalen-Anforderungen gerecht werden im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung.
