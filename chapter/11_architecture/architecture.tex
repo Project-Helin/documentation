@@ -19,7 +19,7 @@ Die Abbildung \ref{fig:architecture-overview} zeigt eine Übersicht der verschie
 
 \section{Komponenten Übersicht}
 
-Abbildung \ref{fig:logical-architecture-overview} zeigt die Hauptkomponenten, sowie eine Übersicht der enthaltenen Layer und Packages. Ausserdem sind die Abhängigkeiten zu den wichtigsten externen Komponenten in verschiedenen Farben gekennzeichnet. Wichtig ist hier vor allem die gemeinsame Verwendung der Messages-Komponente. 
+Abbildung \ref{fig:logical-architecture-overview} zeigt die Hauptkomponenten, sowie eine Übersicht der enthaltenen Layer und Packages. Ausserdem sind die Abhängigkeiten zu den wichtigsten externen Komponenten dargestellt. Hervorzuheben ist ebenfalls die gemeinsame Verwendung der Messages-Komponente. 
 
 \begin{figure}[h]
 	\includegraphics[width=1.0\textwidth]{images/logical-architecture-overview.png}
@@ -31,7 +31,7 @@ Abbildung \ref{fig:logical-architecture-overview} zeigt die Hauptkomponenten, so
 
 \subsection{Anforderungen}
 
-Aus den in den Anforderungen definierten Zielen ergeben sich für diese Komponente folgende Anforderungen:
+Aus den in den Anforderungen definierten Zielen, ergeben sich für diese Komponente folgende Anforderungen:
 
 \begin{itemize}
 	\item Bietet Benutzeroberfläche für Administratoren
@@ -40,23 +40,125 @@ Aus den in den Anforderungen definierten Zielen ergeben sich für diese Komponen
 	\item Berechnet Flugrouten basierend auf den erhaltenen Bestellungs-Koordinaten
 \end{itemize}
 
-\subsection{Logische Architektur}
+\subsection{Layer}
 
 Die Architektur des Servers basiert auf dem MVC Pattern, da dieses für CRUD Applikationen besonders geeignet ist und dafür viele geeignete Frameworks zur Verfügung stehen. %TODO Referenz auf Literaturverzeichnis für MVC
-Die Verantwortlichkeiten der drei Standardlayer sind durch die MVC definition gegeben, die weiteren Layer werden nun genauer definiert.
+Die Verantwortlichkeiten und Kollaborationen der Layer werden nachfolgend genauer definiert.
+
+
+\subsubsection{View-Layer}
+
+Stellt die grafische Benutzeroberfläche zur Verfügung und rendert diese basierend auf den Model-Daten.
+
+\subsubsection{Controller-Layer}
+
+\begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
+	\textbf{Verantwortlichkeiten} & \textbf{Zusammenarbeit} \\ \hline \hline
+	
+	\begin{itemize}
+		\item Lädt Daten für Views aus dem Data-Access-Layer
+		\item Verarbeitet eingehende HTTP-Requests
+		\item Verarbeitet eingehende Requests aus den Messaging-Queues
+		\item Enthält Business-Logik und steuert Ablauf nach einem Request	
+	\end{itemize}&
+	\begin{itemize}
+		\item Data-Access-Layer
+		\item Service-Layer
+		\item Model-Layer
+		\item Messages
+	\end{itemize}
+	\\ \hline
+\end{tabular}
+
+\subsubsection{Model-Layer}
+
+Der Model-Layer enthält die Datenmodelle. (siehe Domain Model)
 
 \subsubsection{Service-Layer}
 
 \begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
-	Verantwortlichkeiten & Zusammenarbeit \\ \hline
+	\textbf{Verantwortlichkeiten} & \textbf{Zusammenarbeit} \\ \hline \hline
 	
 	\begin{itemize}
 		\item Verwaltet Verbindungen zu den Drohnen
-		\item Verarbeitet eingehende Nachrichten von Drohnen
-		\item Verarbeitet eingehende Nachrichten von Customers	
+		\item Deserialisiert eingehende Nachrichten
+		\item Leitet eingehende Nachrichten von Drohnen an den Controller-Layer weiter	
+		\item Leitet eingehende Nachrichten von Customers an den Controller-Layer weiter	
 		\item Berechnet Flugrouten basierend auf den vorgegebenen Flugzonen
 	\end{itemize}&
 	\begin{itemize}
+		\item Controller-Layer
+		\item AMQP-Library
+		\item Messages
+	\end{itemize}
+	\\ \hline
+\end{tabular}
+
+\subsubsection{Data-Access-Layer (DAL)}
+
+Der Data Access Layer bietet die Möglichkeit auf die Persistence Library zuzugreifen und stellt dafür die wichtigsten Funktionen zur Verfügung. 
+
+\section{Onboard-App}
+
+\subsection{Anforderungen}
+
+\begin{itemize}
+	\item Kommuniziert mit dem Flight-Controller der Drohne
+	\item Kommuniziert mit dem Server
+	\item Bietet eine Benutzeroberfläche für den Drone-Operator 
+\end{itemize}
+
+\subsection{Layer}
+
+Die App enthält die normalen Android-Application-Layer wie Activities und Views. Zusätzlich kommt der Service-Layer hinzu. Dieser enthält keine Android-Services, sondern selbst entwickelte Service-Klassen.
+
+\subsubsection{Service-Layer}
+
+\begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
+	\textbf{Verantwortlichkeiten} & \textbf{Zusammenarbeit} \\ \hline \hline
+	
+	\begin{itemize}
+		\item Verwaltet Verbindung zur Drohne
+		\item Verwaltet Verbindung zum Server
+		\item Deserialisiert eingehende Nachrichten.
+		\item Leitet eingehende Nachrichten vom Server and den Activities-Layer oder andere Services weiter
+		\item Ermöglicht das Senden von Nachrichten an den Server
+	\end{itemize}&
+	\begin{itemize}
+		\item Activities-Layer
+		\item AMQP-Library
+		\item Messages
+	\end{itemize}
+	\\ \hline
+\end{tabular}
+
+
+\section{Customer-App}
+
+\subsection{Anforderungen}
+
+\begin{itemize}
+	\item Kommuniziert mit dem Server
+	\item Bietet eine Benutzeroberfläche für den Customer
+\end{itemize}
+
+\subsection{Layer}
+
+Die App enthält die normalen Android-Application-Layer wie Activities und Views. Zusätzlich kommt der Service-Layer hinzu. Dieser enthält keine Android-Services, sondern selbst entwickelte Service-Klassen.
+
+\subsubsection{Service-Layer}
+
+\begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
+	\textbf{Verantwortlichkeiten} & \textbf{Zusammenarbeit} \\ \hline \hline
+	
+	\begin{itemize}
+		\item Verwaltet Verbindung zum Server
+		\item Deserialisiert eingehende Nachrichten.
+		\item Leitet eingehende Nachrichten vom Server and den Activities-Layer weiter
+		\item Ermöglicht das Senden von Nachrichten an den Server
+	\end{itemize}&
+	\begin{itemize}
+		\item Activities-Layer
 		\item AMQP-Library
 		\item Messages
 	\end{itemize}
@@ -92,10 +194,9 @@ Alle Aktoren des Systems müssen die Möglichkeit bieten auf Grund von Events bz
 	\item Smartphone des Kunden erhält neue Position der Drohne, auf der Karte wird die Position der Drohne angezeigt.
 \end{itemize}
 
-\subsection{Messages}
-Um die Messages sowohl auf dem Server als auf den Android Apps nutzen zu können, müssen alle Messages zu jeder Zeit überall verfügbar sein. Daher wurde ein seperates Projekt angelegt. Es wird jeweils nach MavenLocal deployed um es in den anderen Projekten verfügbar zu machen.
+
 \subsection{Register Drone}
-%
+%TODO gehört in die Umsetzung
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.0]{images/registerDrone.png}
