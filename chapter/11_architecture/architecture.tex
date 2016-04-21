@@ -49,6 +49,11 @@ Um die Messages sowohl auf dem Server als auf den Android Apps nutzen zu können
 	\caption{Übersicht der Project Helin Architektur }
 	\label{fig:registerDrone}
 \end{figure}
-
+%
+\subsection{Order Cargo}
 \includepdf[pages=-]{images/OrderCargo.pdf}
+Order Cargo beschreibt den Bestellprozess und die damit zusammenhängende Kommunikation. \\
+Der User möchte gerne an einem Anlass ein Produkt bestellen. Er bestellt mittels der App ein Produkt, der Server bestätigt ihm die Bestellung und schlägt einen Abwurfort vor. Sollte der Abwurfort dem Kunden nicht entsprechen, so kann er den Prozess abbrechen und ihn nocheinmal auslösen, sobald er sich in einer geografisch glücklicheren Lage befindet.
+\\
+Der Server evaluiert im Anschluss welche Drone den Auftrag ausführen kann gerade verfügbar ist und schlägt die Mission dem DroneOperator vor. Sollte die Drone verfügbar sein, so kann er diesen Auftrag bestätigen. Im Fall einer Wartungsarbeit kann der Auftrag zu diesem Zeitpunkt auch abgelehnt werden. Sobald der Auftrag angeommen wurde erhält der DroneOperator genaue Angaben zur Beladung der Drohne. Anschliessend wird die Ladung bestätigt und der Server kann dem Kunden mitteilen, dass die Drone nun startklar ist. Während des Fluges erhält der Kunde Benachrichtigungen vom Server mit der aktuellen Position der Drohne. Sobald die Ladung abwurfbereit ist, wird der Kunde informiert und die Drohne kann die Ladung abwerfen. Im Anschluss fliegt die Drohen zur Basis zurück und bestätigt dem Server die Ankunft, so kann gewährleistet werden, dass die Drohne wieder eine eine Mission erhalten kann.
 %
