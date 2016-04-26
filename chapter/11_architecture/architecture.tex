@@ -30,8 +30,8 @@ Abbildung \ref{fig:logical-architecture-overview} zeigt die Hauptkomponenten, so
 \section{Server-Komponente}
 
 \subsection{Anforderungen}
-
-Aus den in den Anforderungen definierten Zielen, ergeben sich für diese Komponente folgende Anforderungen:
+%Todo sauber referenzieren
+Aus den in den Anforderungen definierten Zielen, ergeben sich für die Server-Komponente folgende Anforderungen:
 
 \begin{itemize}
 	\item Bietet Benutzeroberfläche für Administratoren
@@ -41,20 +41,20 @@ Aus den in den Anforderungen definierten Zielen, ergeben sich für diese Kompone
 \end{itemize}
 
 \subsection{Layer}
+Die Architektur des Servers basiert auf dem MVC Pattern, da dieses für CRUD Applikationen besonders geeignet ist und dafür viele geeignete Frameworks zur Verfügung stehen.
 
-Die Architektur des Servers basiert auf dem MVC Pattern, da dieses für CRUD Applikationen besonders geeignet ist und dafür viele geeignete Frameworks zur Verfügung stehen. %TODO Referenz auf Literaturverzeichnis für MVC
+ Für Funktionen die aus unterschiedlichen Controllern verwendet werden, wurde zustäzlich zu Gunsten eines Service Packages entschieden. Die Services stellen unter anderem eine Abstaktionsschicht für das Messaging bereit und ermöglichen ebenfalls die Routeberechnungsalgorithmen seperat zur Business-Logik auszulagern.
+
+ %TODO Referenz auf Literaturverzeichnis für MVC
 Die Verantwortlichkeiten und Kollaborationen der Layer werden nachfolgend genauer definiert.
 
 
 \subsubsection{View-Layer}
-
 Stellt die grafische Benutzeroberfläche zur Verfügung und rendert diese basierend auf den Model-Daten.
 
 \subsubsection{Controller-Layer}
-
 \begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
 	\textbf{Verantwortlichkeiten} & \textbf{Zusammenarbeit} \\ \hline \hline
-	
 	\begin{itemize}
 		\item Lädt Daten für Views aus dem Data-Access-Layer
 		\item Verarbeitet eingehende HTTP-Requests
@@ -112,7 +112,7 @@ Der Data Access Layer bietet die Möglichkeit auf die Persistence Library zuzugr
 
 Die App enthält die normalen Android-Application-Layer wie Activities und Views. Zusätzlich kommt der Service-Layer hinzu. Dieser enthält keine Android-Services, sondern selbst entwickelte Service-Klassen.
 
-\subsubsection{Service-Layer}
+\subsubsection{Service-Komponente}
 
 \begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
 	\textbf{Verantwortlichkeiten} & \textbf{Zusammenarbeit} \\ \hline \hline
