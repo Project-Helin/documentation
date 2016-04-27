@@ -165,12 +165,9 @@ public final class ConfigUtil {
 \end{lstlisting}
 
 \subsubsection{Code}
-Für die Formattierung und Static Check wird IntellJ verwendet. Dabei werden die Inspection von IntelliJ IDEA verwendet.
-Deise sind konfigurierbare Regeln, welche mit dem Projekt eingecheckt werden. Der IDE führt diese vor dem eincheck aus.
+Für die Formattierung und den Static Check werden die Inspections von IntelliJ IDEA verwendet.
+Diese sind konfigurierbare Regeln, welche mit dem Projekt eingecheckt werden. Der IDE führt diese vor dem einchecken aus und verhindert das einchecken falls diese Verletzten werden.
+Da es zu viele von den Regeln zur Verfügung stehen, wurde die Vorlage von IntelliJ genommen und ins VCS eingecheckt, damit alle diesselben Regeln verwenden.
 
-Als vorlage wurden die Standardregeln genommen und angepasst. Dabei sind folgende Regeln enthaltne:
-\begin{itemize}
-	\item{Unused Code: Zum Beispiel Import, Methode oder Variable}
-\end{itemize}
 
 
