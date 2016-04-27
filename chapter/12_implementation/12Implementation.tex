@@ -164,9 +164,13 @@ public final class ConfigUtil {
 }
 \end{lstlisting}
 
-\subsubsection{Test}
-Es sollten alle public Methoden, soweit diese nicht trivial sind, getestet werden. Falls der automatisch Testaufwand zu gross ist, kann dieser auch manuell getestet werden.
+\subsubsection{Code}
+Für die Formattierung und Static Check wird IntellJ verwendet. Dabei werden die Inspection von IntelliJ IDEA verwendet.
+Deise sind konfigurierbare Regeln, welche mit dem Projekt eingecheckt werden. Der IDE führt diese vor dem eincheck aus.
 
-
+Als vorlage wurden die Standardregeln genommen und angepasst. Dabei sind folgende Regeln enthaltne:
+\begin{itemize}
+	\item{Unused Code: Zum Beispiel Import, Methode oder Variable}
+\end{itemize}
 
 
