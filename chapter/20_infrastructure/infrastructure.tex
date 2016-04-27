@@ -4,7 +4,7 @@
 
 \section{Server}
 
-Für die Helin Applikation steht ein Server bereit. Wie in der Abbildung \ref{fig:communication-architecture-overview} dargestellt, wird dieser als Build-, Test- und Applikations-Server verwendet. 
+Für die Helin Applikation wird ein physischer Server verwendet. Wie in der Abbildung \ref{fig:communication-architecture-overview} dargestellt, wird dieser als Build-, Test- und Applikations-Server verwendet. 
 Auf dem Server läuft eine PostgreSQL Datenbank mit einer PostGIS Extension, welche für die Routenberechnung benötigt wird. Gleichzeitig ist ein RabbitMQ-Message-Broker und eine Instanz der Helin Server Applikation installiert. Aus Resourcengründen wird alles auf einem Server ausgeführt, könnte aber bei Leistungsproblemen ohne weiteres auf mehrere Server verteilt werden. Als Build- und Test-Server für alle Applikationen wird TeamCity verwendet. 
 
 Neben dem Server werden auch Apps für Android Geräte veröffentlicht. Beide kommunizieren primär mit der RabbitMQ Instanz auf dem Server.
