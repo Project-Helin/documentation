@@ -3,9 +3,16 @@
 \chapter{Infrastruktur}
 
 \section{Server}
-Auf dem Server laufen folgende Komponenten. \\
-%\textbf{Team City: } Dient als Continuous Integration server, führt bei jedem commit alle Tests durch. Ausserdem sind auch Build jobs eingerichtet, um ein Deployment anzustossen.
-%\textbf{RabbitMQ: } Der RabbitMQ Broker läuft auf demselben server, wurde mit der Management Console eingerichtet, um die aktiven Queues zu überwachen.
-%\textbf{Helin Server: } Der aktive Helin Server. Dieser wird bei Bedarf mit dem neusten Code deployt.
+
+Für die Helin Applikation wird ein physischer Server verwendet. Wie in der Abbildung \ref{fig:communication-architecture-overview} dargestellt, wird dieser als Build-, Test- und Applikations-Server verwendet. 
+Auf dem Server läuft eine PostgreSQL Datenbank mit einer PostGIS Extension, welche für die Routenberechnung benötigt wird. Gleichzeitig ist ein RabbitMQ-Message-Broker und eine Instanz der Helin Server Applikation installiert. Aus Resourcengründen wird alles auf einem Server ausgeführt, könnte aber bei Leistungsproblemen ohne weiteres auf mehrere Server verteilt werden. Als Build- und Test-Server für alle Applikationen wird TeamCity verwendet. 
+
+Neben dem Server werden auch Apps für Android Geräte veröffentlicht. Beide kommunizieren primär mit der RabbitMQ Instanz auf dem Server.
+
+\begin{figure}[h]
+	\includegraphics[width=1.0\textwidth]{images/DeploymentDiagram.png}
+	\caption{Deployment Diagram}
+	\label{fig:deployment-diagram}
+\end{figure}
 
 

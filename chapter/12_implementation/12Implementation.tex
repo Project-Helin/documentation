@@ -69,6 +69,7 @@ Um die maximale Akku Laufzeit zu testen wurde die Drohne ohne zusätzliches Gewi
     \hline
     \textbf{Akku} & \textbf{Zuladung}  & \textbf{Laufzeit} \\
     3S & keine & 16min 29s\\ \hline 
+    2x 4S & 500g & 19min\\ \hline 
 \end{tabularx}\\
 
 \subsubsection{Tragfähigkeitstests}
@@ -105,5 +106,68 @@ Auch mit 3S Akkus scheint es also möglich eine PET-Flasche zu transportieren.
 	\hline 
 \end{tabularx}
 \subsection{User App}
+
+
+\section{Implementierung}
+
+\subsection{Code Standard}
+Im Team wurden folgende Code-Convention eingeführt.
+
+\subsubsection{Kein Author}
+In Java wird klassicherweise der Autor im Javadoc Kommentar in der Klasse angegeben.
+
+\begin{lstlisting}
+/**
+ * @author Kirusanth Poopalasingam (pkirusanth@gmail.com)
+ */
+public class MyTestClass{
+}
+\end{lstlisting}
+
+Der Autor in der Klasse suggeriert, dass nur ein Autor für diese Klasse existiert und für diese Klasse zuständig ist. Dies ist aber meist nicht der Fall. 
+Der Code sollte von allen Team Mitgliedern gepflegt werden. Ausserdem ist die Angabe auf der Klasse heutzutage mit einem Version Control System redundant.
+
+\subsubsection{Javadoc}
+Generell sollte Javadoc nur dort verwendet werden, wo es nötig ist. Da es sich beim Helin Projekt nicht um eine API handelt, sollten auch die Methoden und Parameter nicht redundant dokumentiert werden. Ein Beispiel für eine schlechte Javadoc Dokumentation sieht folgendermassen aus :
+
+\begin{lstlisting}
+// Beispiel einer Play Klasse
+public final class ConfigUtil {
+    private ConfigUtil() { }
+
+    /**
+     * Quotes and escapes a string, as in the JSON specification.
+     *
+     * @param s
+     *            a string
+     * @return the string quoted and escaped
+     */
+    public static String quoteString(String s) {
+        return ConfigImplUtil.renderJsonString(s);
+    }
+    // ...
+}
+\end{lstlisting}
+
+Bei der Methode quoteString() kann der ganze JavaDoc weggelassen werden, da er nicht mehr aussagend ist, als die Methode selbst.
+Stattdessen sollte die Methode so geschreiben werden, dass die Namen aussagekräftiger sind.
+
+Besser wäre:
+\begin{lstlisting}
+public final class ConfigUtil {
+    private ConfigUtil() { }
+
+    public static String quoteStringAccordingToJsonSpecification(String unquotedJson) {
+        return ConfigImplUtil.renderJsonString(unquotedJson);
+    }
+    // ...
+}
+\end{lstlisting}
+
+\subsubsection{Code}
+Für die Formattierung und den Static Check werden die Inspections von IntelliJ IDEA verwendet.
+Diese sind konfigurierbare Regeln, welche mit dem Projekt eingecheckt werden. Der IDE führt diese vor dem einchecken aus und verhindert das einchecken falls diese Verletzten werden.
+Da es zu viele von den Regeln zur Verfügung stehen, wurde die Vorlage von IntelliJ genommen und ins VCS eingecheckt, damit alle diesselben Regeln verwenden.
+
 
 

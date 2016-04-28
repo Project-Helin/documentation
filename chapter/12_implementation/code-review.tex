@@ -1,0 +1,35 @@
+\newpage
+\chapter{Code Review}
+
+\section{20.04.16 - Review Prototyp Routing}
+Folgende Code Änderungen wurden reviewed von KP und MS :
+\begin{itemize}
+	\item{Anbindung Hibernate Spatial}
+	\item{Verwendung von SFCGAL: SFCGAL ist eine Libary, welches von PostGIS verwendet wird. Es musste geprüfut werden ob SFCGAL richtig installiert wurde.}
+	\item{Helper Klasse für WKT und Polygon Verarbeitung}
+\end{itemize}
+
+Beim Code-Review wurden die folgenden Anpassung gemacht:
+\begin{itemize}
+	\item{Fehlende Test hinzugefügt}
+	\item{Kommentar hinzugefügt, wo Kontext nicht klar war}
+	\begin{lstlisting}
+	/**
+     * SFCGAL is a library used by PostGis. It is not part of PostGis and must therefore
+     * be installed separately. This tests verifies - that SFCGAL ist correctly installed.
+     */
+    public class AssertSfcgalInstallationTest extends AbstractIntegrationTest {
+      //...
+    }
+	\end{lstlisting}
+	\item{Methoden unbenannt nach Java Standard: WGS85Helper -> Wgs84Helper }
+	\item{In manchen Test wurde WKT ( Well Known Text ) statt WKB ( Well Known Binary ) für Polygon verwendet. Beide Formate sind unlesbar, aber WKT bietet den Vorteil, dass es einfacher ersichtlich ist, um was für ein Art Polygon es sich handelt.}
+	\begin{lstlisting}
+    geometry = GisHelper.convertFromWkbToGeometry("0103000020E6100000010000000F000000FFBE7D4109A2214002A052D59E9E9C4740");
+    // korrigiert zu
+    String pointTypeString = "POLYGON ((35 10, 45 45, 15 40, 10 20, 35 10))";
+    Polygon pointType = (Polygon) GisHelper.convertFromWktToGeometry(pointTypeString);
+	\end{lstlisting}
+\end{itemize}
+
+

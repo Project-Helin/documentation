@@ -34,6 +34,31 @@
 
 \documentclass[11pt]{hsrthesis}
 
+% The following snippet is copied from this stack overflow answer
+% http://stackoverflow.com/a/3175141
+% It sets the color right for lstlisting, so that we 
+% can include code snippet
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
 \makeindex
 
 \makeglossaries
@@ -82,6 +107,8 @@
 \input{chapter/20_infrastructure/infrastructure}
 
 \input{chapter/51_projectplan/01plan}
+\input{chapter/12_implementation/code-review}
+
 
 
 \chapter{Sitzungsprotokolle}
