@@ -169,5 +169,19 @@ Für die Formattierung und den Static Check werden die Inspections von IntelliJ 
 Diese sind konfigurierbare Regeln, welche mit dem Projekt eingecheckt werden. Der IDE führt diese vor dem einchecken aus und verhindert das einchecken falls diese Verletzten werden.
 Da es zu viele von den Regeln zur Verfügung stehen, wurde die Vorlage von IntelliJ genommen und ins VCS eingecheckt, damit alle diesselben Regeln verwenden.
 
+\subsection{Messaging}
+Mit der Entscheidung AMQP für die Kommunikation zwischen dem Server und der Drone zu verwenden, war relativ klar, dass sämtliche funktionalen und nichtfunktionalen Anforderungen getestet werden müssen. Es muss sichergestellt werden, dass alle Anforderungen erfüllbar sind.
+
+\begin{itemize}
+	\item{\textbf{Verbindungsabbruch:} \\
+	Gemäss den nicht funktionallen Anforderungen darf der Verbindungsabbruch keinen Einfluss auf die Mission haben. Aus diesem Grund wurde festgelegt, dass die Drohne die gesammte Mission vor dem Start erhält. Somit ist gewährleistet, dass sie autonom fliegen kann. Es wäre aber von Vorteil, wenn Telemetriedaten von der Drohne zum Server trotzdem übertragen werden können. Aus diesem Grunde wurde eine Queue eingesetzt, ohne Datenpersistenz. So ist es möglich, dass die Daten übertragen werden, sobald die Drohne Internet empfang hat.}
+	\item{\textbf{Verbindungswiederherstellung:}
+	Es soll gewährleistet werden, dass bei Internetempfang der automatische Reconnect innerhalb von 30s geschieht. Naheliegend war ein zeitbasiertes Reconnect von einigen Sekunden. Nach detailierterer Bewertung der Lage, wurde aber davon abgesehen und der Backoff Algorithmus verwendet. Sollte der Server down sein, so ist gewährleistet, dass nicht alle Clients gleichzeitig auf den Server verbinden möchten.}
+	\item{\textbf{Security:} 
+	Initial wird die Verbindung über HTTPS zum Server aufgebaut. Über diese Verbindung werden dann die Informationen ausgetauscht, die es braucht um einen AMQP Channel beizutreten. Die AMQP Verbindung wird mittels TLS verschlüsselt und gilt danach somit als ausreichend geschützt.}
+\end{itemize}
+
+\subsection{Benchmarking \& Test}
+
 
 
