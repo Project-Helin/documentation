@@ -182,6 +182,21 @@ Mit der Entscheidung AMQP für die Kommunikation zwischen dem Server und der Dro
 \end{itemize}
 
 \subsection{Benchmarking \& Test}
+Um die Zuverlässigkeit zu testen, wurde der Backoff Algorithmus gegen ein fixes Zeitinterval getestet. Beide Verfahren arbeiten sehr zuverlässig und somit ist die Zuverlässigkeit kein Selektionskriterium.
+\begin{center}
+	\begin{tabular}{|l|l|}
+	\hline
+	  \textbf{Backoff} & \textbf{Interval 3s} \\
+	\hline
+	  17 & 7 \\
+	  7 & 7 \\
+	  9 & 7 \\
+	  11 & 7 \\
+	  10 & 7 \\
+	\hline
+	\end{tabular}
+\end{center}
 
+Es kann somit gesagt werden, dass Android etwa 4s benötigt um eine stabile GSM oder WLAN Verbindung wieder aufzubauen.
 
 
