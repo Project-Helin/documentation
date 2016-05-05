@@ -171,49 +171,45 @@ Da es zu viele von den Regeln zur Verfügung stehen, wurde die Vorlage von Intel
 
 \subsection{Messaging}
 
-Mit der Entscheidung AMQP für die Kommunikation zwischen dem Server und der Drone zu verwenden, war relativ klar, dass sämtliche funktionalen und nichtfunktionalen Anforderungen getestet werden müssen. Es muss sichergestellt werden, dass alle Anforderungen erfüllbar sind.
-% Abschnit oben:
-% - wieso funktionale? sind ja nur nicht-funktionale Anforderung
-
+Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen wurde AMQP als Protokoll ausgewählt. Mit AMQP soll gewährleistet werden, dass die Verbindungswiederherstellung funktioniert. Die funktionale Anforderung des Missionsabbruchs wird somit soweit gedeckt, dass versucht wird die Verbindung aufrechtzuerhalten sofern das Netz es erlaubt. Bei kurzen Netzunterbrüchen kann somit über das AMQP Protokol eine Verbindung zur Drohne gewährleistet werden.
 
 \begin{itemize}
 	\item{\textbf{Verbindungsabbruch:} \\
-	Gemäss den nicht funktionallen Anforderungen darf der Verbindungsabbruch keinen Einfluss auf die Mission haben. Aus diesem Grund wurde festgelegt, dass die Drohne die gesamte Mission vor dem Start erhält. Somit ist gewährleistet, dass sie autonom fliegen kann. Es wäre aber von Vorteil, wenn Telemetriedaten von der Drohne zum Server trotzdem übertragen werden können. Aus diesem Grunde wurde eine Queue eingesetzt, ohne Datenpersistenz. So ist es möglich, dass die Daten übertragen werden, sobald die Drohne Internet empfang hat.}
-% oben: 
-% - unklar was genau heist, dass "queue eingestzt wird, ohne Datenpersistenz"?
-% - 
+	Gemäss den nicht funktionalen Anforderungen darf der Verbindungsabbruch keinen Einfluss auf die Mission haben. Um gemäss den funktionalen Anforderungen einen Missionsabbruch zu gewährleisten, wird versucht Unterbrüche so kurz wie möglich zu halten und einen automatischen Verbiundungsaufbau zu garantieren. Aus diesem Faktoren wird die gesammte Mission vor dem Start übertragen, damit sie ausgeführt werden kann. Wegpunkte mit schlechtem Empfang können somit keine Konsequenzen auf das Resultat haben. Der Missionsabbruch ist ebenfalls gewährleistet - sofern die GSM Verbindung besteht. 
+	\\
+	Verbindungsabbrüche zum Mobiltelefon haben 2 Szenarien:	
+	\begin{itemize}
+		\item{\textbf{Message von Server zu Mobiltelefon:} \\
+		Dieses Szenario wird durch das AMQP Protokoll abgefangen. Der AMQP Broker cached die Nachrichten solange bis der Consumer (Mobiltelefon) wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf.
+		}
+		\item{\textbf{Message von Mobiltelefon zu Server:} \\
+		In diesem Fall kann der Übertragungsfehler nicht durch das AMQP Protokoll gedeckt werden. Der Broker hat vom Producer noch keine Nachricht bekommen. Aus diesem Grund wird Producerseitig (Mobiltelefon) eine Exception geworfen, die darauf hinweist, dass die Verbindung unterbrochen ist. In diesem Fall wird die Nachricht durch eine implementierte Queue aufgenommen. Sämtliche Folgenachrichten die während des Verbindungsunterbruchs nicht übertragen werden können werden ebenfalls in dieser Queue gespeichert. Sobald die Verbindung wieder besteht, werden die Nachrichten aus der Queue gesendet. \\
+		Auf die Persistierung wurde verzichtet, da es sich hauptsächlich um Telemetriedaten handelt und diese in keinem Konflitkt mit dem Anforderungskatalog stehen.
+		}
+	\end{itemize}
+	Mit diesen Massnahmen ist ein guter Kompromiss aus Zuverlässigkeit und Aufwand entstanden. Alle missionskritischen Nachrichten können übertragen werden. Telemetriedaten sind von einem Verbindungsausfall ebenfalls nicht betroffen.
+	}
 	\item{\textbf{Verbindungswiederherstellung:}
-	Es soll gewährleistet werden, dass bei Internetempfang der automatische Reconnect innerhalb von 30s geschieht. Naheliegend war ein zeitbasiertes Reconnect von einigen Sekunden. Nach detailierterer Bewertung der Lage, wurde aber davon abgesehen und der Backoff Algorithmus verwendet. Sollte der Server down sein, so ist gewährleistet, dass nicht alle Clients gleichzeitig auf den Server verbinden möchten.}
-% - äh, backoff oder zeitbasiert ( Was heisst das, ist ja auch zeitbasiert) - verhindert ja nicht, dass alle clients gleichzeitig auf server verbinden
-	\item{\textbf{Security:} 
-	Initial wird die Verbindung über HTTPS zum Server aufgebaut. Über diese Verbindung werden dann die Informationen ausgetauscht, die es braucht um einen AMQP Channel beizutreten. Die AMQP Verbindung wird mittels TLS verschlüsselt und gilt danach somit als ausreichend geschützt.}
-% Security:
-% - etwas ausführlich beschreiben, was wir letztens besprochen haben ( z.b. queue mit token namen, token ist nicht erratbar)
-% - aber das gehört eigentlich nicht da? ( es geht ja hier um messaging, und verbindugnsabbruch, wieso kommt security hier?)
+	Aus den nicht funktionalen Anforderungen ist zu entnehmen, dass bei einem Verbindungsunterbruch ein Reconnect statt findet. Dieser Reconnect soll, sobald die Verbindung im GSM Netz wieder besteht nicht länger als 30s dauern. \\
+	Bei der Konfiguration von AMQP bestanden mehrere Möglichkeiten. Einersetis war der bekannte Backoff Algorithmus eine Option. Dieser Algorithmus arbeitet nach einem incrementellen Printzip. Je länger der Unterbruch dauert, desto länger dauert es bis er die Verbindung wieder versucht aufzubauen. Auf der anderen Seite stanbd ein einfaches Interval. Das Interval gesetzt auf 3 Sekunden garantierte, dass alle drei Sekunden ein Reconnect versucht wird - bis zum erfolgreichen Verbindungsaufbau. Mit diesen Erkenntnissen haben wir folgenden Benchmark aufgebaut:
+	\begin{center}
+		\begin{tabular}{|r|r|}
+		\hline
+		  \textbf{Backoff} & \textbf{Interval 3s} \\
+		\hline
+		  17 & 7 \\
+		  7 & 7 \\
+		  9 & 7 \\
+		  11 & 7 \\
+		  10 & 7 \\
+		\hline
+		\end{tabular}
+	\end{center}
+	Aus diesen Erkenntnissen standen beide Möglichkeiten offen. Performancemässig und auch die Stabilität machte keinen Unterschied. Am Ende wurde bewusst auf den BackOff Algorithmus gesetzt. Der Backoff Algorithmus benötigt zwar deutlich länger für einen Reconnect als das fixe Zeitinterval. Die hetrogene Verteilung der Wiederverbindungszeiten spricht aber für den Backoff Algorithmus. Sollte es zu Probleme auf der Server Seite kommen, so werden nicht alle Geräte gleichzeitig einen Reconnect probieren - der Reconnect passiert somit gestaffelt. Dies bringt zusätzlich Stabilität ins System.}
+	\item{\textbf{Android Process Lifecycle:} \\
+	Da die OnboardApp auf einem Android Betriebssystem läuft, mussten gewisse Voraussetzungen geprüft werden. Im Grund kann davon ausgegangen werden, dass die Applikation immer im Vordergrund steht. Es ist doch sehr unwahrscheinlich, dass die Appliaktion in den Hintergrund rückt, weil eine andere Applikation verwendet wird. \\
+	% % http://developer.android.com/guide/components/processes-and-threads.html
+	Laut Android API Guide ist das Verhalten einer Applikation im Hintergrund nicht deterministisch. Sollte eine Applikation im Hintergrund gewisse Garantien haben, so muss von einem Service und der spezifischen Implementierung eines Services gesprochen werden. Im Fall der OnboardApp und den getroffenen Annahmen, wurde davon abgesehen, da die Applikation während des Fluges nicht gewechselt wird.
+	}
 
 \end{itemize}
-
-\subsection{Benchmarking \& Test}
-Um die Zuverlässigkeit zu testen, wurde der Backoff Algorithmus gegen ein fixes Zeitinterval getestet. Beide Verfahren arbeiten sehr zuverlässig und somit ist die Zuverlässigkeit kein Selektionskriterium.
-\begin{center}
-	\begin{tabular}{|l|l|}
-	\hline
-	  \textbf{Backoff} & \textbf{Interval 3s} \\
-	\hline
-	  17 & 7 \\
-	  7 & 7 \\
-	  9 & 7 \\
-	  11 & 7 \\
-	  10 & 7 \\
-	\hline
-	\end{tabular}
-\end{center}
-
-Es kann somit gesagt werden, dass Android etwa 4s benötigt um eine stabile GSM oder WLAN Verbindung wieder aufzubauen.
-
-% ausführlich beschreibne, was du getestet hast
-% - internet abbruch simuliert -> was ist passeirt (sind messagins angekommen ? oder exception geworfen )
-% - app geht in background -> was ist passiert, sind messages angekommen
-% - gehen message verloren, oder neugeschickt
-% - verbindungsabbruch -> 
-
