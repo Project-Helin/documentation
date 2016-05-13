@@ -9,7 +9,7 @@ Folgende Code Änderungen wurden reviewed von KP und MS :
 	\item{Helper Klasse für WKT und Polygon Verarbeitung}
 \end{itemize}
 
-Beim Code-Review wurden die folgenden Anpassung gemacht:
+Während dem Code Review wurden die folgenden Anpassungen gemacht:
 \begin{itemize}
 	\item{Fehlende Test hinzugefügt}
 	\item{Kommentar hinzugefügt, wo Kontext nicht klar war}
@@ -22,7 +22,7 @@ Beim Code-Review wurden die folgenden Anpassung gemacht:
       //...
     }
 	\end{lstlisting}
-	\item{Methoden unbenannt nach Java Standard: WGS85Helper -> Wgs84Helper }
+	\item{Methoden unbenannt nach Java Standard: WGS84Helper -> Wgs84Helper }
 	\item{In manchen Test wurde WKT ( Well Known Text ) statt WKB ( Well Known Binary ) für Polygon verwendet. Beide Formate sind unlesbar, aber WKT bietet den Vorteil, dass es einfacher ersichtlich ist, um was für ein Art Polygon es sich handelt.}
 	\begin{lstlisting}
     geometry = GisHelper.convertFromWkbToGeometry("0103000020E6100000010000000F000000FFBE7D4109A2214002A052D59E9E9C4740");
@@ -31,5 +31,27 @@ Beim Code-Review wurden die folgenden Anpassung gemacht:
     Polygon pointType = (Polygon) GisHelper.convertFromWktToGeometry(pointTypeString);
 	\end{lstlisting}
 \end{itemize}
+\newpage
 
-
+\section{13.05.2016 - Review Message Handling \& Message Queue}
+Folgende Code Änderungen wurden reviewed von MS und MA:
+\begin{itemize}
+	\item{Message Handling Server}
+	\item{Server Message Persistance}
+	\item{Message Handling Onboard app}
+\end{itemize}
+Während dem Code Review wurden die folgenden Anpassungen gemacht:
+\begin{itemize}
+	\item{Queue mit Exception implementierung verbessert:
+	\begin{lstlisting}
+    if (connection.isOpen()) {
+        while (messagesToSend.peek() != null) {
+            String messageToSend = messagesToSend.peek();
+            channel.basicPublish("", ConnectionUtils.getDroneSideProducerQueueName(droneToken), null, messageToSend.getBytes());
+            messagesToSend.remove();
+        }
+    }
+	\end{lstlisting}
+	An dieser Stelle wurde messagesToSend.get() durch peek() und remove() ersetzt, damit beim werfen der Exception, durch möglichen Verbindungsabbruch die Meldung nicht verloren geht.}
+	\item{Entfernen von connectionClose() auf dem Server. Die Methode existiert bereits als Methode mit einer Verbindung im Funktionsaufruf, aus diesem Grund ist die Methode redundant und wird nicht benötigt.}
+\end{itemize}
