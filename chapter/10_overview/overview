@@ -1,0 +1,12 @@
+\chapter{Einleitung und Übersicht}
+
+\section{Einleitung}
+
+Ziel dieser Arbeit ist es eine Multi-Tenant-fähige Plattform zu konzipieren, zu entwickeln und zu veröffentlichen. Diese soll es Anbietern von Produkten und Services ermöglichen, ihre Drohnen für einen begrenzten Zeitraum oder für bestimmte Aufgaben zur Verfügung zu stellen. Das ausführen einer Aufgabe soll, bis auf das beladen der Drohne, komplett automatisiert ablaufen. 
+
+Sobald ein Kunde eine Bestellung tätigt, wird automatisch eine Route zu seiner Position berechnet, die über vordefinierte, sichere Zonen führt. Über ein auf der Drohne angebrachtes Smartphone erhält der Drone-Operator dann Anweisungen für die Beladung. Sobald die Vorbereitungen abgeschlossen sind, bewegt sich die Drohne dann mit Hilfe von GPS entlang der berechneten Route, erfüllt ihre Aufgabe und kehrt wieder zurück. Während der Mission werden laufen Telemetriedaten an den Server geschickt, welcher diese für den Anbieter visualisiert.
+
+Project Helin wird als Open-Source Software veröffentlicht und kann dann von einem oder mehreren Anbietern gehostet und weiterentwickelt werden.
+
+In der weiteren Dokumentation wird die Architektur, die wichtigsten Punkte der Umsetzung sowie der Aufbau einer Versuchsanordung mit zwei echten Drohnen beschrieben.
+
