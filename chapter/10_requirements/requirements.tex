@@ -111,14 +111,14 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
 	Synopsis & Verbindungsabbruch der Onboard App zum Server soll keine negativen Auswirkungen auf die Mission haben.  \\ \hline
 		
-	Messbarkeit & Nach dem Start der Mission muss die Drohne auch ohne Verbindung zum Server die Mission abschliessen können. \\ \hline
+	Messbarkeit & Nach dem Start der Mission schliesst die Drohne, auch ohne Verbindung zum Server, die Mission ab. \\ \hline
 \end{tabular}
 
 \subsection{Sicherheit im Mittelpunkt}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
 	Synopsis & Eine Drohne führt vor dem Freigeben der Motoren (Arming) einen Check durch, der prüft ob alle nötigen Voraussetzungen für einen Start erfüllt sind. Ausserdem müssen vor einem Start ebenfalls Voraussetzungen der Mission erfüllt sein, beispielsweise muss der Drone-Operator den Start freigeben. Sollte eine dieser Vorraussetzungen nicht erfüllt sein, darf die Drohne nicht starten.  \\ \hline
 	
-	Messbarkeit & Drohne darf nicht starten, falls der Pre-Flight-Check des Autopiloten nicht erfolgreich war oder Voraussetzungen für die aktuelle Mission nicht erfüllt sind. \\ \hline
+	Messbarkeit & Drohne startet nicht, falls der Pre-Flight-Check des Autopiloten nicht erfolgreich war oder Voraussetzungen für die aktuelle Mission nicht erfüllt sind. \\ \hline
 \end{tabular}
 \subsection{Verbindungswiederherstellung}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
@@ -126,15 +126,16 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 	
 	Messbarkeit & Die Verbindung zwischen Server und App wird nach dem deaktivieren und wieder aktivieren der Internetverbindung innert 30 Sekunden wiederhergestellt.\\ \hline
 \end{tabular}
-\subsection{Nutzlast der Drohne}
-\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
-	Synopsis & Eine 1/2 Liter PET Flasche soll innerhalb von einem 500m Radius geliefert werden können. \\ \hline
-	Messbarkeit & Im App kann ein Produkt mit einem Gewicht von 500g bestellt, und geliefert werden. \\ \hline
-\end{tabular}
+%\subsection{Nutzlast der Drohne}
+%\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
+%	Synopsis & Eine 1/2 Liter PET Flasche soll innerhalb von einem 500m Radius geliefert werden können. \\ \hline
+
+%	Messbarkeit & Im App kann ein Produkt mit einem Gewicht von 500g bestellt, und geliefert werden. \\ \hline
+%\end{tabular}
 \subsection{Security}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
 	Synopsis & Es darf nicht möglich sein, dass jemand die Steuerung einer beim Server registrierten Drohne übernehmen kann.\\ \hline
-	Messbarkeit & Der Übertragungskanal vom Server zur Drohne muss verschlüsselt sein und es dürfen sich keine weiteren Producer anmelden können.\\ \hline
+	Messbarkeit & Der Übertragungskanal vom Server zur Drohne ist verschlüsselt und es können sich keine weiteren \Gls{Message-Producer} anmelden.\\ \hline
 \end{tabular}
 \section{Domain-Model}
 Aus den funktionalen Anforderungen ergibt sich das folgende Domainmodel.
