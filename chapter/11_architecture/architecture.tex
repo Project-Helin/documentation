@@ -176,14 +176,14 @@ Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikat
 Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns die je nach Anforderungen verwendet werden können.({\cite{EIP}}) Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
 %
 \subsubsection{Point-to-Point Channel}
-Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverlässigen Nachrichtenaustausch zu ermöglichen, wird jede Drohne bzw. jede App über einen separaten Point-to-Point Channel angebunden. Der Channel wird nach der Registrierung zugeteilt und stellt den Point-to-Point Kanal zwischen Drone und Server dar. Dies garantiert dem Server eine Nachricht an garantiert eine Drohne zu schicken.
+Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverlässigen Nachrichtenaustausch zu ermöglichen, wird jede Drohne bzw. jede App über einen separaten Point-to-Point Channel	\cite[S. 103]{EIP}} angebunden. Der Channel wird nach der Registrierung zugeteilt und stellt den Point-to-Point Kanal zwischen Drone und Server dar. Dies garantiert dem Server eine Nachricht an garantiert eine Drohne zu schicken.
 %
-\subsubsection{At-most-once delivery}
-% Why not exactly once?!
-Wir müssen sicher sein, dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste Logik eingebaut werden, die diese Problematik löst. Sollte die Drohne einen Befehl oder eine Mission gar nicht erhalten, weil die Verbindung unterbrochen ist, muss das System dies wissen und entsprechend reagieren können.
+\subsubsection{At-most-once}
+
+Die Fehlersemantik "At-most-once" gibt die Sicherheit dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
 %
 \subsubsection{Event-driven Consumer}
-Alle Aktoren des Systems müssen die Möglichkeit bieten auf Grund von Events bzw. Nachrichten Aktionen auszuführen. Beispielsweise:
+Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit auf Grund von Nachrichten Aktionen auszuführen. Beispielsweise:
 %
 \begin{itemize}
 	\item Drohne erhält neue Mission vom Server und soll dies dem Drone-Operator anzeigen.
