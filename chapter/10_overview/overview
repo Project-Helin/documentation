@@ -8,7 +8,7 @@ Sobald ein Kunde eine Bestellung über eine App tätigt, wird automatisch eine R
 
 Project Helin wird als Open-Source Software veröffentlicht und kann dann von einem oder mehreren Anbietern gehostet und weiterentwickelt werden.\\
 
-In der weiteren Dokumentation werden die Anforderungen, die Architektur, die wichtigsten Punkte der Umsetzung sowie der Aufbau einer Versuchsanordung mit zwei echten Drohnen beschrieben.
+In der weiteren Dokumentation werden die Anforderungen, die Architektur, die wichtigsten Punkte der Umsetzung sowie der Aufbau eines Anwendungsbeispiels mit zwei echten Drohnen beschrieben.
 
 \section{System Kontext}
 

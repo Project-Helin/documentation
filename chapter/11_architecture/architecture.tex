@@ -180,10 +180,10 @@ Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverl�
 %
 \subsubsection{At-most-once}
 
-Die Fehlersemantik "At-most-once" gibt die Sicherheit dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
+Die Fehlersemantik At-most-once gibt die Sicherheit dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
 %
 \subsubsection{Event-driven Consumer}
-Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit auf Grund von Nachrichten Aktionen auszuführen. Beispielsweise:
+{Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit auf Grund von Nachrichten Aktionen auszuführen. Beispielsweise:
 %
 \begin{itemize}
 	\item Drohne erhält neue Mission vom Server und soll dies dem Drone-Operator anzeigen.
