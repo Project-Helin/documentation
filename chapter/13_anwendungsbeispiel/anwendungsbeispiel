@@ -10,7 +10,7 @@ Bei der Zusammenstellung der Komponenten haben wir vor allem auf die gute Verfü
 
 \item Flight-Controller muss \Gls{MAVLink} Protokoll unterstüzen
 \item Onboard-App muss über MAVLink mit dem Flight-Controller verbunden sein. (Über USB oder eine Funk-Telemetrieverbindung.)
-\end{itemize}\\
+\end{itemize}
 
 Im folgenden Kapitel werden die Komponenten und deren Eigenschaften genauer untersucht und beschrieben, wie auch die Möglichkeiten zur Verwendung von anderer Hardware- und Software auf dem Copter genauer erläutert.
 
