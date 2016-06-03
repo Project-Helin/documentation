@@ -1,5 +1,5 @@
 \newpage
-\chapter{Code Review}
+\chapter{Code Review} 
 
 \section{20.04.16 - Review Prototyp Routing}
 Folgende Code Änderungen wurden reviewed von KP und MS :
@@ -55,3 +55,21 @@ Während dem Code Review wurden die folgenden Anpassungen gemacht:
 	An dieser Stelle wurde messagesToSend.get() durch peek() und remove() ersetzt, damit beim werfen der Exception, durch möglichen Verbindungsabbruch die Meldung nicht verloren geht.}
 	\item{Entfernen von connectionClose() auf dem Server. Die Methode existiert bereits als Methode mit einer Verbindung im Funktionsaufruf, aus diesem Grund ist die Methode redundant und wird nicht benötigt.}
 \end{itemize}
+\section{03.06.2015 - Gesamt Code Review}
+
+Dieses Code Review wurde von Mirco Stocker durchgeführt und betrifft den ganzen Server-Code sowie die Android Onboard-App.
+
+\subsection{Onboard-App}
+
+Die wichtigsten Findings betrafen potentielle Concurrency Probleme, sowie Unschönheiten in den Android-Lifecycle Methoden.
+
+\subsubsection{Concurrency}
+
+Beim Herstellen einer Verbindung mit dem Messagingserver wurde ein neuer Thread gestartet und dort die Variablen "connection" und "channel" zugewiesen. Dies könnte potentiell Probleme verursachen und die Variablen wurden deshalb mit volatile Ergänzt.
+
+\subsubsection{Lifecycle}
+
+In vielen Fragments und Activities wurde die OnDestroy Methode verwendet um Resourcen abzuräumen. Die Ausführung von OnDestroy ist aber nicht garantiert. Deshalb wurde der Code in die OnPause-Methode verschoben und wird nun garantiert ausgeführt, wenn die Activity oder das Fragment vom Betriebssystem beendet wird.
+
+Einige Methoden die Handler registrieren wurden sowohl in den OnCreate-Methoden, wie auch in den  OnResume Methoden ausgeführt. Dies ist keine saubere Lösung. Dieser Code wird nun deshalb nurnoch im OnResume ausgeführt.
+
