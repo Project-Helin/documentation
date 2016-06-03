@@ -65,11 +65,115 @@ Die wichtigsten Findings betrafen potentielle Concurrency Probleme, sowie Unsch�
 
 \subsubsection{Concurrency}
 
-Beim Herstellen einer Verbindung mit dem Messagingserver wurde ein neuer Thread gestartet und dort die Variablen "connection" und "channel" zugewiesen. Dies könnte potentiell Probleme verursachen und die Variablen wurden deshalb mit volatile Ergänzt.
+Beim Herstellen einer Verbindung mit dem Messagingserver wurde ein neuer Thread gestartet und dort die Variablen "'connection"' und "'channel"' zugewiesen.
+Dies könnte potentiell Probleme verursachen und die Variablen wurden deshalb mit volatile Ergänzt.
 
 \subsubsection{Lifecycle}
 
-In vielen Fragments und Activities wurde die OnDestroy Methode verwendet um Resourcen abzuräumen. Die Ausführung von OnDestroy ist aber nicht garantiert. Deshalb wurde der Code in die OnPause-Methode verschoben und wird nun garantiert ausgeführt, wenn die Activity oder das Fragment vom Betriebssystem beendet wird.
+In vielen Fragments und Activities wurde die OnDestroy Methode verwendet um Resourcen abzuräumen.
+Die Ausführung von OnDestroy ist aber nicht garantiert.
+Deshalb wurde der Code in die OnPause-Methode verschoben und wird nun garantiert ausgeführt, wenn die Activity oder das Fragment vom Betriebssystem beendet wird.
 
-Einige Methoden die Handler registrieren wurden sowohl in den OnCreate-Methoden, wie auch in den  OnResume Methoden ausgeführt. Dies ist keine saubere Lösung. Dieser Code wird nun deshalb nurnoch im OnResume ausgeführt.
+Einige Methoden die Handler registrieren, wurden sowohl in den OnCreate-Methoden, wie auch in den  OnResume Methoden ausgeführt.
+ Dies ist keine saubere Lösung. Dieser Code wird nun deshalb nurnoch im OnResume ausgeführt.
 
+\subsection{Server}
+
+Der Code wurde als gut lesbar und verständlich bewertet, es wurden manche Inkonsistenzen aufgezeigt.
+
+\subsubsection{Transaction}
+Bei manchen stellen wurde die Datenbank Transkation mittels einer Annotation deklariert.
+Dies ist die bevorzugte Variante innerhalb der Controller beim Plays Framework.
+\begin{lstlisting}
+@Transactional
+public Result addDrone(UUID projectId) {
+    Project foundProject = getProject(projectId);
+    // ... skipped
+    return redirect(routes.ProjectsDronesController.index(projectId));
+}
+\end{lstlisting}
+Alternativ kann die Transkation auch programmatisch geöffnet werden.
+\begin{lstlisting}
+public void onDroneInfoReceived(UUID droneId, DroneInfoMessage droneInfoMessage) {
+    jpaApi.withTransaction(()-> {
+        // ... skipped
+    });
+}
+\end{lstlisting}
+Es ist unklar warum die Transkation nicht einheitlich geöffnet wurde.
+Der Grund liegt daran, dass in Controllern, welche mit einem Browser Session verlinkt sind die Transkation deklarativ geöffnet wurde.
+Leider funktionniert die Annotation nicht in Controllern, welche kein Browser Session haben.
+In unserem Fall wären alle Controller, welche vom Eingang eines RabbitMQ Messages angestossen werden.
+
+Daneben haben auch alle API-Controller, welche vom Customer-App aufgerufen werden keien Session.
+Daher wurde dort die Transkation programmatisch geöffnet.
+
+\subsubsection{Neue Java 8 Methoden verwenden}
+Bei den Collections wurden in Java 8 nützliche Methoden hinzugefügt. So kann etwa die folgende Methode gekürzt werden:
+
+\begin{lstlisting}
+public void addWebSocketConnection(UUID missionId, WebSocketConnection webSocketConnection) {
+    List<WebSocketConnection> connections = missionIdToOpenConnections.get(missionId);
+    if (connections == null) {
+        connections = new ArrayList<>();
+        missionIdToOpenConnections.put(missionId, connections);
+    }
+   //  ... continue with connection
+}
+
+// replaced with
+public void addWebSocketConnection(UUID missionId, WebSocketConnection webSocketConnection) {
+    List<WebSocketConnection> connections =
+            missionIdToOpenConnections.computeIfAbsent(missionId, key -> new ArrayList<>());
+   //  ... continue with connection
+}
+\end{lstlisting}
+
+
+\subsubsection{Long running jobs innerhalb der Consumer}
+Im DroneConnection wird auf einem Queue ein Consumer registriert, welcher eintreffende Messages verarbietet:
+\begin{lstlisting}
+Consumer consumer = new DefaultConsumer(channel) {
+    @Override
+    public void handleDelivery(String consumerTag,
+                               Envelope envelope,
+                               AMQP.BasicProperties properties,
+                               byte[] body) throws IOException {
+        String message = new String(body, "UTF-8");
+        droneMessageDispatcher.dispatchMessageToController(drone.getId(), message);
+    }
+};
+\end{lstlisting}
+
+Im Interface von Consumer steht folgendes:
+\begin{quote} 
+The Consumers on a particular Channel are invoked serially on one or more dispatch threads. Consumers should avoid executing long-running code because this will delay dispatch of messages to other Consumers on the same Channel	
+\end{quote}
+
+In unserem Fall wird beim Eintreffen der Messages vieles angestossen. Da die Queues pro Drohne sind, ist das blockieren der Queues von Vorteil und beschränkt sich auf eine Drone. Als Long-Runing code kann nur die Transkation betrachtet werden, welche allenfalls blockiern kann. Dies ist aber auch der Fall bei einem Event-Basierten System. Am Code wurde nicht verändert, jedoch wurde aber der Code dokumentiert.
+
+\subsubsection{Fehlende Security Annotation bei den REST Controllern}
+\begin{lstlisting}
+@Security.Authenticated(SecurityAuthenticator.class)
+public Result index() {
+   List<Drone> all = droneDao.findByOrganisation(getOrganisation());
+   
+   String organisationToken = getOrganisation().getToken();
+   return ok(index.render(all, organisationToken));
+}}
+\end{lstlisting}
+
+Im oberen Beispiel wird eine Route mit dem Security Annotation versehen, welche überprüft, ob ein Benutzer bereits eingeloggt ist. In diesem Fall wird die Methode aufgerufen. Die Annotation wurde nicht überall deklariert, dies wurde nachgeholt.
+
+
+\subsubsection{Sonstige Anregungen}
+\begin{itemize}
+	\item{Code ist gut lesbar}
+	\item{Message Controller in einem seprate package verschieben, damit diese sichtlich von den restlichen Controllern getrennt sind}
+	\item{Optional als alternative zur Methoden mit der Namensgebung xxxOrNull()}
+	\item{
+	Beim Play Framework können in der Route eigene Datentypen angegeben werden.
+	So kann zum Beispiel statt String, direkt ein Wert vom Type Position erwartet werden.
+	Das parser der String Werte zum Position wrid von einem PathBindable-Implementierung gemacht.
+	Dies macht die Routen lesbarer. }
+\end{itemize}
