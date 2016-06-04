@@ -2,7 +2,7 @@
 
 \section{Ziele}
 
-Die folgende Architektur soll es ermöglichen, ein Flotte von Drohnen automatisiert und zentralisiert zu verwalten. Die Kommunikation zwischen Server und Drohne muss ausserdem von beiden Seiten initiierbar sein. Zusätzlich muss eine Schnittstelle für Kunden existieren, damit Bestellungen getätigt werden können. 
+Die folgende Architektur soll es ermöglichen, eine Flotte von Drohnen automatisiert und zentralisiert zu verwalten. Die Kommunikation zwischen Server und Drohne muss ausserdem von beiden Seiten initiierbar sein. Zusätzlich muss eine Schnittstelle für Kunden existieren, damit Bestellungen getätigt werden können. 
 
 \section{Übersicht}
 
@@ -145,6 +145,7 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 
 \subsubsection{Service-Layer}
 
+% TODO AMQP is wrong betwen server and customer app
 \begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
 	\textbf{Verantwortlichkeiten} & \textbf{Zusammenarbeit} \\ \hline \hline
 	
