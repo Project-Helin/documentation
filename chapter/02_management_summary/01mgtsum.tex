@@ -1,19 +1,17 @@
 \newpage
 \addcontentsline{toc}{chapter}{Management Summary}
-\chapter{Management Summary}
+\chapter*{Management Summary}
 \section*{Ausgangslage}
-In den letzten Jahren haben sich die Technologien zur autonomen Steuerung von Fahr- und Flugzeugen deutlich weiterentwickelt und sind nun auch als Massenprodukte erhältlich. Im militärischen Bereich werden sie bereits länger eingesetzt, der kommerzielle Einsatz hingegen, steht erst in den Startlöchern. Eine Verkaufswelle von Flugdrohnen im Consumerbereich (Umsatz 2015 1.7 Mia.Dollar) \cite{droneNZZ} und einige Beinahezusammenstösse mit Flugzeugen, lösten in mehreren Ländern heftige Diskussionen über die Einführung von strengeren Gesetzen aus. Die Nutzung von autonomen Drohnen im kommerziellen Bereich, wird hingegen immer mehr bewilligt. Im Jahr 2015 wurden in den USA mindestens 2100 \cite{perm} Ausnahmegenemigungen erteilt, um autonome Drohnen zu testen.
-
-Unsere Vision und das Ziel der Arbeit war es deshalb, eine Plattform zu entwickeln, die es Anbietern ermöglicht, ihre Produkte mit Drohnen automatisiert an die Position des Kunden auszuliefern. Wenn also spezielle Drohnen zum autonomen Fliegen zugelassen werden, können diese mithilfe unserer Plattform auch von kleineren Anbietern verwendet werden.
+In den letzten Jahren haben sich die Technologien zur autonomen Steuerung von Fahr- und Flugzeugen deutlich weiterentwickelt und sind nun auch als Massenprodukte erhältlich. Im militärischen Bereich werden sie bereits länger eingesetzt, während der kommerzielle Einsatz erst in den Startlöchern steht. Eine Verkaufswelle von Flugdrohnen im Consumerbereich (Umsatz 2015 USD 1.7 Mia) \cite{droneNZZ} und einige beinahe Zusammenstösse mit Flugzeugen, lösten in mehreren Ländern heftige Diskussionen über die Einführung von strengeren Gesetzen aus. Im Gegensatz dazu, wird die Nutzung im kommerziellen Bereich immer mehr bewiligt. Im Jahr 2015 wurden in den USA mindestens 2100 \cite{perm} Ausnahmegenemigungen erteilt, um autonome Drohnen zu testen.
+\\
+Unsere Vision und das Ziel der Arbeit war es deshalb, eine Plattform zu entwickeln, die es Anbietern ermöglicht, ihre Produkte mit Drohnen automatisiert an die Position des Kunden auszuliefern. Die aktuellen Entwicklungen zeigen, dass in Zukunft autonome Drohnen zulassungspflichtig sein werden. Um dem entgegen zu wirken, haben wir beschlossen eine Plattform zu bauen, die Drohnen-Modell unabhänig arbeitet. Dies macht die Technologie auch für kleine Anbieter nutzbar, da kein spezifisches Model vorgesehen wird, sondern unterschiedliche Modelle für unterschiedliche Aufgaben genutzt werden können.
 
 \section*{Vorgehen / Technologien}
-
-Um Drohnen über eine Internetplattform zu verwalten und steuern zu können, wurde auf jeder Drohne ein Smartphone installiert. Dieses fungiert als Vermittler zwischen der Plattform und dem Autopilot der Drohne und dient während der Beladung als Benutzeroberfläche.
-
-Durch eine Bestellung wird eine Route berechnet und dann einer Drohne zugewiesen. Sobald diese beladen ist, fliegt sie autonom zum Kunden, liefert das Produkt aus und fliegt wieder zurück. Dabei bleibt die Drohne in den vordefinierten, sicheren Flugzonen und weicht somit statischen Hindernissen aus. Während des Flugs sendet die Drohne laufend Telemetriedaten zur Plattform, welche während und nach dem Flug auf einer Karte eingesehen werden können.
+Um Drohnen über eine Internetplattform zu verwalten und steuern zu können, wurde auf jeder Drohne ein Smartphone installiert. Dieses ermöglicht die Kommunikation mit der Plattform aber auch eine Benutzerinteraktion über das Display.
+\\
+Bei einer eingehenden Bestellung wird eine Route berechnet und dann einer Drohne zugewiesen. Sobald diese beladen ist, fliegt sie autonom zum Kunden, liefert das Produkt aus und fliegt wieder zurück. Dabei bleibt die Drohne in den vordefinierten, sicheren Flugzonen und weicht somit statischen Hindernissen aus. Während des Fluges sendet die Drohne laufend Telemetriedaten zur Plattform, welche während und nach dem Flug auf einer Karte eingesehen werden können.
 
 \section*{Ergebnisse }
-
-Auf Basis der von uns erarbeiteten Anforderungen haben wir eine Plattform für Anbieter, eine Android-App für die Drohne und eine Android- und iOS-App für den Kunden, konzipiert, umgesetzt und erfolgreich getestet. Für die Tests haben wir eigene Drohnen mit Standardkomponenten aufgebaut und zusätzliche Komponenten für das montieren des Smartphones und die Abwurfvorrichtung konzipiert und im 3D-Druck-Verfahren zeichnen und herstellen lassen. 
-
-Die Plattform konnte in einer ersten Version veröffentlicht werden und steht nun bis auf weiteres als Service frei unter www.helin.ch zur Verfügung. Die Android Customer App wurde ebenfalls im Play-Store veröffentlicht. Der ganze Quellcode steht unter github.com/orgs/Project-Helin kostenlos zur Verfügung und kann für weitere Projekte verwendet werden.
+Auf Basis der von uns erarbeiteten Anforderungen haben wir eine Plattform für Anbieter, eine Android-App für die Drohne und eine Android- und iOS-App für den Kunden, konzipiert, umgesetzt und erfolgreich getestet. Für die Tests haben wir eigene Drohnen mit Standardkomponenten aufgebaut und zusätzliche Komponenten für die Befestigung des Smartphones und die Abwurfvorrichtung konzipiert und im 3D-Druck-Verfahren herstellen lassen. 
+\\
+Die Plattform konnte in einer ersten Version veröffentlicht werden und steht nun bis auf weiteres als Service frei unter \url{http://www.helin.ch} zur Verfügung. Die Android Customer App wurde im Play-Store veröffentlicht. Der ganze Quellcode unterliegt der MIT-Lizenz und steht unter \url{http://github.com/orgs/Project-Helin} kostenlos zur Verfügung und kann für weitere Projekte verwendet werden.
