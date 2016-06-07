@@ -147,34 +147,25 @@ Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen
 	Aus diesen Erkenntnissen standen beide Möglichkeiten offen, denn beide erfüllen die Anforderungen und haben somit auch keine Auswirkungen auf die Qualität. Am Ende wurde bewusst auf den BackOff Algorithmus gesetzt. Der Backoff Algorithmus benötigt zwar deutlich länger für einen Reconnect als das fixe Zeitinterval. Die hetrogene Verteilung der Wiederverbindungszeiten spricht aber für den Backoff Algorithmus. Sollte es zu Probleme auf der Serverseite kommen, so werden nicht alle Geräte gleichzeitig einen Reconnect probieren - der Reconnect passiert somit gestaffelt. Dies bringt zusätzlich Stabilität ins System.}
 	\item{\textbf{Android Process Lifecycle:} \\
 	Da die OnboardApp auf einem Android Betriebssystem läuft, mussten gewisse Voraussetzungen geprüft werden. Im Grund kann davon ausgegangen werden, dass die Applikation immer im Vordergrund steht. Es ist doch sehr unwahrscheinlich, dass die Appliaktion in den Hintergrund rückt, weil eine andere Applikation verwendet wird. \\
-	% TODO Quelle: http://developer.android.com/guide/components/processes-and-threads.html
-	Laut Android Dokumentation ist das Verhalten einer Applikation im Hintergrund nicht deterministisch. Sollte eine Applikation im Hintergrund gewisse Garantien haben, so muss von einem Service und der spezifischen Implementierung eines Services gesprochen werden. Im Fall der OnboardApp und den getroffenen Annahmen, wurde davon abgesehen, da die Applikation während des Fluges nicht gewechselt wird.
+	Laut Android Dokumentation ist das Verhalten einer Applikation im Hintergrund nicht deterministisch \cite{androidGuide}. Sollte eine Applikation im Hintergrund gewisse Garantien haben, so muss von einem Service und der spezifischen Implementierung eines Services gesprochen werden. Im Fall der OnboardApp und den getroffenen Annahmen, wurde davon abgesehen, da die Applikation während des Fluges nicht gewechselt wird.
 	}
 \newpage
 \end{itemize}
-\section{Topologisches Konzept}
-Die topologische Überlegung spielt in der Umsetzung eine zentralle Rolle. Die zentrale Aufgabe des Projektes ist es Drohnen zu verwalten, welche sich in einem geografischen Gebiet aufhalten. Dieses Gebiet kann Hindernisse, Gebäude oder Bäume beinhalten, welche möglichst sicher umflogen werden müssen. Da die Drohnen über keine Kollisionserkennung verfügen, ist es umso wichtiger, dass viele Gefahren bereits in der Planung der Mission ausgeschlossen werden kann. Statische Objekte mit unterschiedlicher Höhe können einfach umflogen oder überflogen werden, sofern die Drohne 'weiss' wie diese flugtechnisch zu vermeiden sind. Aus diesen Überlegungen entstand das Zonen Model.
-\subsection{Das Zonen Model}
 
-Betrachten wir nun ein einfaches Projekt am Campus der HSR, so könnte dies wie folgt aussehen. \\
+\section{Customer App}
+Gemäss Aufgabenstellung sollte ein "'Prototyp einer Android App"', mit welchen Bestellungen am System abgegeben werden können, entwickelt werden.
+Dieser App wurde bewusst als letzte Komponente entwickelt, denn es wurde zuerst geschaut, dass die Server und On-Board Komponente reif genug waren.
+
+Um nicht auf die Funktionalität der Customer-App zu verzichten, wurden in der Administrator-Seite eine "'Fake Order"' Funktionen eingeführt.
+Diese imitiert dem Bestellprozess des Apps, was für den Anfang der Entwicklung Ausreichend war. Doch schnell kamen Limitierung dieser Möglichkeit:
+
 \begin{figure}[h]
-	\includegraphics[width=1.0\textwidth]{images/routing/simpleProject_example.png}
-	\caption{Einfaches Demo Projekt an der HSR}
-	\label{fig:demo-project}
+	\centering
+	\includegraphics[width=1\textwidth] {images/customer-app-fake-order.png}
+	\caption{Send Fake Order within Administrator Page}
+	\label{fig:pixhawk}
 \end{figure}
-Jede Farbe kann einer bestimmten Zone zugeteilt werden. Die Zonen können bestimmte Funktionen auf der Drohne auslösen. Zu jeder Zone kann zusätzlich die Höhe hinterlegt werden. Diese gewährleistet die minimale Flughöhe in dem Bereich. Im Falle der DeliveryZone ist die Höhe die Zielhöhe nach dem Start.
-\begin{itemize}
-	\item{\textbf{OrderZone:} Bereich in welchem Produkte im CustomerApp für dieses Projekt bestellt werden können.  (\textit{hell blauer Rahmen})}
-	\item{\textbf{LoadingZone:} Zone die gebraucht wird um die Drohne zu beladen. (\textit{orange})}
-	\item{\textbf{DeliveryZone:} Diese Zone definiert das Gebiet über welchem das Produkt abgeworfen werden kann. (\textit{grün})}
-	\item{\textbf{FlightZone:} Die Flugzone verbindet die Ladezone mit der Abwurfzone. Weiter garantiert sie, dass die angegebene Flughöhe gewährleistet wird. (\textit{blau})}
-\end{itemize}
-\subsection{Routing-Algorithmus}
 
 
-Die Luftraumabbildung in Zonen lässt auf eine Abstraktion in Polygonen schliessen. Polygone sind gut um Bereich zu definieren, aber sie eigenen sich nicht wirklich um eine Route zu B
-Die Luftraumaufteilung mit Zonen 
-Nachdem die Luftraumaufteilung nun mit Zonen gelöst ist, welche durch Polygone abgebildet werden können, muss eine Vereinfachung zu einem Graph gefunden werden, um 
-Für den Erfolg des Projektes war der Gedanke über die Aufteilung des Luftraums von zentraller Bedeutung. Die Luftraumaufteilung wurde auch relativ schnell mit dem intuitiven Zonen konzept gelöst. Leider sind Zonen, welche quasi durch Polygone abgebildet werden, nicht wirklich gut geeignet um eine Route zu finden. Routing-Algorithmen basieren auf Graphen und nicht auf Polygonen. Schnell waren wir uns bewusst, dass eine erfolgreiche Routenberechnung nicht an einem klassischen Routing Algorithmus vorbei führen würde.
-\subsection{Reduktion vom Polygon zum Graph}
-Für das Routing sind nur die drei Zonen, LoadingZone, DeliveryZone und FlightZone von entscheidender Bedeutung. Diese Zonen können von der Drohen angeflogen werden, die OrderZone dient nur um die richtigen Produkte im CustommerApp anzuzeigen.
+
+
