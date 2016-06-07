@@ -1,24 +1,40 @@
 \newpage
 \chapter{Umsetzung}
 
-\section{Kommunikation}
-
-\subsection{Messages}
-Um die Messages sowohl auf dem Server als auf den Android Apps nutzen zu können, müssen alle Messages zu jeder Zeit überall verfügbar sein. Daher wurde ein seperates Projekt angelegt. Es wird jeweils nach MavenLocal deployed um es in den anderen Projekten verfügbar zu machen.
+\section{Struktur}
+Um die Messages sowohl auf dem Server als auch auf dem Android App verfügbar zu machen, wurden diese in ein seperates Projekt ausgelagert. Weiter wurde festgestellt, dass gewisse Sachen auf beiden System genutzt werden muss, daher wurde die gesammte Serialisierungs und Deserialisierungskomponente in das Commons Projekt ausgelagert. Es wird jeweils nach MavenLocal deployed um es in den anderen Projekten verfügbar zu machen.
 
 
+\section{Verwendete Bibliotheken}
+\subsection{Commons}
+\begin{tabularx}{\textwidth}{|X|X|c|X|}
+	\hline
+	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
+	\hline \hline
+	Google GSON & Java Serialisierungs / Deserialisierungs Bibliothek & 2.6.2 & Apache 2.0\\
+	\hline 
+\end{tabularx}
 
-\section{Libraries}
 
 \subsection{Server}
-
+\begin{tabularx}{\textwidth}{|X|X|c|X|}
+	\hline
+	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
+	\hline \hline
+	Hibernate ORM Mapper & Objekt-Relationales mapping zwischen Datenbank und Models  & 5.1.0 & Apache 2.0\\
+	\hline 
+	RabbitMQ Client & Client Komponente zur Kommunikation mit dem Rabbit MQ Server & 3.6.0 &  Mozilla Public License 1.1, GPL 2, Apache 2.0 \\
+	\hline 
+	jGraphT & Graph Bibliothek für Java, um effizient Operationen auf dem Graph auszuführen & 0.9.2 &  LGPL, EPL \\
+	\hline 
+\end{tabularx}
 
 \subsection{Onboard App}
 \begin{tabularx}{\textwidth}{|X|X|c|X|}
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
-	DroneKit-Android Client library & Android API für MAV-Link Protokoll (Ansteuerung der Drohne) & 1.5.1 & Apache 2.0\\
+	DroneKit-Android Client & Android API für MAV-Link Protokoll zum ansteuern der Drohne & 1.5.1 & Apache 2.0\\
 	\hline 
 	AMQP Messaging Library & Messaging für Android & 3.6.0 &  Mozilla Public License 1.1, GPL 2,  Apache 2.0 \\
 	\hline 
@@ -26,6 +42,15 @@ Um die Messages sowohl auf dem Server als auf den Android Apps nutzen zu können
 	\hline 
 \end{tabularx}
 \subsection{Customer App}
+\begin{tabularx}{\textwidth}{|X|X|c|X|}
+	\hline
+	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
+	\hline \hline
+	Paypal Forms & Paypal integration für Xamarin.Forms & 2.0.4 & MIT \\
+	\hline 
+	Xamarin Forms & Messaging für Android & 2.2.0.45 & \url{https://www.xamarin.com/license} \\
+	\hline 
+\end{tabularx}
 
 
 \section{Implementierung}
@@ -33,7 +58,7 @@ Um die Messages sowohl auf dem Server als auf den Android Apps nutzen zu können
 \subsection{Code Standard}
 Im Team wurden folgende Code-Conventions eingeführt.
 
-\subsubsection{Kein Author}
+\subsubsection{Autorfreie Klassen}
 In Java wird klassicherweise der Autor im Javadoc Kommentar in der Klasse angegeben.
 
 \begin{lstlisting}
@@ -43,13 +68,10 @@ In Java wird klassicherweise der Autor im Javadoc Kommentar in der Klasse angege
 public class MyTestClass{
 }
 \end{lstlisting}
-
-Der Autor in der Klasse suggeriert, dass nur ein Autor für diese Klasse existiert und für diese Klasse zuständig ist. Dies ist aber meist nicht der Fall. 
-Der Code sollte von allen Teammitgliedern gepflegt werden. Ausserdem ist die Angabe auf der Klasse heutzutage mit einem Version Control System redundant.
+Der Autor in der Klasse suggeriert, dass nur ein Autor für diese Klasse existiert und für diese Klasse verantwortlich ist. Dies sollte aber nicht der fall sein, da jedes Teammitglied verantwortlich für die gesammte Code-Qualität ist und zudem ist die Angabe auf der Klasse heutzutage mit einem Version Control System redundant.
 
 \subsubsection{Javadoc}
-Generell sollte Javadoc nur dort verwendet werden, wo es nötig ist. Da es sich beim Helin Projekt nicht um eine API handelt, sollten auch die Methoden und Parameter nicht redundant dokumentiert werden. Ein Beispiel für eine schlechte Javadoc Dokumentation sieht folgendermassen aus :
-
+Generell sollte Javadoc nur dort verwendet werden, wo es nötig ist. Da es sich bei Projekt Helin nicht um eine API handelt, sollten auch die Methoden und Parameter nicht redundant dokumentiert werden. Ein Beispiel für eine schlechte Javadoc Dokumentation sieht folgendermassen aus:
 \begin{lstlisting}
 // Beispiel einer Play Klasse
 public final class ConfigUtil {
@@ -68,11 +90,9 @@ public final class ConfigUtil {
     // ...
 }
 \end{lstlisting}
-
-Bei der Methode quoteString() kann der ganze JavaDoc weggelassen werden, da er nicht mehr aussagend ist, als die Methode selbst.
-Stattdessen sollte die Methode so geschreiben werden, dass die Namen aussagekräftiger sind.
-
-Besser wäre:
+Bei der Methode quoteString() kann der ganze Javadoc Kommentar weggelassen werden, da er nicht mehr Aussagekraft hat, als die Methode selbst. Stattdessen sollte die Methode so geschreiben werden, dass die Namen aussagekräftiger sind.
+\\
+Eine bessere Implementierung würde folgendermassen aussehen:
 \begin{lstlisting}
 public final class ConfigUtil {
     private ConfigUtil() { }
@@ -83,14 +103,13 @@ public final class ConfigUtil {
     // ...
 }
 \end{lstlisting}
-
 \subsubsection{Code}
-Für die Formattierung und den Static Check werden die Inspections von IntelliJ IDEA verwendet.
-Diese sind konfigurierbare Regeln, welche mit dem Projekt eingecheckt werden. Der IDE führt diese vor dem einchecken aus und verhindert das einchecken falls diese Verletzten werden.
-Da es zu viele von den Regeln zur Verfügung stehen, wurde die Vorlage von IntelliJ genommen und ins VCS eingecheckt, damit alle diesselben Regeln verwenden.
-
+Für die Formatierung und den Static Check werden die 'Code Inspection' von IntelliJ IDEA verwendet.
+\\
+Es handelt sich bei den 'Code Inspections' um konfigurierbare Regeln, welche mit dem Projekt in das Repository eingecheckt werden. Die Entwicklungsumgebung führt die 'Code Inspections' vor dem Einchecken aus und weisst gegebenenfals auf Unstimmigkeiten hin.
+Da sich die standard Regeln von IntelliJ bereits in anderen Projekten bewährt haben, wurde von einem eigenen Standart abgesehen.
+\newpage
 \subsection{Messaging}
-
 Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen, wurde AMQP als Protokoll ausgewählt. Mit Messaging soll gewährleistet werden, dass die Verbindungswiederherstellung funktioniert. Die funktionale Anforderung des Missionsabbruchs wird somit soweit gedeckt, dass versucht wird die Verbindung aufrechtzuerhalten, sofern das Netz es erlaubt. Bei kurzen Netzunterbrüchen kann somit über das AMQP Protokoll eine Verbindung zur Drohne gewährleistet werden.
 
 \begin{itemize}
@@ -133,3 +152,6 @@ Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen
 	}
 
 \end{itemize}
+\section{Routing-Algorithmus}
+Für den Erfolg des Projektes war der Gedanke über die Aufteilung des Luftraums von zentraller Bedeutung. Die Luftraumaufteilung wurde auch relativ schnell mit dem intuitiven Zonen konzept gelöst. Leider sind Zonen, welche quasi durch Polygone abgebildet werden, nicht wirklich gut geeignet um eine Route zu finden. Routing-Algorithmen basieren auf Graphen und nicht auf Polygonen. Schnell waren wir uns bewusst, dass eine erfolgreiche Routenberechnung nicht an einem klassischen Routing Algorithmus vorbei führen würde.
+\section{Reduktion der Fläche zum Graph}
