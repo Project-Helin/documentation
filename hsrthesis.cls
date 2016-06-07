@@ -80,7 +80,16 @@
 }
 \newcommand*\rot{\multicolumn{1}{R{90}{1em}}}% no optional argument here, please!
 
-
+% Copied from http://tex.stackexchange.com/a/313337
+\usepackage{enumitem,amssymb}
+\newlist{todolist}{itemize}{2}
+\setlist[todolist]{label=$\square$}
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
+\hspace{-2.5pt}}
+\newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
 		
 %\usepackage{wrapfig}
 

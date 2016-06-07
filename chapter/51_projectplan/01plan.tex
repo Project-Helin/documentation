@@ -215,3 +215,112 @@ Die Qualität der Entwicklung wird durch folgende Massnahmen sichergestellt:
 	\item{\textbf{Deployment:} Die Serverkomponenten werden mithilfe eines Build Systems deployt. Die Komponenten auf den Mobiltelefonen werden manuell deployt. Jedoch wird auf dem Build-System für alle Komponenten die Ausführung von Unit-Tests garantiert.}
 	
 \end{itemize}
+
+\newpage
+\section{Systemtests}	
+
+Die nachfolgenden Tests wurden mit den folgenden Komponenten durchgeführt:
+
+\begin{itemize}
+	\item Server: www.helin.ch
+	\item On-Board-App: läuft auf einem Nexus 5 mit Android 6.0
+	\item Customer-App: läuft auf einem Neuxs 5 mit Android 6.1
+	\item Drohne: läuft im Simulator
+\end{itemize}
+
+\subsection{Administrator}	
+\subsubsection{Funktionale Anforderungen}	
+\begin{todolist}
+	\item[\done] Es kann ein Administrator Account erstellt werden
+	\item[\done] Es kann kein Account mit demselben Namen erstellt werden
+	\item[\done] Administrator kann sich mit seinem Email und Passwort einloggen
+	\item[\done] Administrator kann eine neue Organisation erstellen
+	\item[\done] Administrator kann den Namen der Organisation ändern
+	\item[\done] Administrator kann einen zusätzlichen Administrator zur Organisation hinzufügen
+	\item[\done] Es kann ein Administrator aus der Organisation gelöscht werden
+	\item[\done] Administrator kann ein neues Produkt erfassen
+	\item[\done] Administrator kann ein vorhandenes Produkt editieren
+	\item[\done] Administrator kann ein Produkt löschen
+	\item[\done] Administrator kann ein neues Projekt erfassen
+	\item[\done] Administrator kann ein Produkt erfassen
+	\item[\done] Administrator kann eine Bestell-, Abwurfs-, Flug- und Ladezone definieren
+	\item[\done] Administrator kann eine Zone anpassen und löschen
+	\item[\done] Administrator kann ein Produkt zu einem Projekt zuweisen
+	\item[\done] Administrator kann ein Produkt aus einem Projekt herauslöschen
+	\item[\done] Administrator kann eine Test Flugroute generieren.
+
+	\item[\done] Administraotr kann die Bestellung ansehen.
+	\item[\done] Administraotr kann die vorgeschlagene und geflogene Flugroute anschauen.
+
+	\item[\done] Eine registrierte Drohne kann einem Projekt zugewiesen werden
+	\item[\done] Eine registrierte Drohne kann angepasst werden
+	\item[\done] Eine registrierte Drohne kann als inaktiv markiert werden
+	\item[\done] Eine aktuell verbundene Drohne zeigt den letzten Akku stand an.
+
+	\item[\done] Administrator kann alle Bestellungen ansehen
+	\item[\done] Adminstraot kann die Missionen pro Bestllung ansehen
+	\item[\xmark] Administrator kann einbe Bestellunge ändern ( Funtkionale Anforderung )
+	\item[\xmark] Administrator kann einbe Bestellunge löschen ( Funtkionale Anforderung )
+
+	\item[\xmark] Drone kann herausgelöscht werden (Funktionale Anforderung)
+	\item[\xmark] Adminstrator kann eine laufende Mission abbrechen
+	\item[\xmark] Administrator kann services definieren ( Funktioanle Anforderung )
+
+\end{todolist}
+
+\subsubsection{Nicht-Funktionale Anforderungen}	
+\begin{todolist}
+	\item[\done] Auf die Admin Seite kann nur über HTTPS zugegriffen werden
+\end{todolist}
+
+\subsection{Drone-Operator}	
+\subsubsection{Funktionale Anforderungen}	
+\begin{todolist}
+	\item[\done] Das OnBoard-App kann über ein APK heruntergeladen und installiert werden.
+	\item[\done] Mit dem OnBoard-App kann ich die Drohne beim Server registrieren und einer Organisation hinzufügen
+	\item[\done] Das OnBoard-App kann sich mit dem Server verbinden
+	\item[\done] Das OnBoard-App kann auf Wunsch die Verbindung zum Server trennen
+	\item[\done] Die Drohne kann auf dem OnBoardApp als inaktiv markiert werden
+	\item[\done] Das OnBoard-App kann sich mit der Drohne verbinden
+	\item[\done] Das OnBoard-App kann die Verbindung mit der Drohne trennen
+	\item[\done] Es kann der aktuelle Status des GPS, Batterie Status und der Verbindung zum Server angezeigt werden
+	\item[\done] Eine vorgeschlagene Mission kann abgelehnt werden
+	\item[\done] Drone-Operator kann eine Mission annehmen und sieht die zu belandende Produkte
+	\item[\done] Bevor die Drohne startet erhalten ich eine Countdown
+	\item[\xmark] Bevor dei Drohne startet erhalte ich einen akustischen Signal
+	\item[\done] Während des Countdown kann der Start abgerochen werden
+	\item[\done] Die Drohne kann mit den Produkten beladen und bestätigt werden
+	\item[\done]
+\end{todolist}
+
+\subsubsection{Nicht-Funktionale Anforderungen}	
+\begin{todolist}
+	\item[\done] Die Verbindung zum Server beim Registrieren ist verschlüsselt ( Server kann nur https)
+	\item[\done] Die Verbindugm zum Server bei der Übertragung der Drohneninformation ist verschlüsselt (überprüft mittels RabbitMQ Management Konsole)
+\end{todolist}
+
+\subsection{Customer}	
+\subsubsection{Funktionale Anforderungen}	
+\begin{todolist}
+	\item[\xmark] Der Kunde kannn sich die App aus dem Google Play Store herunterladen
+	\item[\done] Kunde kann sich die bestellbaren Produkte anschauen, ohne sich einzuloggen
+	\item[\done] Kunde sieht nur nur Produkte innerhalb der Bestellzone
+	\item[\done] Kunde kann eine Bestellung abschicken und sieht die voraussichtliche Lieferposition
+	\item[\done] Kunde kann die Bestellung abbrechen
+	\item[\done] Kunde kann sich über Google Anmelden und sieht welche Berechtigung von Google erforderlich sind
+	\item[\done] Kunde kann die bestellte Ware mit PayPal bezahlen ( nur im Testmodus )
+	\item[\done] Kunde kann die Bestellung bestätigen
+	\item[\done] Kunde kann die seine Bestellungen anschauen und dessen Status ansehen
+	\item[\done] Kunde kann die einzelnen Lieferung anschauen und dessen Status ansehen
+	\item[\done] Kunde kann bei einer aktuellen Lieferung die Position der Drohne mitverfolgen
+	\item[\xmark] Als Kunde kann ich  eine Bestellung stornieren
+\end{todolist}
+
+\subsubsection{Nicht-Funktionale Anforderungen}	
+\begin{todolist}
+	\item[\done] Die Verbindung zum Server ist verschlüsselt
+	\item[\done] Ohne Internetverbindung wird beim Abruf der Produkte eine Fehlermeldung angzeigt.
+	\item[\done] Ohne GPS Verbindung wird beim Abruf der Produkte eine Fehlermeldung angzeigt.
+\end{todolist}
+
+
