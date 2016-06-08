@@ -103,7 +103,11 @@
 
 
 %\usepackage{float}
-%\usepackage{natbib}
+\usepackage{natbib}
+
+%\usepackage[round, sort, compress, authoryear]{natbib}
+\usepackage[autostyle]{csquotes}  
+
 \usepackage{ltxtable, tabularx, longtable}
 \usepackage{booktabs}
 %\definecolor{lightgrey}{rgb}{.9,.9,.9}
