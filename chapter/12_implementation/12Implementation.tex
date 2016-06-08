@@ -153,19 +153,41 @@ Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen
 \end{itemize}
 
 \section{Customer App}
-Gemäss Aufgabenstellung sollte ein "'Prototyp einer Android App"', mit welchen Bestellungen am System abgegeben werden können, entwickelt werden.
+Gemäss Aufgabenstellung sollte ein "'Prototyp einer Android App"', mit welchen Bestellungen am System abgegeben können, entwickelt werden.
 Dieser App wurde bewusst als letzte Komponente entwickelt, denn es wurde zuerst geschaut, dass die Server und On-Board Komponente reif genug waren.
 
-Um nicht auf die Funktionalität der Customer-App zu verzichten, wurden in der Administrator-Seite eine "'Fake Order"' Funktionen eingeführt.
-Diese imitiert dem Bestellprozess des Apps, was für den Anfang der Entwicklung Ausreichend war. Doch schnell kamen Limitierung dieser Möglichkeit:
-
+Um nicht auf die Funktionalität der Customer-App zu verzichten, wurden in der Administrator-Seite eine "'Fake Order"' Funktionen eingeführt. 
+Diese imitiert dem Bestellprozess des Kunden uns schickt eine Anfrage mit vordefinierten Koordinaten und Produkten an das System. 
+Dies war für den Anfang der Entwicklung Ausreichend war. Doch schnell kamen Limitierung dieser Möglichkeit. Denn beim Testen war es wichtig mit unterschiedlichen Projekten und Positionen zu testen. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth] {images/customer-app-fake-order.png}
 	\caption{Send Fake Order within Administrator Page}
-	\label{fig:pixhawk}
 \end{figure}
+Daher wurde die Customer-App, mit dem Fokus die Fake-Order-Funktion abzulösen, entwickelt.
+Entgegen dem On-Board-App, welches mit mit Java nur für Android entwickelt wurden, für das Customer-App auf Xamarin Forms gesetzt.
+Auch wenn gemäss der Aufgabenstellung ein Android App gengüt hätte, war doch die Fragen offen, wie die iPhone Kunden ein Bestellung tätigen können.
+Mit einem Marktanteil von 42.2\% (Zahlen 2015) \cite{ios-user} von iOs Benutzern in der Schweiz, ist anzunehmen dass die Anforderung nach einem iPhone App kommen wird.
+Deshalb wurde, nach Absprache mit dem Betreuer, auf C# und Xamarin Forms gesetzt, so kann auch gleichzeitig eine iOS App entwickelt werden - ohne grossen Aufwand.
 
+\subsection{Resultate}
+\begin{landscape}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\paperheight] {images/customer-app-pages.png}
+	\caption{Customer app flow}
+\end{figure}
+\end{landscape}
 
+Die App wurde bewusst einfach gehalten.
+Auf dem Start Screen kann der Kunde auswählen, ob er seine alten Bestellungen sehen oder neue Produkte bestllen will.
+Beim Bestellen neuer Produkte, werden alle aufgelistet, welche sich innerhalb der Bestellezone liegen.
+Nach dem Abschicken der Bestellung, bekommt der Kunde einen Vorschlag für die Abwurfsposition.
+Falls er sich überlegt, doch nicht zu bestellen, springt er wieder zurück auf die Produkteliste.
+Bis zum letzten Schritt war keine Anmeldung erforderlich.
+Im Falle einer Bestätigung der Abwurfsposition, muss sich der Kunde über Google authentizieren lassen.
+Danach kann der Benutzer die bestellte Ware bezahlen. Die Bezahlung wird über PayPal abgewickelt.
 
+Nach der erfolgreichen Bezahlung kann wird dem Kunde die Mission angezeigt. 
+Der Kunde sieht die Route der Drohne und bei laufend Mission wird die Position der Drohne angezeigt.
 
