@@ -83,20 +83,20 @@ Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen
 \end{itemize}
 
 \subsection{Sicherheit}
-Wie sicher ist die Kommunikation mit dem Server? Kann allenfalls eine Drohne gekapert und falsche Koordinate zugeschickt werden?
+Wie sicher ist die Kommunikation mit dem Server? Kann allenfalls eine Drohne gekapert und falsche Koordinaten zugeschickt werden?
 \\
-Die Verbindung zum RabbitMQ läuft über TLS (Transport Layer Security ). 
-Die Kommunikation mit dem Server läuft über zwei Queues:
+Das CustomerApp registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Anmeldung werden neben einem Token auch die Anmeldedaten für RabbitMQ mitgeliefert.
+
+Damit kann sich die App mit dem Messaging Broker verbinden, auch diese Verbindung läuft verschlüsselt.
+Für die darauf folgende Kommunikation mit dem Server, werden zwei Queues erzeugt: 
 \begin{itemize}
 	 \item \{token\}-Drone-To-Server
 	 \item  \{token\}-Server-To-Drone
 \end{itemize}
 
-Beim Token handelt es sich um einen auf dem Smartphone gespeicherten UUID, welcher vom Server beim erstmaligen Anmelden zugewiesen wird.
-Über diesen Kanal werden JSON Messages ausgetauscht. Ein Angreifer müsste den Token herausfinden. Mit einer Brutforce Methode ist mit $2^122$ Möglichkeiten ein Treffer auszuschliessen. 
-Da bei der Anmeldung der Drohne die Verbindung über HTTPS ist, kann auch das auslesen des Tokens ausgeschlossen werden.
-Somit ist für uns die Kommunikation mit der Drohne ausreichend gesichert.
-
+Beim Token handelt es sich um den vom Server gesendeten UUID.
+Über diesen Kanal werden JSON Messages ausgetauscht. Ein Angreifer müsste den Token herausfinden, um mit der Drohne zu kommunizieren. Mit einer Brutforce Methode ist mit $2^{122}$ Möglichkeiten ein Treffer auszuschliessen. 
+Das auslesen des Tokens ist auch ausgeschlossen, da die erstmalige Verbindung verschlüsselt ist. Somit ist für uns die Kommunikation mit der Drohne ausreichend gesichert.
 
 \subsubsection{Verwendete Bibliotheken}
 \begin{tabularx}{\textwidth}{|X|X|c|X|}
