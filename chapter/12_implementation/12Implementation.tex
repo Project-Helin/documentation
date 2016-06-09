@@ -156,7 +156,7 @@ Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen
 Gemäss Aufgabenstellung sollte ein "'Prototyp einer Android App"', mit welchen Bestellungen am System abgegeben können, entwickelt werden.
 Dieser App wurde bewusst als letzte Komponente entwickelt, denn es wurde zuerst geschaut, dass die Server und On-Board Komponenten reif genug waren.
 
-Um nicht auf die Funktionalität der Customer-App zu verzichten, wurden in der Administrator-Seite eine "'Fake Order"' Funktionen eingeführt. 
+Um nicht auf die Funktionalität der Customer-App zu verzichten, wurden in der Administrations-Seite eine "'Fake Order"' Funktionen eingeführt. 
 Diese imitiert dem Bestellprozess des Kunden und schickt eine Anfrage mit vordefinierten Koordinaten und Produkten an das System.
 Dies war für den Anfang der Entwicklung ausreichend.
 Doch schnell kamen Limitierung dieser Möglichkeit.
@@ -181,7 +181,7 @@ Deshalb wurde, nach Absprache mit dem Betreuer, auf Xamarin Forms gesetzt, so ka
 \end{figure}
 \end{landscape}
 
-Die App wurde bewusst einfach gehalten.
+Wie in der Abbildung XX zu sehen, wurde die App bewusst einfach gehalten.
 Auf dem Start Screen kann der Kunde auswählen, ob er seine alten Bestellungen sehen oder neue Produkte bestellen will.
 Beim Bestellen neuer Produkte, werden alle aufgelistet, welche sich innerhalb der Bestellezone liegen.
 Nach dem Abschicken der Bestellung, bekommt der Kunde einen Vorschlag für die Abwurfsposition.
@@ -192,13 +192,13 @@ Im Falle einer Bestätigung der Abwurfsposition, muss sich der Kunde über Googl
 Danach kann der Benutzer die bestellte Ware bezahlen.
 Die Bezahlung wird über PayPal abgewickelt.
 
-Nach der erfolgreichen Bezahlung kann wird dem Kunde die Mission angezeigt.
-Der Kunde sieht die Route der Drohne und bei laufend Mission wird die Position der Drohne angezeigt.
+Nach der erfolgreichen Bezahlung wird dem Kunde die Mission angezeigt.
+Der Kunde sieht die Route der Drohne und bei laufender Mission wird die Position der Drohne angezeigt.
 
 \subsection{Implementierung}
 
 \subsubsection{HTTP statt RabbitMQ}
-Bei der Kommunikation vom Onboard-App zum Server wurde auf AMQP gesetzt, da sowohl die Drohne als auch der Server die Möglichkeit haben sollten bidirektional Daten zu schicken. 
+Bei der Kommunikation vom Onboard-App zum Server wurde auf AMQP gesetzt, da sowohl die Drohne als auch der Server die Möglichkeit haben sollten bidirektional Daten auszutauschen. 
 Für den Customer-App war auch AMQP eingeplant. Aufgrund vom Einsatz von Xamarin und C-Sharp wurde dies neu evaluiert, wie der Support für RabbitMQ ist.
 Es existiert ein Library für C-Shapr \cite{easynetq}, jedoch ist die Verwendung innerhalb von Xamarin.Forms nicht verbreitet \cite{amqp-csharp}. 
 
@@ -221,7 +221,7 @@ Denn für den Customer-App überwiegen die Vorteile von AMQP nicht deren von HTT
 HTTP gegenüber AMQP hat noch den Vorteil, dass die REST Schnittstelle, einfacher von einem drittanbieter verwendet werden können.
 
 Für die HTTP-Request wurde ein REST Library eingesetzt, mit welchen einfach eine Anfrange an den Server geschickt werden können.
-Eine Anfrange an den Server kann nun elegant gelöst werden.
+Eine Anfrange an den Server kann damit elegant gelöst werden.
 
 \begin{lstlisting}
 public async Task<List<Mission>> GetAllMissions (String orderId)
@@ -232,7 +232,6 @@ public async Task<List<Mission>> GetAllMissions (String orderId)
 
     if (response != null && response.IsSuccessStatusCode) {
         var content = await response.Content.ReadAsStringAsync ();
-        Debug.WriteLine (content);
         // ...
         return Newtonsoft.Json.JsonConvert.DeserializeObject <List<Mission>> (content, jsonSetting);
     } else {
@@ -241,9 +240,4 @@ public async Task<List<Mission>> GetAllMissions (String orderId)
 }
 \end{lstlisting}
 
-Anfäglich kam es zum Absturz der Applikation, da beim Verbindungsabbruch ein Exception geschmissen wurde.
-Deshalb wrude dieser Fall eine eigen Methode einfeührt, welche im Falle von Exception ( zum Beispiel Timeout, oder keine Internet Verbindung ) oder falls der HTTP-Response code nicht wohlgesinnt ist, einen null Wert zurückgibt.
-
-\subsubsection{GPS Postion braucht lange}
-Bei der GPS Postion
 
