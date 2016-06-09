@@ -90,7 +90,11 @@
 \newcommand{\done}{\rlap{$\square$}{\raisebox{2pt}{\large\hspace{1pt}\cmark}}%
 \hspace{-2.5pt}}
 \newcommand{\wontfix}{\rlap{$\square$}{\large\hspace{1pt}\xmark}}
-		
+
+% Copied from http://tex.stackexchange.com/a/64765
+% makes tables a bit wider
+\renewcommand{\arraystretch}{1.5}
+
 %\usepackage{wrapfig}
 
 %Display URL and Hyperlinks
