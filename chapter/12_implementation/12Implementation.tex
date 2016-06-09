@@ -44,7 +44,7 @@ Diese App wurde als letzte Komponente entwickelt, da sie erst getestet werden ko
 Um manuelle Tests der Bestell-API möglich zu machen, wurde in der Administrations-Seite eine "'Fake Order"' Funktionen eingeführt. 
 Diese imitiert eine Bestellung des Kunden und schickt eine Anfrage mit vordefinierten Koordinaten und Produkten an das System.
 
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=1\textwidth] {images/customer-app-fake-order.png}
 	\caption{Send Fake Order within Administrator Page}
@@ -124,8 +124,40 @@ Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen
 	\newpage
 \end{itemize}
 
+\section{Qualitätsmassnahmen und Messungen}
+
+\subsection{Statistiken}
+
+Folgende Statistiken wurden am Ende der Arbeit erstellt um einen Eindruck der Grösse und der Qualität des Projektes zu erhalten.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth] {images/code-metrics.png}
+	\caption{Code Metriken nach Abschluss der Arbeit}
+	\label{fig:code-metrics}
+\end{figure}
+
+\subsection{Continous Integration}
+
+Als Build-Server haben wir TeamCity verwendet. Dort waren alle Projekte (ausser Customer-App) jeweils mit einem Build für den develop- und master-branch eingerichtet. Alle Builds führten die nötigen Tests aus und produzierten ein entsprechendes Artifact für das Deployment. Das Deployment für den Server wurde ebenfalls automatisiert.
+
+\subsection{Testing}
+
+Je nach Plattform wurden andere Formen von Tests durchgeführt. 
+
+\subsubsection{Server}
+
+Auf dem Server wurden vor allem E2E- und Integration-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bewusst gegen Unit-Tests entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwändig gewesen. Sogar die Routenberechnung konnte nicht mit Unit-Tests abgedeckt werden, da ein Teil der Berechnung auf der Datenbank stattfindet und somit nur Integrationtests einen Sinn ergeben.\\
+
+Wir haben darauf geachtet, dass immer nur die minimale Integrationsstufe gewählt wurde. Für die Simulation eines Benutzers (E2E) wurde Selenium verwendet, das widerum einen Firefox Browser verwendet. Für die Api- und Messaging-Controller wurden Integrationtests verwendet, welche den Server ohne Browser verwenden.\\
+
+Es wurde eine durchschnittliche Testabdeckung von 72\% über das ganze Projekt erreicht. In wichtigen Packages liegen diese aber meist über 85\%.
+
+\subsubsection{Onboard-App}
+
+Beim Onboard App wurden nur Unit-Tests ausgeführt. 
 
 
-
+\subsection{Code Reviews}
 
 

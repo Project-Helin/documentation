@@ -188,13 +188,13 @@ HTTP gegenüber AMQP hat noch den Vorteil, dass die REST Schnittstelle, einfache
 
 \section{Kommunikations-Architektur}
 Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht. Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. Bei den mobilen Geräten wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen. Dies ist nötig, damit Kunden und Administratoren die Bewegungen der Drohne live verfolgen können. Die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Smartphones muss ausserdem den Nicht-Funktionalen-Anforderungen gerecht werden im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung.
-%
-\begin{figure}[h]
+
+\begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/Communication-Overview-Diagram.png}
 	\caption{Übersicht der Kommunikations-Architektur mit den jeweiligen Protokollen. }
 	\label{fig:communication-architecture-overview}
 \end{figure}
-%
+
 \subsection{Verwendete Enterprise Integration Patterns}
 Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns die je nach Anforderungen verwendet werden können.({\cite{EIP}}) Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
 %
