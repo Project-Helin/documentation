@@ -5,6 +5,19 @@
 
 \subsection{Server}
 
+\subsubsection{Handling Drohnen Kommunikation}
+
+In der Architektur ist beschrieben, dass die Drohnen über AMQP mit dem Messaging-Broker kommunizieren. Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss en möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Auf Grund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.
+
+Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm von Instanzen, die die Kommunikation mit den Drohnen erlauben, sobald die Applikation gestartet hat.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\paperwidth] {images/drone-communication-diagram.png}
+	\caption{Objekt-Diagramm der Kommunkationsstruktur}
+	\label{fig:drone-communication-diagram}
+\end{figure}
+
 \subsubsection{Verwendete Bibliotheken}
 \begin{tabularx}{\textwidth}{|X|X|c|X|}
 	\hline
