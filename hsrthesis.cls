@@ -30,7 +30,7 @@
 \usepackage{textcomp}
 \usepackage{lmodern}
 \usepackage{titlesec}
-
+\usepackage{float}
 \usepackage{hhline}
 
 %\usepackage{mathptmx}
