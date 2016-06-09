@@ -69,6 +69,21 @@ Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen
 	\newpage
 \end{itemize}
 
+\subsection{Sicherheit}
+Wie sicher ist die Kommunikation mit dem Server? Kann allenfalls eine Drohne gekapert und falsche Koordinate zugeschickt werden?
+\\
+Die Verbindung zum RabbitMQ läuft über TLS (Transport Layer Security ). Das Customer App meldet sich über einen hard-codeten Benutzernamen und Passwort beim RabbitMQ an. 
+Die Kommunikation mit dem Server läuft über zwei Queues:
+\begin{itemize}
+	 \item \{token\}-Drone-To-Server
+	 \item  \{token\}-Server-To-Drone
+\end{itemize}
+
+Beim Token handelt es sich um einen auf dem Smartphone gespeicherten UUID, welcher vom Server beim erstmaligen Anmelden zugewiesen wird.
+Über diesen Kanal werden JSON Messages ausgetauscht. Ein Angreifer müsste den Token herausfinden. Mit einer Brutforce Methode ist dies mit $2^122$ Möglichkeiten ein Treffer auszuschliessen. 
+Da bei der Anmeldung der Drohne die Verbindung über HTTPS ist, kann auch das auslesen des Tokens ausgeschlossen werden.
+Somit ist für uns die Kommunikation mit der Drohne ausreichend gesichert.
+
 
 \subsubsection{Verwendete Bibliotheken}
 \begin{tabularx}{\textwidth}{|X|X|c|X|}
