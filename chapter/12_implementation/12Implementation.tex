@@ -129,18 +129,64 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 
 
 
-\section{Qualitätsmassnahmen und Messungen}
+\section{Projektgrösse}
 
-\subsection{Statistiken}
+Folgende Statistiken wurden am Ende der Arbeit erstellt um einen Eindruck der Grösse des Projekts zu erhalten.\\
 
-Folgende Statistiken wurden am Ende der Arbeit erstellt um einen Eindruck der Grösse und der Qualität des Projektes zu erhalten.
-
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=1.0\textwidth] {images/code-metrics.png}
 	\caption{Code Metriken nach Abschluss der Arbeit}
 	\label{fig:code-metrics}
 \end{figure}
+
+In Abbildung \ref{fig:code-metrics} sind vor allem der geringe Anteil von Methoden mit hoher Essentieller Komplexität hervorzuheben. Alle Methoden mit hoher Komplexität wurden vom Team geprüft, konnten aber nicht mehr verbessert werden. Hauptsächlich sind dies 'equals' Methoden von grösseren DTOs oder es handelt sich um MessageConverter, die einfach alle verschiedenen Messagetypen verschieden behandeln müssen. Das folgende Beispiel zeigt die Methode mit der höchsten Zyklomatischen Komplexität der Server-Applikation (Essentielle Komplexität = 10, Cyclomatische Komplexität = 10). \\
+
+
+\begin{lstlisting}
+private Message parseMessageWithoutCare(String messageAsJson) {
+	...
+	switch (payloadType) {
+		case ConfirmCargoLoaded:
+			return gson.fromJson(messageAsJson, ConfirmCargoLoaded.class);
+		case NotifyCargoDrop:
+			return gson.fromJson(messageAsJson, NotifyCargoDrop.class);
+		case DroneInfo:
+			return gson.fromJson(messageAsJson, DroneInfoMessage.class);
+		case DroneDto:
+			return gson.fromJson(messageAsJson, DroneDtoMessage.class);
+		case AssignMission:
+			return gson.fromJson(messageAsJson, AssignMissionMessage.class);
+		case FinalAssignMission:
+			return gson.fromJson(messageAsJson, FinalAssignMissionMessage.class);
+		case ConfirmMission:
+			return gson.fromJson(messageAsJson, ConfirmMissionMessage.class);
+		case FinishedMission:
+			return gson.fromJson(messageAsJson, FinishedMissionMessage.class);
+		case DroneActiveState:
+			return gson.fromJson(messageAsJson, DroneActiveStateMessage.class);
+	}
+}
+
+\end{lstlisting}
+
+Da diese Methode gut strukturiert ist und auch gut verstanden werden kann, gibt es keinen Grund diese auf Grund der Metrik anzupassen.
+
+\section{Qualitätssicherung}
+
+\subsection{Prozesse}
+
+Zur Qualitätssicherung wurde im Projektmanagement-Tool neben Todo, In Progress und Done ein neuer Quality-Assurance-Status für die Issues eingeführt. Alle Issues in diesem Status mussten von einem anderen Teammitglied überprüft werden, bevor sie auf Done geschoben werden konnten. \\
+
+Die Überprüfung eines Issues beinhaltet folgende Aufgaben:
+
+\begin{itemize}
+	\item{Akzeptanzkriterien aus der User-Story manuell prüfen}
+	\item{Code-Review durchführen (Intensität je nach Grösse und Komplexität des geschriebenen Codes)}
+	\item{Code auf Vertösse gegen Style-Guide prüfen}
+\end{itemize}
+
+Damit konnten viele Fehler früh entdeckt werden und die Code-Qualität konnte über die ganze Projektdauer konstant gehalten werden.
 
 \subsection{Continous Integration}
 
@@ -148,11 +194,11 @@ Als Build-Server haben wir TeamCity verwendet. Dort waren alle Projekte (ausser 
 
 \subsection{Testing}
 
-Je nach Plattform wurden andere Formen von Tests durchgeführt. 
+Je nach Plattform wurden andere Formen von Tests durchgeführt:
 
 \subsubsection{Server}
 
-Auf dem Server wurden vor allem E2E- und Integration-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bewusst gegen Unit-Tests entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwändig gewesen. Sogar die Routenberechnung konnte nicht mit Unit-Tests abgedeckt werden, da ein Teil der Berechnung auf der Datenbank stattfindet und somit nur Integrationtests einen Sinn ergeben.\\
+Auf dem Server wurden vor allem E2E- und Integration-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bewusst gegen Unit-Tests entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Sogar die Routenberechnung konnte nicht mit Unit-Tests abgedeckt werden, da ein Teil der Berechnung auf der Datenbank stattfindet und somit nur Integrationtests einen Sinn ergeben.\\
 
 Wir haben darauf geachtet, dass immer nur die minimale Integrationsstufe gewählt wurde. Für die Simulation eines Benutzers (E2E) wurde Selenium verwendet, das widerum einen Firefox Browser verwendet. Für die Api- und Messaging-Controller wurden Integrationtests verwendet, welche den Server ohne Browser verwenden.\\
 
@@ -160,9 +206,14 @@ Es wurde eine durchschnittliche Testabdeckung von 72\% über das ganze Projekt e
 
 \subsubsection{Onboard-App}
 
-Beim Onboard App wurden nur Unit-Tests ausgeführt. 
+Beim Onboard App wurden nur Unit-Tests ausgeführt. Zusätzliche E2E-Tests wären ziemlich aufwendig gewesen und der Nutzen bei einer eher kleinen App mit vielen Abhängikeiten auf RabbitMQ und den Flight-Controller ist fraglich. Deshalb wurden hauptsächlich die Messagehandler und die Daten-Mapper getestet. Diese haben eine Testabdeckung von 86\%.
+
+\subsubsection{Customer-App}
+
+Bei der Customer App wurden keine Tests eingerichtet, da es sich um einen Prototyp handelt.
 
 
-\subsection{Code Reviews}
+
+
 
 
