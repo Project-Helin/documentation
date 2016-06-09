@@ -52,7 +52,7 @@ Diese imitiert eine Bestellung des Kunden und schickt eine Anfrage mit vordefini
 
 Anders als die Onboard-App, welche native mit Java entwickelt wurde und nur auf Android läuft, entschieden wir uns beim Bestell-App für eine Cross-Plattform Lösung, welche Android und iOS unterstützt. 
 
-Auch wenn gemäss der Aufgabenstellung keine iOS App gefordert war, stelle sich doch die Frage ob man die iPhone-Kunden ausschliessen soll und spätere Entwickler zwingt, einen grossen Teil des Codes in einer nativen iOS App duplizieren zu müssen. Mit einem Marktanteil von 42.2\% (Zahlen 2015) \cite{ios-user} von iOS Benutzern in der Schweiz, ist anzunehmen zu einem späteren Zeitpunkt eine iPhone App implementiert werden muss.
+Auch wenn gemäss der Aufgabenstellung keine iOS App gefordert war, stelle sich doch die Frage ob man die iPhone-Kunden ausschliessen soll und spätere Entwickler zwingt, einen grossen Teil des Codes in einer nativen iOS App duplizieren zu müssen. Mit einem Marktanteil von 42.2\% (Zahlen 2015) \cite{ios-user} von iOS Benutzern in der Schweiz, ist anzunehmen, dass zu einem späteren Zeitpunkt eine iPhone App implementiert werden muss.
 
 Deshalb wurde auf Xamarin Forms gesetzt, welches ermöglicht, die ganzen Service-Klassen und einen Teil der Benutzeroberfläche für die verschiedenen Plattformen nur einmal zu implementieren.
 
@@ -76,7 +76,9 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 	\hline \hline
 	Paypal Forms & Paypal integration für Xamarin.Forms & 2.0.4 & MIT \\
 	\hline 
-	Xamarin Forms & Messaging für Android & 2.2.0.45 & \url{https://www.xamarin.com/license} \\
+	Xamarin Forms & Plattform übergreifende Komponente für Xamarin & 2.2.0.45 & \url{https://www.xamarin.com/license} \\
+	Websocket.PCL & Plattformübergreifende Websocket Anbindung & 1.1.9 & MIT \\
+	Newton.Json & Json zu Object mapper & 8.0.3 & MIT \\
 	\hline 
 \end{tabularx}
 
