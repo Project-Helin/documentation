@@ -163,6 +163,28 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 	\\ \hline
 \end{tabular}
 
+\subsubsection{HTTP statt RabbitMQ}
+Bei der Kommunikation vom Onboard-App zum Server wurde auf AMQP gesetzt, da sowohl die Drohne als auch der Server die Möglichkeit haben sollten bidirektional Daten auszutauschen. 
+Für den Customer-App war auch AMQP eingeplant. Aufgrund vom Einsatz von Xamarin und C-Sharp wurde dies neu evaluiert, wie der Support für RabbitMQ ist.
+Es existiert ein Library für C-Shapr \cite{easynetq}, jedoch ist die Verwendung innerhalb von Xamarin.Forms nicht verbreitet \cite{amqp-csharp}. 
+
+Aufgrund dessen wurde auf HTTP und Websocket gesetzt.
+Denn für den Customer-App überwiegen die Vorteile von AMQP nicht deren von HTTP:
+\begin{itemize}
+	\item{
+		Beim Verbindungsabbruch ist der Verlust einer Nachricht nicht schlimm.
+		Dem Benutzer kann einer Nachricht gezeigt werden und dieser kann auf Wunsch die Anfrage nochmals verschicken}
+	\item{
+		Alle Anfragen werden nur von App an den Server verschickt.
+		Einzig die aktuelle Position der Drohne sollte vom Server an den Kunden geschickt werden können.
+		Dies kann auch mittels Pulling gelöst werden, denn für den Kunden ist dies nicht spürbar.
+		Es können alle paar Sekunden eine Afrange an den Server geschickt zu werden.
+		Serverseit ist die Mehrlast auch zu vernachlässigen, da die Anfrange nur geschickt werden,
+		falls eine aktuelle Mission läuft.
+	}
+\end{itemize}
+
+HTTP gegenüber AMQP hat noch den Vorteil, dass die REST Schnittstelle, einfacher von einem drittanbieter verwendet werden können.
 
 \section{Kommunikations-Architektur}
 Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht. Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. Bei den mobilen Geräten wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen. Dies ist nötig, damit Kunden und Administratoren die Bewegungen der Drohne live verfolgen können. Die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Smartphones muss ausserdem den Nicht-Funktionalen-Anforderungen gerecht werden im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung.
