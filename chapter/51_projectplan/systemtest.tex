@@ -6,11 +6,11 @@ Die nachfolgenden Tests wurden mit den folgenden Komponenten durchgeführt:
 \begin{itemize}
 	\item Server befindet sich auf www.helin.ch
 	\item On-Board-App: läuft auf einem Nexus 4 mit Android 4.4
-	\item Customer-App: läuft auf einem Neuxs 5 mit Android 6.1
-	\item Customer-App wurde mit einem OTG Kabel an der Drohne verbunden
+	\item Customer-App: läuft auf einem Nexus 5 mit Android 6.1
+	\item Customer-App wurde mit einem OTG Kabel mit der Drohne verbunden
 \end{itemize}
 
-Es wurden nach dem beiden Implementierungs-Meilenstein ProofOfConcept und Implementierung ausgeführt.
+Es wurde jeweils nach dem Implementierungs-Meilensteinen ein kompletter Test ausgeführt.
 
 \section{Ende Proof Of Concept}
 
@@ -18,67 +18,67 @@ Die Tests wurden am 25.03.2016 durchgeführt.
 
 \begin{todolist}
 	\item[\done] Der Administrator kann sich erfolgreich registrieren.
-	\item[\xmark] Es kann kein Account mit demselben Namen erstellt werden
+	\item Es kann kein Account mit demselben Namen erstellt werden
 	\item[\done] Administrator kann sich mit seinem Email und Passwort einloggen
 	\item[\done] Administrator kann eine neue Organisation erstellen
 	\item[\done] Administrator kann den Namen der Organisation ändern
-	\item[\xmark] Administrator kann einen zusätzlichen Administrator zur Organisation hinzufügen
-	\item[\xmark] Es kann ein Administrator aus der Organisation gelöscht werden
+	\item Administrator kann einen zusätzlichen Administrator zur Organisation hinzufügen
+	\item Es kann ein Administrator aus der Organisation gelöscht werden
 	\item[\done] Administrator kann ein neues Produkt erfassen
 	\item[\done] Administrator kann ein vorhandenes Produkt editieren
 	\item[\done] Administrator kann ein Produkt löschen
 	\item[\done] Administrator kann ein neues Projekt erfassen
-	\item[\xmark] Administrator kann eine Bestell-, Abwurfs-, Flug- und Ladezone definieren
-	\item[\xmark] Administrator kann eine Zone anpassen und löschen
-	\item[\xmark] Administrator kann ein Produkt zu einem Projekt zuweisen
-	\item[\xmark] Administrator kann ein Produkt aus einem Projekt herauslöschen
-	\item[\xmark] Administrator kann eine Flugroute mit einem Kunden simulieren.
+	\item Administrator kann eine Bestell-, Abwurfs-, Flug- und Ladezone definieren
+	\item Administrator kann eine Zone anpassen und löschen
+	\item Administrator kann ein Produkt zu einem Projekt zuweisen
+	\item Administrator kann ein Produkt aus einem Projekt herauslöschen
+	\item Administrator kann eine Flugroute mit einem Kunden simulieren.
 	
-	\item[\xmark] Administrator kann die Bestellung ansehen.
-	\item[\xmark] Administrator kann die vorgeschlagene und geflogene Flugroute anschauen.
+	\item Administrator kann die Bestellung ansehen.
+	\item Administrator kann die vorgeschlagene und geflogene Flugroute anschauen.
 	
 	\item[\done] Eine registrierte Drohne kann einem Projekt zugewiesen werden
-	\item[\xmark] Eine registrierte Drohne kann angepasst werden
-	\item[\xmark] Eine registrierte Drohne kann als inaktiv markiert werden
-	\item[\xmark] Eine aktuell verbundene Drohne zeigt den letzten Akku stand an.
-	\item[\xmark] Administrator kann alle Bestellungen ansehen
-	\item[\xmark] Administrator kann die Missionenen einer Bestellung ansehen
+	\item Eine registrierte Drohne kann angepasst werden
+	\item Eine registrierte Drohne kann als inaktiv markiert werden
+	\item Eine aktuell verbundene Drohne zeigt den letzten Akku stand an.
+	\item Administrator kann alle Bestellungen ansehen
+	\item Administrator kann die Missionenen einer Bestellung ansehen
 	
-	\item[\xmark] Administrator kann eine Bestellung ändern ( Funtkionale Anforderung )
-	\item[\xmark] Administrator kann eine Bestellung löschen ( Funtkionale Anforderung )
-	\item[\xmark] Drohne kann herausgelöscht werden (Funktionale Anforderung) 
+	\item Administrator kann eine Bestellung ändern ( Funtkionale Anforderung )
+	\item Administrator kann eine Bestellung löschen ( Funtkionale Anforderung )
+	\item Drohne kann herausgelöscht werden (Funktionale Anforderung) 
 	
-	\item[\xmark] Administrator kann eine laufende Mission abbrechen 
+	\item Administrator kann eine laufende Mission abbrechen 
 \end{todolist}
 
 \subsubsection{Nicht-Funktionale Anforderungen}
 \begin{todolist}
-	\item[\xmark] Auf die Seite kann nur über HTTPS zugegriffen werden
+	\item Auf die Seite kann nur über HTTPS zugegriffen werden
 \end{todolist}
 
 \subsection{Drone-Operator}
 \subsubsection{Funktionale Anforderungen}
 \begin{todolist}
-	\item[\xmark] Das Onboard-App kann über ein APK heruntergeladen und installiert werden.
+	\item Das Onboard-App kann über ein APK heruntergeladen und installiert werden.
 	\item[\done] Mit dem Onboard-App kann ich die Drohne beim Server registrieren und einer Organisation hinzufügen
 	\item[\done] Das Onboard-App kann sich mit dem Server verbinden
-	\item[\xmark] Das Onboard-App kann auf Wunsch die Verbindung zum Server trennen
-	\item[\xmark] Die Drohne kann auf dem Onboard-App als inaktiv markiert werden
+	\item Das Onboard-App kann auf Wunsch die Verbindung zum Server trennen
+	\item Die Drohne kann auf dem Onboard-App als inaktiv markiert werden
 	\item[\done] Das Onboard-App kann sich mit der Drohne über USB Kabel verbinden
 	\item[\done] Das Onboard-App kann die Verbindung mit der Drohne trennen
-	\item[\xmark] Es kann der aktuelle Status des GPS, der Batterie und der Verbindung zum Server angezeigt werden
-	\item[\xmark] Eine vorgeschlagene Mission kann abgelehnt werden
-	\item[\xmark] Drone-Operator kann eine Mission annehmen und sieht die zu belandende Produkte
-	\item[\xmark] Bevor die Drohne startet erhalte ich ein Countdown
-	\item[\xmark] Bevor die Drohne startet erhalte ich einen akustischen Signal
-	\item[\xmark] Während des Countdown kann der Start abgebrochen werden
-	\item[\xmark] Die Drohne kann mit den Produkten beladen und bestätigt werden
+	\item Es kann der aktuelle Status des GPS, der Batterie und der Verbindung zum Server angezeigt werden
+	\item Eine vorgeschlagene Mission kann abgelehnt werden
+	\item Drone-Operator kann eine Mission annehmen und sieht die zu belandende Produkte
+	\item Bevor die Drohne startet erhalte ich einen Countdown
+	\item Bevor die Drohne startet erhalte ich einen akustisches Signal
+	\item Während des Countdowns kann der Start abgebrochen werden
+	\item Die Drohne kann mit den Produkten beladen und bestätigt werden
 \end{todolist}
 
 \subsubsection{Nicht-Funktionale Anforderungen}
 \begin{todolist}
-	\item[\xmark] Die Verbindung zum Server beim Registrieren ist verschlüsselt ( Server kann nur HTTPS angesprochen werden )
-	\item[\xmark] Die Verbindung zum Server bei der Übertragung der Drohneninformation ist verschlüsselt (überprüft mittels RabbitMQ Management Konsole)
+	\item Die Verbindung zum Server beim Registrieren ist verschlüsselt ( Server kann nur HTTPS angesprochen werden )
+	\item Die Verbindung zum Server bei der Übertragung der Drohneninformation ist verschlüsselt (überprüft mittels RabbitMQ Management Konsole)
 	\item[\done] Beim Verbindungsabbruch zum Server wird die Mission weitergeführt
 	\item[\done] Nach einem Verbindungsabbruch wird die Verbindung automatisch wiederhergestellt
 \end{todolist}
@@ -86,25 +86,25 @@ Die Tests wurden am 25.03.2016 durchgeführt.
 \subsection{Customer}
 \subsubsection{Funktionale Anforderungen}
 \begin{todolist}
-	\item[\xmark] Der Kunde kann sich die App aus dem Google Play Store herunterladen 
-	\item[\xmark] Kunde kann sich die bestellbaren Produkte anschauen, ohne sich einzuloggen
-	\item[\xmark] Kunde sieht nur nur Produkte innerhalb der Bestellzone
-	\item[\xmark] Kunde kann eine Bestellung abschicken und sieht die voraussichtliche Lieferposition
-	\item[\xmark] Kunde kann die Bestellung abbrechen
-	\item[\xmark] Kunde kann sich über Google Anmelden und sieht welche Berechtigung von Google erforderlich sind
-	\item[\xmark] Kunde kann die bestellte Ware mit PayPal bezahlen ( nur im Testmodus )
-	\item[\xmark] Kunde kann die Bestellung bestätigen
-	\item[\xmark] Kunde kann seine Bestellungen anschauen und dessen Status ansehen
-	\item[\xmark] Kunde kann die einzelnen Lieferung anschauen und dessen Status ansehen
-	\item[\xmark] Kunde kann bei einer aktuellen Lieferung die Position der Drohne mitverfolgen
-	\item[\xmark] Als Kunde kann ich  eine Bestellung stornieren
+	\item Der Kunde kann sich die App aus dem Google Play Store herunterladen 
+	\item Kunde kann sich die bestellbaren Produkte anschauen, ohne sich einzuloggen
+	\item Kunde sieht nur nur Produkte innerhalb der Bestellzone
+	\item Kunde kann eine Bestellung abschicken und sieht die voraussichtliche Lieferposition
+	\item Kunde kann die Bestellung abbrechen
+	\item Kunde kann sich über Google Anmelden und sieht welche Berechtigung von Google erforderlich sind
+	\item Kunde kann die bestellte Ware mit PayPal bezahlen ( nur im Testmodus )
+	\item Kunde kann die Bestellung bestätigen
+	\item Kunde kann seine Bestellungen anschauen und dessen Status ansehen
+	\item Kunde kann die einzelnen Lieferung anschauen und dessen Status ansehen
+	\item Kunde kann bei einer aktuellen Lieferung die Position der Drohne mitverfolgen
+	\item Als Kunde kann ich  eine Bestellung stornieren
 \end{todolist}
 
 \subsubsection{Nicht-Funktionale Anforderungen}
 \begin{todolist}
-	\item[\xmark] Die Verbindung zum Server ist verschlüsselt
-	\item[\xmark] Ohne Internetverbindung wird beim Abruf der Produkte eine Fehlermeldung angzeigt
-	\item[\xmark] Ohne GPS Verbindung wird beim Abruf der Produkte eine Fehlermeldung angzeigt
+	\item Die Verbindung zum Server ist verschlüsselt
+	\item Ohne Internetverbindung wird beim Abruf der Produkte eine Fehlermeldung angzeigt
+	\item Ohne GPS Verbindung wird beim Abruf der Produkte eine Fehlermeldung angzeigt
 \end{todolist}
 
 
@@ -144,11 +144,11 @@ Dies folgenden Tests wurden, nach dem Abschluss der Implementierung durchgeführ
 	\item[\done] Administrator kann alle Bestellungen ansehen
 	\item[\done] Administrator kann die Missionenen einer Bestellung ansehen
 
-	\item[\xmark] Administrator kann eine Bestellung ändern ( Funtkionale Anforderung )
-	\item[\xmark] Administrator kann eine Bestellung löschen ( Funtkionale Anforderung )
-	\item[\xmark] Drohne kann herausgelöscht werden (Funktionale Anforderung) %TODO
+	\item Administrator kann eine Bestellung ändern ( Funtkionale Anforderung )
+	\item Administrator kann eine Bestellung löschen ( Funtkionale Anforderung )
+	\item Drohne kann herausgelöscht werden (Funktionale Anforderung) %TODO
 
-	\item[\xmark] Administrator kann eine laufende Mission abbrechen %TODO begründbar
+	\item Administrator kann eine laufende Mission abbrechen %TODO begründbar
 
 \end{todolist}
 
@@ -188,7 +188,7 @@ Dies folgenden Tests wurden, nach dem Abschluss der Implementierung durchgeführ
 \subsection{Customer}
 \subsubsection{Funktionale Anforderungen}
 \begin{todolist}
-	\item[\xmark] Der Kunde kann sich die App aus dem Google Play Store herunterladen %TODO Auf done setzuen und Datum richtig setzen
+	\item Der Kunde kann sich die App aus dem Google Play Store herunterladen %TODO Auf done setzuen und Datum richtig setzen
 	\item[\done] Kunde kann sich die bestellbaren Produkte anschauen, ohne sich einzuloggen
 	\item[\done] Kunde sieht nur nur Produkte innerhalb der Bestellzone
 	\item[\done] Kunde kann eine Bestellung abschicken und sieht die voraussichtliche Lieferposition
@@ -199,7 +199,7 @@ Dies folgenden Tests wurden, nach dem Abschluss der Implementierung durchgeführ
 	\item[\done] Kunde kann seine Bestellungen anschauen und dessen Status ansehen
 	\item[\done] Kunde kann die einzelnen Lieferung anschauen und dessen Status ansehen
 	\item[\done] Kunde kann bei einer aktuellen Lieferung die Position der Drohne mitverfolgen
-	\item[\xmark] Als Kunde kann ich  eine Bestellung stornieren 
+	\item Als Kunde kann ich  eine Bestellung stornieren 
 \end{todolist}
 
 \subsubsection{Nicht-Funktionale Anforderungen}
