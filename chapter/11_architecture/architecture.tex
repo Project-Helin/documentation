@@ -166,7 +166,7 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 \subsubsection{HTTP statt RabbitMQ}
 Bei der Kommunikation vom Onboard-App zum Server wurde auf AMQP gesetzt, da sowohl die Drohne als auch der Server die Möglichkeit haben sollten bidirektional Daten auszutauschen. 
 Für den Customer-App war auch AMQP eingeplant. Aufgrund vom Einsatz von Xamarin und C-Sharp wurde dies neu evaluiert, wie der Support für RabbitMQ ist.
-Es existiert ein Library für C-Shapr \cite{easynetq}, jedoch ist die Verwendung innerhalb von Xamarin.Forms nicht verbreitet \cite{amqp-csharp}. 
+Es existiert ein Library für C-Shapr \cite{easynetq}, jedoch ist die Verwendung innerhalb von Xamarin.Forms nicht verbreitet \cite{ampq-csharp}. 
 
 Aufgrund dessen wurde auf HTTP und Websocket gesetzt.
 Denn für den Customer-App überwiegen die Vorteile von AMQP nicht deren von HTTP:
