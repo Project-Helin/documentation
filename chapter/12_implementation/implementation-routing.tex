@@ -1,21 +1,20 @@
 \newpage
-\section{Topologisches Konzept}
+\section{Flugrouten Planung}
 Die topologische Überlegung spielt in der Umsetzung eine zentrale Rolle.
 Die zentrale Aufgabe des Projektes ist es Drohnen zu verwalten, welche sich in einem geografischen Gebiet bewegen. 
 Dieses Gebiet kann Hindernisse wie Gebäude oder Bäume beinhalten, welche möglichst sicher umflogen werden müssen. 
 Statische Objekte mit unterschiedlicher Höhe können einfach umflogen oder überflogen werden, sofern die Drohne 'weiss' wie diese flugtechnisch zu vermeiden sind. \\
-\begin{figure}[h]
+\begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/routing/topology_example.png}
 	\caption{Topologische Ansicht des Campus HSR}
 	\label{fig:campus-hsr}
 \end{figure}
-\\
-Am Beispiel der HSR ist unschwer zu erkennen, wie Gebäude in der Landschaft unteschiedliche Höhen haben. Diese Höhenunterschiede sollte wenn möglich gut in einem Model abgebildet werden können. \\
+Am Beispiel der HSR ist unschwer zu erkennen, wie Gebäude in der Landschaft unterschiedliche Höhen haben. Diese Höhenunterschiede sollte wenn möglich gut in einem Model abgebildet werden können. \\
 Aus diesen Überlegungen entstand das Zonen Model.
 
 \subsection{Das Zonen Model}
-Betrachten wir nun ein einfaches Projekt am Campus der HSR, so könnte dies wie folgt aussehen. \\
-\begin{figure}[h]
+Betrachten wir nun ein einfaches Projekt am Campus der HSR, so könnte dies wie folgt aussehen. 
+\begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/routing/simpleProject_example.png}
 	\caption{Einfaches Demo Projekt an der HSR}
 	\label{fig:demo-project}
@@ -23,17 +22,17 @@ Betrachten wir nun ein einfaches Projekt am Campus der HSR, so könnte dies wie 
 Jedes Polygon bildet eine Zone ab. Diese Zonen können unterschiedliche Höhen, aber auch Eigenschaften aufweisen. Die Höhe gewährleistet die minimale Flughöhe in einer Zone. Weiter sind die Zone in vier verschiedenen Typen aufgeteilt: 
 \begin{itemize}
 	\item{\textbf{OrderZone:} Bereich aus welchem Produkte bestellt werden können. (\textit{hell blauer Rahmen})}
-	\item{\textbf{LoadingZone:} Zone die gebraucht wird um die Drohne zu beladen. (\textit{orange})}
+	\item{\textbf{LoadingZone:} Zone in welcher die Drohne beladen werden kann. (\textit{orange})}
 	\item{\textbf{DeliveryZone:} Diese Zone definiert das Gebiet über welchem das Produkt abgeworfen werden kann. (\textit{grün})}
 	\item{\textbf{FlightZone:} Die Flugzone verbindet die Ladezone mit der Abwurfzone. Weiter garantiert sie, dass die angegebene Flughöhe gewährleistet wird. (\textit{blau})}
 \end{itemize}
 
 \subsection{Routing-Algorithmus}
-Das Zonenmodel lässt es einfach zu, dass Flugkorridore sehr intuitiv gebildet werden können. Leider eignen sich nur die Polygone weniger gut für eine Navigation oder eine Routenberechnung. Die Routenberechnung im klassischen Sinne entsteht auf einem Graph. Anhand des Graphs wird mit Start und Endpunkt eine Lösung berechnet und diese stellt dann die Route dar. Da dieses Konzept naheliegend war, sollten die Polygone auf einen Graph reduziert werden.
+Das Zonenmodel lässt es einfach zu, dass Flugkorridore sehr intuitiv gebildet werden können. Leider eignen sich Polygone weniger gut für eine Navigation oder eine Routenberechnung. Die Routenberechnung im klassischen Sinne entsteht auf einem Graphen. Anhand des Graphs wird mit Start und Endpunkt eine Lösung berechnet und diese stellt dann die Route dar. Da dieses Konzept das Naheliegendste ist, sollten die Polygone auf einen Graph reduziert werden.
 
 \subsection{Reduktion vom Polygon zum Graph}
-Für das Routing sind nur die drei Zonen, LoadingZone, DeliveryZone und FlightZone von entscheidender Bedeutung. Diese Zonen können von den Drohen überflogen werden, die OrderZone hingegen dient ausschliesslich dazu, den bestellbaren Bereich einzuschränken, so dass der Kunde nicht aus Stadt Zürich etwas bestellt, welches von der HSR aus beliefert wird.
-
+Für das Routing sind nur die drei Zonen, LoadingZone, DeliveryZone und FlightZone von entscheidender Bedeutung. Diese Zonen können von den Drohen überflogen werden, die OrderZone hingegen dient ausschliesslich dazu, den bestellbaren Bereich einzuschränken. Beispielsweise kann so garantiert werden, dass der Kunde nicht Produkte aus der Stadt Zürich bestellen kann, welche von der HSR aus beliefert werden.
+\\
 Um die Problemstellung etwas besser zu verstehen, werden im folgenden drei möglichen Konzepte anhand eines Polygons demonstriert:
 
 \subsubsection{Erste Konzept: Direkte Route}
