@@ -19,7 +19,7 @@ Das Framework wurde aus folgenden Gründen ausgewählt:
 Während der Implementierung kristallisierten sich mehrere Schwächen des Frameworks heraus. 
 Im Anhang \ref{ch:play_pitfalls} wird anhand einiger Beispiele erklärt, warum wir Play mit Java nur eingeschränkt weiterempfehlen können und welche Probleme damit aufgetreten sind.
 
-\subsubsection{Handling der Kommunikation mit Drohnen}
+\subsubsection{Kommunikation mit Drohnen}
 
 In der Architektur ist beschrieben, dass die Drohnen über AMQP mit dem Messaging-Broker kommunizieren. Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss en möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Auf Grund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.
 
@@ -43,15 +43,26 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 	\hline 
 	jGraphT & Graph Bibliothek für Java, um effizient Operationen auf dem Graph auszuführen & 0.9.2 &  LGPL, EPL \\
 	\hline 
-	\hline
-	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
-	\hline \hline
 	Google GSON & Java Serialisierungs / Deserialisierungs Bibliothek & 2.6.2 & Apache 2.0\\
 	\hline 
 \end{tabularx}
 
 \subsection{Onboard-App}
 
+\subsubsection{Verwendete Bibliotheken}
+\begin{tabularx}{\textwidth}{|X|X|c|X|}
+	\hline
+	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
+	\hline \hline
+	DroneKit-Android Client & Android API für MAV-Link Protokoll zum ansteuern der Drohne & 1.5.1 & Apache 2.0\\
+	\hline 
+	AMQP Messaging Library & Messaging für Android & 3.6.0 &  Mozilla Public License 1.1, GPL 2,  Apache 2.0 \\
+	\hline 
+	Lyra  & High availability Messaging & 0.4.3 &  Apache 2.0 \\
+	\hline 
+	Dagger  & Dependency Injection Framwork für Android & 2.0.1 &  Apache 2.0 \\
+	\hline 
+\end{tabularx}
 
 \subsection{Kommunikation}
 Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen, wurde AMQP als Protokoll ausgewählt. Mit Messaging soll gewährleistet werden, dass die Verbindungswiederherstellung funktioniert. Die funktionale Anforderung des Missionsabbruchs wird somit soweit gedeckt, dass versucht wird die Verbindung aufrechtzuerhalten, sofern das Netz es erlaubt. Bei kurzen Netzunterbrüchen kann somit über das AMQP Protokoll eine Verbindung zur Drohne gewährleistet werden.
@@ -96,34 +107,6 @@ Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen
 	\newpage
 \end{itemize}
 
-\subsection{Sicherheit}
-Wie sicher ist die Kommunikation mit dem Server? Kann allenfalls eine Drohne gekapert und falsche Koordinaten zugeschickt werden?
-\\
-Das CustomerApp registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Anmeldung werden neben einem Token auch die Anmeldedaten für RabbitMQ mitgeliefert.
-
-Damit kann sich die App mit dem Messaging Broker verbinden, auch diese Verbindung läuft verschlüsselt.
-Für die darauf folgende Kommunikation mit dem Server, werden zwei Queues erzeugt: 
-\begin{itemize}
-	 \item \{token\}-Drone-To-Server
-	 \item  \{token\}-Server-To-Drone
-\end{itemize}
-
-Beim Token handelt es sich um den vom Server gesendeten UUID.
-Über diesen Kanal werden JSON Messages ausgetauscht. Ein Angreifer müsste den Token herausfinden, um mit der Drohne zu kommunizieren. Mit einer Brutforce Methode ist mit $2^{122}$ Möglichkeiten ein Treffer auszuschliessen. 
-Das auslesen des Tokens ist auch ausgeschlossen, da die erstmalige Verbindung verschlüsselt ist. Somit ist für uns die Kommunikation mit der Drohne ausreichend gesichert.
-
-\subsubsection{Verwendete Bibliotheken}
-\begin{tabularx}{\textwidth}{|X|X|c|X|}
-	\hline
-	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
-	\hline \hline
-	DroneKit-Android Client & Android API für MAV-Link Protokoll zum ansteuern der Drohne & 1.5.1 & Apache 2.0\\
-	\hline 
-	AMQP Messaging Library & Messaging für Android & 3.6.0 &  Mozilla Public License 1.1, GPL 2,  Apache 2.0 \\
-	\hline 
-	Lyra  & High availability Messaging & 0.4.3 &  Apache 2.0 \\
-	\hline 
-\end{tabularx}
 \subsection{Customer App}
 Gemäss Aufgabenstellung sollte ein Prototyp für eine App, mit welchem Bestellungen am System abgegeben können, entwickelt werden.
 Diese App wurde als letzte Komponente entwickelt, da sie erst getestet werden konnte als die Server- und Onboard-App-Komponenten fertiggestellt waren.
@@ -171,7 +154,21 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 	\hline 
 \end{tabularx}
 
+\subsection{Sicherheit}
+Wie sicher ist die Kommunikation mit dem Server? Kann allenfalls eine Drohne gekapert und falsche Koordinaten zugeschickt werden?
+\\
+Das CustomerApp registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Anmeldung werden neben einem Token auch die Anmeldedaten für RabbitMQ mitgeliefert.
 
+Damit kann sich die App mit dem Messaging Broker verbinden, auch diese Verbindung läuft verschlüsselt.
+Für die darauf folgende Kommunikation mit dem Server, werden zwei Queues erzeugt: 
+\begin{itemize}
+	\item \{token\}-Drone-To-Server
+	\item  \{token\}-Server-To-Drone
+\end{itemize}
+
+Beim Token handelt es sich um den vom Server gesendeten UUID.
+Über diesen Kanal werden JSON Messages ausgetauscht. Ein Angreifer müsste den Token herausfinden, um mit der Drohne zu kommunizieren. Mit einer Brutforce Methode ist mit $2^{122}$ Möglichkeiten ein Treffer auszuschliessen. 
+Das auslesen des Tokens ist auch ausgeschlossen, da die erstmalige Verbindung verschlüsselt ist. Somit ist für uns die Kommunikation mit der Drohne ausreichend gesichert.
 
 \section{Projektgrösse}
 
