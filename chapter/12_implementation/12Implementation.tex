@@ -6,82 +6,18 @@
 \subsection{Server}
 
 \subsubsection{Play Framework}
-Für den Server Teil wurde das Play Framework ausgewählt, denn zum grössten Teil bestehen die Komponenten aus CRUD Operationen.
-Die Gründe für den Wahl waren:
+Für den Server Teil wurde das Play Framework mit Java ausgewählt, denn grösstenteils mussten CRUD Operationen auf einer Weboberfläche dargestellt werden. Das Play-Framework ist speziell für diesen Anwendungszweck entwickelt worden.
+
+Das Framework wurde aus folgenden Gründen ausgewählt:
 \begin{itemize}
-    \item Play kam bereits mit Integration für Datenbanken
-    \item Mit Play sollte es einfach und schnell möglich sein eine Web Applikation zu erstellen, wie dies etwa aus anderen Frameworks wie Ruby on Ralis gewohnt ist.
-    \item Spring als Alternative war allen Teammitgliedern bestens bekannt, und mit Play gab es die Möglichkeit ein neues Framework ausführlich in ein langfristiges Projekt einzusetzten
+    \item Fortschrittlicher O/R-Mapper im Framework integriert
+    \item Vorgegebene MVC-Architektur (Speziell geeignet für CRUD-Operationen)
+    \item Schnelle Implementation durch Spezialisierung auf diese Anwendungsart 
+    \item Alle Entwickler sind versiert in Java
 \end{itemize}
 
-Während der Implementierung stellten sich mehrere Schwächen von Play heraus. 
-Im folgenden werden anhand einiger Punkte erklärt, warum wir Play nicht für ein weiteres Projekt im Betracht ziehen.
-
-\subsubsection{Instabile Schnittstelle}
-Während der Arbeit musste die Play Version auf den aktuellsten Stand gebracht werden, da sonst die Integration-Tests nicht mit der aktuellsten Firefox Version kompatibel waren. 
-Dies brachte jedoch schnell neue Probleme mit sich, welches auch mit anderen Frameworks gegeben hätte.
-
-Entgegen der API der anderen Java Frameworks, wie Spring, setzt Play in ihren Schnittstellen auf statische Methoden.
-So ist etwas der Zugriff auf die Datenbank oder den Hibernate EntityManager über eine statische Methode möglich:
-\begin{lstlisting}
-    JPA.withTransaction(()-> {
-        JPA.em().createQuery("select * from zones");
-    });
-\end{lstlisting}
-
-Wie aus Software Engineer bekannt, bringen Statische Methoden schlecht Testbarkeit und starke Kopplung mit sich.
-Dies wurde jedoch geändert, denn seit der neusten Version sind diese als Deprecated markiert und müssen injected werden, die neue Version sieht folglich so aus:
-\begin{lstlisting}
-    @Inject
-    private JPAApi jpaApi;
-    // ...
-    jpaApi.withTransaction(()-> {
-        jpaApi.em().createQuery("select * from zones");
-    });
-\end{lstlisting}
-
-Das Umstellen einer Schnittstelle ist für ein Framework etwas gewöhnliches. Doch für uns war es nicht nachvollziehbar, warum dieser Schritt in einem Minor Version geschah.
-
-Dieser Umstand war auch bei älteren Versionen zu erkennen. 
-Ein Grund für den Wahl auf Play fiel auch aufgrund der CRUD-Komponente \cite{play-crud-1}, welche es ermöglichen sollten mit wenig Code ganze CRUD-Seiten zu erstellen.
-Leider wurde diese Komponten von Play 1 auf Play 2 aus dem Projekt gelöscht, und keine Alternative zur Verfügung gestellt. 
-Deshalb sind auch bei uns alle CRUD Seiten von Hand geschrieben.
-
-\subsubsection{Unklare Dokumentation}
-
-Wie bereits erwähnt, war ein Problem die veralteten Methoden und die wandelnden APIs.
-Neben dem Code, war dies auch an der Dokumentation erkennbar.
-So wurden viele neue Komponenten nicht ausführlich oder gar nicht Dokumentiert.
-
-Für eine Laufende Mission sollte der Administrator die Möglichkeit haben die Drohne live zu verfolgen.
-Schnell kam der Einsatz von Websocket für diesen Zweck in den Sinn.
-Dies war auch einfach mit Play.
-Jedoch wurde die Websocket API völlig umgestellt.
-\begin{lstlisting}
-    return WebSocket.whenReady((in, out) -> {
-        // do logic
-    });
-\end{lstlisting}
-Was vorher mit drei Zeilen gelöst wurde, mussten auf Akka Stream umgestellt werden. 
-Akka Streams ermöglicht die ganze Websocket-Logik "'reactive"' zu definieren.
-Leider war zur Zeitpunkt der Implementierung die Dokumentation veraltet, und musste anhand von vorhanden Github Repositories nachvollzogen werden. 
-
-Aufgrund der grösseren Komplexität wurde darauf verzichtet die Logik auf die neue Schnittstelle zu migriere. 
-
-
-\subsubsection{Community}
-Neben der Dokumentation war auch die fehlende Community ein störender Faktor.
-Im Internet existieren viele Antworten, doch aufgrund der verschiedene API sind nicht alle aktuell. 
-Es musst meist direkt bei den Entwicklern nachgefragt ( z.b. IRC Chat ) oder über Github Issues \cite{github-ticket} die fehlenden Informationen geholt werden.
-
-\subsubsection{Play mit Java}
-Bei allen den Negativen Punkte stellt sich die Frage, warum Play als Framework nach neun Jahren Entwicklung für uns nicht als reif für ein langfristiges Projekt angesehen wird. 
-Zum einen liegt es sicherlich daran, dass neue Funktionen hinzukommen und alte Komponenten abgebaut werden. 
-Doch der Hauptgrund ist sicherlich, dass Play ein Framework für zwei Sprachen, Java und Scala zugleich ist. 
-Es ist bereits sehr schwierig ein gutes Framework für eine Sprache zu schreiben. 
-Play wurde ursprünglich für Java entwickelt und später auch für Scala. 
-So kommt es dass, der Fokus auf Scala gelegt wird. 
-
+Während der Implementierung kristallisierten sich mehrere Schwächen des Frameworks heraus. 
+Im Anhang \ref{ch:play_pitfalls} wird anhand einiger Beispiele erklärt, warum wir Play mit Java nur eingeschränkt weiterempfehlen können und welche Probleme damit aufgetreten sind.
 
 \subsubsection{Handling der Kommunikation mit Drohnen}
 

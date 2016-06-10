@@ -1,0 +1,67 @@
+\chapter{Pitfalls Play mit Java Framework}
+\label{ch:play_pitfalls}
+
+\subsubsection{Instabile Schnittstelle}
+Während der Arbeit musste die Play Version auf den aktuellsten Stand gebracht werden, da sonst die Integration-Tests nicht mit der aktuellsten Firefox Version kompatibel waren. 
+Dies brachte jedoch schnell neue Probleme mit sich, welches auch mit anderen Frameworks gegeben hätte.
+
+Entgegen der API der anderen Java Frameworks, wie Spring, setzt Play in ihren Schnittstellen auf statische Methoden.
+So ist etwas der Zugriff auf die Datenbank oder den Hibernate EntityManager über eine statische Methode möglich:
+\begin{lstlisting}
+    JPA.withTransaction(()-> {
+        JPA.em().createQuery("select * from zones");
+    });
+\end{lstlisting}
+
+Wie aus Software Engineer bekannt, bringen Statische Methoden schlecht Testbarkeit und starke Kopplung mit sich.
+Dies wurde jedoch geändert, denn seit der neusten Version sind diese als Deprecated markiert und müssen injected werden, die neue Version sieht folglich so aus:
+\begin{lstlisting}
+    @Inject
+    private JPAApi jpaApi;
+    // ...
+    jpaApi.withTransaction(()-> {
+        jpaApi.em().createQuery("select * from zones");
+    });
+\end{lstlisting}
+
+Das Umstellen einer Schnittstelle ist für ein Framework etwas gewöhnliches. Doch für uns war es nicht nachvollziehbar, warum dieser Schritt in einem Minor Version geschah.
+
+Dieser Umstand war auch bei älteren Versionen zu erkennen. 
+Ein Grund für den Wahl auf Play fiel auch aufgrund der CRUD-Komponente \cite{play-crud-1}, welche es ermöglichen sollten mit wenig Code ganze CRUD-Seiten zu erstellen.
+Leider wurde diese Komponten von Play 1 auf Play 2 aus dem Projekt gelöscht, und keine Alternative zur Verfügung gestellt. 
+Deshalb sind auch bei uns alle CRUD Seiten von Hand geschrieben.
+
+\subsubsection{Unklare Dokumentation}
+
+Wie bereits erwähnt, war ein Problem die veralteten Methoden und die wandelnden APIs.
+Neben dem Code, war dies auch an der Dokumentation erkennbar.
+So wurden viele neue Komponenten nicht ausführlich oder gar nicht Dokumentiert.
+
+Für eine Laufende Mission sollte der Administrator die Möglichkeit haben die Drohne live zu verfolgen.
+Schnell kam der Einsatz von Websocket für diesen Zweck in den Sinn.
+Dies war auch einfach mit Play.
+Jedoch wurde die Websocket API völlig umgestellt.
+\begin{lstlisting}
+    return WebSocket.whenReady((in, out) -> {
+        // do logic
+    });
+\end{lstlisting}
+Was vorher mit drei Zeilen gelöst wurde, mussten auf Akka Stream umgestellt werden. 
+Akka Streams ermöglicht die ganze Websocket-Logik "'reactive"' zu definieren.
+Leider war zur Zeitpunkt der Implementierung die Dokumentation veraltet, und musste anhand von vorhanden Github Repositories nachvollzogen werden. 
+
+Aufgrund der grösseren Komplexität wurde darauf verzichtet die Logik auf die neue Schnittstelle zu migriere. 
+
+
+\subsubsection{Community}
+Neben der Dokumentation war auch die fehlende Community ein störender Faktor.
+Im Internet existieren viele Antworten, doch aufgrund der verschiedene API sind nicht alle aktuell. 
+Es musst meist direkt bei den Entwicklern nachgefragt ( z.b. IRC Chat ) oder über Github Issues \cite{github-ticket} die fehlenden Informationen geholt werden.
+
+\subsubsection{Play mit Java}
+Bei allen den Negativen Punkte stellt sich die Frage, warum Play als Framework nach neun Jahren Entwicklung für uns nicht als reif für ein langfristiges Projekt angesehen wird. 
+Zum einen liegt es sicherlich daran, dass neue Funktionen hinzukommen und alte Komponenten abgebaut werden. 
+Doch der Hauptgrund ist sicherlich, dass Play ein Framework für zwei Sprachen, Java und Scala zugleich ist. 
+Es ist bereits sehr schwierig ein gutes Framework für eine Sprache zu schreiben. 
+Play wurde ursprünglich für Java entwickelt und später auch für Scala. 
+So kommt es dass, der Fokus auf Scala gelegt wird. 
