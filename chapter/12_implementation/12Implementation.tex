@@ -45,7 +45,7 @@ Das Umstellen einer Schnittstelle ist für ein Framework etwas gewöhnliches. Do
 Dieser Umstand war auch bei älteren Versionen zu erkennen. 
 Ein Grund für den Wahl auf Play fiel auch aufgrund der CRUD-Komponente \cite{play-crud-1}, welche es ermöglichen sollten mit wenig Code ganze CRUD-Seiten zu erstellen.
 Leider wurde diese Komponten von Play 1 auf Play 2 aus dem Projekt gelöscht, und keine Alternative zur Verfügung gestellt. 
-Deshalb wurde auch bei uns alle CRUD Seiten von Hand geschrieben. 
+Deshalb sind auch bei uns alle CRUD Seiten von Hand geschrieben.
 
 \subsubsection{Unklare Dokumentation}
 
@@ -63,23 +63,24 @@ Jedoch wurde die Websocket API völlig umgestellt.
     });
 \end{lstlisting}
 Was vorher mit drei Zeilen gelöst wurde, mussten auf Akka Stream umgestellt werden. 
-Akka Streams ermöglicht die ganze Websocket-Logik reactive"' zu definieren.
+Akka Streams ermöglicht die ganze Websocket-Logik "'reactive"' zu definieren.
 Leider war zur Zeitpunkt der Implementierung die Dokumentation veraltet, und musste anhand von vorhanden Github Repositories nachvollzogen werden. 
+
+Aufgrund der grösseren Komplexität wurde darauf verzichtet die Logik auf die neue Schnittstelle zu migriere. 
 
 
 \subsubsection{Community}
-
-Neben der Dokumentation war auch die Fehlende Community ein störend Faktor.
-Im Internet existieren viele Antworten, doch aufgrund der verschiedene API sind nicht alle aktuell . 
-Es musst meist direkt bei den Entwicklern nachgefragt ( z.b. IRC Chat ) oder über Github Issue \cite{github-ticket} die fehlenden Informationen geholt werden.
+Neben der Dokumentation war auch die fehlende Community ein störender Faktor.
+Im Internet existieren viele Antworten, doch aufgrund der verschiedene API sind nicht alle aktuell. 
+Es musst meist direkt bei den Entwicklern nachgefragt ( z.b. IRC Chat ) oder über Github Issues \cite{github-ticket} die fehlenden Informationen geholt werden.
 
 \subsubsection{Play mit Java}
 Bei allen den Negativen Punkte stellt sich die Frage, warum Play als Framework nach neun Jahren Entwicklung für uns nicht als reif für ein langfristiges Projekt angesehen wird. 
-Zum einen liegt es sicherlich daran, dass neue Funktionen hinzukommen und alte Komponenten abgebaut werden müssen. 
-Doch der Hauptgrund ist sicherlich, dass Play ein Framework für zwei Sprachen, Java und Scala ist. 
+Zum einen liegt es sicherlich daran, dass neue Funktionen hinzukommen und alte Komponenten abgebaut werden. 
+Doch der Hauptgrund ist sicherlich, dass Play ein Framework für zwei Sprachen, Java und Scala zugleich ist. 
 Es ist bereits sehr schwierig ein gutes Framework für eine Sprache zu schreiben. 
 Play wurde ursprünglich für Java entwickelt und später auch für Scala. 
-So kommt es dass, der Fokus auf Scala gelegt wir wird Java für Play die Sprache zweiter Klasse ist.
+So kommt es dass, der Fokus auf Scala gelegt wird. 
 
 
 \subsubsection{Handling der Kommunikation mit Drohnen}
