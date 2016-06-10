@@ -155,20 +155,21 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 \end{tabularx}
 
 \subsection{Sicherheit}
-Wie sicher ist die Kommunikation mit dem Server? Kann allenfalls eine Drohne gekapert und falsche Koordinaten zugeschickt werden?
-\\
-Das CustomerApp registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Anmeldung werden neben einem Token auch die Anmeldedaten für RabbitMQ mitgeliefert.
+Es ist essentiell, dass die Sicherheit bei der Kommunkation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte. (siehe auch NFRs). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ-Broker und die Queue-Namen geheim zu halten: \\
 
-Damit kann sich die App mit dem Messaging Broker verbinden, auch diese Verbindung läuft verschlüsselt.
-Für die darauf folgende Kommunikation mit dem Server, werden zwei Queues erzeugt: 
+Die Onboard-App registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Registrierung der Drohne, wird ein Token sowie der Benutzer und das Kennwort für die Verbindung zu RabbitMQ an die Onboard-App geschickt. Mit diesen Informationen kann sich die App mit dem Messaging Broker über eine verschlüsselte Leitung verbinden.\\
+
+Für die darauf folgende Kommunikation mit dem Broker, werden mit Hilfe des Tokens zwei Queues erzeugt: 
 \begin{itemize}
 	\item \{token\}-Drone-To-Server
 	\item  \{token\}-Server-To-Drone
 \end{itemize}
 
-Beim Token handelt es sich um den vom Server gesendeten UUID.
-Über diesen Kanal werden JSON Messages ausgetauscht. Ein Angreifer müsste den Token herausfinden, um mit der Drohne zu kommunizieren. Mit einer Brutforce Methode ist mit $2^{122}$ Möglichkeiten ein Treffer auszuschliessen. 
-Das auslesen des Tokens ist auch ausgeschlossen, da die erstmalige Verbindung verschlüsselt ist. Somit ist für uns die Kommunikation mit der Drohne ausreichend gesichert.
+Über diese Queues können jetzt Nachrichten ausgetauscht werden. \\
+
+Ein Angreifer müsste mit dieser Methode den Token herausfinden und auch die Zugangsdaten für den Broker kennen, um mit einer Drohne zu kommunizieren. Falls jemand es aber doch schaffen würde, die Benutzerdaten auszulesen, gibt es trotzdem noch $2^{122}$ mögliche Tokens, die durchprobiert werden müssten. \\
+
+Wir erachten die Sicherheit mit dieser Methode als genügend.
 
 \section{Projektgrösse}
 
