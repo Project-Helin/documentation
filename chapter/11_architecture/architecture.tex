@@ -206,7 +206,13 @@ Die Fehlersemantik At-most-once gibt die Sicherheit dass eine Drohne eine Missio
 \end{figure}
 %
 \subsection{Order Cargo}
-\includepdf[pages=-]{images/OrderCargo.pdf}
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=1.0\textheight]{images/sequence_diagram.png}
+	\caption{Übersicht der Project Helin Architektur }
+	\label{fig:registerDrone}
+\end{figure}
+%
 Order Cargo (Abbildung \ref{fig:registerDrone}) beschreibt den Bestellprozess und die damit zusammenhängende Kommunikation. \\
 Der User möchte gerne an einem Anlass ein Produkt bestellen. Er bestellt mittels der App ein Produkt, der Server bestätigt ihm die Bestellung und schlägt einen Abwurfort vor. Sollte der Abwurfort dem Kunden nicht entsprechen, so kann er den Prozess abbrechen und ihn nocheinmal auslösen, sobald er sich in einer geografisch glücklicheren Lage befindet.
 \\
