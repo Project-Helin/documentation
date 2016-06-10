@@ -2,19 +2,54 @@
 
 \section{Ergebnisse}
 
-Während dieser Arbeit hat das Team eine Plattform konzipiert und entwickelt, die es jedem Anbieter ermöglicht einen Drohnen-Lieferservice für ein von ihm definiertes Gebiet aufzubauen. Die Plattform wurde auf einem Server als Software as a Service zur Verfügung gestellt. Ausserdem wurde der gesamte Code des Projekts auf Github veröffentlicht und steht unter einer \Gls{MIT-Lizenz} als Open-Source Software zur Verfügung.
-
-Zusätzlich wurden mit eigens aufgebauten Drohnen Tests durchgeführt, die zeigen, dass das System als ganzes funktioniert.
+Während dieser Arbeit hat das Team eine Plattform konzipiert und entwickelt, die es jedem Anbieter ermöglicht einen Drohnen-Lieferservice für ein von ihm definiertes Gebiet aufzubauen. Die Plattform wurde auf einem Server als Software as a Service zur Verfügung gestellt. Ausserdem wurde der gesamte Code des Projekts auf Github veröffentlicht und steht unter einer \Gls{MIT-Lizenz} als Open-Source-Software zur Verfügung. Die Tests mit den zwei eigens aufgebauten Drohnen zeigen, dass das System als ganzes funktioniert.
 
 \subsection{Zusammenfassung der Features}
 
 \begin{itemize}
-	\item Webseite für Administratoren zur Verwaltung von Drohnen, Produkten und Bestellungen
+	\item Webseite für Administratoren zur Verwaltung von Organisationen, Drohnen, Produkten und Bestellungen
 	\item Cross-Plattform Bestell-App (iOS, Android) für Kunden
 	\item Android App zur Steuerung der Drohne über das Internet
 	\item Verfolgung der Drohnen-Telemetrie während, vor und nach der Lieferung einer Bestellung
 	\item Automatisierte dynamische Routenberechnung über vordefinierte Flugzonen abhängig von der Position des Kunden
-	\item Automatisierte Verteilung von Aufträgen an die Drohnen
+	\item Automatisierte Verteilung von Lieferaufträgen an die Drohnen
 \end{itemize}
 
+
 \section{Ausblick}
+
+Die entwickelte Plattform zeigt erst einen Bruchteil der Möglichkeiten, die in Zukunft von autonomen Drohnen übernommen werden können. Beispielsweise können Videoaufnahmen, Infrastrukturüberwachung oder Katastrophenhilfe als Angebote integriert werden. Ausserdem könnte das Smartphone für gewisse Aufgaben mit spezifischer Embedded Hardware ersetzt werden um das Gewicht zu senken und die Transportkapazität zu erhöhen. 
+
+\subsection{Empfohlene Weiterentwicklungen}
+
+Während des Projekts sind weitere Ideen entstanden, die aber grössere Änderungen benötigen oder getestet werden müssen. Sie müssen für einen produktiven Einsatz aber nicht unbedingt umgesetzt werden.
+
+\begin{itemize}
+	\item Services hinzufügen (Drone-Selfie, Follow-Me Video, Geographische Vermessung)
+	\item Testen in Kombination mit Obstacle Avoidance (Intel RealSense, Sonar, o.ä)
+	\item Test ob es auch mit Radio-Telemetry am Onboard-App funktioniert
+	\item Smartphone ersetzen durch Embedded-System 
+	\item Smartphone-Sensoren nutzen um Sicherheit zu erhöhen
+	\item Beladungssystem für Drohnen
+	\item Batterieaustauschsystem für Drohnen
+	\item Flight-Controller ohne MAVLink auch unterstützen (z.B. DJI-API)
+\end{itemize} 
+
+
+\subsection{Known-Issues}
+
+Alle bekannten kleineren Probleme und zusätzlichen Features, die vor einem Produktiven Einsatz des Systems umgesetzt werden sollten, werden im Server-Github-Repository als Issues erfasst. Dies ermöglicht es auch anderen Entwicklern an dem Projekt weiterzuarbeiten und dessen Limitierungen zu kennen.
+
+
+\section{Schlussfolgerung}
+
+Während dieser Arbeit haben wir aus unserer Vision ein Produkt entwickelt und fertiggestellt. Damit konnten wir beweisen, dass man mit verfügbaren Technologien Liefersysteme mit autonomen Drohnen schon heute realisieren kann. Die entstandene Plattform kann nun zu Testzwecken von allen Interessierten genutzt und weiterentwickelt werden.\\
+
+Die erarbeiteten funktionalen- und nicht-funktionalen Anforderungen konnten alle erfüllt und teilweise übertroffen werden, trotz der vielfältigen und teilweise interdisziplinären Aufgaben, die dieser Arbeit innewohnten. \\
+
+Wir hoffen, dass die entwickelte Plattform als Anstoss für die Stakeholder in dieser Branche dienen kann und sich die Technologien und Gesetzeslagen insoweit verbessern, dass Dienstleistungen von Drohnen bald überall zur Verfügung stehen werden.
+
+
+
+
+
