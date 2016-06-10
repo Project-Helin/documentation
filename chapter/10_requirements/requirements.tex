@@ -66,39 +66,40 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 \subsection{Administrator}
 \begin{itemize}
 \item Als Administrator möchte ich auf der Webseite einen Account erstellen können.
+\item Als Administrator möchte ich meine Organisation verwalten können (CRU). (zusätzlich, siehe unten)
+\item Als Administrator möchte ich neue Administratoren hinzufügen und entfernen können. (zusätzlich)
 \item Als Administrator möchte ich ein Projekt erfassen können.
 \item Als Administrator möchte ich auf eine Drohne dem Projekt hinzufügen können.
 \item Als Administrator möchte ich alle Drohnen verwalten können (RUD).
 \item Als Administrator möchte ich Produkte verwalten können (CRUD).
+\item Als Administrator möchte ich Produkte einem Projekt hinzufügen können (zusätzlich)
 \item Als Administrator möchte ich Services (zum Beispiel Drone Selfies) verwalten können (CRUD). (optional)
 \item Als Administrator möchte ich Flug-, Lade- und Abwurfzonen verwalten können.
-\item Als Administrator möchte ich Bestellungen verwalten können (CRUD).
-
-%add where - what de fuck is a mission mst, 01.04.2016
-
-\item Als Administrator möchte ich Missionen vor, nach, und während der Ausführung ansehen können.
-\item Als Administrator möchte ich Missionen abbrechen können.
+\item Als Administrator möchte ich Bestellungen verwalten können (CRUD) (teilweise ausgeschlossen).
+\item Als Administrator möchte ich Telemetriedaten der Drohne, sowie die berechnete Route vor, nach, und während der Auslieferung einer Bestellung ansehen können.
+\item Als Administrator möchte ich Bestellungen abbrechen können. (ausgeschlossen)
 \end{itemize}
 
 \subsection{Kunde}
 \begin{itemize}
-\item Als Kunde möchte ich eine App aus dem Google Play Store herunterladen können um diese verwenden zu können.
-\item Als Kunde möchte ich die App nutzen ohne mich anmelden zu müssen.
-\item Als Kunde möchte ich in der App, aus einer Liste von Gütern und Services, eine Auswahl treffen können.
-\item Als Kunde möchte ich eine Bestellung tätigen können.
-\item Als Kunde möchte ich die bestellte Ware direkt bezahlen können. (optional)
-\item Als Kunde möchte ich auf der Karte des Smartphones die Bewegung der Drohne verfolgen können um abzuschätzen wann meine Lieferung eintrifft.
-\item Als Kunde möchte ich eine Bestellung stornieren können.
+	\item Als Kunde möchte ich eine App aus dem Google Play Store herunterladen können um diese verwenden zu können.
+	\item Als Kunde möchte ich die App nutzen ohne mich anmelden zu müssen.
+	\item Als Kunde möchte ich in der App, aus einer Liste von Produkten und Services, eine Auswahl treffen können.
+	\item Als Kunde möchte ich nur Produkte und Services sehen, die in meiner Umgebung angeboten werden. (zusätzlich)
+	\item Als Kunde möchte ich eine Bestellung tätigen können.
+	\item Als Kunde möchte ich die bestellte Ware direkt bezahlen können. (optional)
+	\item Als Kunde möchte ich auf der Karte des Smartphones die Bewegung der Drohne verfolgen können um abzuschätzen wann meine Lieferung eintrifft.
+	\item Als Kunde möchte ich eine Bestellung stornieren können (ausgeschlossen).
 \end{itemize}
 
 \subsection{Drone-Operator}
 \begin{itemize}
 	\item Als Drone-Operator möchte ich eine Android App mit Hilfe der heruntergeladenen \Gls{APK} installieren können.
-	\item Als Drone-Operator möchte ich das die Drohne beim Server registrieren können.
-	\item Als Drone-Operator möchte ich das die Drohne zu einer Organisation hinzufügen können.
-	\item Als Drone-Operator möchte ich das \Gls{OTG}-fähige Smartphone an einen MAV-Link kompatiblen Flight-Controller über USB anschliessen können.
-	\item Als Drone-Operator möchte ich eine Verbindung zwischen App und Server über das Internet herstellen könnnen.
-	\item Als Drone-Operator möchte ich eine Verbindung zwischen App und Flight-Controller herstellen können.
+	\item Als Drone-Operator muss ich das die Drohne beim Server registrieren können.
+	\item Als Drone-Operator muss ich das die Drohne zu einer Organisation hinzufügen können.
+	\item Als Drone-Operator muss ich das \Gls{OTG}-fähige Smartphone an einen MAV-Link kompatiblen Flight-Controller über USB anschliessen können.
+	\item Als Drone-Operator muss ich eine Verbindung zwischen App und Server über das Internet herstellen könnnen.
+	\item Als Drone-Operator muss ich eine Verbindung zwischen App und Flight-Controller herstellen können.
 	\item Als Drone-Operator möchte ich den aktuellen Zustand der Verbindungen zur Drohne und zum Server sehen.
 	\item Als Drone-Operator möchte ich den aktuellen Status des \Gls{Flight-Controller}, beispielsweise GPS und Batteriespannung sehen.
 	\item Als Drone-Operator möchte ich eine Liste von Produkten angezeigt bekommen, die für die aktuelle Mission geladen werden müssen.
@@ -107,6 +108,35 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 	\item Als Drone-Operator erhalte ich ein visuelles und akustisches Countdown-Signal bevor die Drohne startet.
 	\item Als Drone-Operator möchte ich den Start der Drohne während des Countdowns verhindern können.
 \end{itemize}
+
+\subsection{Nachträglich ausgeschlossene Anforderungen}
+
+\subsubsection{Bestellung löschen und ändern}
+Gemäss den anfänglichen Anforderungen sollte der Administrator die Möglichkeit haben eine Bestellung zu bearbeiten (CRUD). Dies wurde reduziert auf das Ansehen von Bestellungen (R). Nur ein Kunde sollte die Möglichkeit haben eine Bestellung zu löschen, da auch er sie erstellt hat. Ausserdem muss es auch dort Einschränkungen geben, da eine bezahlte Bestellung unter keinen Umständen gelöscht werden sollte.
+
+
+\subsubsection{Mission abbrechen}
+
+Das Abbrechen einer Mission wurde aus dem Scope entfernt, da sich einerseits Fragen über den sinvollen Einsatz eines solchen Features stellten und dafür andere Tasks wie das Payment priorisiert werden konnten.
+
+\subsection{Nachträglich hinzugefügte Anforderungen}
+
+\subsubsection{Verwalten von Organisationen}
+
+Um die Applikation Multi-Tenant-Fähig zu machen, wurden Organisationen eingefügt. Diese trennen verschiedene Kunden komplett ab und ermöglichen den Einsatz als Software as a Service.
+
+\subsubsection{Administratoren Hinzufügen und Entfernen}
+
+Um Organisationen nutzbar zu machen, musste es auch möglich sein zusätzliche Administratoren zu einer Firma hinzuzufügen und wieder zu entfernen.
+
+\subsubsection{Produkte einem Projekt hinzüfen}
+
+Damit Organisationen nur einmal ihre Produkte erfassen müssen und diese dann für verschiedene Projekte (z.B. Events) verwenden können, gehören Produkte immer zu einer Organisation und zu beliebig vielen Projekten. (siehe Abb. \ref{fig:domain-model})
+
+\subsubsection{Nur verfügbare Produkte anzeigen}
+
+Damit ein Kunde nur die für ihn relevanten Angebote sieht, werden nur Produkte und Services angezeigt, die an seiner Position verfügbar sind.
+
 \newpage
 \section{Nichtfunktionale Anforderungen}
 \subsection{Verbindungsabbruch}
@@ -128,17 +158,20 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 	
 	Messbarkeit & Die Verbindung zwischen Server und App wird nach dem deaktivieren und wieder aktivieren der Internetverbindung innert 30 Sekunden wiederhergestellt.\\ \hline
 \end{tabular}
-%\subsection{Nutzlast der Drohne}
-%\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
-%	Synopsis & Eine 1/2 Liter PET Flasche soll innerhalb von einem 500m Radius geliefert werden können. \\ \hline
 
-%	Messbarkeit & Im App kann ein Produkt mit einem Gewicht von 500g bestellt, und geliefert werden. \\ \hline
-%\end{tabular}
 \subsection{Security}
+\subsubsection{Messaging-Verbindungen}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
 	Synopsis & Es darf nicht möglich sein, dass jemand die Steuerung einer beim Server registrierten Drohne übernehmen kann.\\ \hline
 	Messbarkeit & Der Übertragungskanal vom Server zur Drohne ist verschlüsselt und es können sich keine weiteren \Gls{Message-Producer} anmelden.\\ \hline
 \end{tabular}
+
+\subsubsection{HTTP-Verbindungen}
+\begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
+	Synopsis & Die Verbindung zum Server von jedem Client muss verschlüsselt sein.\\ \hline
+	Messbarkeit & Die Verbindung über den Webbrowser lässt nur HTTPS zu. Die Verbindung vom Customer-App zum Server läuft über HTTPS und Secure-Websockets. Die Verbindung vom Onboard-App zum Server läuft über HTTPS.\\ \hline
+\end{tabular}
+
 \section{Domain-Model}
 Aus den funktionalen Anforderungen ergibt sich das folgende Domainmodel.
 \begin{landscape}
