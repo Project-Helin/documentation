@@ -58,6 +58,16 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 
 \subsection{Onboard-App}
 
+Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk Flight-Controllers, stellt dafür eine Open-Source Android-API bereit, die im App integriert werden konnte und es erlaubt, dem Flight-Controller direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
+
+Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich fast gleich wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung erzeugen. Das erarbeiten der verschidenen Setups war teilweise ziemlich aufwendig, je nachdem ob man neben der App noch eine Bodenstation an die Simulation anbinden wollte, die weitere Echtzeitinformationen liefert (siehe Abb. \ref{fig:test-setup-onboard}). Auf Github sind die verschiedenen Setups detailliert erklärt, um den Einstieg in die Entwicklung zu erleichtern.
+
+\begin{figure}[H]
+	\includegraphics[width=1.0\textwidth]{images/test-setup-onboard.png}
+	\caption{APM Planner 2.0 als Bodenstation und Android Emulator mit Onboard App}
+	\label{fig:test-setup-onboard}
+\end{figure}
+
 \subsubsection{Verwendete Bibliotheken}
 \begin{tabularx}{\textwidth}{|X|X|c|X|}
 	\hline
