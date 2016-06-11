@@ -144,8 +144,6 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 Die App enthält die normalen Android-Application-Layer wie Activities und Views. Zusätzlich kommt der Service-Layer hinzu. Dieser enthält keine Android-Services, sondern selbst entwickelte Service-Klassen.
 
 \subsubsection{Service-Layer}
-
-% TODO AMQP is wrong betwen server and customer app
 \begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
 	\textbf{Verantwortlichkeiten} & \textbf{Zusammenarbeit} \\ \hline \hline
 	
@@ -164,6 +162,7 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 \end{tabular}
 
 \section{Kommunikations-Architektur}
+\label{sec:communication-architecture}
 Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht. Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. Für die Kommunikation mit dem Onboard-App wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen. Eine Bidirektionale Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne). Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
 	
 Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über die bidirektionale Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig Websockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
