@@ -140,7 +140,8 @@ Um das maximale Gewicht zu prüfen, welches auf unsere Drohnen geladen werden ka
 \textbf{Nutzlast} & \textbf{Akku Typ} & \textbf{Nötige Leistung }& \textbf{Erwartete Flugzeit } & \textbf{Subjektives Flugverhalten }\\
 \hline \hline
 500g & 3S & ca. 75\%  & n.A. & Ziemlich Träge, mehr Gewicht wäre kritisch\\\hline
-500g & 4S & ca. 45\%  & n.A. & Gewicht kaum Spürbar\\\hline
+500g & 4S & ca. 45\%  & n.A. & Gewicht kaum Spürbar\\
+\hline
 \end{tabularx}\\
 
 Auch mit 3S Akkus ist es also möglich eine PET-Flasche zu transportieren. Allerdings empfehlen wir für Gewichte über 300 4S-Akkus zu verwenden.\\
@@ -152,13 +153,21 @@ Aus den Tragfähigkeitstests schliessen wir, dass auch ein Defibrilator (siehe A
 
 \section{Alternativen}
 
-Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software 'ArduPilot' Firmwares für Multicopter, Flugzeuge, Fahrzeuge und Schiffe.\\
+Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software \ref{arduScreenshot} 'ArduPilot' Firmware-Varianten für Multicopter, Flugzeuge, Fahrzeuge. \\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth] {images/arduScreenshot.jpg}
+\caption{Screenshot der verschiedenen Firmwarevarianten.}
+\label{fig:arduScreenshot}
+\end{figure}
 
-Uplift Aero beispielsweise war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge die selben Flugcontroller wie wir verwendet und mussten lediglich die passende Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
+Uplift \ref{uplift} Aero beispielsweise war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge die selben Flugcontroller wie wir verwendet und mussten lediglich die passende Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth] {images/SyriaUplift.jpg}
-\caption{Upaero Team und die Syrien-Drohne Quelle: \protect\url{http://uplift.aero/}}
-\label{fig:prototyp-1}
+\caption{Uplift Team und die Syrien-Drohne Quelle: \protect\url{http://uplift.aero/}}
+\label{fig:uplift}
 \end{figure}
+
+
