@@ -50,33 +50,30 @@ Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kan
 
 \subsection{Ausbaustufen}
 
-Während des Projekts wurden die Hardware laufend den Bedürfnissen angepasst. Daher gibt es mehrere Prototypen, die für die Versuche genutzt wurden.
+Während des Projekts wurde die Hardware laufend den Bedürfnissen angepasst. Daher existieren mehrere Iterationen der Drohne, die für die Versuche genutzt wurden und geholfen haben Risiken früh auszuschliessen.
 
-\subsubsection{Prototyp 1}
+\subsubsection{Version 1}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.4\textwidth] {images/hardware/prototype1.jpg}
-\caption{Erster Prototyp ohne Landegestellt und ohne Smartphone}
+\caption{Erster Prototyp ohne Landegestell und ohne Smartphone}
 \label{fig:prototyp-1}
 \end{figure}
 
-Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Versuche mit dem GPS und den verschiedenen Flugmodi zu sammeln, wurde sehr schnell ein Prototyp gebaut.
+Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Erfahrungen mit dem GPS und den verschiedenen Flugmodi zu sammeln, wurde in der ersten Iteration nur die Drohne in einem minimal Flugzustand aufgebaut.
 
-\subsubsection{Prototyp 2}
+\subsubsection{Version 2}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.4\textwidth] {images/hardware/prototype2.jpg}
-\caption{Erster Prototyp ohne Landegestellt und ohne Smartphone}
+\caption{Drohnen Aufbau mit Smartphone}
 \label{fig:prototyp-2}
 \end{figure}
 
-Um die Risiken R08 (Ardupilot Handhabugn ) und R09 (Ardupilot API) schnell auszuschliessen ( siehe Tabelle \ref{table:risk-table} ), wurde das Smartphone kurzerhand auf die Drohne montiert, und mit einer ersten 
-Prototypen des Onboard-App getestet. 
-Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeitet werden mussten. 
-Denn das Smartphone konnte nicht standfest montiert, und gleichzeitig hadhaber sein. 
-
+Um die Risiken R08 (Ardupilot Handhabung) und R09 (Ardupilot API) frühzeitig auszuschliessen (siehe Tabelle \ref{table:risk-table}), wurde das Smartphone zusätzlich auf die Drohne montiert, und mit einem ersten Prototypen der Onboard-App getestet. \\
+Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeitet werden mussten, um es sicher zu transportieren und bedienbar zu positionieren.
 
 \begin{figure}[H]
 	\centering
@@ -94,32 +91,31 @@ Denn das Smartphone konnte nicht standfest montiert, und gleichzeitig hadhaber s
 	\end{minipage}
 \end{figure}
 
-Es wurde eine Halterung erstellen lassen \ref{fig:case-model} und mit einem 3D-Drucker hergestellt. 
-Die Handy-Halterung konnte auch gleich genutzt werden, um den Pixhawk-Controller zu verstecken und das GPS Module gut zu montieren. 
+Es wurde eine Halterung konzipiert \ref{fig:case-model}, welche wir später im 3D-Druck Verfahren produzieren liessen.
+Die Handy-Halterung konnte auch gleich genutzt werden, um den Pixhawk-Controller zu verstecken und das GPS Module gut exponiert zu montieren. 
 
-
-\subsubsection{Prototyp 3}
-
-Nachdem mit der Drohne Test für den autonomen Flug mögliche waren, musste eine Möglichkeit erarbeitet werden, wie die Lieferung an den Kunden gebracht wird.
+\subsubsection{Version 3}
+Nachdem mit der Drohne zahlreiche autonome Testflüge unternommen wurden, musste eine Möglichkeit erarbeitet werden, wie die Lieferung an den Kunden gebracht werden kann.
 
 \begin{figure}[H]
 	\centering
 	\begin{minipage}[b]{0.4\textwidth}
-		% TODO Hier muss ein bessers Bild her ( oder Kafferahmen weg photoshoppen )
-		\includegraphics[width=\textwidth]{images/hardware/drone-with-servo.jpg}
-		\caption{Drohne mit dem Abwurfsmechanismus}
+		\includegraphics[width=\textwidth]{images/hardware/parachute-model.jpg}
+		\caption{Halterung}
+		\label{asdf}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[b]{0.4\textwidth}
-		\includegraphics[width=\textwidth]{images/hardware/parachute-model.jpg}
-		\caption{Halterung}
+		% TODO Hier muss ein bessers Bild her ( oder Kafferahmen weg photoshoppen )
+		\includegraphics[width=\textwidth]{images/hardware/drone-with-servo.jpg}
+		\caption{Drohne mit dem Abwurfsmechanismus}
+		\label{asdf}
 	\end{minipage}
 \end{figure}
 
 
-Es wurde ein einfacher Mechanismus mit einem Servo und Stift erarbeitet, wie in Abbildung \ref{fig:case-model}  dargestellt. 
-Das Packet, mit einem Fallschirm, wird auf einem Stift gehängt, dieser wird vom Servo auf knopfdruck weggezogen. 
-
+Es wurde ein einfacher Mechanismus mit einem handelsüblichen Modelbau-Servo konstruiert. Die Abbildung \ref{fig:AbwurfMechanismus} zeigt, wie der Servo den Stift entfernt und so die Ladung freigeben kann. \\
+Das Packet, an einem Fallschirm befestigt, wird auf den Stift gehängt und verschlossen und der Fallschirm im dazugehörigen Fallschirmschacht verstaut. Der Servo war mittels einer Fernbedienungstaste kontrollierbar und löste so den Abwurf des Paketes aus. Später haben wir den Servo über einen Softwarebefehl auslösbar gemacht. 
 
 \subsection{Tests}
 
