@@ -14,6 +14,32 @@ Bei der Zusammenstellung der Komponenten haben wir vor allem auf die gute Verfü
 
 \section{Multicopter Hardware}
 
+\section{Teile-Liste}
+
+\begin{tabularx}{\textwidth}{|X|l|l r|}
+	\hline
+	\textbf{Bezeichnung} & \textbf{Bezugsquelle} && \textbf{Preis}\\
+	\hline \hline
+	DJI F450 ARF Kit & conrad.ch & CHF &229.95 \\\hline
+	DJI F450/F550 Landegestell & conrad.ch & CHF &24.95 \\\hline
+	3DR Pixhawk & 3dr.com & USD& 199.99 \\\hline
+	3DR uBlox GPS with Compass Kit & 3dr.com & USD &89.99 \\\hline
+	3DR uBlox GPS with Compass Kit & 3dr.com & USD &89.99 \\\hline
+	Pixhawk external LED and USB & 3dr.com & USD & 20.00 \\\hline
+	FrSky X8+ Radio Transmitter & 3dr.com & USD & 89.99 \\\hline
+	FrSky X8R Receiver & hebu-shop.ch & CHF & 39.95 \\\hline
+	Delock Micro USB OTG Kabel & digitec.ch & CHF &15.90 \\\hline
+	Multistar High Capacity 4S Akku & hobbyking.com & USD& 25.25 \\\hline
+	Multistar High Capacity 4S Akku & hobbyking.com & USD &25.25 \\\hline
+	APM Flight Controller Damping Platform & hobbyking.com & USD& 2.69 \\\hline
+	Smartphone und GPS Halterung & eigener 3D-Print & CHF &27.50\\\hline
+	Abwurfvorrichtung & eigener 3D-Print & CHF &25.50\\\hline
+	Hitec Super Servo S-Bec (Stromversorgung Servo) & brack.ch & CHF &13.90\\\hline
+	Tactic TSX10 (Servo für Abwurf) & brack.ch & CHF & 14.90\\\hline
+	Total& & CHF/USD & $\approx 1000.00$\\\hline
+\end{tabularx}
+
+
 \subsection{Frame und Antrieb}
 
 Der Frame, die Motoren und ESCs wurden als Kit gekauft. Es handelt sich dabei um ein DJI Flamewheel 450 Frame mit DJI 2312 960kV Motoren und ESeries 420 20A ESCs. Dieses Kit ist weltweit gut verfügbar und deshalb ideal geeignet um einen Versuchsaufbau zu erstellen.
@@ -235,7 +261,7 @@ Nachteile:
 
 \subsection{Entscheidung}
 
-Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, dass die letzte Variante die meisten Vorteile bringt. Wichtig ist auch, dass ein Abwurf im gelandeten Zustand weiterhin möglich bleibt, ohne die mechanischen Komponenten zu verändern.
+Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, dass die letzte Variante die meisten Vorteile bringt. Wichtig ist auch, dass ein Abwurf im gelandeten Zustand weiterhin möglich bleibt, ohne die mechanischen Komponenten zu verändern. Deshalb haben wir uns für einen Abwurf mit dem Fallschirm entschieden.
 
 \begin{figure}[h]
 	\centering
@@ -244,7 +270,7 @@ Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, da
 	\label{fig:nutzwertanalyse_abwurf}
 \end{figure}
 
-\section{Alternativen}
+\section{Alternative Drohnenarten}
 
 Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software \ref{fig:arduScreenshot} 'ArduPilot' Firmware-Varianten für Multicopter, Flugzeuge, Fahrzeuge. \\
 \begin{figure}[H]
