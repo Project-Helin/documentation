@@ -75,12 +75,13 @@ Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Versuche mit de
 Um die Risiken R08 (Ardupilot Handhabugn ) und R09 (Ardupilot API) schnell auszuschliessen ( siehe Tabelle \ref{table:risk-table} ), wurde das Smartphone kurzerhand auf die Drohne montiert, und mit einer ersten 
 Prototypen des Onboard-App getestet. 
 Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeitet werden mussten. 
-Denn das Smartphone konnte nicht leicht und handhaber montiert werden.
+Denn das Smartphone konnte nicht standfest montiert, und gleichzeitig hadhaber sein. 
 
 
 \begin{figure}[H]
 	\centering
 	\begin{minipage}[b]{0.4\textwidth}
+		% TODO Ein Bild ohne Tastatur und Stuhl wäre auch gut?
 		\includegraphics[width=\textwidth]{images/hardware/drone-with-handy.jpg}
 	\caption{Modell der Handy Halterung}
 	\label{fig:case-model}
@@ -93,29 +94,31 @@ Denn das Smartphone konnte nicht leicht und handhaber montiert werden.
 	\end{minipage}
 \end{figure}
 
-Es wurde ein Halterung erstellen lassen \ref{fig:case-model} und mit einem 3D-Drucker hergestellt. 
-Die Halterung konnte auch genutzte werden, um den Pixhawk-Controller zu verstecken und das GPS Module gut zu montieren. 
+Es wurde eine Halterung erstellen lassen \ref{fig:case-model} und mit einem 3D-Drucker hergestellt. 
+Die Handy-Halterung konnte auch gleich genutzt werden, um den Pixhawk-Controller zu verstecken und das GPS Module gut zu montieren. 
 
 
 \subsubsection{Prototyp 3}
 
-Nachdem mit der Drohne Test für den autonomen Flug mögliche waren, musst eine Möglichkeit erarbeitet werden, wie die Lieferung an den Kunden gebracht wird.
+Nachdem mit der Drohne Test für den autonomen Flug mögliche waren, musste eine Möglichkeit erarbeitet werden, wie die Lieferung an den Kunden gebracht wird.
 
 \begin{figure}[H]
 	\centering
 	\begin{minipage}[b]{0.4\textwidth}
+		% TODO Hier muss ein bessers Bild her ( oder Kafferahmen weg photoshoppen )
 		\includegraphics[width=\textwidth]{images/hardware/drone-with-servo.jpg}
-		\caption{Drohne }
+		\caption{Drohne mit dem Abwurfsmechanismus}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[b]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{images/hardware/parachute-model.jpg}
-		\caption{Flower two.}
+		\caption{Halterung}
 	\end{minipage}
 \end{figure}
 
 
-Es wurde ein einfacher Mechanismus mit einem Servo und Stift erarbeitet, wie in Abbildung \ref{fig:case-model}  dargestellt. Das Packet, mit einem Fallschirm, wird auf einem Stift gehängt, dieser wird vom Servo auf knopfdruck weggezogen. 
+Es wurde ein einfacher Mechanismus mit einem Servo und Stift erarbeitet, wie in Abbildung \ref{fig:case-model}  dargestellt. 
+Das Packet, mit einem Fallschirm, wird auf einem Stift gehängt, dieser wird vom Servo auf knopfdruck weggezogen. 
 
 
 \subsection{Tests}
@@ -140,7 +143,8 @@ Um das maximale Gewicht zu prüfen, welches auf unsere Drohnen geladen werden ka
 \textbf{Nutzlast} & \textbf{Akku Typ} & \textbf{Nötige Leistung }& \textbf{Erwartete Flugzeit } & \textbf{Subjektives Flugverhalten }\\
 \hline \hline
 500g & 3S & ca. 75\%  & n.A. & Ziemlich Träge, mehr Gewicht wäre kritisch\\\hline
-500g & 4S & ca. 45\%  & n.A. & Gewicht kaum Spürbar\\\hline
+500g & 4S & ca. 45\%  & n.A. & Gewicht kaum Spürbar\\
+\hline
 \end{tabularx}\\
 
 Auch mit 3S Akkus ist es also möglich eine PET-Flasche zu transportieren. Allerdings empfehlen wir für Gewichte über 300 4S-Akkus zu verwenden.\\
@@ -152,13 +156,21 @@ Aus den Tragfähigkeitstests schliessen wir, dass auch ein Defibrilator (siehe A
 
 \section{Alternativen}
 
-Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software 'ArduPilot' Firmwares für Multicopter, Flugzeuge, Fahrzeuge und Schiffe.\\
+Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software \ref{fig:arduScreenshot} 'ArduPilot' Firmware-Varianten für Multicopter, Flugzeuge, Fahrzeuge. \\
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth] {images/arduScreenshot.jpg}
+\caption{Screenshot der verschiedenen Firmwarevarianten.}
+\label{fig:arduScreenshot}
+\end{figure}
 
-Uplift Aero beispielsweise war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge die selben Flugcontroller wie wir verwendet und mussten lediglich die passende Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
+Uplift \ref{fig:uplift} Aero beispielsweise war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge die selben Flugcontroller wie wir verwendet und mussten lediglich die passende Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth] {images/SyriaUplift.jpg}
-\caption{Upaero Team und die Syrien-Drohne Quelle: \protect\url{http://uplift.aero/}}
-\label{fig:prototyp-1}
+\caption{Uplift Team und die Syrien-Drohne Quelle: \protect\url{http://uplift.aero/}}
+\label{fig:uplift}
 \end{figure}
+
+
