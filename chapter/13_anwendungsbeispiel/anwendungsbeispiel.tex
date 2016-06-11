@@ -69,13 +69,47 @@ Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Versuche mit de
 \centering
 \includegraphics[width=0.4\textwidth] {images/hardware/prototype2.jpg}
 \caption{Erster Prototyp ohne Landegestellt und ohne Smartphone}
-\label{fig:prototyp-1}
+\label{fig:prototyp-2}
 \end{figure}
 
-Nach dem manuellen Flug und der Konfiguration vom Pixhawk wurde versucht das Smartphone zu montieren. 
-Uns wurde klar, dass eine Befestigung Mechanismus für das Smartphone erarbeitet werden mussten. 
-Denn auf dem Pixhawk konnte es nicht montiert, da die Display für den Benutzer sichtbar sein musste, wurde ein Halterung erarbeitet und mit einm 3D-Drucker hergestellt.
+Um die Risiken R08 (Ardupilot Handhabugn ) und R09 (Ardupilot API) schnell auszuschliessen ( siehe Tabelle \ref{table:risk-table} ), wurde das Smartphone kurzerhand auf die Drohne montiert, und mit einer ersten Prototypen des Onboard-App getestet. 
+Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeitet werden mussten. 
+Denn das Smartphone konnte nicht leicht und handhaber montiert werden. Die Halterung konnte auch genutzte werden, um den Pixhawk-Controller zu verstecken und das GPS Module gut zu montieren. 
 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth] {images/hardware/case-model.png}
+	\caption{Modell der Handy Halterung}
+	\label{fig:case-model}
+\end{figure}
+Es wurde ein Halterung erstellen lassen \ref{fig:case-model} und mit einem 3D-Drucker hergestellt. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\textwidth] {images/hardware/drone-with-handy.jpg}
+	\caption{Drohne mit Handy Halterung}
+	\label{fig:prototyp-3}
+\end{figure}
+
+\subsubsection{Prototyp 3}
+
+Nachdem mit der Drohne Test für den autonomen Flug mögliche waren, musst eine Möglichkeit erarbeitet werden, wie die Lieferung an den Kunden gebracht wird.
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{images/hardware/drone-with-servo.jpg}
+		\caption{Drohne }
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{images/hardware/parachute-model.jpg}
+		\caption{Flower two.}
+	\end{minipage}
+\end{figure}
+
+
+Es wurde ein einfacher Mechanismus mit einem Servo und Stift erarbeitet, wie in Abbildung \ref{fig:case-model}  dargestellt. Das Packet, mit einem Fallschirm, wird auf einem Stift gehängt, dieser wird vom Servo auf knopfdruck weggezogen. 
 
 
 
@@ -86,13 +120,12 @@ Um die Anwendungsmöglichkeiten eines solchen Multicopters auszuloten wurden div
 \subsubsection{Akku Laufzeittest}
 Um die maximale Akku Laufzeit zu testen wurde die Drohne ohne zusätzliches Gewicht gestartet, etwa 1.5m über dem Boden schweben gelassen und die Zeit gemessen. Dabei versucht die Drohne die Postion zu halten, bei Abweichung wurde aktiv korrigiert. \\
 
-\begin{tabularx}{\textwidth}{|c|c|X}
+\begin{tabularx}{\textwidth}{|c|c|X|}
 \hline
 \textbf{Akku} & \textbf{Zuladung} & \textbf{Laufzeit} \\ \hline \hline 
 3S & keine & 16min 29s\\ \hline 
 2x 4S & 500g & 19min\\ \hline 
 \end{tabularx}
-%TODO fix this table layout
 \newpage
 \subsubsection{Tragfähigkeitstests}
 Um das maximale Gewicht zu prüfen, welches auf unsere Drohnen geladen werden kann, wurden Tests mit dem Zielgewicht von ca. 500g durchgeführt. Dies Entspricht dem Gewicht einer PET-Flasche eines beliebigen Getränkeherstellers oder einem leichten Defibrilator. Ausserdem war das Mobiltelefon (ca. 150g) während der Tests auf der Drohne angebracht.  \\
@@ -108,7 +141,7 @@ Um das maximale Gewicht zu prüfen, welches auf unsere Drohnen geladen werden ka
 Auch mit 3S Akkus ist es also möglich eine PET-Flasche zu transportieren. Allerdings empfehlen wir für Gewichte über 300 4S-Akkus zu verwenden.\\
 
 Aus den Tragfähigkeitstests schliessen wir, dass auch ein Defibrilator (siehe Aufgabenstellung) mit einer von uns erstellten Drohne transportierbar ist.
-\blockquote{I identified the two lightest weight defibrillators on the market in the U.S. at the time of the exploration (March 2013): the Schiller FRED EasyPort (600 grams) and the HeartSine samaritan PAD 300P (1100 grams). The former model is not designed for layperson use, but is far and away the lightest defibrillator available.}
+\blockquote{I identified the two lightest weight defibrillators on the market in the U.S. at the time of the exploration (March 2013): the Schiller FRED EasyPort (600 grams) and the HeartSine samaritan PAD 300P (1100 grams). The former model is not designed for layperson use, but is far and away the lightest defibrillator available.} 
 \cite[p.3]{FleckUAV}
 %TODO Zitatdarstellung richtig machen
 
