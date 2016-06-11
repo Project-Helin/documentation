@@ -72,24 +72,30 @@ Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Versuche mit de
 \label{fig:prototyp-2}
 \end{figure}
 
-Um die Risiken R08 (Ardupilot Handhabugn ) und R09 (Ardupilot API) schnell auszuschliessen ( siehe Tabelle \ref{table:risk-table} ), wurde das Smartphone kurzerhand auf die Drohne montiert, und mit einer ersten Prototypen des Onboard-App getestet. 
+Um die Risiken R08 (Ardupilot Handhabugn ) und R09 (Ardupilot API) schnell auszuschliessen ( siehe Tabelle \ref{table:risk-table} ), wurde das Smartphone kurzerhand auf die Drohne montiert, und mit einer ersten 
+Prototypen des Onboard-App getestet. 
 Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeitet werden mussten. 
-Denn das Smartphone konnte nicht leicht und handhaber montiert werden. Die Halterung konnte auch genutzte werden, um den Pixhawk-Controller zu verstecken und das GPS Module gut zu montieren. 
+Denn das Smartphone konnte nicht leicht und handhaber montiert werden.
 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\textwidth] {images/hardware/case-model.png}
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{images/hardware/drone-with-handy.jpg}
 	\caption{Modell der Handy Halterung}
 	\label{fig:case-model}
-\end{figure}
-Es wurde ein Halterung erstellen lassen \ref{fig:case-model} und mit einem 3D-Drucker hergestellt. 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.4\textwidth] {images/hardware/drone-with-handy.jpg}
+	\end{minipage}
+	\hfill
+	\begin{minipage}[b]{0.4\textwidth}
+		\includegraphics[width=\textwidth]{images/hardware/case-model.png}
 	\caption{Drohne mit Handy Halterung}
 	\label{fig:prototyp-3}
+	\end{minipage}
 \end{figure}
+
+Es wurde ein Halterung erstellen lassen \ref{fig:case-model} und mit einem 3D-Drucker hergestellt. 
+Die Halterung konnte auch genutzte werden, um den Pixhawk-Controller zu verstecken und das GPS Module gut zu montieren. 
+
 
 \subsubsection{Prototyp 3}
 
@@ -110,7 +116,6 @@ Nachdem mit der Drohne Test für den autonomen Flug mögliche waren, musst eine 
 
 
 Es wurde ein einfacher Mechanismus mit einem Servo und Stift erarbeitet, wie in Abbildung \ref{fig:case-model}  dargestellt. Das Packet, mit einem Fallschirm, wird auf einem Stift gehängt, dieser wird vom Servo auf knopfdruck weggezogen. 
-
 
 
 \subsection{Tests}
@@ -146,12 +151,14 @@ Aus den Tragfähigkeitstests schliessen wir, dass auch ein Defibrilator (siehe A
 %TODO Zitatdarstellung richtig machen
 
 \section{Alternativen}
+
 Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software 'ArduPilot' Firmwares für Multicopter, Flugzeuge, Fahrzeuge und Schiffe.\\
 
-Uplift Aero war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge die selben Flugcontroller wie wir verwendet und nur lediglich die Firmware ausgetauscht, damit diese für Flugzeuge passt. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
+Uplift Aero beispielsweise war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge die selben Flugcontroller wie wir verwendet und nur lediglich die Firmware ausgetauscht, damit diese für Flugzeuge passt. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth] {images/SyriaUplift.jpg}
-\caption{Quelle: \url{http://uplift.aero/}}
+\caption{Upaero Team und die Syrien-Drohne Quelle: \protect\url{http://uplift.aero/}}
 \label{fig:prototyp-1}
 \end{figure}
