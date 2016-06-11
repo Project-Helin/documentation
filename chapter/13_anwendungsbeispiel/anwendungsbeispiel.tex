@@ -12,8 +12,6 @@ Bei der Zusammenstellung der Komponenten haben wir vor allem auf die gute Verfü
 \item Onboard-App muss über MAVLink mit dem Flight-Controller verbunden sein. (Über USB oder eine Funk-Telemetrieverbindung.)
 \end{itemize}
 
-Im folgenden Kapitel werden die Komponenten und deren Eigenschaften genauer untersucht und beschrieben, wie auch die Möglichkeiten zur Verwendung von anderer Hardware- und Software auf dem Copter genauer erläutert.
-
 \section{Multicopter Hardware}
 
 \subsection{Frame und Antrieb}
@@ -153,6 +151,83 @@ Aus den Tragfähigkeitstests schliessen wir, dass auch ein Defibrilator (siehe A
 \blockquote{I identified the two lightest weight defibrillators on the market in the U.S. at the time of the exploration (March 2013): the Schiller FRED EasyPort (600 grams) and the HeartSine samaritan PAD 300P (1100 grams). The former model is not designed for layperson use, but is far and away the lightest defibrillator available.} 
 \cite[p.3]{FleckUAV}
 %TODO Zitatdarstellung richtig machen
+
+
+\section{Ablieferungskonzept}
+
+Um ein möglichst sicheres und einfaches Ablieferungsverfahren zu finden, wurden folgende Optionen in Betracht gezogen.
+
+\subsection{Landung ohne automatischen Abwurf}
+
+Bei diesem Konzept landet die Drohne an der Position des Kunden und dieser kann dann selbst das Paket von der Drohne lösen. Er wird dann mit Hilfe der Onboard-App aufgefordert den Erhalt der Bestellung zu bestätigen. Nach der Bestätigung startet die Drohne einen Countdown, hebt danach ab und fliegt zur Ausgangsposition zurück. Der Kunde kann den Countdown unterbrechen und erneut starten.
+
+Vorteile:
+\begin{itemize}
+	\item Kunde bestätigt Lieferung
+	\item Ware kann keinen Schaden nehmen
+	\item Kunde kann entscheiden wann es sicher genug ist, damit die Drohne starten kann.
+\end{itemize}
+
+
+Nachteile:
+\begin{itemize}
+	\item Drohne kann Personen verletzen, während sie sich in Bodennähe befindet
+	\item Aufwendiges Handling auf der Onboard-App
+	\item Landung kann schwierig sein je nach Gelände
+	\item Fremde Personen haben physischen Zugriff auf die Drohne
+\end{itemize}
+
+\subsection{Landung mit automatischem Abwurf}
+
+Dieses System ermöglicht es ohne Fallschirm die Ware abzuwerfen. Dabei Landet die Drohne, löst die Ladung und startet sofort wieder. Es gibt keinerlei Interaktion mit dem Kunden.
+
+Vorteile:
+\begin{itemize}
+	\item Ware kann keinen Schaden nehmen
+\end{itemize}
+
+
+Nachteile:
+\begin{itemize}
+	\item Drohne kann Personen verletzen, während sie sich in Bodennähe befindet
+	\item Landung kann schwierig sein je nach Gelände
+	\item Fremde Personen haben physischen Zugriff auf die Drohne
+\end{itemize}
+
+
+\subsection{Abwurf mit Fallschirm}
+
+Dabei wird ein Fallschirm an der Ware befestigt. Die Drohne löst die Ladung in einer vorgegebenen Höhe und die Ladung schwebt zu Boden.
+
+%TODO Martin hinzufügen Fallschirmberechnungen
+
+Vorteile:
+\begin{itemize}
+	\item Drohne kann niemanden Verletzen 
+	\item Drohne ist ausser Reichweite von Personen
+	\item Einfaches Handling auf der Onboard-App
+	\item Mechanismus erlaubt auch Landung mit automatischem Abwurf
+\end{itemize}
+
+
+Nachteile:
+\begin{itemize}
+	\item Ware kann Schaden nehmen
+	\item Ware kann Personen verletzen bei Versagen des Fallschirms
+	\item Einweg Fallschirme (Kosten und Abfall)
+\end{itemize}
+
+
+\subsection{Entscheidung}
+
+Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, dass die letzte Variante die meisten Vorteile bringt. Wichtig ist auch, dass ein Abwurf im gelandeten Zustand weiterhin möglich bleibt, ohne die mechanischen Komponenten zu verändern.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth] {images/nutzwertanalyse_abwurf.png} 
+	\caption{Nutzwertanalyse der verschiedenen Liefervarianten}
+	\label{fig:nutzwertanalyse_abwurf}
+\end{figure}
 
 \section{Alternativen}
 
