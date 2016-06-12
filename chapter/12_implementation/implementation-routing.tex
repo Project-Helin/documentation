@@ -1,54 +1,52 @@
 \newpage
-\section{Flugrouten Planung}
-Die topologische Überlegung spielt in der Umsetzung eine zentrale Rolle.
-Die zentrale Aufgabe des Projektes ist es Drohnen zu verwalten, welche sich in einem geografischen Gebiet bewegen. 
-Dieses Gebiet kann Hindernisse wie Gebäude oder Bäume beinhalten, welche möglichst sicher umflogen werden müssen. 
-Statische Objekte mit unterschiedlicher Höhe können einfach umflogen oder überflogen werden, sofern die Drohne 'weiss' wie diese flugtechnisch zu vermeiden sind. \\
+\section{Flugrouten}
+Die zentrale Aufgabe des Projektes ist es Drohnen zu verwalten, die sich in einem geografischen Gebiet autonom und sicher bewegen können. 
+Dieses Gebiet, beispielsweise die HSR (siehe Abb. \ref{fig:campus-hsr}) kann Hindernisse wie Gebäude oder Bäume enthalten, welche um- oder überflogen werden müssen. \\
+
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/routing/topology_example.png}
 	\caption{Topologische Ansicht des Campus HSR}
 	\label{fig:campus-hsr}
 \end{figure}
-Am Beispiel der HSR ist unschwer zu erkennen, wie Gebäude in der Landschaft unterschiedliche Höhen haben. Diese Höhenunterschiede sollte wenn möglich gut in einem Model abgebildet werden können. \\
-Aus diesen Überlegungen entstand das Zonen Model.
 
 \subsection{Das Zonen Model}
-Betrachten wir nun ein einfaches Projekt am Campus der HSR, so könnte dies wie folgt aussehen. 
+Um Kollisionen mit statischen Objekten zu vermeiden und sichere Flugwege zu erhalten, wurde ein Zonen Model eingeführt. Dieses ermöglicht dem Anbieter zu definieren, wo geflogen werden kann und wie hoch dort geflogen werden muss. Die Abbildung \ref{fig:demo-project} zeigt die Benutzeroberfläche für die Zonendefinition anhand des HSR-Campus.
+
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/routing/simpleProject_example.png}
 	\caption{Einfaches Demo Projekt an der HSR}
 	\label{fig:demo-project}
 \end{figure}
-Jedes Polygon bildet eine Zone ab. Diese Zonen können unterschiedliche Höhen, aber auch Eigenschaften aufweisen. Die Höhe gewährleistet die minimale Flughöhe in einer Zone. Weiter sind die Zone in vier verschiedenen Typen aufgeteilt: 
+Jedes Polygon bildet eine Zone ab. Jede Zone enthält eine Flughöhe sowie einen Typ:
 \begin{itemize}
-	\item{\textbf{OrderZone:} Bereich aus welchem Produkte bestellt werden können. (\textit{hell blauer Rahmen})}
-	\item{\textbf{LoadingZone:} Zone in welcher die Drohne beladen werden kann. (\textit{orange})}
-	\item{\textbf{DeliveryZone:} Diese Zone definiert das Gebiet über welchem das Produkt abgeworfen werden kann. (\textit{grün})}
-	\item{\textbf{FlightZone:} Die Flugzone verbindet die Ladezone mit der Abwurfzone. Weiter garantiert sie, dass die angegebene Flughöhe gewährleistet wird. (\textit{blau})}
+	\item{\textbf{Order Zone:} Zone in welchem die Produkte des Projekts bestellt werden können. (\textit{hell blauer Rahmen})}
+	\item{\textbf{Loading Zone:} Zone in welcher die Drohne beladen wird. (\textit{orange})}
+	\item{\textbf{Delivery Zone:} Zone in der geliefert und geflogen werden darf. (\textit{grün})}
+	\item{\textbf{Flight Zone:} Zone in der nur geflogen aber nicht geliefert werden darf. (\textit{blau})}
 \end{itemize}
 
-\subsection{Routing-Algorithmus}
-Das Zonenmodel lässt es einfach zu, dass Flugkorridore sehr intuitiv gebildet werden können. Leider eignen sich Polygone weniger gut für eine Navigation oder eine Routenberechnung. Die Routenberechnung im klassischen Sinne entsteht auf einem Graphen. Anhand des Graphs wird mit Start und Endpunkt eine Lösung berechnet und diese stellt dann die Route dar. Da dieses Konzept das Naheliegendste ist, sollten die Polygone auf einen Graph reduziert werden.
+\subsection{Von der Zone zum Graph}
+Normalerweise wird eine Routenberechnung mit Hilfe eines Graphen durchgeführt, der durch die möglichen Wege (z.B. Strassen) definiert ist. Da die Zonen aber eine Fläche bilden, musste diese zuerst in einen Graphen umgewandelt werden. \\
 
-\subsection{Reduktion vom Polygon zum Graph}
-Für das Routing sind nur die drei Zonen, LoadingZone, DeliveryZone und FlightZone von entscheidender Bedeutung. Diese Zonen können von den Drohen überflogen werden, die OrderZone hingegen dient ausschliesslich dazu, den bestellbaren Bereich einzuschränken. Beispielsweise kann so garantiert werden, dass der Kunde nicht Produkte aus der Stadt Zürich bestellen kann, welche von der HSR aus beliefert werden.
-\\
-Um die Problemstellung etwas besser zu verstehen, werden im folgenden drei möglichen Konzepte anhand eines Polygons demonstriert:
-\subsubsection{Erste Konzept: Direkte Route}
-Dieses Konzept umfasste den Ansatz den Start und den Endpunkt direkt zu verbinden, und bei einem verlassen des Polygons dem Rand nach zufliegen. Diese Lösung an einem Beispiel sah folgendermassen aus.
+Folgende Lösungsmöglichkeiten wurden evaluiert:
+
+\subsubsection{Erstes Konzept: Direkte Route}
+Dieses Konzept umfasste den Ansatz den Start und den Endpunkt direkt zu verbinden, und bei einem verlassen des Polygons dem Rand zu folgen (siehe Abb.\ref{fig:first-concet-routing}).
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/routing/firstSolution.png}
 	\caption{Erstes Konzept}
 	\label{fig:first-concet-routing}
 \end{figure}
-Aus Sicherheitsgründen wurde ein zusätzlicher Rand (\textit{Rot}) berechnet. Das ursprüngliche Polygon wurde um 5 Meter geschrumpft um nicht zu nah an den realen Rand des Polygons zu fliegen (\textit{Blau}). Diese Massnahme wurde getroffen, um allfällige GPS Ungenauigkeit zu berücksichtigen. Die Drohne hat somit auch einen Sicherheitsabstand bei Flugfehler.
-\\
-So einfach dieses Konzept auch war, leider brachte es einige schwächen mit sich. Bei zu engen Korridoren war die Frage offen, wie der Rand definiert ist. Ausserdem kann im Extremfall die kürzeste und die berechnete Route weit voneinander abweichen.
+Es wurde ausserdem ein Rand (\textit{Rot}) hinzugefügt.Diese Massnahme wurde getroffen, um allfällige GPS Ungenauigkeiten zu berücksichtigen.\\
+
+Der Nachteil dieser Lösung zeigt sich bei grösseren Polygonen, wo unnötigerweise dem Rand entlang geflogen wird, obwohl ein Flug durch die Mitte viel sicherer wäre.
 \newpage
 \subsubsection{Zweites Konzept: Visibility Graph}
-Das nächste Konzept konzentrierte sich auf den 'Visibility Graphen'. 
+Das nächste Konzept orientiert sich an einem 'Visibility Graphen'. 
 \cite[p.1]{IEEEPaper} 
+
 \blockquote{Using visibility graphs for determining the shortest path is very practical and intuitive. The visibility graph of a set of nonintersecting polygonal obstacles in the plane is an undirected graph whose vertices are the vertices of the obstacles and whose edges are pairs of vertices such that the open line segment between each two vertices does not intersect any of the obstacles.}
 In unserem Fall haben wir den Gedanken umgedreht. Wir haben den Graphen in einem Polygon mit potentiellen Löchern berechnet. Diese Löcher stellen Enklaven für Bäume oder Gebäude dar. Das Konzept ist aber das gleiche, angewendet auf unser Beispiel Polygon ergibt sich folgende Abstraktion:
 \begin{figure}[h]
@@ -57,19 +55,22 @@ In unserem Fall haben wir den Gedanken umgedreht. Wir haben den Graphen in einem
 	\caption{Visibility Graph in einer Flugzone}
 	\label{fig:visibility-graph}
 \end{figure}
-Wie in der Grafik \ref{fig:visibility-graph} unschwer zu erkennen ist, verlaufen deutlich weniger Flugrouten entlang der Polygon Kanten. 
-Dies ist ein deutlicher Fortschritt gegenüber dem ersten Konzept. Leider muss aber ehrlicherweise gesagt werden, dass die innere Ecke des L-förmigen Polygons sicher angeflogen wird, da es die vermeintlich kürzeste Route in einem nächsten Schritt darstellen wird. Aus diesem Grund wurde von einer tiefere Betrachtung des Algorithmus abgesehen.
-\\
+Wie in der Grafik \ref{fig:visibility-graph} gezeigt wird, verlaufen deutlich weniger Flugrouten entlang der Kante des Polygons. \\
+Dies ist eine deutliche Verbesserung gegenüber dem ersten Konzept. Der Nachteil ist, dass die untere Ecke des L-förmigen Polygons sicher angeflogen wird, da es die vermeintlich kürzeste Route in einem nächsten Schritt darstellen würde. Aus diesem Grund haben wir uns gegen den Einsatz dieses Konzepts entschieden.\\
+
 \subsubsection{Drittes Konzept: Straight Skeleton}
-Durch die Recherchen für die zweite Lösung war für uns klar, dass eine ideale Lösung eine mitten betonte Flugroute empfehlen sollte. Eine einfache Lösung ohne grossen Implementationsaufwand war bereits durch die \GLS{CGAL} Bibliothek vorhanden. Diese ermöglichte es ein Straight Skeleton zu berechnen. Das Ergebnis für ein einfaches Polygon sah wie folgt aus:
-\begin{figure}[h]
+Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet.
+
+Diese Lösung scheint ideal, da sie einen Flug in der Mitte bevorzugt und nur bei wechseln in eine andere Flugzone an den Rand fliegt.
+
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/routing/skeleton.png}
 	\caption{Skeleton in Polygon}
 	\label{fig:skeleton-in-polygon}
 \end{figure}
-Das Skeleton stellt quasi die Gipfel Linie eines Gebirges mit der Form des Polygons dar. Die Linie ist hier neon-grün eingezeichnet, um Vollständigkeits halber anzudeuten, dass sie bereits Teil einer fertigen Lösung ist. Von diesem Graphen ausgehend, fehlen nur noch die kürzesten Linien auf die Skeletonlinie. Diese sind bekanntlich die zwei Senkrechen von den Start und den Endpunkten auf das Skeleton. 
-\subsection{Graph Routing Algorithmus}
+
+\subsection{Routing Algorithmus}
 Nach der Herleitung des Graphen aus der Polygonstruktur, musste nun der passende Algorithmus gefunden werden um eine Lösung von A nach B zu finden. Es kamen 4 standard Algorithmen in Frage, wobei ein Algorithmus sich als besonders geeignet herausstellte.
 \begin{itemize}
 	\item{\textbf{BFS:} (\textit{Breadth-first search}) Die Breitensuche durchsucht einen Baum in der Breite. Sie bringt garantiert eine Lösung, wenn eine Lösung vorhanden ist und kann problemlos mit Zyklen im Graph umgehen. Bei der Lösung handelt es sich aber nicht um de 'optimale Lösung' (kürzester Pfad). Die Lösung liefert den Pfad mit den wenigsten Knoten. \cite{AiClass}}

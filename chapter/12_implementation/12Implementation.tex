@@ -139,15 +139,15 @@ Diese imitiert eine Bestellung des Kunden und schickt eine Anfrage mit vordefini
 	\caption{Send Fake Order within Administrator Page}
 \end{figure}
 
-Anders als die Onboard-App, welche native mit Java entwickelt wurde und nur auf Android läuft, entschieden wir uns beim Bestell-App für eine Cross-Plattform Lösung, welche Android und iOS unterstützt. 
+Anders als die Onboard-App, welche native mit Java entwickelt wurde und nur auf Android läuft, entschieden wir uns beim Bestell-App für eine Cross-Plattform Lösung, welche Android und iOS unterstützt. \\
 
-Auch wenn gemäss der Aufgabenstellung keine iOS App gefordert war, stelle sich doch die Frage ob man die iPhone-Kunden ausschliessen soll und spätere Entwickler zwingt, einen grossen Teil des Codes in einer nativen iOS App duplizieren zu müssen. Mit einem Marktanteil von 42.2\% (Zahlen 2015) \cite{ios-user} von iOS Benutzern in der Schweiz, ist anzunehmen, dass zu einem späteren Zeitpunkt eine iPhone App implementiert werden muss.
+Auch wenn gemäss der Aufgabenstellung keine iOS App gefordert war, stellte sich doch die Frage ob man die iPhone-Kunden ausschliessen soll und spätere Entwickler zwingt, einen grossen Teil des Codes in einer nativen iOS App duplizieren zu müssen. Mit einem Marktanteil von 42.2\% (Zahlen 2015) \cite{ios-user} von iOS Benutzern in der Schweiz, ist anzunehmen, dass zu einem späteren Zeitpunkt eine iPhone App implementiert werden muss.\\
 
 Deshalb wurde auf Xamarin Forms gesetzt, welches ermöglicht, die ganzen Service-Klassen und einen Teil der Benutzeroberfläche für die verschiedenen Plattformen nur einmal zu implementieren.
 
 Die App wurde in einer minimalen Ausbaustufe erstellt, erfüllt aber bereits alle nötigen Funktionalen Anforderungen. In Abbildung \ref{fig:customer-app-flow} wird gezeigt, wie ein Benutzer durch die App navigieren kann. 
 
-Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlung der Ware, sowie die Anzeige der Drohnenposition in Echtzeit während des Anflugs der Drohne.  
+Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlung der Ware, sowie die Anzeige der Drohnenposition während des Anflugs.  
 
 \begin{landscape}
 	\begin{figure}[h]
@@ -174,7 +174,7 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 \end{tabularx}
 
 \subsection{Sicherheit}
-Es ist essentiell, dass die Sicherheit bei der Kommunkation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte. (siehe auch NFRs). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ-Broker und die Queue-Namen geheim zu halten: \\
+Es ist essentiell, dass die Sicherheit bei der Kommunkation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte (siehe auch NFRs). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ-Broker und die Queue-Namen geheim zu halten: \\
 
 Die Onboard-App registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Registrierung der Drohne, wird ein Token sowie der Benutzer und das Kennwort für die Verbindung zu RabbitMQ an die Onboard-App geschickt. Mit diesen Informationen kann sich die App mit dem Messaging Broker über eine verschlüsselte Leitung verbinden.\\
 
@@ -188,8 +188,6 @@ Für die darauf folgende Kommunikation mit dem Broker, werden mit Hilfe des Toke
 
 Ein Angreifer müsste mit dieser Methode den Token herausfinden und auch die Zugangsdaten für den Broker kennen, um mit einer Drohne zu kommunizieren. Falls jemand es aber doch schaffen würde, die Benutzerdaten auszulesen, gibt es trotzdem noch $2^{122}$ mögliche Tokens, die durchprobiert werden müssten. \\
 
-Wir erachten die Sicherheit mit dieser Methode als genügend.
-
 \section{Projektgrösse}
 
 Folgende Statistiken wurden am Ende der Arbeit erstellt um einen Eindruck der Grösse des Projekts zu erhalten.\\
@@ -201,7 +199,7 @@ Folgende Statistiken wurden am Ende der Arbeit erstellt um einen Eindruck der Gr
 	\label{fig:code-metrics}
 \end{figure}
 
-In Abbildung \ref{fig:code-metrics} sind vor allem der geringe Anteil von Methoden mit hoher Essentieller Komplexität hervorzuheben. Alle Methoden mit hoher Komplexität wurden vom Team geprüft, konnten aber nicht mehr verbessert werden. Hauptsächlich sind dies 'equals' Methoden von grösseren DTOs oder es handelt sich um MessageConverter, die einfach alle verschiedenen Messagetypen verschieden behandeln müssen. Das folgende Beispiel zeigt die Methode mit der höchsten Zyklomatischen Komplexität der Server-Applikation (Essentielle Komplexität = 10, Cyclomatische Komplexität = 10). \\
+In Abbildung \ref{fig:code-metrics} sind vor allem der geringe Anteil von Methoden mit hoher essentieller Komplexität\cite[S. 79]{MCCABE} hervorzuheben. Alle Methoden mit hoher Komplexität wurden vom Team geprüft, konnten aber nicht mehr verbessert werden. Hauptsächlich sind dies 'equals' Methoden von grösseren DTOs oder es handelt sich um MessageConverter, die einfach alle verschiedenen Messagetypen verschieden behandeln müssen. Das folgende Beispiel zeigt die Methode mit der höchsten zyklomatischen Komplexität der Server-Applikation (Essentielle Komplexität = 10, Cyclomatische Komplexität = 10). \\
 
 
 \begin{lstlisting}
@@ -231,7 +229,7 @@ private Message parseMessageWithoutCare(String messageAsJson) {
 
 \end{lstlisting}
 
-Da diese Methode gut strukturiert ist und auch gut verstanden werden kann, gibt es keinen Grund diese auf Grund der Metrik anzupassen.
+Da diese Methode gut strukturiert ist und auch gut verstanden werden kann, gibt es keinen Grund, diese auf Grund der Metrik anzupassen.
 
 \section{Qualitätssicherung}
 
@@ -247,7 +245,7 @@ Die Überprüfung eines Issues beinhaltet folgende Aufgaben:
 	\item{Akzeptanzkriterien aus der User-Story manuell prüfen}
 	\item{Code-Review durchführen (Intensität je nach Grösse und Komplexität des geschriebenen Codes)}
 	\item{Code auf Vertösse gegen Style-Guide prüfen}
-	\item{Prüfen of allenfalls Tests vorhanden sind}
+	\item{Prüfen der Tests vorhanden sind}
 \end{itemize}
 
 Damit konnten viele Fehler früh entdeckt werden und die Code-Qualität konnte über die ganze Projektdauer konstant gehalten werden.
@@ -264,18 +262,18 @@ Je nach Plattform wurden andere Formen von Tests durchgeführt:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth] {images/test-count-chart.png}
-	\caption{Anazhl Test über die Zeit. Grün (erfolgreiche Tests) und Grau ( ausgeschlossene )}
+	\caption{Anzahl Tests über die Zeit. Grün (erfolgreiche Tests) und Grau ( ausgeschlossene )}
 \end{figure}
 
-Auf dem Server wurden vor allem E2E- und Integration-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bewusst gegen Unit-Tests entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Sogar die Routenberechnung konnte nicht mit Unit-Tests abgedeckt werden, da ein Teil der Berechnung auf der Datenbank stattfindet und somit nur Integrationtests einen Sinn ergeben.\\
+Auf dem Server wurden vor allem E2E- und Integration-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bei den meisten Kompoonenten bewusst gegen Unit-Tests entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Bei der Routenberechnung hingegen konnte sehr gut mit Unit-Tests gearbeitet werden.\\
 
-Wir haben darauf geachtet, dass immer nur die minimale Integrationsstufe gewählt wurde. Für die Simulation eines Benutzers (E2E) wurde Selenium verwendet, das wiederum einen Firefox Browser verwendet. Für die Api- und Messaging-Controller wurden Integrationtests verwendet, welche den Server ohne Browser verwenden.\\
+Wir haben darauf geachtet, dass immer nur die minimale Integrationsstufe gewählt wurde. Für die Simulation eines Benutzers (E2E) wurde Selenium verwendet, das wiederum einen Firefox Browser verwendet. Für die Api- und Messaging-Controller wurden Integrationtests verwendet, welche keinen Browser benötigen.\\
 
-Es wurde eine durchschnittliche Testabdeckung von 72\% über das ganze Projekt erreicht. In wichtigen Packages liegen diese aber meist über 85\%.
+Es wurde eine \textbf{durchschnittliche Testabdeckung von 72\%} über das ganze Projekt erreicht. In wichtigen Packages liegt diese aber meist über 85\%.
 
 \subsubsection{Onboard-App}
 
-Beim Onboard App wurden nur Unit-Tests ausgeführt. Zusätzliche E2E-Tests wären ziemlich aufwendig gewesen und der Nutzen bei einer eher kleinen App mit vielen Abhängikeiten auf RabbitMQ und den Flight-Controller ist fraglich. Deshalb wurden hauptsächlich die Message-Handler und die Daten-Mapper getestet. Diese haben eine Testabdeckung von 86\%.
+Beim Onboard App wurden nur Unit-Tests ausgeführt. Der Aufbau von E2E Tests ist denkbar, hätte den Rahmen dieser Arbeit aber gesprengt. Deshalb wurden hauptsächlich die Message-Handler und die Daten-Mapper getestet. Diese haben eine \textbf{Testabdeckung von 86\%}.
 
 \subsubsection{Customer-App}
 
