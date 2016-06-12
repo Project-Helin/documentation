@@ -24,21 +24,20 @@ Bei der Zusammenstellung der Komponenten haben wir vor allem auf die gute Verfü
 	DJI F450/F550 Landegestell & conrad.ch & CHF &24.95 \\\hline
 	3DR Pixhawk & 3dr.com & USD& 199.99 \\\hline
 	3DR uBlox GPS with Compass Kit & 3dr.com & USD &89.99 \\\hline
-	3DR uBlox GPS with Compass Kit & 3dr.com & USD &89.99 \\\hline
 	Pixhawk external LED and USB & 3dr.com & USD & 20.00 \\\hline
 	FrSky X8+ Radio Transmitter & 3dr.com & USD & 89.99 \\\hline
 	FrSky X8R Receiver & hebu-shop.ch & CHF & 39.95 \\\hline
 	Delock Micro USB OTG Kabel & digitec.ch & CHF &15.90 \\\hline
-	Multistar High Capacity 4S Akku & hobbyking.com & USD& 25.25 \\\hline
-	Multistar High Capacity 4S Akku & hobbyking.com & USD &25.25 \\\hline
+	Multistar High Capacity 4S Akku (2x) & hobbyking.com & USD& 50.50 \\\hline
 	APM Flight Controller Damping Platform & hobbyking.com & USD& 2.69 \\\hline
 	Smartphone und GPS Halterung & eigener 3D-Print & CHF &27.50\\\hline
 	Abwurfvorrichtung & eigener 3D-Print & CHF &25.50\\\hline
 	Hitec Super Servo S-Bec (Stromversorgung Servo) & brack.ch & CHF &13.90\\\hline
 	Tactic TSX10 (Servo für Abwurf) & brack.ch & CHF & 14.90\\\hline
-	Total& & CHF/USD & $\approx 1000.00$\\\hline
+	Kleinmaterial & diverse & CHF & 50.00\\\hline
+		\hline
+	\textbf{Total} & & \textbf{CHF/USD} & $\boldsymbol{\approx 900.00}$\\\hline
 \end{tabularx}
-
 
 \subsection{Frame und Antrieb}
 
@@ -149,7 +148,7 @@ Da die Drohne gemäss unseren Anforderungen eine Verbindung zum Server benötigt
 	\item{Es existiert eine passende Bibliothek für die Kommunikation über MAVLink}
 	\item{Das Betriebssystem übernimmt den gesammten Kommunikationsstack - sei es im Gebäude mittels WLAN oder im Feld über GSM}
 \end{itemize}
-Für Verwendungszwecke ohne den Bedarf eines User Interfaces kann man sich allenfalls auch überlegen andere Komponenten zu verwenden. Wir haben 2 Optionen genauer angeschaut und bewertet:
+Für Verwendungszwecke ohne den Bedarf eines User Interfaces kann man sich allenfalls auch überlegen andere Komponenten zu verwenden. Wir haben zwei Optionen genauer angeschaut und bewertet:
 \begin{itemize}
 	\item{\textbf{Raspbery PI} \\
 	Bereits ab dem leichtgewichtigen Raspberry PI zero sind die nötigen Funktionen vorhanden. Zusätzlich muss hier auf ein GSM Modem zurückgegriffen werden um eine permanente Internetverbindung aufzubauen. Bei Verwendung eines Raspberry PI 3 kann sogar auf ein WLAN Interface zugegriffen werden.
@@ -157,9 +156,15 @@ Für Verwendungszwecke ohne den Bedarf eines User Interfaces kann man sich allen
 	\item{\textbf{Arduino} \\
 	Bei der Arduino Hardware Plattform kann auf einem beliebigen Arduino Board implementiert werden, welches als USB Host Device arbeiten kann. Zusätzlich muss ein GSM Shield 2 verwendet werden um eine GSM Verbindung aufbauen zu können.}
 \end{itemize}
-Aus unserer Sicht stellen die 2 Embedded Systeme durchaus eine alternative dar. Leider verschwindet aber der Komfort die Drohne zu überwachen mittels dem GUI auf der Onboard App. Beide Alternativen müssen zusätzlich über das Boardstromnetz der Drohne betrieben werden, und benötigen zusätzliche Spannungsregler um die gewünschte Betriebsspannung der Hardware zu gewährleisten. Dies kann noch weiter optimiert werden, wenn die Schaltung genügend Dimensioniert ist, um dem Servo eine stabile Stromversorgung zu gewährleisten, so kann ein externes BEC, welches zur Zeit im Einsatz ist, weg fallen.\\
+Aus unserer Sicht stellen die zwei Embedded Systeme durchaus eine alternative dar. Leider verschwindet aber der Komfort die Drohne mittels dem GUI auf der Onboard App zu überwachen . 
+Beide Alternativen müssen zusätzlich über das Boardstromnetz der Drohne betrieben werden, und benötigen zusätzliche Spannungsregler um die gewünschte Betriebsspannung der Hardware zu gewährleisten. 
 
-Abschliessend sollte erwähnt werden, dass die permanente Internetverbindung durchaus eine Anforderung ist, die vieles einschränkt. Kann man sich von dieser Anforderung trennen und mit den Konsequenzen leben, so könnte die Drohne in der Ladezone ausschliesslich mit einem WLAN Netz betrieben werden. Dies wiederum würde einen Raspberry PI 3 sehr attraktiv für dieses Szenario machen.
+Dies kann noch weiter optimiert werden, wenn die Schaltung genügend dimensioniert ist, um dem Servo  eine stabile Stromversorgung zu gewährleisten, so kann ein externes BEC, welches zur Zeit im Einsatz ist, wegfallen.\\
+
+Abschliessend sollte erwähnt werden, dass die permanente Internetverbindung durchaus eine Anforderung ist, die vieles einschränkt.
+Kann man sich von dieser Anforderung trennen und mit den Konsequenzen leben, so könnte die Drohne in der Ladezone ausschliesslich mit einem WLAN Netz betrieben werden. Dies wiederum würde einen Raspberry PI 3 sehr attraktiv für dieses Szenario machen.
+ 
+ 
  
 \subsection{Tests}
 Um die Anwendungsmöglichkeiten eines solchen Multicopters auszuloten wurden diverse Experimente durchgeführt um die Leistungsfähigkeit und die Einschränkungen zu testen. 
@@ -207,6 +212,7 @@ Vorteile:
 	\item Kunde bestätigt Lieferung
 	\item Ware kann keinen Schaden nehmen
 	\item Kunde kann entscheiden wann es sicher genug ist, damit die Drohne starten kann.
+	\item Die Lieferung ist punktgenau 
 \end{itemize}
 
 
@@ -214,7 +220,7 @@ Nachteile:
 \begin{itemize}
 	\item Drohne kann Personen verletzen, während sie sich in Bodennähe befindet
 	\item Aufwendiges Handling auf der Onboard-App
-	\item Landung kann schwierig sein je nach Gelände
+	\item Landung kann je nach Gelände schwierig sein 
 	\item Fremde Personen haben physischen Zugriff auf die Drohne
 \end{itemize}
 
@@ -256,6 +262,7 @@ Nachteile:
 	\item Ware kann Schaden nehmen
 	\item Ware kann Personen verletzen bei Versagen des Fallschirms
 	\item Einweg Fallschirme (Kosten und Abfall)
+	\item Windlage kann Fallschirm Flugrichtung beeinflussen
 \end{itemize}
 
 
@@ -272,7 +279,7 @@ Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, da
 
 \section{Alternative Drohnenarten}
 
-Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software \ref{fig:arduScreenshot} 'ArduPilot' Firmware-Varianten für Multicopter, Flugzeuge, Fahrzeuge. \\
+Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software 'ArduPilot' Firmware-Varianten für Multicopter, Flugzeuge, Fahrzeuge an, wie dies in der Abbildung \ref{fig:arduScreenshot} dargestellt. \\
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth] {images/arduScreenshot.jpg}
@@ -280,7 +287,7 @@ Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, al
 \label{fig:arduScreenshot}
 \end{figure}
 
-Uplift \ref{fig:uplift} Aero beispielsweise war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge die selben Flugcontroller wie wir verwendet und mussten lediglich die passende Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
+Uplift  Aero beispielsweise war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge (Grafik \ref{fig:uplift}) die selben Flugcontroller wie wir verwendet und mussten lediglich die passende Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
 
 \begin{figure}[H]
 \centering
