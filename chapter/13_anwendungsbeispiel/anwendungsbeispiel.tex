@@ -151,21 +151,19 @@ Da die Drohne gemäss unseren Anforderungen eine Verbindung zum Server benötigt
 Falls die Beladung automatisiert wird, oder keine Beladung notwendig ist, benötigt man nicht zwingend ein Smartphone. Um Gewicht und Platz auf der Drohne zu sparen gibt es folgende Alternativen:
 \begin{itemize}
 	\item{\textbf{Raspberry PI} \\
-	Bereits ab dem leichtgewichtigen Raspberry PI zero sind die nötigen Funktionen vorhanden. Zusätzlich muss hier auf ein GSM Modem zurückgegriffen werden um eine permanente Internetverbindung aufzubauen. Bei Verwendung eines Raspberry PI 3 kann sogar auf ein WLAN Interface zugegriffen werden.
+	Bereits ab dem leichtgewichtigen Raspberry PI zero sind die nötigen Funktionen vorhanden. Zusätzlich muss hier auf ein GSM Modem zurückgegriffen werden um eine permanente Internetverbindung aufzubauen. Bei Verwendung eines Raspberry PI 3 kann sogar auf ein eingebautes WLAN Interface verwendet werden.
 	}
 	\item{\textbf{Arduino} \\
 	Bei der Arduino Hardware Plattform kann auf einem beliebigen Arduino Board implementiert werden, welches als USB Host Device arbeiten kann. Zusätzlich muss ein GSM Shield 2 verwendet werden um eine GSM Verbindung aufbauen zu können. Eine Option auf WLAN existiert nur durch zusätzliche Komponenten.}
 \end{itemize}
 
-Beide Alternativen bringen zusätzlichen Aufwand mit sich, denn sie müssen das Boardstromnetz der Drohne betrieben werden und benötigen zusätzliche Spannungsregler um die gewünschte Betriebsspannung der Hardware zu gewährleisten. 
+Beide Alternativen bringen zusätzlich mit sich, dass sie nicht autonom betrieben werden. Somit muss auf die Bordstromversorgung zurückgegriffen werden und das \Gls{BEC} für die Servo-Stromversorgung verwendet werden muss um eine stabile Betriebsspannung zu generieren. \\
 
-Dies kann noch weiter optimiert werden, wenn die Schaltung genügend dimensioniert ist, um dem Servo eine stabile Stromversorgung zu gewährleisten, so kann ein externes BEC, welches zur Zeit im Einsatz ist, wegfallen.\\
+Abschliessend kann gesagt werden, dass die Mobiltelefonlösung mit dem von uns verwendeten Nexus 4 ein Gewicht von 139 Gramm mit sich bringt. Die Lösung mit dem Raspberry PI 3 schlägt 40 Gramm zu buche. Die Einsparung von 100 Gramm bringt einen Verzicht auf ein Display und eine autonome Batterie mit sich. Es ist hier von use-case zu use-case zu entscheiden, ob dieser Kompromiss angebracht ist. Auf einen Kostenpunktsvergleich verzichten wir an dieser Stelle, da gebrauchte Android Smartphones in einer erschwinglichen Preisregion angesiedelt sind.
 
-Abschliessend sollte erwähnt werden, dass die permanente Internetverbindung durchaus eine Anforderung ist, die vieles einschränkt.
-Kann man sich von dieser Anforderung trennen und mit den Konsequenzen leben, so könnte die Drohne in der Ladezone ausschliesslich mit einem WLAN Netz betrieben werden. Dies wiederum würde einen Raspberry PI 3 sehr attraktiv für dieses Szenario machen.
 \newpage
 \subsection{Fallschirm}
-Da wir uns entschieden haben, die Lieferung abzuwerfen, und die Drohne nicht zu landen, musste sichergestellt werden, dass beim Aufprall keine Schäden entstehen. Das Ausmass durfte das Produkt nicht beschädigen.
+Da wir uns entschieden haben, die Lieferung abzuwerfen, und die Drohne nicht zu landen, musste sichergestellt werden, dass beim Aufprall keine Schäden entstehen.
 \\
 Eine PET-Flasche die von einem ein Meter hohen Tisch fällt, bleibt unbeschädigt. Die Möglichkeit sie zu öffnen, ohne den Flascheninhalt auf Grund der Kohlensäure schlagartig über die Umgebung zu verteilen, hält sich in Grenzen. Aus diesem Grund haben wir die Geschwindigkeit für diesen Aufprall errechnet.
 \begin{equation}
@@ -175,7 +173,7 @@ v &= \sqrt{2 \cdot 9.81\frac{m}{s^2} \cdot 1.0m} \\
 v &= 4.429 \frac{m}{s} \approx 4.5 \frac{m}{s} \\
 \end{split}
 \end{equation}
-Nun musste ein Fallschirm dimensioniert werden, der eine Flasche mit 500g Inhalt sicher zu Boden bringt. Da dies alles Annäherungen sind, nehmen wir der einfachheithalber an, dass die Flasche mit Inhalt 500g schwer ist und der Fallschirm die Form einer Kugelkalotte. 
+Nun musste ein Fallschirm dimensioniert werden, der eine Flasche mit 500g Inhalt sicher zu Boden bringt. Da dies alles Annäherungen sind, nehmen wir einfachheithalber an, dass die Flasche mit Inhalt 500g schwer ist und der Fallschirm die Form einer Kugelkalotte hat. 
 %Todo Skizze
 \begin{equation}
 \begin{split}
@@ -184,7 +182,7 @@ c_{w} \cdot A \cdot \frac{\rho}{2} \cdot v_{sink}^{2} &= m_{Pet} \cdot g \\
 A &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
 \end{split}
 \end{equation}
-Für die Werte $\rho$, $c_w$ wurden die Standardwerte genommen. Bei der Luftdichte $\rho$ entspricht das $1.225 \frac{kg}{m^3}$ und für $c_w$ den Literaturwert für die konkave Seite der Halbkugelschale $1.33$. Herr Prof. Dr. F. Müller hat uns daruaf hingewiesen, dass bei seinen Raketen versuchen, er einen $C_w$-Wert von 1.8 als gute Annäherung verwendet. Aus diesem Grund haben wir diesen für die weitere Berechnung eingesetzt. Zusätzlich, lässt sich der Durchmesser über die Öffnungsfläche berechnen $A = \pi \cdot r^2$.
+Für die Werte $\rho$, $c_w$ wurden die Standardwerte genommen. Bei der Luftdichte $\rho$ entspricht das $1.225 \frac{kg}{m^3}$ und für $c_w$ den Literaturwert für die konkave Seite der Halbkugelschale $1.33$. Herr Prof. Dr. F. Müller hat uns daruaf hingewiesen, dass bei seinen Raketenversuche, er einen $c_w$-Wert von 1.8 als gute Annäherung verwendet. Aus diesem Grund haben wir diesen für die weitere Berechnung eingesetzt. Zusätzlich, lässt sich der Durchmesser über die Öffnungsfläche berechnen $A = \pi \cdot r^2$.
 \begin{equation}
 \begin{split}
 \pi \cdot r^2 &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
@@ -222,13 +220,11 @@ Um das maximale Gewicht zu prüfen, welches auf unsere Drohnen geladen werden ka
 \hline
 \end{tabularx}\\
 
-Auch mit 3S Akkus ist es also möglich eine PET-Flasche zu transportieren. Allerdings empfehlen wir für Gewichte über 300 4S-Akkus zu verwenden.\\
+Auch mit 3S Akkus ist es also möglich eine PET-Flasche zu transportieren. Allerdings empfehlen wir für Gewichte über 300 Gramm 4S-Akkus zu verwenden.\\
 
-Aus den Tragfähigkeitstests schliessen wir, dass auch ein Defibrilator (siehe Aufgabenstellung) mit einer von uns erstellten Drohne transportierbar ist.
+Aus den Tragfähigkeitstests schliessen wir, dass auch ein Defibrillator (siehe Aufgabenstellung) mit einer von uns erstellten Drohne transportierbar ist. Folgende Textpassage \cite[p.3]{FleckUAV} bestätigt, dass in einem ähnlichen Gewichtsbereich bereits Produkte existieren.
+
 \blockquote{I identified the two lightest weight defibrillators on the market in the U.S. at the time of the exploration (March 2013): the Schiller FRED EasyPort (600 grams) and the HeartSine samaritan PAD 300P (1100 grams). The former model is not designed for layperson use, but is far and away the lightest defibrillator available.} 
-\cite[p.3]{FleckUAV}
-%TODO Zitatdarstellung richtig machen
-
 
 \section{Ablieferungskonzept}
 
