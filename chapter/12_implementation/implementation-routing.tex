@@ -71,20 +71,18 @@ Diese Lösung scheint ideal, da sie einen Flug in der Mitte bevorzugt und nur be
 \end{figure}
 
 \subsection{Routing Algorithmus}
-Nach der Herleitung des Graphen aus der Polygonstruktur, musste nun der passende Algorithmus gefunden werden um eine Lösung von A nach B zu finden. Es kamen 4 standard Algorithmen in Frage, wobei ein Algorithmus sich als besonders geeignet herausstellte.
+Nach der Herleitung des Graphen aus den Zonen, musste nun der passende Algorithmus gefunden werden um einen möglichst effizienten Weg von A nach B zu finden. Es kamen 4 Algorithmen in Frage, wobei ein Algorithmus sich als besonders geeignet herausstellte.
 \begin{itemize}
 	\item{\textbf{BFS:} (\textit{Breadth-first search}) Die Breitensuche durchsucht einen Baum in der Breite. Sie bringt garantiert eine Lösung, wenn eine Lösung vorhanden ist und kann problemlos mit Zyklen im Graph umgehen. Bei der Lösung handelt es sich aber nicht um de 'optimale Lösung' (kürzester Pfad). Die Lösung liefert den Pfad mit den wenigsten Knoten. \cite{AiClass}}
-	\item{\textbf{DFS:} (\textit{Depth-first search}) Die Tiefensuche fängt an einem Knoten an und arbeitet sich dann in die Tiefe. Das Problem ist, dass sie sehr anfällig auf Zyklen ist und ohne weitere Hilfsmittel (loop detection oder pruning) nicht terminieren kann. Aus diesen Gründen ist diese Lösung nicht die Beste für unser Problem. \cite{AiClass}}
-	\item{\textbf{A-Star:} Der A-Star Algorithmus arbeitet mit einer Heuristik und funktioniert effizienter wie die zwei bereits genannten Algorithmen. In unserem Fall war der A-Star Algorithmus zwar eine interessante Option, da wir uns am Anfang nicht auf die 'optimale Lösung' gestürzt haben, sondern eine 'garantierte Lösung' wollten, war die Heuristik und der damit verbunden Aufwand, ein Kriterium dagegen. \cite{AiClass}}
-	\item{\textbf{Dijkstra:} Der Dijkstra-Algorithmus ist ebenfalls ein klassischer Graphpropagierungsalgorithmus. Der Vorteil an ihm ist, dass er grundsätzlich ohne Heuristik auskommt und robust mit Zyklen umgehen kann. Als Metrik kann in unserem Fall einfach eine Konstante genommen werden, so optimiert er auf die kleinste Anzahl Knotentraversierungen im Lösungspfad.}
+	\item{\textbf{DFS:} (\textit{Depth-first search}) Die Tiefensuche fängt an einem Knoten an und arbeitet sich dann in die Tiefe. Das Problem ist, dass sie sehr anfällig auf Zyklen ist und ohne weitere Hilfsmittel (loop detection oder pruning) nicht terminieren kann. \cite{AiClass}}
+	\item{\textbf{A-Star:} Der A-Star Algorithmus arbeitet mit einer Heuristik und funktioniert effizienter als die zwei bereits genannten Algorithmen. Allerdings ist der Aufwand für die Umsetzung deutlich höher. \cite{AiClass}}
+	\item{\textbf{Dijkstra:} Der Dijkstra-Algorithmus ist ebenfalls ein klassischer Graphpropagierungsalgorithmus. Der Vorteil ist, dass er grundsätzlich ohne Heuristik auskommt und robust mit Zyklen umgehen kann. Ausserdem können die Kanten mit einem Gewicht versehen werden und dadurch, der kürzeste Weg berechnet werden.}
 \end{itemize}
-Nach genauerem Betrachten der Algorithmen haben wir uns für den Dijkstra Algorithmus entschieden. Er liefert ohne Metrik eine ähnliche Lösung wie die BFS-Suche. Der Vorteil ist, dass der Umgang mit einer Metrik bereits konzipiert ist, was ihn deutlich von der klassischen BFS-Suche unterscheidet.
-In einer ersten Version haben wir auf die Längen-Metrik verzichtet, das Ziel war eine Lösung zu finden ohne zu Garantieren, dass es sich hierbei um die Beste handelt.
-\subsection{Höhenhandling}
-Bis an hin wurde die Höhe der einzelnen Polygone ausser acht gelassen, denn so konnten sämtlichen Polygone der drei Zonentypen zusammengefasst werden. Somit konnte mit einem Polygon, wie in der Grafik \ref{fig:skeleton-in-polygon} dargestellt, die Route berechnet werden.
+Wir uns für den Dijkstra Algorithmus entschieden. Er liefert ohne Metrik eine ähnliche Lösung wie die BFS-Suche, kann aber im Nachhinein erweitert werden um effizientere Routen zu liefern.
 
-Das Höhenhandling bildet nun den abschliessenden Schritt für die Routen-Berechnung und benötigt wieder Informationen der einzelnen Polygone, da die Höhe pro Zone individuell definiert werden kann.
-Nachdem nun die Route innerhalb des Graphen berechnet wurden, muss für jeden Knotenpunkt die Höhe definiert werden. Dies geschieht in zwei Schritten:
+\subsection{Höhenhandling}
+Damit die Route 2-Dimensional berechnet werden kann, werden die Höhen erst zum Schluss berücksichtigt. Das Höhenhandling bildet den abschliessenden Schritt bei der Berechnung einer Route und wird in zwei Schritten durchgeführt:
+
 \begin{itemize}
 	\item{\textbf{Bestimmen der Zugehörigkeit des Knotens:} In einem ersten Schritt werden die Zonen nach Höhe absteigend sortiert. Im Anschluss werden bei einer Überlagerung von zwei Zonen die Differenzen der Polygone entfernt, somit können die höherliegenden Polygone die Tieferliegenden abdecken. Dieses Abdecken, garantiert später, dass die Punkte nur einmal zugeordnet werden und somit bei einer Überlagerung von zwei Zonen mit unterschiedlichen Höhen die Route nicht durch einen Tal vom höher- und tiefergelegenen Polygon führt.}
 	\item{\textbf{Setzten der Höhe:} Es wird über alle Punkte iteriert, und die Höhe entsprechend dem Polygon indem es sich befindet gesetzt. Da die Überschneidungen nach Höhe im ersten Teil bereits vollzogen wurde, ist das Resultat eindeutig.}
