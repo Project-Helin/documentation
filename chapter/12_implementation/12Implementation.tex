@@ -15,14 +15,16 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 \subsection{Server}
 
 \subsubsection{Play Framework}
-Für den Server Teil wurde das Play Framework mit Java ausgewählt, denn grösstenteils mussten CRUD Operationen auf einer Weboberfläche dargestellt werden. Das Play-Framework ist speziell für diesen Anwendungszweck entwickelt worden.
+Für den Server Teil wurde das Play Framework mit Java ausgewählt, denn grösstenteils mussten CRUD Operationen auf einer Weboberfläche dargestellt werden. Zu diesem Zweck wurde ein Framework ausgewählt, dass zu den Anforderungen passt.\\
 
-Das Framework wurde aus folgenden Gründen ausgewählt:
+Das Play-Framework wurde aus folgenden Gründen ausgewählt:
 \begin{itemize}
     \item Fortschrittlicher O/R-Mapper im Framework integriert
     \item Vorgegebene MVC-Architektur (Speziell geeignet für CRUD-Operationen)
     \item Schnelle Implementation durch Spezialisierung auf diese Anwendungsart 
-    \item Alle Entwickler sind versiert in Java
+    \item Alle Entwickler des Projekts sind versiert in Java
+    \item RabbitMQ Anbindung möglich
+    \item WebSocket Anbindung möglich
 \end{itemize}
 
 Während der Implementierung kristallisierten sich mehrere Schwächen des Frameworks heraus. 
@@ -30,9 +32,9 @@ Im Anhang \ref{ch:play_pitfalls} wird anhand einiger Beispiele erklärt, warum w
 
 \subsubsection{Kommunikation mit Drohnen}
 
-In der Architektur ist beschrieben, dass die Drohnen über AMQP mit dem Messaging-Broker kommunizieren. Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss en möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Auf Grund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.
+Wie in der Architektur beschrieben, kommunizieren die Drohnen über AMQP mit dem Messaging-Broker. Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss en möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Auf Grund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.\\
 
-Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm von Instanzen, die die Kommunikation mit den Drohnen erlauben, sobald die Applikation gestartet hat.
+Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm von Instanzen, die die Kommunikation mit den Drohnen erlauben, sobald die Applikation gestartet ist.
 
 \begin{figure}[H]
 	\centering
@@ -46,9 +48,9 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
-	Hibernate ORM Mapper & Objekt-Relationales mapping zwischen Datenbank und Models  & 5.1.0 & Apache 2.0\\
+	Hibernate ORM Mapper & objekt-relationales Mapping zwischen Datenbank und Models  & 5.1.0 & Apache 2.0\\
 	\hline 
-	RabbitMQ Client & Client Komponente zur Kommunikation mit dem Rabbit MQ Server & 3.6.0 &  Mozilla Public License 1.1, GPL 2, Apache 2.0 \\
+	RabbitMQ Client & Client Komponente zur Kommunikation mit dem Rabbit MQ Broker & 3.6.0 &  Mozilla Public License 1.1, GPL 2, Apache 2.0 \\
 	\hline 
 	jGraphT & Graph Bibliothek für Java, um effizient Operationen auf dem Graph auszuführen & 0.9.2 &  LGPL, EPL \\
 	\hline 
@@ -58,9 +60,9 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 
 \subsection{Onboard-App}
 
-Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk Flight-Controllers, stellt dafür eine Open-Source Android-API bereit, die im App integriert werden konnte und es erlaubt, dem Flight-Controller direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
+Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk Flight-Controllers, stellt dafür eine Open-Source Android-API bereit. Die API konnte im App integriert werden erlaubt es, dem Flight-Controller direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
 
-Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich fast gleich wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung erzeugen. Das erarbeiten der verschidenen Setups war teilweise ziemlich aufwendig, je nachdem ob man neben der App noch eine Bodenstation an die Simulation anbinden wollte, die weitere Echtzeitinformationen liefert (siehe Abb. \ref{fig:test-setup-onboard}). Auf Github sind die verschiedenen Setups detailliert erklärt, um den Einstieg in die Entwicklung zu erleichtern.
+Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich fast gleich wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung erzeugen. Das erarbeiten der verschiedenen Setups war teilweise ziemlich aufwendig, je nachdem ob man neben der App noch eine Bodenstation an die Simulation anbinden wollte, die weitere Echtzeitinformationen liefert (siehe Abb. \ref{fig:test-setup-onboard}). Auf Github sind die verschiedenen Setups detailliert erklärt, um den Einstieg in die Entwicklung zu erleichtern.
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/test-setup-onboard.png}
@@ -84,47 +86,45 @@ Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der
 \end{tabularx}
 
 \subsection{Kommunikation}
-Um die nichtfunktionalen Anforderungen im Bereich der Kommunikation zu erfüllen, wurde AMQP als Protokoll ausgewählt. Mit Messaging soll gewährleistet werden, dass die Verbindungswiederherstellung funktioniert. Die funktionale Anforderung des Missionsabbruchs wird somit soweit gedeckt, dass versucht wird die Verbindung aufrechtzuerhalten, sofern das Netz es erlaubt. Bei kurzen Netzunterbrüchen kann somit über das AMQP Protokoll eine Verbindung zur Drohne gewährleistet werden.
+Um die nicht-funktionalen Anforderungen im Bereich der Kommunikation zu erfüllen, wurde auf der Onboard-App Messaging mit RabbitMQ bzw. dem AMQP-Protokoll verwendet. Mit Messaging soll gewährleistet werden, dass trotz einem Verbindungsabbruch Messages nicht verloren gehen.
 
+\subsubsection{Verbindungsabbruch} 
+Gemäss den nicht funktionalen Anforderungen darf der Verbindungsabbruch keinen Einfluss auf die Mission haben. Um gemäss den funktionalen Anforderungen einen Missionsabbruch zu gewährleisten, wird versucht Unterbrüche so kurz wie möglich zu halten und einen automatischen Verbiundungsaufbau zu ermöglichen. Aus diesem Faktoren wird die gesamte Mission vor dem Start übertragen, damit sie ausgeführt werden kann. Einzelne Wegpunke sind somit nicht auf eine stabile Internetverbindung angewiesen, da die Route bereits von Anfang bekannt ist. Der Missionsabbruch ist ebenfalls gewährleistet - sofern die GSM Verbindung besteht. 
+\\
+Verbindungsabbrüche auf dem Mobiltelefon haben zweierlei Konsequenzen:	
 \begin{itemize}
-	\item{\textbf{Verbindungsabbruch:} \\
-		Gemäss den nicht funktionalen Anforderungen darf der Verbindungsabbruch keinen Einfluss auf die Mission haben. Um gemäss den funktionalen Anforderungen einen Missionsabbruch zu gewährleisten, wird versucht Unterbrüche so kurz wie möglich zu halten und einen automatischen Verbiundungsaufbau zu ermöglichen. Aus diesem Faktoren wird die gesamte Mission vor dem Start übertragen, damit sie ausgeführt werden kann. Einzelne Wegpunke sind somit nicht auf eine stabile Internetverbindung angewiesen, da die Route bereits von Anfang bekannt ist. Der Missionsabbruch ist ebenfalls gewährleistet - sofern die GSM Verbindung besteht. 
-		\\
-		Verbindungsabbrüche auf dem Mobiltelefon haben zweierlei Konsequenzen:	
-		\begin{itemize}
-			\item{\textbf{Mobiltelefon kann die Messages vom Server nicht empfangen:} \\
-				Dieses Szenario wird durch das RabbitMQ abgefangen. Der Messaging Broker cached die Nachrichten solange bis der Consumer (Mobiltelefon) wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf auf dem Onboard-App.
-			}
-			\item{\textbf{Messages vom Mobiltelefon zum Server können nicht gesendet werden:} \\
-				In diesem Fall kann der Übertragungsfehler nicht durch RabbitMQ abgefangen werden. Der Broker hat vom Producer (Mobiletelefon) noch keine Nachricht bekommen. Aus diesem Grund wird producerseitig eine Exception geworfen, die darauf hinweist, dass die Verbindung unterbrochen ist. In diesem Fall wird die Nachricht in einem Queue zwischengespeichert. Sämtliche Folgenachrichten, die während des Verbindungsunterbruchs nicht übertragen werden können, werden ebenfalls in dieser Queue gespeichert. Sobald die Verbindung wieder besteht, werden die Nachrichten aus der Queue gesendet.
-			}
-		\end{itemize}
-		Mit diesen Massnahmen ist ein guter Kompromiss aus Zuverlässigkeit und Aufwand entstanden. Alle missionskritischen Nachrichten können übertragen werden. Telemetriedaten sind von einem Verbindungsausfall ebenfalls nicht betroffen.
+	\item{\textbf{Mobiltelefon kann die Messages vom Server nicht empfangen:} \\
+		Dieses Szenario wird durch das RabbitMQ abgefangen. Der Messaging Broker cached die Nachrichten solange bis der Consumer (Mobiltelefon) wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf auf dem Onboard-App.
 	}
-	\item{\textbf{Verbindungswiederherstellung:}
-		Aus den nicht funktionalen Anforderungen ist zu entnehmen, dass bei einem Verbindungsunterbruch ein Reconnect statt findet. Dieser Reconnect soll, sobald die Verbindung im GSM Netz wieder besteht nicht länger als 30s dauern. \\
-		Bei der Konfiguration von AMQP bestanden mehrere Möglichkeiten. Einersetis war der bekannte Backoff Algorithmus eine Option. Dieser Algorithmus arbeitet nach einem incrementellen Prinzip. Je länger der Unterbruch dauert, desto länger dauert es bis er die Verbindung wieder versucht aufzubauen. Auf der anderen Seite stand ein einfacher Interval-Algorithmus. Dieser versucht alle drei Sekunden die Verbindung wiederherzustellen, bis zum erfolgreichen Verbindungsaufbau. Mit diesen Erkenntnissen haben wir folgende Messung gemacht:
-		\begin{center}
-			\begin{tabular}{|r|r|}
-				\hline
-				\textbf{Backoff} & \textbf{Interval 3s} \\
-				\hline
-				17 & 7 \\
-				7 & 7 \\
-				9 & 7 \\
-				11 & 7 \\
-				10 & 7 \\
-				\hline
-				% TODO: Kommentar noch: Anzahl Sekunden bis zum Verbindungsaufbau
-			\end{tabular}
-		\end{center}
-		Aus diesen Erkenntnissen standen beide Möglichkeiten offen, denn beide erfüllen die Anforderungen und haben somit auch keine Auswirkungen auf die Qualität. Am Ende wurde bewusst auf den BackOff Algorithmus gesetzt. Der Backoff Algorithmus benötigt zwar deutlich länger für einen Reconnect als das fixe Zeitinterval. Die hetrogene Verteilung der Wiederverbindungszeiten spricht aber für den Backoff Algorithmus. Sollte es zu Probleme auf der Serverseite kommen, so werden nicht alle Geräte gleichzeitig einen Reconnect probieren - der Reconnect passiert somit gestaffelt. Dies bringt zusätzlich Stabilität ins System.}
-	\item{\textbf{Android Process Lifecycle:} \\
-		Da die OnboardApp auf einem Android Betriebssystem läuft, mussten gewisse Voraussetzungen geprüft werden. Im Grund kann davon ausgegangen werden, dass die Applikation immer im Vordergrund steht. Es ist doch sehr unwahrscheinlich, dass die Appliaktion in den Hintergrund rückt, weil eine andere Applikation verwendet wird. \\
-		Laut Android Dokumentation ist das Verhalten einer Applikation im Hintergrund nicht deterministisch \cite{androidGuide}. Sollte eine Applikation im Hintergrund gewisse Garantien haben, so muss von einem Service und der spezifischen Implementierung eines Services gesprochen werden. Im Fall der OnboardApp und den getroffenen Annahmen, wurde davon abgesehen, da die Applikation während des Fluges nicht gewechselt wird.
+	\item{\textbf{Messages vom Mobiltelefon zum Server können nicht gesendet werden:} \\
+		In diesem Fall kann der Übertragungsfehler nicht durch RabbitMQ abgefangen werden. Der Broker hat vom Producer (Mobiletelefon) noch keine Nachricht bekommen. Aus diesem Grund wird producerseitig eine Exception geworfen, die darauf hinweist, dass die Verbindung unterbrochen ist. In diesem Fall wird die Nachricht in einem Queue zwischengespeichert. Sämtliche Folgenachrichten, die während des Verbindungsunterbruchs nicht übertragen werden können, werden ebenfalls in dieser Queue gespeichert. Sobald die Verbindung wieder besteht, werden die Nachrichten aus der Queue gesendet.
 	}
-	\newpage
 \end{itemize}
+Mit diesen Massnahmen ist ein guter Kompromiss aus Zuverlässigkeit und Aufwand entstanden. Alle missionskritischen Nachrichten können übertragen werden. Telemetriedaten sind von einem Verbindungsausfall ebenfalls nicht betroffen.
+}
+\subsubsection{Verbindungswiederherstellung}
+Aus den nicht funktionalen Anforderungen ist zu entnehmen, dass bei einem Verbindungsunterbruch ein Reconnect statt findet. Dieser Reconnect soll, sobald die Verbindung im GSM Netz wieder besteht nicht länger als 30s dauern. \\
+Bei der Konfiguration von AMQP bestanden mehrere Möglichkeiten. Einersetis war der bekannte Backoff Algorithmus eine Option. Dieser Algorithmus arbeitet nach einem incrementellen Prinzip. Je länger der Unterbruch dauert, desto länger dauert es bis er die Verbindung wieder versucht aufzubauen. Auf der anderen Seite stand ein einfacher Interval-Algorithmus. Dieser versucht alle drei Sekunden die Verbindung wiederherzustellen, bis zum erfolgreichen Verbindungsaufbau. Mit diesen Erkenntnissen haben wir folgende Messung gemacht:
+\begin{center}
+	\begin{tabular}{|r|r|}
+		\hline
+		\textbf{Backoff} & \textbf{Interval 3s} \\
+		\hline
+		17 & 7 \\
+		7 & 7 \\
+		9 & 7 \\
+		11 & 7 \\
+		10 & 7 \\
+		\hline
+		% TODO: Kommentar noch: Anzahl Sekunden bis zum Verbindungsaufbau
+	\end{tabular}
+\end{center}
+Aus diesen Erkenntnissen standen beide Möglichkeiten offen, denn beide erfüllen die Anforderungen und haben somit auch keine Auswirkungen auf die Qualität. Am Ende wurde bewusst auf den BackOff Algorithmus gesetzt. Der Backoff Algorithmus benötigt zwar deutlich länger für einen Reconnect als das fixe Zeitinterval. Die hetrogene Verteilung der Wiederverbindungszeiten spricht aber für den Backoff Algorithmus. Sollte es zu Probleme auf der Serverseite kommen, so werden nicht alle Geräte gleichzeitig einen Reconnect probieren - der Reconnect passiert somit gestaffelt. Dies bringt zusätzlich Stabilität ins System.
+
+\subsubsection{Android Process Lifecycle} 
+Da die OnboardApp auf einem Android Betriebssystem läuft, mussten gewisse Voraussetzungen geprüft werden. Im Grund kann davon ausgegangen werden, dass die Applikation immer im Vordergrund steht. Es ist doch sehr unwahrscheinlich, dass die Appliaktion in den Hintergrund rückt, weil eine andere Applikation verwendet wird. \\
+Laut Android Dokumentation ist das Verhalten einer Applikation im Hintergrund nicht deterministisch \cite{androidGuide}. Sollte eine Applikation im Hintergrund gewisse Garantien haben, so muss von einem Service und der spezifischen Implementierung eines Services gesprochen werden. Im Fall der OnboardApp und den getroffenen Annahmen, wurde davon abgesehen, da die Applikation während des Fluges nicht gewechselt wird.\\
+
 
 \subsection{Customer App}
 Gemäss Aufgabenstellung sollte ein Prototyp für eine App, mit welchem Bestellungen am System abgegeben können, entwickelt werden.
