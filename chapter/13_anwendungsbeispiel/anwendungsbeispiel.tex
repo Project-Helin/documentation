@@ -53,7 +53,7 @@ Der Frame, die Motoren und ESCs wurden als Kit gekauft. Es handelt sich dabei um
 
 \subsection{Flight-Controller}
 
-Der Flight-Controller ist das Herzstück eines Quadcopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches abfliegen von Wegpunkten.
+Der Flight-Controller ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches abfliegen von Wegpunkten.
 
 Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open-Source ist und auch bei vielen anderen Projekten eingesetzt wird. Sie unterstützt ausserdem das \Gls{MAVLink} Protokoll, das es ermöglicht verschiedene Flight-Controller über verschiedene Protokolle und Anschlüsse anzusprechen.
 
@@ -279,7 +279,7 @@ Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, da
 
 \section{Alternative Drohnenarten}
 
-Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software 'ArduPilot' Firmware-Varianten für Multicopter, Flugzeuge, Fahrzeuge an, wie dies in der Abbildung \ref{fig:arduScreenshot} dargestellt. \\
+Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Wie in Abbildung \ref{fig:arduScreenshot} ersichtlich, bietet die Autopilot-Software 'ArduPilot' Varianten für Multicopter, Flugzeuge und Fahrzeuge an.\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth] {images/arduScreenshot.jpg}
@@ -287,7 +287,7 @@ Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, al
 \label{fig:arduScreenshot}
 \end{figure}
 
-Uplift  Aero beispielsweise war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge (Grafik \ref{fig:uplift}) die selben Flugcontroller wie wir verwendet und mussten lediglich die passende Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
+Auch andere Projekte könnten von unserem System profititeren. Uplift Aero beispielsweise, ist ein Startup, dass Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen wollte. Sie haben für ihre Flugzeuge (Grafik \ref{fig:uplift}) die selben Flugcontroller wie wir verwendet, mussten lediglich eine andere Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
 
 \begin{figure}[H]
 \centering
