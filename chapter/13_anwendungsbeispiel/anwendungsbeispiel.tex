@@ -4,7 +4,7 @@
 
 Um die vom Team erstellte Plattform auch unter realen Bedingungen testen zu können, wurde ein Versuchsaufbau mit zwei Drohnen erstellt, die es ermöglichen Produkte zu transportieren und über dem Kunden mit einem Fallschirm abzuwerfen. Der Aufbau der Drohnen beinhaltete die Zusammenstellung der passenden Komponenten, den Zusammenbau der Drohnen und die Planung und Erstellung von zusätzlichen Halterungen für die obengenannten spezifischen Anforderungen.\\
 
-Bei der Zusammenstellung der Komponenten haben wir vor allem auf die gute Verfügbarkeit von Ersatzteilen und einen hohen Marktanteil der Komponenten geachtet. Besonders wichtig erschien uns, dass ein Anbieter nicht an einen Hersteller gebunden ist, sondern die Drohne an seine Bedürfnisse (Zuladung, Reichweite, Geschwindigkeit) anpassen kann. Es sollten also möglichst wenige Vorraussetzungen bestehen um die Plattform nutzen zu können, folgende sind allerdings unabdingbar:
+Bei der Zusammenstellung der Komponenten haben wir vor allem auf die gute Verfügbarkeit von Ersatzteilen und einen hohen Marktanteil der Komponenten geachtet. Besonders wichtig erschien uns, dass ein Anbieter nicht an einen Hersteller gebunden ist, sondern die Drohne an seine Bedürfnisse (Zuladung, Reichweite, Geschwindigkeit) anpassen kann. Es sollten also möglichst wenige Voraussetzungen bestehen um die Plattform nutzen zu können. Folgende Anforderungen sind allerdings unabdingbar:
 
 \begin{itemize}
 
@@ -53,9 +53,9 @@ Der Frame, die Motoren und ESCs wurden als Kit gekauft. Es handelt sich dabei um
 
 \subsection{Flight-Controller}
 
-Der Flight-Controller ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches abfliegen von Wegpunkten.
+Der Flight-Controller ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches Abfliegen von Wegpunkten.
 
-Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open-Source ist und auch bei vielen anderen Projekten eingesetzt wird. Sie unterstützt ausserdem das \Gls{MAVLink} Protokoll, das es ermöglicht verschiedene Flight-Controller über verschiedene Protokolle und Anschlüsse anzusprechen.
+Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open-Source ist und auch bei vielen anderen Projekten eingesetzt wird. Sie unterstützt ausserdem das \Gls{MAVLink} Protokoll.
 
 \begin{figure}[h]
 \centering
@@ -73,7 +73,7 @@ Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kan
 
 \subsection{Ausbaustufen}
 
-Während des Projekts wurde die Hardware laufend den Bedürfnissen angepasst. Daher existieren mehrere Iterationen der Drohne, die für die Versuche genutzt wurden und geholfen haben Risiken früh auszuschliessen.
+Während des Projekts wurde die Hardware laufend den Bedürfnissen angepasst. Daher sind mehrere Versionen der Drohne entstanden, die für die Versuche genutzt wurden und geholfen haben Risiken früh auszuschliessen.
 
 \subsubsection{Version 1}
 
@@ -95,27 +95,27 @@ Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Erfahrungen mit
 \label{fig:prototyp-2}
 \end{figure}
 
-Um die Risiken R08 (Ardupilot Handhabung) und R09 (Ardupilot API) frühzeitig auszuschliessen (siehe Tabelle \ref{table:risk-table}), wurde das Smartphone zusätzlich auf die Drohne montiert, und mit einem ersten Prototypen der Onboard-App getestet. \\
-Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeitet werden mussten, um es sicher zu transportieren und bedienbar zu positionieren.
+Um die Risiken R08 (Ardupilot Handhabung) und R09 (Ardupilot API) frühzeitig auszuschliessen (siehe Tabelle \ref{table:risk-table}), wurde das Smartphone provisorisch auf die Drohne montiert, und mit einem ersten Prototypen der Onboard-App getestet. \\
+Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeitet werden musste, um es sicher zu transportieren und bedienbar zu positionieren.
 
 \begin{figure}[H]
 	\centering
 	\begin{minipage}[b]{0.4\textwidth}
 		% TODO Ein Bild ohne Tastatur und Stuhl wäre auch gut?
 		\includegraphics[width=\textwidth]{images/hardware/drone-with-handy.jpg}
-	\caption{Modell der Handy Halterung}
-	\label{fig:case-model}
+	\caption{Drohne mit Handy Halterung}
+	\label{fig:prototyp-3}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[b]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{images/hardware/case-model.png}
-	\caption{Drohne mit Handy Halterung}
-	\label{fig:prototyp-3}
+	\caption{3D-Modell der Handy Halterung}
+	\label{fig:case-model}
 	\end{minipage}
 \end{figure}
 
-Es wurde eine Halterung konzipiert \ref{fig:case-model}, welche wir später im 3D-Druck Verfahren produzieren liessen.
-Die Handy-Halterung konnte auch gleich genutzt werden, um den Pixhawk-Controller zu verstecken und das GPS Module gut exponiert zu montieren. 
+Es wurde eine Halterung konzipiert (siehe Abb.\ref{fig:case-model}), welche wir im 3D-Druck Verfahren produzieren liessen.
+Die Handy-Halterung konnte auch gleich genutzt werden, um das GPS-Modul an einer passenden Stelle zu positionieren. 
 
 \subsubsection{Version 3}
 Nachdem mit der Drohne zahlreiche autonome Testflüge unternommen wurden, musste eine Möglichkeit erarbeitet werden, wie die Lieferung an den Kunden gebracht werden kann.
@@ -125,26 +125,25 @@ Nachdem mit der Drohne zahlreiche autonome Testflüge unternommen wurden, musste
 	\begin{minipage}[b]{0.4\textwidth}
 		\includegraphics[width=\textwidth]{images/hardware/parachute-model.jpg}
 		\caption{Halterung}
-		\label{asdf}
+		\label{fig:parachute-mode}
 	\end{minipage}
 	\hfill
 	\begin{minipage}[b]{0.4\textwidth}
 		% TODO Hier muss ein bessers Bild her ( oder Kafferahmen weg photoshoppen )
 		\includegraphics[width=\textwidth]{images/hardware/drone-with-servo.jpg}
 		\caption{Drohne mit dem Abwurfsmechanismus}
-		\label{asdf}
+		\label{fig:drone-with-servo}
 	\end{minipage}
 \end{figure}
 
 
-Es wurde ein einfacher Mechanismus mit einem handelsüblichen Modelbau-Servo konstruiert. Die Abbildung \ref{fig:AbwurfMechanismus} zeigt, wie der Servo den Stift entfernt und so die Ladung freigeben kann. \\
-Das Packet, an einem Fallschirm befestigt, wird auf den Stift gehängt und verschlossen und der Fallschirm im dazugehörigen Fallschirmschacht verstaut. Der Servo war mittels einer Fernbedienungstaste kontrollierbar und löste so den Abwurf des Paketes aus. Später haben wir den Servo über einen Softwarebefehl auslösbar gemacht. 
+Es wurde ein einfacher Mechanismus mit einem handelsüblichen Modelbau-Servo konstruiert. Die Abbildung \ref{fig:drone-with-servo} zeigt, den Mechanismus mit dem Stift, der vom Servo herausgezogen werden kann. Das Rohr auf der Vorrichtung dient zur Aufbewahrung des Fallschirms während des Flugs. Nach dem Lösen des Stifts zieht das Gewicht der Ladung den Fallschirm aus dem Rohr.\\
 
 \subsection{Kommunikationshardware}
-Da die Drohne gemäss unseren Anforderungen eine Verbindung zum Server benötigt, muss geeignete Kommunikationshardware installiert werden. Aus folgenden Gründen haben wir uns für ein Android-Smartphone entschieden:
+Da die Drohne eine Verbindung zum Server benötigt, muss geeignete Kommunikationshardware installiert werden. Aus folgenden Gründen haben wir uns für ein Android-Smartphone entschieden:
 \begin{itemize}
 	\item{Der Status der Drohne und Anweisungen zur Beladung können angezeigt werden}
-	\item{Die Anbindung an den Flight-Controller ist über eine API möglich}
+	\item{Die Anbindung an den Flight-Controller ist über eine bestehende API möglich}
 	\item{Das Android-Betriebssystem stellt die Kommunikation über WLAN oder GSM zur Verfügung}
 \end{itemize}
 
@@ -157,14 +156,14 @@ Falls die Beladung automatisiert wird, oder keine Beladung notwendig ist, benöt
 	Bei der Arduino Hardware Plattform kann auf einem beliebigen Arduino Board implementiert werden, welches als USB Host Device arbeiten kann. Zusätzlich muss ein GSM Shield 2 verwendet werden um eine GSM Verbindung aufbauen zu können. Eine Option auf WLAN existiert nur durch zusätzliche Komponenten.}
 \end{itemize}
 
-Beide Alternativen bringen zusätzlich mit sich, dass sie nicht autonom betrieben werden. Somit muss auf die Bordstromversorgung zurückgegriffen werden und das \Gls{BEC} für die Servo-Stromversorgung verwendet werden muss um eine stabile Betriebsspannung zu generieren. \\
+Beide Alternativen bringen zusätzlich mit sich, dass sie externe Stromversorgung benötigen. Somit muss auf die Bordstromversorgung zurückgegriffen werden und das \Gls{BEC} für die Servo-Stromversorgung verwendet werden muss um eine stabile Betriebsspannung zu generieren. \\
 
-Abschliessend kann gesagt werden, dass die Mobiltelefonlösung mit dem von uns verwendeten Nexus 4 ein Gewicht von 139 Gramm mit sich bringt. Die Lösung mit dem Raspberry PI 3 schlägt 40 Gramm zu buche. Die Einsparung von 100 Gramm bringt einen Verzicht auf ein Display und eine autonome Batterie mit sich. Es ist hier von use-case zu use-case zu entscheiden, ob dieser Kompromiss angebracht ist. Auf einen Kostenpunktsvergleich verzichten wir an dieser Stelle, da gebrauchte Android Smartphones in einer erschwinglichen Preisregion angesiedelt sind.
+Abschliessend kann gesagt werden, dass das von uns verwendete Smartphone (Nexus 4) 139 Gramm schwer ist. Die Lösung mit dem Raspberry PI 3 schlägt mit 40 Gramm zu buche. Die Einsparung von 100 Gramm bringt einen Verzicht auf ein Display und den Zwang einer zusätzlichen Stromversorgung mit sich.
 
 \newpage
 \subsection{Fallschirm}
-Da wir uns entschieden haben, die Lieferung abzuwerfen, und die Drohne nicht zu landen, musste sichergestellt werden, dass beim Aufprall keine Schäden entstehen.
-\\
+Da wir uns entschieden haben, die Lieferung abzuwerfen, und die Drohne nicht zu landen, musste sichergestellt werden, dass beim Aufprall keine Schäden entstehen.\\
+
 Eine PET-Flasche die von einem ein Meter hohen Tisch fällt, bleibt unbeschädigt. Die Möglichkeit sie zu öffnen, ohne den Flascheninhalt auf Grund der Kohlensäure schlagartig über die Umgebung zu verteilen, hält sich in Grenzen. Aus diesem Grund haben wir die Geschwindigkeit für diesen Aufprall errechnet.
 \begin{equation}
 \begin{split}
