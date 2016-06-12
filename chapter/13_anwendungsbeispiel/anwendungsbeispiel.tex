@@ -141,22 +141,22 @@ Es wurde ein einfacher Mechanismus mit einem handelsüblichen Modelbau-Servo kon
 Das Packet, an einem Fallschirm befestigt, wird auf den Stift gehängt und verschlossen und der Fallschirm im dazugehörigen Fallschirmschacht verstaut. Der Servo war mittels einer Fernbedienungstaste kontrollierbar und löste so den Abwurf des Paketes aus. Später haben wir den Servo über einen Softwarebefehl auslösbar gemacht. 
 
 \subsection{Kommunikationshardware}
-Da die Drohne gemäss unseren Anforderungen eine Verbindung zum Server benötigt, muss geeignete Kommunikationshardware installiert werden. Aus folgenden Gründen haben wir uns für ein Android fähiges Mobiltelefon entschieden:
+Da die Drohne gemäss unseren Anforderungen eine Verbindung zum Server benötigt, muss geeignete Kommunikationshardware installiert werden. Aus folgenden Gründen haben wir uns für ein Android-Smartphone entschieden:
 \begin{itemize}
-	\item{Android als Softwareplattform ermöglicht uns die Entwicklung in Java}
-	\item{Ein User Interface und Statusanzeige kann auf dem App implementiert werden}
-	\item{Es existiert eine passende Bibliothek für die Kommunikation über MAVLink}
-	\item{Das Betriebssystem übernimmt den gesammten Kommunikationsstack - sei es im Gebäude mittels WLAN oder im Feld über GSM}
+	\item{Der Status der Drohne und Anweisungen zur Beladung können angezeigt werden}
+	\item{Die Anbindung an den Flight-Controller ist über eine API möglich}
+	\item{Das Android-Betriebssystem stellt die Kommunikation über WLAN oder GSM zur Verfügung}
 \end{itemize}
-Für Verwendungszwecke ohne den Bedarf eines User Interfaces kann man sich allenfalls auch überlegen andere Komponenten zu verwenden. Wir haben zwei Optionen genauer angeschaut und bewertet:
+
+Falls die Beladung automatisiert wird, oder keine Beladung notwendig ist, benötigt man nicht unbedingt ein Smartphone. Um Gewicht und Platz auf der Drohne zu sparen gibt es folgende Alternativen:
 \begin{itemize}
-	\item{\textbf{Raspbery PI} \\
+	\item{\textbf{Raspberry PI} \\
 	Bereits ab dem leichtgewichtigen Raspberry PI zero sind die nötigen Funktionen vorhanden. Zusätzlich muss hier auf ein GSM Modem zurückgegriffen werden um eine permanente Internetverbindung aufzubauen. Bei Verwendung eines Raspberry PI 3 kann sogar auf ein WLAN Interface zugegriffen werden.
 	}
 	\item{\textbf{Arduino} \\
 	Bei der Arduino Hardware Plattform kann auf einem beliebigen Arduino Board implementiert werden, welches als USB Host Device arbeiten kann. Zusätzlich muss ein GSM Shield 2 verwendet werden um eine GSM Verbindung aufbauen zu können.}
 \end{itemize}
-Aus unserer Sicht stellen die zwei Embedded Systeme durchaus eine alternative dar. Leider verschwindet aber der Komfort die Drohne mittels dem GUI auf der Onboard App zu überwachen . 
+
 Beide Alternativen müssen zusätzlich über das Boardstromnetz der Drohne betrieben werden, und benötigen zusätzliche Spannungsregler um die gewünschte Betriebsspannung der Hardware zu gewährleisten. 
 
 Dies kann noch weiter optimiert werden, wenn die Schaltung genügend dimensioniert ist, um dem Servo  eine stabile Stromversorgung zu gewährleisten, so kann ein externes BEC, welches zur Zeit im Einsatz ist, wegfallen.\\
