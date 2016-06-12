@@ -1,10 +1,10 @@
 \chapter{Anforderungen}
 \section{Benutzer und Personas}
-Die Benutzer der Project Helin Plattform teilen sich in drei Gruppen auf, welche in dieser Arbeit berücksichtigt werden. Die Gruppen werden nach der primären Funktion unterschieden.
+Die Benutzer der Project Helin Plattform teilen sich in drei Gruppen auf.
 \begin{itemize}
 	\item{\textbf{Kunde:} Der Kunde möchte Produkte und Dienstleistungen nutzen, welche von Drohnen erbracht werden können. Beispielsweise die Bestellung eines Getränks und sofortige Lieferung an seine Position.}
 	\item{\textbf{Administrator:} Administratoren verwenden die Project Helin Plattform um eine Flotte von Drohnen zu verwalten. Sie nutzen dazu die Webseite der Plattform und definieren, wo ihre Drohnen fliegen dürfen und welche Produkte und Services wo angeboten werden.}
-	\item{\textbf{Drone-Operator:} Der Drone-Operator kümmert sich primär um die Drone und verwendet dafür die Onboard-App um die Drohne einem Organisationsinventar hinzuzufügen.}
+	\item{\textbf{Drone-Operator:} Der Drone-Operator ist für die Wartung der Drone verantwortlich und verwendet dafür die Onboard-App. Er kümmert sich ausserdem um die Beladung der Drohnen.}
 \end{itemize}
 
 Bei den Personas handelt es sich um fiktive Personen.
@@ -16,7 +16,7 @@ Bei den Personas handelt es sich um fiktive Personen.
 \protect\url{http://blog.placeit.net/free-avatar-pack/}}
 \label{fig:diego}
 \end{figure}
-Diego ist \textbf{23 Jahre alt} wohnt in einer WG in Uster.
+Diego ist \textbf{23 Jahre alt} und wohnt in einer WG in Uster.
 Diego hat eine Informatik-Lehre mit BMS abgeschlossen und ist auf der Suche nach einer neuen beruflichen oder schulischen Herausforderung.
 \paragraph{Technisches Verhalten}
 Arbeitet täglich acht Stunden mit dem PC. Nutzt gerne neue Technologien. Besitzt ein Android-Smartphone der neusten Generation. Die Android Updates macht er immer sofort. Interessiert sich für neue Technologien und sieht sich regelmässig Kickstarter Projekte an.
@@ -24,7 +24,7 @@ Arbeitet täglich acht Stunden mit dem PC. Nutzt gerne neue Technologien. Besitz
 Möchte sich weiterbilden und neue Herausforderungen finden. Möchte neue Technologien entdecken und einsetzen.
 \paragraph{Szenario}
 Diego möchte an einem Openair ein kühles Getränk für sich und seine Freunde bestellen, er hat auf einem Plakat vor Ort gesehen, dass ein Drohnen-Lieferservice existiert und möchte aufgrund seines technischen Interesses den Dienst in Anspruch nehmen.
-\subsection{Persona Carmen: Administratoren}
+\subsection{Persona Stefanie: Administrator}
 \begin{figure}[h]
 \centering
 	\includegraphics[width=.35\textwidth]{images/persona-stefanie.jpg}
@@ -32,12 +32,12 @@ Diego möchte an einem Openair ein kühles Getränk für sich und seine Freunde 
 	 \protect\url{http://blog.placeit.net/free-avatar-pack/}}
 	\label{fig:stefanie}
 \end{figure}
-Carmen ist \textbf{35 Jahre alt} und lebt alleine in Zürich.
-Sie unternimmt viel mit Freunden und reist gerne. Sie ist auf dem Land aufgewachsen und wohnt jetzt in Zürich.
-Carmen arbeitet bei einer Eventagentur und hat eine Ausbildung als Eventmanagerin abgeschlossen.
+Stefanie ist \textbf{33 Jahre alt} und lebt alleine in Zürich.
+
+Stefanie arbeitet bei einer Eventagentur und hat eine Ausbildung als Eventmanagerin abgeschlossen.
 
 \paragraph{Technisches Verhalten}
-Sie nutzt den PC täglich bei der Arbeit, vor allem Planungstools und das E-Mail-Programm. Ausserdem ist sie zu Recherchezwecken viel im Internet unterwegs. Sie nutzt Chrome als Browser im Geschäft. Sie besitzt ein Samsung Galaxy S4, dass sie schon seit einigen Jahren verwendet. Zuhause hat sie keinen PC.
+Sie nutzt den PC täglich 8 Stunden bei der Arbeit, vor allem Excel, Word und das E-Mail-Programm. Sie nutzt Chrome als Browser während der Arbeit. Sie besitzt ein Samsung Galaxy S4, dass sie schon seit einigen Jahren verwendet. Zuhause hat sie keinen PC.
 \paragraph{Kommunikationsverhalten}
 Sie kommuniziert geschäftlich hauptsächlich per E-Mail. Mit Freunden unterhält sie sich oft über WhatsApp.
 \paragraph{Ziele}
@@ -51,17 +51,17 @@ Sie möchte mit neuen und innovativen Ideen Events für Besucher spannender gest
 	 \protect\url{http://blog.placeit.net/free-avatar-pack/}}
 	\label{fig:ricardo}
 \end{figure}
-Ricardo ist 26 Jahre alt und wohnhaft in Wetzikon. Der ausgebildete Schlosser hat zur Zeit keinen festen Job. Er lebt das Leben von Tag zu Tag und geniest es keine festen Verpflichtungen zu haben.
+Ricardo ist 26 Jahre alt und wohnhaft in Wetzikon. Der ausgebildete Schlosser hat zur Zeit keinen festen Job. Er lebt das Leben von Tag zu Tag und geniest, es keine festen Verpflichtungen zu haben.
 \paragraph{Technisches Verhalten}
-Er nutzt den PC selten, vorallem aber zum Surfen im Internet. Als Mobiltelefon besitzt er ein altes Telefon mit Android. Er möchte sich auch kein neues Gerät kaufen, da er ausser Whatsapp und der Taschenlampe das Gerät sowieso nicht verwendet.
+Er nutzt den PC selten, vorallem aber zum Surfen im Internet. Als Mobiltelefon besitzt er ein altes Telefon mit Android. Er möchte sich auch kein neues Gerät kaufen, da er ausser WhatsApp und der Taschenlampe das Gerät sowieso nicht verwendet.
 \paragraph{Kommunikationsverhalten}
-Er verwendet hautpsächlich Email und sein Mobiltelefon zur Kommunikation. Mit Freunden unterhält sie sich auch oft über WhatsApp.
+Er verwendet hauptsächlich Email und sein Mobiltelefon zur Kommunikation. Mit Freunden ist er über WhatsApp in Kontakt.
 \paragraph{Ziele}
 Ricardo möchte gerne am Openair etwas Geld dazu verdienen und ohne grosse Einarbeitungszeit den Anforderungen der Eventtechnikfirma genügen.
 \newpage
 \section{Funktionale Anforderungen (User Stories)}
 
-Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den mit dem Betreuer diskutierten Ideen ab.
+Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den mit dem Betreuer diskutierten Ideen ab. Standardoperationen sind mit Teilen von CRUD bezeichnet (C = Create, R = Read, U = Update, D = Delete). Einige Anforderungen sind mit 'zusätzlich' oder 'ausgeschlossen' gekennzeichnet, eine Erklärung zu jeder geänderten Anforderung findet sich im nächsten Abschnitt.
 
 \subsection{Administrator}
 \begin{itemize}
@@ -99,9 +99,9 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 	\item Als Drone-Operator muss ich das die Drohne zu einer Organisation hinzufügen können.
 	\item Als Drone-Operator muss ich das \Gls{OTG}-fähige Smartphone an einen MAV-Link kompatiblen Flight-Controller über USB anschliessen können.
 	\item Als Drone-Operator muss ich eine Verbindung zwischen App und Server über das Internet herstellen könnnen.
-	\item Als Drone-Operator muss ich eine Verbindung zwischen App und Flight-Controller herstellen können.
+	\item Als Drone-Operator muss ich eine Verbindung zwischen App und \Gls{Flight-Controller}, herstellen können.
 	\item Als Drone-Operator möchte ich den aktuellen Zustand der Verbindungen zur Drohne und zum Server sehen.
-	\item Als Drone-Operator möchte ich den aktuellen Status des \Gls{Flight-Controller}, beispielsweise GPS und Batteriespannung sehen.
+	\item Als Drone-Operator möchte ich den aktuellen Status des \Gls{Flight-Controller}s, beispielsweise GPS und Batteriespannung sehen.
 	\item Als Drone-Operator möchte ich eine Liste von Produkten angezeigt bekommen, die für die aktuelle Mission geladen werden müssen.
 	\item Als Drone-Operator möchte ich eine Mission annehmen oder ablehnen können um eine Drohne bei Problemen austauschen zu können.
 	\item Als Drone-Operator möchte ich die Beladung einer Drohne bestätigen können.
@@ -112,8 +112,7 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 \subsection{Nachträglich ausgeschlossene Anforderungen}
 
 \subsubsection{Bestellung löschen und ändern}
-Gemäss den anfänglichen Anforderungen sollte der Administrator die Möglichkeit haben eine Bestellung zu bearbeiten (CRUD). Dies wurde reduziert auf das Ansehen von Bestellungen (R). Nur ein Kunde sollte die Möglichkeit haben eine Bestellung zu löschen, da auch er sie erstellt hat. Ausserdem muss es auch dort Einschränkungen geben, da eine bezahlte Bestellung unter keinen Umständen gelöscht werden sollte.
-
+Gemäss den anfänglichen Anforderungen sollte der Administrator die Möglichkeit haben eine Bestellung zu bearbeiten (CRUD). Dies wurde reduziert auf das Ansehen von Bestellungen (R). Unserer Meinung nach, sollten nur der Kunde die Möglichkeit haben seine Bestellung zu löschen. Ausserdem muss es auch dort Einschränkungen geben, da eine bezahlte Bestellung unter keinen Umständen gelöscht werden darf.
 
 \subsubsection{Mission abbrechen}
 
@@ -123,19 +122,19 @@ Das Abbrechen einer Mission wurde aus dem Scope entfernt, da sich einerseits Fra
 
 \subsubsection{Verwalten von Organisationen}
 
-Um die Applikation Multi-Tenant-Fähig zu machen, wurden Organisationen eingefügt. Diese trennen verschiedene Kunden komplett ab und ermöglichen den Einsatz als Software as a Service.
+Um die Applikation multi-tenant-fähig zu machen, wurden Organisationen eingefügt. Diese trennen verschiedene Kunden komplett ab und ermöglichen den Einsatz als Software as a Service.
 
 \subsubsection{Administratoren Hinzufügen und Entfernen}
 
-Um Organisationen nutzbar zu machen, musste es auch möglich sein zusätzliche Administratoren zu einer Firma hinzuzufügen und wieder zu entfernen.
+Um Organisationen nutzbar zu machen, musste es auch möglich sein, zusätzliche Administratoren zu einer Firma hinzuzufügen und wieder zu entfernen.
 
-\subsubsection{Produkte einem Projekt hinzüfen}
+\subsubsection{Produkte einem Projekt hinzufügen}
 
-Damit Organisationen nur einmal ihre Produkte erfassen müssen und diese dann für verschiedene Projekte (z.B. Events) verwenden können, gehören Produkte immer zu einer Organisation und zu beliebig vielen Projekten. (siehe Abb. \ref{fig:domain-model})
+Dieses Feature war nötig, damit Organisationen ihre Produkte nur einmal erfassen müssen und diese dann für verschiedene Projekte (z.B. Events) verwendet werden können (siehe Abb. \ref{fig:domain-model}).
 
 \subsubsection{Nur verfügbare Produkte anzeigen}
 
-Damit ein Kunde nur die für ihn relevanten Angebote sieht, werden nur Produkte und Services angezeigt, die an seiner Position verfügbar sind.
+Es macht keinen Sinn, dass ein Kunde Produkte sieht, die gar nicht zu ihm geliefert werden können. Deshalb wird die Liste mit Hilfe seiner Position auf verfügbare Produkte gefiltert.
 
 \newpage
 \section{Nichtfunktionale Anforderungen}
@@ -168,13 +167,13 @@ Damit ein Kunde nur die für ihn relevanten Angebote sieht, werden nur Produkte 
 
 \subsubsection{HTTP-Verbindungen}
 \begin{tabular}{|p{.25\textwidth}|p{.75\textwidth}|} \hline
-	Synopsis & Die Verbindung zum Server von jedem Client muss verschlüsselt sein.\\ \hline
+	Synopsis & Die Verbindung zum Server muss verschlüsselt sein.\\ \hline
 	Messbarkeit & Die Verbindung über den Webbrowser lässt nur HTTPS zu. Die Verbindung vom Customer-App zum Server läuft über HTTPS und Secure-Websockets. Die Verbindung vom Onboard-App zum Server läuft über HTTPS.\\ \hline
 \end{tabular}
 
 \section{Usability und Accessability}
 
-Usability-Tests und Anforderungen im der Accessability wurden bewusst und in Absprache mit dem Betreuer aus dem Scope ausgeschlossen.
+Usability-Tests und Anforderungen in der Accessability wurden bewusst und in Absprache mit dem Betreuer aus dem Scope ausgeschlossen.
 
 \section{Domain-Model}
 Aus den funktionalen Anforderungen ergibt sich das folgende Domainmodel.
