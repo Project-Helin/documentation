@@ -94,7 +94,6 @@ Aufgrund der schlechten Erfahrung mit Websocket auf mobilen Geräten und der st�
 Eine alternative war Messaging. Wegen der zeitlichen Unabhängigkeit, vom Server und App, haben Verbindungsabbrüche keine schlimmen Konsequenzen.\\
 
 Um bei Verbindungsabbrüchen die Mission nicht zu gefährden, wird die gesamte Mission vor dem Start übertragen, damit sie ausgeführt werden kann. Einzelne Wegpunke sind somit nicht auf eine stabile Internetverbindung angewiesen, da die Route bereits von Anfang bekannt ist. \\
-
 Verbindungsabbrüche auf dem Mobiltelefon haben zweierlei Konsequenzen:	\\
 \begin{itemize}
 	\item{\textbf{Mobiltelefon kann die Messages vom Server nicht empfangen:} \\
@@ -133,8 +132,6 @@ Aus diesen Erkenntnissen standen beide Möglichkeiten offen, denn beide erfülle
 \subsubsection{Android Process Lifecycle} 
 Da die OnboardApp auf einem Android Betriebssystem läuft, mussten gewisse Voraussetzungen geprüft werden. Im Grund kann davon ausgegangen werden, dass die Applikation immer im Vordergrund steht. Es ist doch sehr unwahrscheinlich, dass die Appliaktion in den Hintergrund rückt, weil eine andere Applikation verwendet wird. \\
 Laut Android Dokumentation ist das Verhalten einer Applikation im Hintergrund nicht deterministisch \cite{androidGuide}. Sollte eine Applikation im Hintergrund gewisse Garantien haben, so muss von einem Service und der spezifischen Implementierung eines Services gesprochen werden. Im Fall der OnboardApp und den getroffenen Annahmen, wurde davon abgesehen, da die Applikation während des Fluges nicht gewechselt wird.\\
-
-
 
 
 \subsection{Customer App}

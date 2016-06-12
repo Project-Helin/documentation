@@ -26,12 +26,12 @@ Jedes Polygon bildet eine Zone ab. Jede Zone enthält eine Flughöhe sowie einen
 \end{itemize}
 
 \subsection{Von der Zone zum Graph}
-Normalerweise wird eine Routenberechnung mit Hilfe eines Graphen durchgeführt, der durch die möglichen Wege (z.B. Strassen) definiert ist. Da die Zonen aber eine Fläche bilden, musste diese zuerst in einen Graphen umgewandelt werden. \\
+Normalerweise wird eine Routenberechnung mit Hilfe eines Graphen durchgeführt, der durch die möglichen Wege (z.B. Strassen) definiert ist. Da die Zonen aber eine Fläche bilden, mussten diese zuerst in einen Graphen umgewandelt werden. \\
 
 Folgende Lösungsmöglichkeiten wurden evaluiert:
 
 \subsubsection{Erstes Konzept: Direkte Route}
-Dieses Konzept umfasste den Ansatz den Start und den Endpunkt direkt zu verbinden, und bei einem verlassen des Polygons dem Rand zu folgen (siehe Abb.\ref{fig:first-concet-routing}).
+Dieses Konzept umfasste den Ansatz den Start und den Endpunkt direkt zu verbinden, und bei einem Verlassen des Polygons dem Rand zu folgen (siehe Abb.\ref{fig:first-concet-routing}).
 
 \begin{figure}[H]
 	\centering
@@ -48,7 +48,7 @@ Das nächste Konzept orientiert sich an einem 'Visibility Graphen'.
 \cite[p.1]{IEEEPaper} 
 
 \blockquote{Using visibility graphs for determining the shortest path is very practical and intuitive. The visibility graph of a set of nonintersecting polygonal obstacles in the plane is an undirected graph whose vertices are the vertices of the obstacles and whose edges are pairs of vertices such that the open line segment between each two vertices does not intersect any of the obstacles.}
-In unserem Fall haben wir den Gedanken umgedreht. Wir haben den Graphen in einem Polygon mit potentiellen Löchern berechnet. Diese Löcher stellen Enklaven für Bäume oder Gebäude dar. Das Konzept ist aber das gleiche, angewendet auf unser Beispiel Polygon ergibt sich folgende Abstraktion:
+In unserem Fall haben wir den Gedanken umgedreht. Wir haben den Graphen in einem Polygon mit potentiellen Löchern berechnet. Diese Löcher stellen Enklaven für Bäume oder Gebäude dar. Das Konzept ist aber identisch, angewendet auf unser Beispiel Polygon ergibt sich folgende Abstraktion:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/routing/visibilityGraph.png}
@@ -56,7 +56,7 @@ In unserem Fall haben wir den Gedanken umgedreht. Wir haben den Graphen in einem
 	\label{fig:visibility-graph}
 \end{figure}
 Wie in der Grafik \ref{fig:visibility-graph} gezeigt wird, verlaufen deutlich weniger Flugrouten entlang der Kante des Polygons. \\
-Dies ist eine deutliche Verbesserung gegenüber dem ersten Konzept. Der Nachteil ist, dass die untere Ecke des L-förmigen Polygons sicher angeflogen wird, da es die vermeintlich kürzeste Route in einem nächsten Schritt darstellen würde. Aus diesem Grund haben wir uns gegen den Einsatz dieses Konzepts entschieden.\\
+Dies ist eine deutliche Verbesserung gegenüber dem ersten Konzept. Der Nachteil ist, dass die innere Ecke des L-förmigen Polygons sicher angeflogen wird, da es die vermeintlich kürzeste Route in einem nächsten Schritt darstellen würde. Aus diesem Grund haben wir uns gegen den Einsatz dieses Konzepts entschieden.\\
 
 \subsubsection{Drittes Konzept: Straight Skeleton}
 Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet.
@@ -78,14 +78,14 @@ Nach der Herleitung des Graphen aus den Zonen, musste nun der passende Algorithm
 	\item{\textbf{A-Star:} Der A-Star Algorithmus arbeitet mit einer Heuristik und funktioniert effizienter als die zwei bereits genannten Algorithmen. Allerdings ist der Aufwand für die Umsetzung deutlich höher. \cite{AiClass}}
 	\item{\textbf{Dijkstra:} Der Dijkstra-Algorithmus ist ebenfalls ein klassischer Graphpropagierungsalgorithmus. Der Vorteil ist, dass er grundsätzlich ohne Heuristik auskommt und robust mit Zyklen umgehen kann. Ausserdem können die Kanten mit einem Gewicht versehen werden und dadurch, der kürzeste Weg berechnet werden.}
 \end{itemize}
-Wir uns für den Dijkstra Algorithmus entschieden. Er liefert ohne Metrik eine ähnliche Lösung wie die BFS-Suche, kann aber im Nachhinein erweitert werden um effizientere Routen zu liefern.
+Wir haben uns für den Dijkstra Algorithmus entschieden. Er liefert ohne Metrik eine ähnliche Lösung wie die BFS-Suche, kann aber im Nachhinein erweitert werden um effizientere Routen zu liefern.
 
 \subsection{Höhenhandling}
 Damit die Route 2-Dimensional berechnet werden kann, werden die Höhen erst zum Schluss berücksichtigt. Das Höhenhandling bildet den abschliessenden Schritt bei der Berechnung einer Route und wird in zwei Schritten durchgeführt:
 
 \begin{itemize}
-	\item{\textbf{Bestimmen der Zugehörigkeit des Knotens:} In einem ersten Schritt werden die Zonen nach Höhe absteigend sortiert. Im Anschluss werden bei einer Überlagerung von zwei Zonen die Differenzen der Polygone entfernt, somit können die höherliegenden Polygone die Tieferliegenden abdecken. Dieses Abdecken, garantiert später, dass die Punkte nur einmal zugeordnet werden und somit bei einer Überlagerung von zwei Zonen mit unterschiedlichen Höhen die Route nicht durch einen Tal vom höher- und tiefergelegenen Polygon führt.}
-	\item{\textbf{Setzten der Höhe:} Es wird über alle Punkte iteriert, und die Höhe entsprechend dem Polygon indem es sich befindet gesetzt. Da die Überschneidungen nach Höhe im ersten Teil bereits vollzogen wurde, ist das Resultat eindeutig.}
+	\item{\textbf{Eindeutigkeit der Höhe:} In einem ersten Schritt werden die Zonen nach Höhe absteigend sortiert und Überlagerungen zu Gunsten der Höheren Zone entfernt.}
+	\item{\textbf{Bestimmen der Zugehörigkeit des Knotens:} Angefangen bei der höchsten Zone werden die Liniensegmente mit der jeweiligen Zonen höhe versehen. Bei Linien, welche die Zone verlassen, wird ein Punkt am Schnittpunkt eingefügt.}
 \end{itemize}
 \begin{figure}[h]
 	\centering
@@ -93,9 +93,9 @@ Damit die Route 2-Dimensional berechnet werden kann, werden die Höhen erst zum 
 	\caption{Beispiel der Höhe am Übergang zweier Polygone}
 	\label{fig:polygon-border-example}
 \end{figure}
-Wie gemäss der Abbildung \ref{fig:polygon-border-example} ersichtlich ist, ist trotz des langen geraden Pfades zwischen den zwei Zonen ein Punkt eingefügt. Im Grunde sind es zwei Punkte, die für den Wechsel der Flughöhe verantwortlich sind.
+Wie gemäss der Abbildung \ref{fig:polygon-border-example} ersichtlich ist, ist trotz des langen geraden Pfades zwischen den zwei Zonen ein Punkt eingezeichnet. Im Grunde sind es zwei Punkte, die für den Wechsel der Flughöhe verantwortlich sind.
 \newpage
 \subsection{Wahl der Rückroute}
-Das Bilden der Rückroute erfolgt in einem sehr einfachen verfahren. Bei der aktuellen Lösung werden Start und Endpunkt mit der dazugehörigen Aktion versehen. Im Falle des Endpunktes ist es in unserem Fall der Abwurf.
+Das Bilden der Rückroute erfolgt in einem sehr einfachen Verfahren. Bei der aktuellen Lösung werden Start und Endpunkt mit der dazugehörigen Aktion versehen. Im Falle des Endpunktes ist es in unserem Fall der Abwurf.
 \\
-Nun kann dieser Pfad genommen, umgedreht und angehängt werden, wobei der letzte Punkt entfernt wird. So ist garantiert, dass die Drohne den gleichen Rückweg wie hinweg verwendet um die Mission zu erfüllen. Diese Liste wird nun an den Autopiloten übergeben.
+Nun kann dieser Pfad genommen, umgedreht und angehängt werden, wobei der letzte Punkt entfernt wird. So ist garantiert, dass die Drohne den gleichen Rückweg wie Hinweg verwendet um die Mission zu erfüllen. Diese Liste wird nun an den Autopiloten übertragen.
