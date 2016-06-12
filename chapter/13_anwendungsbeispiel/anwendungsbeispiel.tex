@@ -53,7 +53,7 @@ Der Frame, die Motoren und ESCs wurden als Kit gekauft. Es handelt sich dabei um
 
 \subsection{Flight-Controller}
 
-Der Flight-Controller ist das Herzstück eines Quadcopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches abfliegen von Wegpunkten.
+Der Flight-Controller ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches abfliegen von Wegpunkten.
 
 Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open-Source ist und auch bei vielen anderen Projekten eingesetzt wird. Sie unterstützt ausserdem das \Gls{MAVLink} Protokoll, das es ermöglicht verschiedene Flight-Controller über verschiedene Protokolle und Anschlüsse anzusprechen.
 
@@ -141,31 +141,62 @@ Es wurde ein einfacher Mechanismus mit einem handelsüblichen Modelbau-Servo kon
 Das Packet, an einem Fallschirm befestigt, wird auf den Stift gehängt und verschlossen und der Fallschirm im dazugehörigen Fallschirmschacht verstaut. Der Servo war mittels einer Fernbedienungstaste kontrollierbar und löste so den Abwurf des Paketes aus. Später haben wir den Servo über einen Softwarebefehl auslösbar gemacht. 
 
 \subsection{Kommunikationshardware}
-Da die Drohne gemäss unseren Anforderungen eine Verbindung zum Server benötigt, muss geeignete Kommunikationshardware installiert werden. Aus folgenden Gründen haben wir uns für ein Android fähiges Mobiltelefon entschieden:
+Da die Drohne gemäss unseren Anforderungen eine Verbindung zum Server benötigt, muss geeignete Kommunikationshardware installiert werden. Aus folgenden Gründen haben wir uns für ein Android-Smartphone entschieden:
 \begin{itemize}
-	\item{Android als Softwareplattform ermöglicht uns die Entwicklung in Java}
-	\item{Ein User Interface und Statusanzeige kann auf dem App implementiert werden}
-	\item{Es existiert eine passende Bibliothek für die Kommunikation über MAVLink}
-	\item{Das Betriebssystem übernimmt den gesammten Kommunikationsstack - sei es im Gebäude mittels WLAN oder im Feld über GSM}
+	\item{Der Status der Drohne und Anweisungen zur Beladung können angezeigt werden}
+	\item{Die Anbindung an den Flight-Controller ist über eine API möglich}
+	\item{Das Android-Betriebssystem stellt die Kommunikation über WLAN oder GSM zur Verfügung}
 \end{itemize}
-Für Verwendungszwecke ohne den Bedarf eines User Interfaces kann man sich allenfalls auch überlegen andere Komponenten zu verwenden. Wir haben zwei Optionen genauer angeschaut und bewertet:
+
+Falls die Beladung automatisiert wird, oder keine Beladung notwendig ist, benötigt man nicht unbedingt ein Smartphone. Um Gewicht und Platz auf der Drohne zu sparen gibt es folgende Alternativen:
 \begin{itemize}
-	\item{\textbf{Raspbery PI} \\
+	\item{\textbf{Raspberry PI} \\
 	Bereits ab dem leichtgewichtigen Raspberry PI zero sind die nötigen Funktionen vorhanden. Zusätzlich muss hier auf ein GSM Modem zurückgegriffen werden um eine permanente Internetverbindung aufzubauen. Bei Verwendung eines Raspberry PI 3 kann sogar auf ein WLAN Interface zugegriffen werden.
 	}
 	\item{\textbf{Arduino} \\
 	Bei der Arduino Hardware Plattform kann auf einem beliebigen Arduino Board implementiert werden, welches als USB Host Device arbeiten kann. Zusätzlich muss ein GSM Shield 2 verwendet werden um eine GSM Verbindung aufbauen zu können.}
 \end{itemize}
-Aus unserer Sicht stellen die zwei Embedded Systeme durchaus eine alternative dar. Leider verschwindet aber der Komfort die Drohne mittels dem GUI auf der Onboard App zu überwachen . 
+
 Beide Alternativen müssen zusätzlich über das Boardstromnetz der Drohne betrieben werden, und benötigen zusätzliche Spannungsregler um die gewünschte Betriebsspannung der Hardware zu gewährleisten. 
 
-Dies kann noch weiter optimiert werden, wenn die Schaltung genügend dimensioniert ist, um dem Servo  eine stabile Stromversorgung zu gewährleisten, so kann ein externes BEC, welches zur Zeit im Einsatz ist, wegfallen.\\
+Dies kann noch weiter optimiert werden, wenn die Schaltung genügend dimensioniert ist, um dem Servo eine stabile Stromversorgung zu gewährleisten, so kann ein externes BEC, welches zur Zeit im Einsatz ist, wegfallen.\\
 
 Abschliessend sollte erwähnt werden, dass die permanente Internetverbindung durchaus eine Anforderung ist, die vieles einschränkt.
 Kann man sich von dieser Anforderung trennen und mit den Konsequenzen leben, so könnte die Drohne in der Ladezone ausschliesslich mit einem WLAN Netz betrieben werden. Dies wiederum würde einen Raspberry PI 3 sehr attraktiv für dieses Szenario machen.
  
- 
- 
+\subsection{Fallschirm}
+Da wir uns entschieden haben, die Lieferung abzuwerfen, und die Drohne nicht zu landen, musste sichergestellt werden, dass der Aufprall sich in einem niedrigen Ausmass ereignete. Der Ausmass durfte das Produkt nicht beschädigen.
+\\
+Eine PET-Flasche die von einem ein Meter hohen Tisch fällt, bleibt unbeschädigt. Die Möglichkeit sie zu öffnen, ohne den Flascheninhalt auf Grund der Kohlensäure schlagartig über die Umgebung zu verteilen, hält sich in Grenzen. Aus diesem Grund haben wir die Geschwindigkeit für diesen Aufprall errechnet.
+\begin{equation}
+\begin{split}
+v &= \sqrt{2gd} \\
+v &= \sqrt{2 \cdot 9.81\frac{m}{s^2} \cdot 1.0m} \\
+v &= 4.429 \frac{m}{s} \approx 4.5 \frac{m}{s} \\
+\end{split}
+\end{equation}
+Nun musste ein Fallschirm dimensioniert werden, der eine Flasche mit 500g Inhalt sicher zu Boden bringt. Da dies alles Annäherungen sind, nehmen wir der einfachheithalber an, dass die Flasche mit Inhalt 500g schwer ist und der Fallschirm die Form einer Kugelkalotte. 
+%Todo Skizze
+\begin{equation}
+\begin{split}
+F_{Brems} &= F_{G} \\
+c_{w} \cdot A \cdot \frac{\rho}{2} \cdot v_{sink}^{2} &= m_{Pet} \cdot g \\
+A &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
+\end{split}
+\end{equation}
+Für die Werte $\rho$, $c_w$ wurden die Standardwerte genommen. Bei der Luftdichte $\rho$ entspricht das $1.225 \frac{kg}{m^3}$ und für $c_w$ den Literaturwert für die konkave Seite der Halbkugelschale $1.33$. Zusätzlich, lässt sich der Durchmesser über die Öffnungsfläche berechnen $A = \pi \cdot r^2$.
+\begin{equation}
+\begin{split}
+\pi \cdot r^2 &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
+r &= \sqrt{\frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} \cdot \pi}} \\
+d &= 2 \cdot \sqrt{\frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} \cdot \pi}} \\
+d &= 2 \cdot \sqrt{\frac{2 \cdot 0.5kg \cdot  9.81\frac{m}{s^2}}{1.225 \frac{kg}{m^3} \cdot 1.33 \cdot 4.5 \frac{m}{s} \cdot \pi}} \\
+d &= 1.30m \\
+\end{split}
+\end{equation}
+Der Durchmesser des Prototypenfallschirms muss somit etwa 1.30m betragen.
+%TODO MARCEL: 2 - 3 Sätze zum Bau und noch eine foto? :)
+
 \subsection{Tests}
 Um die Anwendungsmöglichkeiten eines solchen Multicopters auszuloten wurden diverse Experimente durchgeführt um die Leistungsfähigkeit und die Einschränkungen zu testen. 
 
@@ -279,7 +310,7 @@ Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, da
 
 \section{Alternative Drohnenarten}
 
-Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Beispielsweise bietet die Autopilot-Software 'ArduPilot' Firmware-Varianten für Multicopter, Flugzeuge, Fahrzeuge an, wie dies in der Abbildung \ref{fig:arduScreenshot} dargestellt. \\
+Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, alle Arten von Drohnen angesteuert werden. Wie in Abbildung \ref{fig:arduScreenshot} ersichtlich, bietet die Autopilot-Software 'ArduPilot' Varianten für Multicopter, Flugzeuge und Fahrzeuge an.\\
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth] {images/arduScreenshot.jpg}
@@ -287,7 +318,7 @@ Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, al
 \label{fig:arduScreenshot}
 \end{figure}
 
-Uplift  Aero beispielsweise war ein Startup, dass versucht hat, Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen. Sie haben für ihre Flugzeuge (Grafik \ref{fig:uplift}) die selben Flugcontroller wie wir verwendet und mussten lediglich die passende Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
+Auch andere Projekte könnten von unserem System profititeren. Uplift Aero beispielsweise, ist ein Startup, dass Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien zu fliegen wollte. Sie haben für ihre Flugzeuge (Grafik \ref{fig:uplift}) die selben Flugcontroller wie wir verwendet, mussten lediglich eine andere Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
 
 \begin{figure}[H]
 \centering
