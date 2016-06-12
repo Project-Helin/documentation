@@ -159,13 +159,44 @@ Falls die Beladung automatisiert wird, oder keine Beladung notwendig ist, benöt
 
 Beide Alternativen müssen zusätzlich über das Boardstromnetz der Drohne betrieben werden, und benötigen zusätzliche Spannungsregler um die gewünschte Betriebsspannung der Hardware zu gewährleisten. 
 
-Dies kann noch weiter optimiert werden, wenn die Schaltung genügend dimensioniert ist, um dem Servo  eine stabile Stromversorgung zu gewährleisten, so kann ein externes BEC, welches zur Zeit im Einsatz ist, wegfallen.\\
+Dies kann noch weiter optimiert werden, wenn die Schaltung genügend dimensioniert ist, um dem Servo eine stabile Stromversorgung zu gewährleisten, so kann ein externes BEC, welches zur Zeit im Einsatz ist, wegfallen.\\
 
 Abschliessend sollte erwähnt werden, dass die permanente Internetverbindung durchaus eine Anforderung ist, die vieles einschränkt.
 Kann man sich von dieser Anforderung trennen und mit den Konsequenzen leben, so könnte die Drohne in der Ladezone ausschliesslich mit einem WLAN Netz betrieben werden. Dies wiederum würde einen Raspberry PI 3 sehr attraktiv für dieses Szenario machen.
  
- 
- 
+\subsection{Fallschirm}
+Da wir uns entschieden haben, die Lieferung abzuwerfen, und die Drohne nicht zu landen, musste sichergestellt werden, dass der Aufprall sich in einem niedrigen Ausmass ereignete. Der Ausmass durfte das Produkt nicht beschädigen.
+\\
+Eine PET-Flasche die von einem ein Meter hohen Tisch fällt, bleibt unbeschädigt. Die Möglichkeit sie zu öffnen, ohne den Flascheninhalt auf Grund der Kohlensäure schlagartig über die Umgebung zu verteilen, hält sich in Grenzen. Aus diesem Grund haben wir die Geschwindigkeit für diesen Aufprall errechnet.
+\begin{equation}
+\begin{split}
+v &= \sqrt{2gd} \\
+v &= \sqrt{2 \cdot 9.81\frac{m}{s^2} \cdot 1.0m} \\
+v &= 4.429 \frac{m}{s} \approx 4.5 \frac{m}{s} \\
+\end{split}
+\end{equation}
+Nun musste ein Fallschirm dimensioniert werden, der eine Flasche mit 500g Inhalt sicher zu Boden bringt. Da dies alles Annäherungen sind, nehmen wir der einfachheithalber an, dass die Flasche mit Inhalt 500g schwer ist und der Fallschirm die Form einer Kugelkalotte. 
+%Todo Skizze
+\begin{equation}
+\begin{split}
+F_{Brems} &= F_{G} \\
+c_{w} \cdot A \cdot \frac{\rho}{2} \cdot v_{sink}^{2} &= m_{Pet} \cdot g \\
+A &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
+\end{split}
+\end{equation}
+Für die Werte $\rho$, $c_w$ wurden die Standardwerte genommen. Bei der Luftdichte $\rho$ entspricht das $1.225 \frac{kg}{m^3}$ und für $c_w$ den Literaturwert für die konkave Seite der Halbkugelschale $1.33$. Zusätzlich, lässt sich der Durchmesser über die Öffnungsfläche berechnen $A = \pi \cdot r^2$.
+\begin{equation}
+\begin{split}
+\pi \cdot r^2 &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
+r &= \sqrt{\frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} \cdot \pi}} \\
+d &= 2 \cdot \sqrt{\frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} \cdot \pi}} \\
+d &= 2 \cdot \sqrt{\frac{2 \cdot 0.5kg \cdot  9.81\frac{m}{s^2}}{1.225 \frac{kg}{m^3} \cdot 1.33 \cdot 4.5 \frac{m}{s} \cdot \pi}} \\
+d &= 1.30m \\
+\end{split}
+\end{equation}
+Der Durchmesser des Prototypenfallschirms muss somit etwa 1.30m betragen.
+%TODO MARCEL: 2 - 3 Sätze zum Bau und noch eine foto? :)
+
 \subsection{Tests}
 Um die Anwendungsmöglichkeiten eines solchen Multicopters auszuloten wurden diverse Experimente durchgeführt um die Leistungsfähigkeit und die Einschränkungen zu testen. 
 
