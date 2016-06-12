@@ -2,7 +2,7 @@
 
 \section{Ziele}
 
-Die folgende Architektur soll es ermöglichen, eine Flotte von Drohnen automatisiert und zentralisiert zu verwalten. Die Kommunikation zwischen Server und Drohne muss ausserdem von beiden Seiten initiierbar sein. Zusätzlich muss eine Schnittstelle für Kunden existieren, damit Bestellungen getätigt werden können. 
+Die folgende Architektur soll es ermöglichen, eine Flotte von Drohnen automatisiert und zentralisiert zu verwalten. Die Kommunikation zwischen Server und Drohne muss ausserdem von beiden Seiten initiierbar sein (Push-Messages). Zusätzlich muss eine Schnittstelle für Kunden existieren, damit Bestellungen getätigt werden können. 
 
 \section{Übersicht}
 
@@ -29,7 +29,6 @@ Abbildung \ref{fig:logical-architecture-overview} zeigt die Hauptkomponenten, so
 \section{Server-Komponente}
 
 \subsection{Anforderungen}
-%Todo sauber referenzieren
 Aus den in den Anforderungen definierten Zielen, ergeben sich für die Server-Komponente folgende Anforderungen:
 
 \begin{itemize}
@@ -42,7 +41,7 @@ Aus den in den Anforderungen definierten Zielen, ergeben sich für die Server-Ko
 \subsection{Layers}
 Die Architektur des Servers basiert auf dem {MVC Pattern \cite{MVC}}, da dieses für CRUD Applikationen mit Benutzeroberfläche besonders geeignet ist und dafür viele geeignete Frameworks zur Verfügung stehen.\\
 
-Für Komponenten die aus unterschiedlichen Controllern verwendet werden, wurde zusätzlich eine Service Komponente verwendet. Die Services stellen Abstraktionen für wichtige Funktionen wie das Messaging und die Routenberechnung bereit.
+Für Komponenten die aus unterschiedlichen Controllern verwendet werden, wurde zusätzlich eine Service Komponente verwendet. Die Services stellen Abstraktionen für wichtige Funktionen wie das Messaging und die Routenberechnung bereit.\\
 
 Die Verantwortlichkeiten und Kollaborationen der Layer werden nachfolgend genauer definiert.
 
@@ -107,7 +106,7 @@ Der Data Access Layer bietet die Möglichkeit auf die Persistence Library zuzugr
 
 \subsection{Layer}
 
-Die App enthält die normalen Android-Application-Layer wie Activities und Views. Zusätzlich kommt der Service-Layer hinzu. Dieser enthält keine Android-Services, sondern selbst entwickelte Service-Klassen.
+Die App enthält die normalen Android-Application-Layer wie Activities und Views. Zusätzlich kommt der Service-Layer hinzu. Dieser enthält keine Android-Services, sondern selbst entwickelte Service-Klassen. Android Services werden nur zwingend benötigt, wenn etwas im Hintergrund weiterlaufen soll. Da die Onboard-App aber immer im Vordergrund läuft, konnte die aufwendige Kommunikation mit Android-Services mit Hilfe von {Dependency-Injection \cite{DI} umgangen werden.\\
 
 \subsubsection{Service-Komponente}
 
@@ -124,7 +123,7 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 	\begin{itemize}
 		\item Activities-Layer
 		\item AMQP-Library
-		\item Messages
+		\item Commons
 	\end{itemize}
 	\\ \hline
 \end{tabular}
@@ -137,11 +136,14 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 \begin{itemize}
 	\item Kommuniziert mit dem Server
 	\item Bietet eine Benutzeroberfläche für den Customer
+	\item Ermöglicht die Bezahlung von Produkten
+	\item Ermöglicht das Login über einen externen Identifikationsprovider
 \end{itemize}
 
 \subsection{Layer}
 
-Die App enthält die normalen Android-Application-Layer wie Activities und Views. Zusätzlich kommt der Service-Layer hinzu. Dieser enthält keine Android-Services, sondern selbst entwickelte Service-Klassen.
+\subsubsection{View-Layer}
+Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schnittstellen zum Zahlungsanbieter und Identifikationsprovider an.
 
 \subsubsection{Service-Layer}
 \begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
@@ -154,18 +156,19 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 		\item Ermöglicht das Senden von Nachrichten an den Server
 	\end{itemize}&
 	\begin{itemize}
-		\item Activities-Layer
-		\item AMQP-Library
-		\item Messages
+		\item View-Layer
+		\item Websockets-Library
+		\item Identifikationsprovider
+		\item Zahlungsanbieter
 	\end{itemize}
 	\\ \hline
 \end{tabular}
 
 \section{Kommunikations-Architektur}
 \label{sec:communication-architecture}
-Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht. Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. Für die Kommunikation mit dem Onboard-App wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen. Eine Bidirektionale Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne). Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
+Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht. Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. Für die Kommunikation mit dem Onboard-App wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen. Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne). Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
 	
-Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über die bidirektionale Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig Websockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
+Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig Websockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
 
 Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und Websockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät.\\
 
@@ -179,11 +182,11 @@ Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und
 Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns die je nach Anforderungen verwendet werden können.({\cite{EIP}}) Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
 %
 \subsubsection{Point-to-Point Channel}
-Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverlässigen Nachrichtenaustausch zu ermöglichen, wird jede Drohne bzw. jede App über einen separaten Point-to-Point Channel	\cite[S. 103]{EIP}} angebunden. Der Channel wird nach der Registrierung zugeteilt und stellt den Point-to-Point Kanal zwischen Drone und Server dar. Dies garantiert dem Server eine Nachricht an garantiert eine Drohne zu schicken.
+Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverlässigen Nachrichtenaustausch zu ermöglichen, wird jede Drohne bzw. jede App über einen separaten Point-to-Point Channel	\cite[S. 103]{EIP}} angebunden. Der Channel wird nach der Registrierung zugeteilt und stellt den Point-to-Point Kanal zwischen Drone und Server dar. Dies garantiert dem Server, eine Nachricht an nur eine Drohne zu schicken.
 %
 \subsubsection{At-most-once}
 
-Die Fehlersemantik At-most-once gibt die Sicherheit dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
+Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist ausserdem in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
 %
 \subsubsection{Event-driven Consumer}
 {Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit auf Grund von Nachrichten Aktionen auszuführen. Beispielsweise:
@@ -194,17 +197,7 @@ Die Fehlersemantik At-most-once gibt die Sicherheit dass eine Drohne eine Missio
 	\item Smartphone des Kunden erhält neue Position der Drohne, auf der Karte wird die Position der Drohne angezeigt.
 \end{itemize}
 
-
-\subsection{Register Drone}
-%TODO gehört in die Umsetzung
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=1.0]{images/registerDrone.png}
-	\caption{Übersicht der Project Helin Architektur }
-	\label{fig:registerDrone}
-\end{figure}
-%
-\subsection{Order Cargo}
+\section{Bestellprozess}
 \begin{figure}[h]
 	\centering
 	\includegraphics[height=1.0\textheight]{images/sequence_diagram.png}
@@ -213,7 +206,9 @@ Die Fehlersemantik At-most-once gibt die Sicherheit dass eine Drohne eine Missio
 \end{figure}
 %
 Order Cargo (Abbildung \ref{fig:registerDrone}) beschreibt den Bestellprozess und die damit zusammenhängende Kommunikation. \\
-Der User möchte gerne an einem Anlass ein Produkt bestellen. Er bestellt mittels der App ein Produkt, der Server bestätigt ihm die Bestellung und schlägt einen Abwurfort vor. Sollte der Abwurfort dem Kunden nicht entsprechen, so kann er den Prozess abbrechen und ihn nocheinmal auslösen, sobald er sich in einer geografisch glücklicheren Lage befindet.
-\\
-Der Server evaluiert im Anschluss eine verfügbare Drone, welche den Auftrag ausführen kann und schlägt die Mission dem DroneOperator vor. Sollte die Drone verfügbar sein, so kann er diesen Auftrag bestätigen. Im Fall einer Wartungsarbeit kann der Auftrag zu diesem Zeitpunkt auch abgelehnt werden. Sobald der Auftrag angeommen wurde, erhält der DroneOperator genaue Angaben zur Beladung der Drohne. Anschliessend wird die Ladung bestätigt und der Server kann dem Kunden mitteilen, dass die Drone nun startklar ist. Während des Fluges erhält der Kunde Benachrichtigungen vom Server mit der aktuellen Position der Drohne. Sobald die Ladung abwurfbereit ist, wird der Kunde informiert und die Drohne kann die Ladung abwerfen. Im Anschluss fliegt die Drohen zur Basis zurück und bestätigt dem Server die Ankunft. So kann gewährleistet werden, dass die Drohne wieder eine eine Mission erhalten kann.
+
+
+Der Kunde bestellt mittels der App ein Produkt, der Server bestätigt ihm die Bestellung und schlägt einen Abwurfort vor. Sollte der Abwurfort dem Kunden nicht entsprechen, so kann er den Prozess abbrechen und ihn noch einmal auslösen, sobald er sich an einer passenderen Stelle befindet.\\
+
+Der Server evaluiert im Anschluss eine verfügbare Drohne, welche den Auftrag ausführen kann und zeigt die Mission dem Drone-Operator an. Sollte die Drohne bereit sein, so kann er diesen Auftrag bestätigen. Im Falle einer nötigen Wartungsarbeit kann der Auftrag zu diesem Zeitpunkt auch abgelehnt werden. Sobald der Auftrag angenommen wurde, erhält der Drone-Operator genaue Angaben zur Beladung der Drohne. Anschliessend wird die Ladung bestätigt und der Server kann dem Kunden mitteilen, dass die Drone nun startklar ist. Während des Fluges erhält der Kunde Benachrichtigungen vom Server mit der aktuellen Position der Drohne. Sobald die Ladung abgeworfen wurde, fliegt die Drohne zur Ladezone zurück und bestätigt dem Server die Ankunft. So kann gewährleistet werden, dass bekannt ist, ab wann die Drohne wieder verfügbar ist.
 %
