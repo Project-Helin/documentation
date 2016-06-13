@@ -90,7 +90,7 @@ Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der
 
 Die Kommunikation vom Onboard-App zum Server sollte bidirektional sein. 
 Gemäss den nicht-funktionalen Anforderungen darf der Verbindungsabbruch keinen Einfluss auf die Mission haben.
-Aufgrund der schlechten Erfahrung mit Websocket auf mobilen Geräten und der ständigen Verbindungsabbrüche, kam diese nicht in Frage. 
+Aufgrund der schlechten Erfahrung mit WebSocket auf mobilen Geräten und der ständigen Verbindungsabbrüche, kam diese nicht in Frage.
 Eine alternative war Messaging. Wegen der zeitlichen Unabhängigkeit, vom Server und App, haben Verbindungsabbrüche keine schlimmen Konsequenzen.\\
 
 Um bei Verbindungsabbrüchen die Mission nicht zu gefährden, wird die gesamte Mission vor dem Start übertragen, damit sie ausgeführt werden kann. Einzelne Wegpunke sind somit nicht auf eine stabile Internetverbindung angewiesen, da die Route bereits von Anfang bekannt ist. \\
@@ -175,7 +175,7 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 	\hline 
 	Xamarin Forms & Plattform übergreifende Komponente für Xamarin & 2.2.0.45 & \url{https://www.xamarin.com/license} \\
 	\hline 
-	Websocket.PCL & Plattformübergreifende Websocket Anbindung & 1.1.9 & MIT \\
+	Websocket.PCL & Plattformübergreifende WebSocket Anbindung & 1.1.9 & MIT \\
 	\hline 
 	Newton.Json & Json zu Object mapper & 8.0.3 & MIT \\
 	\hline 
