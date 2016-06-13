@@ -160,39 +160,8 @@ Beide Alternativen bringen zusätzlich mit sich, dass sie externe Stromversorgun
 
 Abschliessend kann gesagt werden, dass das von uns verwendete Smartphone (Nexus 4) 139 Gramm schwer ist. Die Lösung mit dem Raspberry PI 3 schlägt mit 40 Gramm zu buche. Die Einsparung von 100 Gramm bringt einen Verzicht auf ein Display und den Zwang einer zusätzlichen Stromversorgung mit sich.
 
-\newpage
-\subsection{Fallschirm}
-Da wir uns entschieden haben, die Lieferung abzuwerfen, und die Drohne nicht zu landen, musste sichergestellt werden, dass beim Aufprall keine Schäden entstehen.\\
 
-Eine PET-Flasche die von einem ein Meter hohen Tisch fällt, bleibt unbeschädigt. Die Möglichkeit sie zu öffnen, ohne den Flascheninhalt auf Grund der Kohlensäure schlagartig über die Umgebung zu verteilen, hält sich in Grenzen. Aus diesem Grund haben wir die Geschwindigkeit für diesen Aufprall errechnet.
-\begin{equation}
-\begin{split}
-v &= \sqrt{2gd} \\
-v &= \sqrt{2 \cdot 9.81\frac{m}{s^2} \cdot 1.0m} \\
-v &= 4.429 \frac{m}{s} \approx 4.5 \frac{m}{s} \\
-\end{split}
-\end{equation}
-Nun musste ein Fallschirm dimensioniert werden, der eine Flasche mit 500g Inhalt sicher zu Boden bringt. Da dies alles Annäherungen sind, nehmen wir einfachheithalber an, dass die Flasche mit Inhalt 500g schwer ist und der Fallschirm die Form einer Kugelkalotte hat. 
-%Todo Skizze
-\begin{equation}
-\begin{split}
-F_{Brems} &= F_{G} \\
-c_{w} \cdot A \cdot \frac{\rho}{2} \cdot v_{sink}^{2} &= m_{Pet} \cdot g \\
-A &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
-\end{split}
-\end{equation}
-Für die Werte $\rho$, $c_w$ wurden die Standardwerte genommen. Bei der Luftdichte $\rho$ entspricht das $1.225 \frac{kg}{m^3}$ und für $c_w$ den Literaturwert für die konkave Seite der Halbkugelschale $1.33$. Herr Prof. Dr. F. Müller hat uns daruaf hingewiesen, dass bei seinen Raketenversuche, er einen $c_w$-Wert von 1.8 als gute Annäherung verwendet. Aus diesem Grund haben wir diesen für die weitere Berechnung eingesetzt. Zusätzlich, lässt sich der Durchmesser über die Öffnungsfläche berechnen $A = \pi \cdot r^2$.
-\begin{equation}
-\begin{split}
-\pi \cdot r^2 &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
-r &= \sqrt{\frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} \cdot \pi}} \\
-d &= 2 \cdot \sqrt{\frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} \cdot \pi}} \\
-d &= 2 \cdot \sqrt{\frac{2 \cdot 0.5kg \cdot  9.81\frac{m}{s^2}}{1.225 \frac{kg}{m^3} \cdot 1.80 \cdot 4.5 \frac{m}{s} \cdot \pi}} \\
-d &= 1.12m \\
-\end{split}
-\end{equation}
-Der Durchmesser des Prototypenfallschirms muss somit etwa 1.12m betragen.
-%TODO MARCEL: 2 - 3 Sätze zum Bau und noch eine foto? :)
+
 \newpage
 \subsection{Tests}
 Um die Anwendungsmöglichkeiten eines solchen Multicopters auszuloten wurden diverse Experimente durchgeführt um die Leistungsfähigkeit und die Einschränkungen zu testen. 
@@ -208,7 +177,7 @@ Um die maximale Akku Laufzeit zu testen wurde die Drohne ohne zusätzliches Gewi
 \end{tabularx}
 \newpage
 \subsubsection{Tragfähigkeitstests}
-Um das maximale Gewicht zu prüfen, welches auf unsere Drohnen geladen werden kann, wurden Tests mit dem Zielgewicht von ca. 500g durchgeführt. Dies Entspricht dem Gewicht einer PET-Flasche eines beliebigen Getränkeherstellers oder einem leichten Defibrilator. Ausserdem war das Mobiltelefon (ca. 150g) während der Tests auf der Drohne angebracht.  \\
+Um das maximale Gewicht zu prüfen, welches auf unsere Drohnen geladen werden kann, wurden Tests mit dem Zielgewicht von ca. 500g durchgeführt. Dies Entspricht dem Gewicht einer $1/2$-Liter Flasche oder einem leichten Defibrilator. Ausserdem war das Mobiltelefon (ca. 150g) während des Tests auf der Drohne angebracht.  \\
 
 \begin{tabularx}{\textwidth}{|c|c|c|c|X|}
 \hline
@@ -272,8 +241,6 @@ Nachteile:
 
 Dabei wird ein Fallschirm an der Ware befestigt. Die Drohne löst die Ladung in einer vorgegebenen Höhe und die Ladung schwebt zu Boden.
 
-%TODO Martin hinzufügen Fallschirmberechnungen
-
 Vorteile:
 \begin{itemize}
 	\item Drohne kann niemanden Verletzen 
@@ -295,6 +262,42 @@ Nachteile:
 \subsection{Entscheidung}
 
 Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, dass die letzte Variante die meisten Vorteile bringt. Wichtig ist auch, dass ein Abwurf im gelandeten Zustand weiterhin möglich bleibt, ohne die mechanischen Komponenten zu verändern. Deshalb haben wir uns für einen Abwurf mit dem Fallschirm entschieden.
+
+\subsection{Fallschirmgrösse}
+Da wir uns entschieden haben, die Lieferung abzuwerfen, und die Drohne nicht zu landen, musste sichergestellt werden, dass beim Aufprall keine Schäden entstehen.\\
+
+Eine PET-Flasche die von einem ein Meter hohen Tisch fällt, bleibt unbeschädigt. Die Möglichkeit sie zu öffnen, ohne den Flascheninhalt auf Grund der Kohlensäure schlagartig über die Umgebung zu verteilen, hält sich in Grenzen. Aus diesem Grund haben wir die Geschwindigkeit für diesen Aufprall errechnet.
+
+\begin{equation}
+\begin{split}
+v &= \sqrt{2gd} \\
+v &= \sqrt{2 \cdot 9.81\frac{m}{s^2} \cdot 1.0m} \\
+v &= 4.429 \frac{m}{s} \approx 4.5 \frac{m}{s} \\
+\end{split}
+\end{equation}
+Nun musste ein Fallschirm dimensioniert werden, der eine Flasche mit 500g Inhalt sicher zu Boden bringt. Da dies alles Annäherungen sind, nehmen wir einfachheithalber an, dass die Flasche mit Inhalt 500g schwer ist und der Fallschirm die Form einer Kugelkalotte hat. 
+%Todo Skizze
+\begin{equation}
+\begin{split}
+F_{Brems} &= F_{G} \\
+c_{w} \cdot A \cdot \frac{\rho}{2} \cdot v_{sink}^{2} &= m_{Pet} \cdot g \\
+A &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
+\end{split}
+\end{equation}
+Für die Werte $\rho$, $c_w$ wurden die Standardwerte genommen. Bei der Luftdichte $\rho$ entspricht das $1.225 \frac{kg}{m^3}$ und für $c_w$ den Literaturwert für die konkave Seite der Halbkugelschale $1.33$. Herr Prof. Dr. F. Müller hat uns darauf hingewiesen, dass bei seinen Raketenversuche, er einen $c_w$-Wert von 1.8 als gute Annäherung verwendet. Aus diesem Grund haben wir diesen für die weitere Berechnung eingesetzt. Zusätzlich, lässt sich der Durchmesser über die Öffnungsfläche berechnen $A = \pi \cdot r^2$.
+\begin{equation}
+\begin{split}
+\pi \cdot r^2 &= \frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} } \\
+r &= \sqrt{\frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} \cdot \pi}} \\
+d &= 2 \cdot \sqrt{\frac{2 \cdot m_{Pet} \cdot g}{\rho \cdot c_{w} \cdot v_{sink}^{2} \cdot \pi}} \\
+d &= 2 \cdot \sqrt{\frac{2 \cdot 0.5kg \cdot  9.81\frac{m}{s^2}}{1.225 \frac{kg}{m^3} \cdot 1.80 \cdot 4.5 \frac{m}{s} \cdot \pi}} \\
+d &= 1.12m \\
+\end{split}
+\end{equation}
+Der Durchmesser des Prototypenfallschirms muss somit etwa 1.12m betragen.
+
+
+
 
 \begin{figure}[h]
 	\centering
