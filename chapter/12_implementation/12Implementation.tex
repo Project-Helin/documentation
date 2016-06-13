@@ -10,14 +10,57 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 	\caption{Übersicht wichtigsten Schnittstellen und deren Verbindungen }
 	\label{fig:component-overview}
 \end{figure}
+
 \section{Implementierung}
+
+\subsection{Messaging Provider}
+
+Wie in der Architektur diskutiert, wurde für die Kommunikation der Drohnen für AMQP mit Messaging Broker entschieden.
+Im folgenden werden einige Produkte verglichen: \\
+
+\subsubsection{Firebabse ( ehemals Google Cloud Messaging )}
+Vorteile:
+\begin{itemize}
+	\item API ist gut dokumentiert
+	\item Android wird unterstützt
+\end{itemize} 
+Nachteile:
+\begin{itemize}
+	\item Ist Kostenpflichtig ( ab 100 Verbindungen )
+	\item Hat Unterschiedlicher Latenzen gemäss Erfrahungsbericht \ref{gcm-latenc}
+\end{itemize}
+
+\subsubsection{RabbitMQ}
+Vorteile:
+\begin{itemize}
+	\item Ist Open Source
+	\item Kann Verbindung wiederherstellen bei Unterbrüche
+\end{itemize}
+
+Nachteile:
+\begin{itemize}
+	\item Muss auf dem eigenen Server installiert werden
+\end{itemize}
+
+\subsubsection{ActiveMQ}
+Vorteile:
+\begin{itemize}
+	\item Ist Open Source
+\end{itemize}
+
+Nachteile:
+\begin{itemize}
+	\item Kann nicht auf Android betrieben werden
+\end{itemize}
+
+\subsubsection{Entscheid}
+Aufgrund unserer Anforderungen dass vom Android aus auf den Messaging Broker verbunden werden kann, und beim Verbindungsunterbrüche keine negativen Auswirkung haen sollten, kam nur RabbitMQ in Frage.
 
 \subsection{Server}
 
 \subsubsection{Play Framework}
-Für den Server Teil wurde das Play Framework mit Java ausgewählt, denn grösstenteils mussten CRUD Operationen auf einer Weboberfläche dargestellt werden. Zu diesem Zweck wurde ein Framework ausgewählt, dass zu den Anforderungen passt.\\
+Für den Server Teil wurde das Play Framework mit Java ausgewählt, denn grösstenteils mussten CRUD Operationen auf einer Weboberfläche dargestellt werden. Gründe die unsere Entscheidung untermauerten:
 
-Das Play-Framework wurde aus folgenden Gründen ausgewählt:
 \begin{itemize}
     \item Fortschrittlicher O/R-Mapper im Framework integriert
     \item Vorgegebene MVC-Architektur (Speziell geeignet für CRUD-Operationen)
@@ -26,7 +69,8 @@ Das Play-Framework wurde aus folgenden Gründen ausgewählt:
     \item RabbitMQ Anbindung möglich
     \item WebSocket Anbindung möglich
 \end{itemize}
-
+An dieser Stelle sollte angemerkt werden, dass der De-Facto-Standard SpringMVC diese Liste ebenfalls vollständig abdeckt. Da wir bereits Erfahrungen mit SpringMVC gesammelt haben und Neugierig waren, ob die vielen guten Kommentare zu Play, auch in der Praxis berechtigt sind, entschieden wir uns zugunsten von Play.
+\\
 Während der Implementierung kristallisierten sich mehrere Schwächen des Frameworks heraus. 
 Im Anhang \ref{ch:play_pitfalls} wird anhand einiger Beispiele erklärt, warum wir Play mit Java nur eingeschränkt weiterempfehlen können und welche Probleme damit aufgetreten sind.
 
@@ -44,11 +88,15 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 \end{figure}
 
 \subsubsection{Verwendete Bibliotheken}
+
 \begin{tabularx}{\textwidth}{|X|X|c|X|}
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
 	Hibernate ORM Mapper & objekt-relationales Mapping zwischen Datenbank und Models  & 5.1.0 & Apache 2.0\\
+	\cmidrule{2-4}
+	& \multicolumn{3}{l|}{\textbf{Begründung:} Hibernate ORM bietet die Erweiterung Hibernate Spatial, welcher als einziger OR-Mapper zu PostGIS Geometrie Objekten abbilden kann. }
+	\\
 	\hline 
 	RabbitMQ Client & Client Komponente zur Kommunikation mit dem Rabbit MQ Broker & 3.6.0 &  Mozilla Public License 1.1, GPL 2, Apache 2.0 \\
 	\hline 
