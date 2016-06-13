@@ -99,7 +99,7 @@
 
 %Display URL and Hyperlinks
 \usepackage[hyphens]{url}
-%\usepackage{hyperref}
+\usepackage{hyperref}
 \usepackage{url}
 %\usepackage{breakurl}
 
