@@ -15,9 +15,8 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 \subsection{Server}
 
 \subsubsection{Play Framework}
-Für den Server Teil wurde das Play Framework mit Java ausgewählt, denn grösstenteils mussten CRUD Operationen auf einer Weboberfläche dargestellt werden. Zu diesem Zweck wurde ein Framework ausgewählt, dass zu den Anforderungen passt.\\
+Für den Server Teil wurde das Play Framework mit Java ausgewählt, denn grösstenteils mussten CRUD Operationen auf einer Weboberfläche dargestellt werden. Gründe die unsere Entscheidung untermauerten:
 
-Das Play-Framework wurde aus folgenden Gründen ausgewählt:
 \begin{itemize}
     \item Fortschrittlicher O/R-Mapper im Framework integriert
     \item Vorgegebene MVC-Architektur (Speziell geeignet für CRUD-Operationen)
@@ -26,7 +25,8 @@ Das Play-Framework wurde aus folgenden Gründen ausgewählt:
     \item RabbitMQ Anbindung möglich
     \item WebSocket Anbindung möglich
 \end{itemize}
-
+An dieser Stelle sollte angemerkt werden, dass der De-Facto-Standard SpringMVC diese Liste ebenfalls vollständig abdeckt. Da wir bereits Erfahrungen mit SpringMVC gesammelt haben und Neugierig waren, ob die vielen guten Kommentare zu Play, auch in der Praxis berechtigt sind, entschieden wir uns zugunsten von Play.
+\\
 Während der Implementierung kristallisierten sich mehrere Schwächen des Frameworks heraus. 
 Im Anhang \ref{ch:play_pitfalls} wird anhand einiger Beispiele erklärt, warum wir Play mit Java nur eingeschränkt weiterempfehlen können und welche Probleme damit aufgetreten sind.
 
@@ -44,11 +44,15 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 \end{figure}
 
 \subsubsection{Verwendete Bibliotheken}
+
 \begin{tabularx}{\textwidth}{|X|X|c|X|}
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
 	Hibernate ORM Mapper & objekt-relationales Mapping zwischen Datenbank und Models  & 5.1.0 & Apache 2.0\\
+	\cmidrule{2-4}
+	& \multicolumn{3}{l|}{\textbf{Begründung:} Hibernate ORM bietet die Erweiterung Hibernate Spatial, welcher als einziger OR-Mapper zu PostGIS Geometrie Objekten abbilden kann. }
+	\\
 	\hline 
 	RabbitMQ Client & Client Komponente zur Kommunikation mit dem Rabbit MQ Broker & 3.6.0 &  Mozilla Public License 1.1, GPL 2, Apache 2.0 \\
 	\hline 
