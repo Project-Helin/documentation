@@ -141,7 +141,7 @@ Das Erarbeiten der verschiedenen Setups war teilweise ziemlich aufwendig und ist
 Bemerkungen aus der Evaluation oben stehender Komponenten:
 \begin{itemize}
 	\item{\textbf{DroneKit-Android Client:} Es existiert keine gleichwertige Alternative die das \Gls{MAVLink} Protokoll in diesem Umfang abdeckt.}
-	\item{\textbf{AMQP Messaging Library:} Ist Voraussetzung für die Lyra Bibliothek um diesr das \Gls{AMQP} Protokoll zuverfügung zu stellen.}
+	\item{\textbf{AMQP Messaging Library:} Ist Voraussetzung für die Lyra Bibliothek um dieser das \Gls{AMQP} Protokoll zur Verfügung zu stellen.}
 	\item{\textbf{Lyra:} Die Bibliothek ist auf der RabbitMQ Seite als 'highly available RabbitMQ Java client' gelistet und erfüllt somit unsere Kriterien. \cite[]{lyra-page} }
 	\item{\textbf{Dagger:} Ein von Google gewartetes leichtgewichtiges  Dependency Injection Framework.}
 \end{itemize}
@@ -150,23 +150,23 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 
 Gemäss den nicht-funktionalen Anforderungen soll ein Verbindungsabbruch zum Server keinen Einfluss auf die Ausführung der Lieferung haben. Deshalb wird die Flugroute vor dem Start auf den \Gls{Flight-Controller} übertragen, somit kann die Mission auch ohne Online-Verbindung erfolgreich abgeschlossen werden. \\
 
-Sollte die Verbindung zwischen Server und Onboard-App unterbrochen sein, muss wenn möglich verhindert werden, dass Nachrichten verloren gehen.\\
+Sollte die Verbindung zwischen Server und Onboard-App unterbrochen sein, sollte wenn möglich verhindert werden, dass Nachrichten verloren gehen. Bei unterbrochener Verbindung wird dies wie folgt erreicht:\\
 \begin{itemize}
 	\item{\textbf{Nachricht vom Server zum Onboard-App} \\
-		Dieses Szenario wird durch das RabbitMQ abgefangen. Der Messaging Broker cached die Nachrichten solange bis der Consumer (Mobiltelefon) wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf auf dem Onboard-App.
+		Dieses Szenario wird durch RabbitMQ abgefangen. Der Messaging-Broker persistiert die Nachrichten solange bis die Onboard-App wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf.
 	}
 	\item{\textbf{Nachricht vom Onboard-App an den Server} \\
-		In diesem Fall kann der Übertragungsfehler nicht durch RabbitMQ abgefangen werden. Der Broker hat vom Producer (Mobiletelefon) noch keine Nachricht bekommen. Aus diesem Grund wird producerseitig eine Exception geworfen, die darauf hinweist, dass die Verbindung unterbrochen ist. In diesem Fall wird die Nachricht in einem Queue zwischengespeichert. Sämtliche Folgenachrichten, die während des Verbindungsunterbruchs nicht übertragen werden können, werden ebenfalls in dieser Queue gespeichert. Sobald die Verbindung wieder besteht, werden die Nachrichten aus der Queue gesendet.
+		Hier steht der Broker nicht zur Verfügung und die Speicherung der Nachrichten musste implementiert werden. Dazu verwenden wir eine Queue in der alle Nachrichten gespeichert werden und erst entfernt werden, wenn sie verschickt wurden.
 	}
 \end{itemize}
-Mit diesen Massnahmen ist ein guter Kompromiss aus Zuverlässigkeit und Aufwand entstanden. Alle missionskritischen Nachrichten können übertragen werden. Telemetriedaten werden beim Verbindungsausfall verspätet übertragen
+Mit diesen Massnahmen haben wir einen guten Kompromiss zwischen Zuverlässigkeit und Implementationsaufwand erreicht.
 }
 
 
 \subsubsection{Verbindungswiederherstellung}
-Aus den nicht funktionalen Anforderungen ist zu entnehmen, dass bei einem Verbindungsunterbruch ein Reconnect stattfindet. Dieser Reconnect soll, sobald die Verbindung im GSM Netz wieder besteht nicht länger als 30s dauern. \\
+Gemäss den nicht-funktionalen Anforderungen, muss sichergestellt werden, dass nach einem Unterbruch der Internetverbindung eine Verbindungswiederherstellung stattfindet. Sobald die Verbindung mit dem Internet wieder besteht, soll nach 30 Sekunden wieder eine Verbindung zum Message-Broker bestehen. \\
 
-Bei der Konfiguration von AMQP bestanden mehrere Möglichkeiten. Einersetis war der bekannte Backoff Algorithmus eine Option. Dieser Algorithmus arbeitet nach einem incrementellen Prinzip. Je länger der Unterbruch dauert, desto länger dauert es bis er die Verbindung wieder versucht aufzubauen. Auf der anderen Seite stand ein einfacher Interval-Algorithmus. Dieser versucht alle drei Sekunden die Verbindung wiederherzustellen, bis zum erfolgreichen Verbindungsaufbau. \\
+Bei der Konfiguration von AMQP bestanden mehrere Möglichkeiten. Einerseits war der bekannte Backoff Algorithmus eine Option. Dieser Algorithmus arbeitet nach einem incrementellen Prinzip. Je länger der Unterbruch dauert, desto länger dauert es bis er die Verbindung wieder versucht aufzubauen. Auf der anderen Seite stand ein einfacher Interval-Algorithmus. Dieser versucht alle drei Sekunden die Verbindung wiederherzustellen, bis zum erfolgreichen Verbindungsaufbau. \\
 Mit diesen Erkenntnissen haben wir folgende Messung gemacht:
 \begin{table}
 	\centering
