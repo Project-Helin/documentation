@@ -157,7 +157,7 @@ Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schni
 	\end{itemize}&
 	\begin{itemize}
 		\item View-Layer
-		\item Websockets-Library
+		\item WebSockets-Library
 		\item Identifikationsprovider
 		\item Zahlungsanbieter
 	\end{itemize}
@@ -168,9 +168,9 @@ Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schni
 \label{sec:communication-architecture}
 Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht. Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. Für die Kommunikation mit dem Onboard-App wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen. Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne). Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
 	
-Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig Websockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
+Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
 
-Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und Websockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät.\\
+Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und WebSockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät.\\
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/Communication-Overview-Diagram.png}
@@ -198,17 +198,28 @@ Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Missi
 \end{itemize}
 
 \section{Bestellprozess}
-\begin{figure}[h]
+
+Order Cargo (Abbildung \ref{fig:registerDrone}) beschreibt den Bestellprozess und die damit zusammenhängende Kommunikation. \\
+
+Der Kunde bestellt mittels der App ein Produkt, der Server bestätigt ihm die Bestellung und schlägt einen Abwurfort vor. Sollte der Abwurfort dem Kunden nicht entsprechen, so kann er den Prozess abbrechen und ihn noch einmal auslösen, sobald er sich an einer passenderen Stelle befindet.\\
+
+Der Server evaluiert im Anschluss eine verfügbare Drohne, welche den Auftrag ausführen kann und zeigt die Mission dem Drone-Operator an. Sollte die Drohne bereit sein, so kann er diesen Auftrag bestätigen. Im Falle einer nötigen Wartungsarbeit kann der Auftrag zu diesem Zeitpunkt auch abgelehnt werden. Sobald der Auftrag angenommen wurde, erhält der Drone-Operator genaue Angaben zur Beladung der Drohne. Anschliessend wird die Ladung bestätigt und der Server kann dem Kunden mitteilen, dass die Drone startklar ist. Während des Fluges erhält der Kunde Benachrichtigungen vom Server mit der aktuellen Position der Drohne. Sobald die Ladung abgeworfen wurde, fliegt die Drohne zur Ladezone zurück und bestätigt dem Server die Ankunft. So kann gewährleistet werden, dass bekannt ist, ab wann die Drohne wieder verfügbar ist. \\
+
+Der Bezahl- und Anmeldeprozess wird hier aus Übersichtsgründen nicht dargestellt.
+\begin{figure}[H]
 	\centering
 	\includegraphics[height=1.0\textheight]{images/sequence_diagram.png}
 	\caption{Übersicht der Project Helin Architektur }
 	\label{fig:registerDrone}
 \end{figure}
-%
-Order Cargo (Abbildung \ref{fig:registerDrone}) beschreibt den Bestellprozess und die damit zusammenhängende Kommunikation. \\
 
+\section{Missionen}
 
-Der Kunde bestellt mittels der App ein Produkt, der Server bestätigt ihm die Bestellung und schlägt einen Abwurfort vor. Sollte der Abwurfort dem Kunden nicht entsprechen, so kann er den Prozess abbrechen und ihn noch einmal auslösen, sobald er sich an einer passenderen Stelle befindet.\\
+Wie im Domainmodel (Abb. \ref{fig:domain-model}) ersichtlich, enthalten alle Bestellungen mindestens eine Mission. Die Mission wiederum enthält alle Informationen, die für die Auslieferung notwendig sind. Das folgende Diagramm (Abb. \ref{fig:mission-state}) zeigt die möglichen Zustände einer Mission, von der Bestellung bis zur Rückkehr nach der Lieferung.
 
-Der Server evaluiert im Anschluss eine verfügbare Drohne, welche den Auftrag ausführen kann und zeigt die Mission dem Drone-Operator an. Sollte die Drohne bereit sein, so kann er diesen Auftrag bestätigen. Im Falle einer nötigen Wartungsarbeit kann der Auftrag zu diesem Zeitpunkt auch abgelehnt werden. Sobald der Auftrag angenommen wurde, erhält der Drone-Operator genaue Angaben zur Beladung der Drohne. Anschliessend wird die Ladung bestätigt und der Server kann dem Kunden mitteilen, dass die Drone nun startklar ist. Während des Fluges erhält der Kunde Benachrichtigungen vom Server mit der aktuellen Position der Drohne. Sobald die Ladung abgeworfen wurde, fliegt die Drohne zur Ladezone zurück und bestätigt dem Server die Ankunft. So kann gewährleistet werden, dass bekannt ist, ab wann die Drohne wieder verfügbar ist.
-%
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/mission-state-flow-diagram.png}
+	\caption{Zustände der Mission}
+	\label{fig:mission-state}
+\end{figure}
