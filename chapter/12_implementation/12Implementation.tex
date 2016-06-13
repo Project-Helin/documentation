@@ -45,22 +45,25 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 
 \subsubsection{Verwendete Bibliotheken}
 
-\begin{tabularx}{\textwidth}{|X|X|c|X|}
+
+\begin{tabularx}{\textwidth}{|l|X|l|X|}
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
 	Hibernate ORM Mapper & objekt-relationales Mapping zwischen Datenbank und Models  & 5.1.0 & Apache 2.0\\
-	\cmidrule{2-4}
-	& \multicolumn{3}{l|}{\textbf{Begründung:} Hibernate ORM bietet die Erweiterung Hibernate Spatial, welcher als einziger OR-Mapper zu PostGIS Geometrie Objekten abbilden kann. }
-	\\
 	\hline 
 	RabbitMQ Client & Client Komponente zur Kommunikation mit dem Rabbit MQ Broker & 3.6.0 &  Mozilla Public License 1.1, GPL 2, Apache 2.0 \\
 	\hline 
 	jGraphT & Graph Bibliothek für Java, um effizient Operationen auf dem Graph auszuführen & 0.9.2 &  LGPL, EPL \\
 	\hline 
-	Google GSON & JSON Serialisierungs / Deserialisierungs Bibliothek & 2.6.2 & Apache 2.0\\
-	\hline 
-\end{tabularx}
+\end{tabularx} \\
+
+Bemerkungen aus der Evaluation oben stehender Komponenten:
+\begin{itemize}
+	\item{\textbf{Hibernate ORM Mapper:} Hibernate ORM ist der einzige ORM Mapper, der eine Spatial-Extension anbietet. Durch Hibernate Spatial ist es möglich, PostGIS Objekte aus der Datenbank direkt zu Java Objekten zu konvertieren.}
+	\item{\textbf{RabbitMQ Client:} Als Message Broker wurde auf RabbitMQ gesetzt, daher wurde konsequenterweise RabbitMQ Client als Bibliothek verwendet.}
+	\item{\textbf{jGraphT:} Hibernate Spatial arbeitet mit der \Gls{Java Topology Suite} (JTS) zur Abbildung der geografischen Daten. Um aus JTS Objekten einen Graphen zu bilden, kann nur jGraphT verwendet werden.}
+\end{itemize}
 
 \subsection{Onboard-App}
 
@@ -88,7 +91,15 @@ Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der
 	\hline 
 	Dagger  & Dependency Injection Framwork für Android & 2.0.1 &  Apache 2.0 \\
 	\hline 
-\end{tabularx}
+\end{tabularx} \\
+
+Bemerkungen aus der Evaluation oben stehender Komponenten:
+\begin{itemize}
+	\item{\textbf{DroneKit-Android Client:} Es existiert keine gleichwertige Alternative die das \Gls{MAVLink} Protokoll in diesem Umfang abdeckt.}
+	\item{\textbf{AMQP Messaging Library:} Ist Voraussetzung für die Lyra Bibliothek um diesr das \Gls{AMQP} Protokoll zuverfügung zu stellen.}
+	\item{\textbf{Lyra:} Die Bibliothek ist auf der RabbitMQ Seite als 'highly available RabbitMQ Java client' gelistet und erfüllt somit unsere Kriterien. \cite[]{lyra-page} }
+	\item{\textbf{Dagger:} Ein von Google gewartetes leichtgewichtiges  Dependency Injection Framework.}
+\end{itemize}
 
 \subsubsection{Kommunikation zum Server}
 
@@ -184,6 +195,14 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 	Newton.Json & Json zu Object mapper & 8.0.3 & MIT \\
 	\hline 
 \end{tabularx}
+
+Bemerkungen aus der Evaluation oben stehender Komponenten:
+\begin{itemize}
+	\item{\textbf{Paypal Forms:} Einzige OpenSource Paypal Integration für Android, alternativen sind kostenpflichtig.}
+	\item{\textbf{Xamarin Forms:} Ermöglicht Crossplattform UI sehr einfach zu entwickeln.}
+	\item{\textbf{Websocket.PCL:} Einzige gut gewartete Implementation der WebSockets in Xamarin}
+	\item{\textbf{Newton.Json:} Die Bibliothek weisst die höchste Anzahl Downloads auf.}
+\end{itemize}
 
 \subsection{Sicherheit}
 Es ist essentiell, dass die Sicherheit bei der Kommunkation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte (siehe auch NFRs). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ-Broker und die Queue-Namen geheim zu halten: \\
