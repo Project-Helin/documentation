@@ -148,18 +148,14 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 
 \subsubsection{Kommunikation zum Server}
 
-Die Kommunikation vom Onboard-App zum Server sollte bidirektional sein. 
-Gemäss den nicht-funktionalen Anforderungen darf der Verbindungsabbruch keinen Einfluss auf die Mission haben.
-Aufgrund der schlechten Erfahrung mit WebSocket auf mobilen Geräten und der ständigen Verbindungsabbrüche, kam diese nicht in Frage.
-Eine Alternative war Messaging. Wegen der zeitlichen Unabhängigkeit, vom Server und App, haben Verbindungsabbrüche keine schlimmen Konsequenzen.\\
+Gemäss den nicht-funktionalen Anforderungen soll ein Verbindungsabbruch zum Server keinen Einfluss auf die Ausführung der Lieferung haben. Deshalb wird die Flugroute vor dem Start auf den \Gls{Flight-Controller} übertragen, somit kann die Mission auch ohne Online-Verbindung erfolgreich abgeschlossen werden. \\
 
-Um bei Verbindungsabbrüchen die Mission nicht zu gefährden, wird die gesamte Mission vor dem Start übertragen, damit sie ausgeführt werden kann. Einzelne Wegpunke sind somit nicht auf eine stabile Internetverbindung angewiesen, da die Route bereits von Anfang bekannt ist. \\
-Verbindungsabbrüche auf dem Mobiltelefon haben zweierlei Konsequenzen:	\\
+Sollte die Verbindung zwischen Server und Onboard-App unterbrochen sein, muss wenn möglich verhindert werden, dass Nachrichten verloren gehen.\\
 \begin{itemize}
-	\item{\textbf{Mobiltelefon kann die Messages vom Server nicht empfangen:} \\
+	\item{\textbf{Nachricht vom Server zum Onboard-App} \\
 		Dieses Szenario wird durch das RabbitMQ abgefangen. Der Messaging Broker cached die Nachrichten solange bis der Consumer (Mobiltelefon) wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf auf dem Onboard-App.
 	}
-	\item{\textbf{Messages vom Mobiltelefon zum Server können nicht gesendet werden:} \\
+	\item{\textbf{Nachricht vom Onboard-App an den Server} \\
 		In diesem Fall kann der Übertragungsfehler nicht durch RabbitMQ abgefangen werden. Der Broker hat vom Producer (Mobiletelefon) noch keine Nachricht bekommen. Aus diesem Grund wird producerseitig eine Exception geworfen, die darauf hinweist, dass die Verbindung unterbrochen ist. In diesem Fall wird die Nachricht in einem Queue zwischengespeichert. Sämtliche Folgenachrichten, die während des Verbindungsunterbruchs nicht übertragen werden können, werden ebenfalls in dieser Queue gespeichert. Sobald die Verbindung wieder besteht, werden die Nachrichten aus der Queue gesendet.
 	}
 \end{itemize}
