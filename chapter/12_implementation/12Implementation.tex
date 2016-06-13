@@ -10,7 +10,50 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 	\caption{Übersicht wichtigsten Schnittstellen und deren Verbindungen }
 	\label{fig:component-overview}
 \end{figure}
+
 \section{Implementierung}
+
+\subsection{Messaging Provider}
+
+Wie in der Architektur diskutiert, wurde, für die Kommunikation der Drohnen, für AMQP mit Messaging Broker entschieden.
+Im folgenden werden einige Produkte verglichen: 
+\subsubsection{Firebabse ( ehemals Google Cloud Messaging )}
+Vorteile:
+\begin{itemize}
+	\item API ist gut dokumentiert
+	\item Android wird unterstützt
+\end{itemize} 
+Nachteile:
+\begin{itemize}
+	\item Ist Kostenpflichtig ( ab 100 Verbindungen )
+	\item Hat unterschiedliche Latenzen gemäss Erfrahungsbericht \ref{gcm-latenc}
+\end{itemize}
+
+\subsubsection{RabbitMQ}
+Vorteile:
+\begin{itemize}
+	\item Ist opensource
+	\item Kann Verbindung wiederherstellen bei Unterbrüchen
+\end{itemize}
+
+Nachteile:
+\begin{itemize}
+	\item Muss auf dem eigenen Server installiert werden
+\end{itemize}
+
+\subsubsection{ActiveMQ}
+Vorteile:
+\begin{itemize}
+	\item Ist Open Source
+\end{itemize}
+
+Nachteile:
+\begin{itemize}
+	\item Kann nicht auf Android betrieben werden
+\end{itemize}
+
+\subsubsection{Entscheid}
+Aufgrund unserer Anforderungen dass vom Android aus auf den Messaging Broker verbunden werden kann, und beim Verbindungsunterbrüche keine negativen Auswirkung haben sollten, kam nur RabbitMQ in Frage.
 
 \subsection{Server}
 
