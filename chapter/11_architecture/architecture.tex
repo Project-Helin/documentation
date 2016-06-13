@@ -4,6 +4,12 @@
 
 Die folgende Architektur soll es ermöglichen, eine Flotte von Drohnen automatisiert und zentralisiert zu verwalten. Die Kommunikation zwischen Server und Drohne muss ausserdem von beiden Seiten initiierbar sein (Push-Messages). Zusätzlich muss eine Schnittstelle für Kunden existieren, damit Bestellungen getätigt werden können. 
 
+
+\section{Einschränkungen}
+
+Da der Flight-Controller bereits vor Anfang der Arbeit bestellt wurde, wird dieser als vorgegebene Limitierung angesehen. Somit steht auch die Wahl auf MAVLink, für die Kommunikation mit der Drohne fest.  
+
+
 \section{Übersicht}
 
 Die Abbildung \ref{fig:architecture-overview} zeigt eine Übersicht der verschiedenen Tiers und Server-Komponenten.
