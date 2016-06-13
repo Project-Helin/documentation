@@ -14,10 +14,30 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 \section{Implementierung}
 
 \subsection{Messaging Provider}
+\begin{tabularx}{\textwidth}{|l|X|X|X|}
+	\hline
+	& \textbf{Firebase \footnote{ehemals Google Cloud Messaging}} & \textbf{RabbitMQ} & \textbf{ActiveMQ} \\
+	\hline
+	\textbf{Vorteile} & 
+	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{API Dokumentation} \item{Android Support} \end{itemize}  & 
+	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Opensource} \item{Automatische  Verbindungswiederherstellung} \end{itemize}  &
+	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Opensource} \end{itemize} \\
+	
+	\hline 
+	
+	
+	\textbf{Nachteile} & 
+	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Kostenpflichtig \footnote{ab 100 Verbindungen}} \item{Android Support} \end{itemize}  & 
+	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Betrieb on premisies} \item{Automatische  Verbindungswiederherstellung} \end{itemize}  &
+	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Opensource} \end{itemize} \\
+
+	\hline 
+
+\end{tabularx} \\
 
 Wie in der Architektur diskutiert, wurde, für die Kommunikation der Drohnen, für AMQP mit Messaging Broker entschieden.
 Im folgenden werden einige Produkte verglichen: 
-\subsubsection{Firebase ( ehemals Google Cloud Messaging )}
+\subsubsection{Firebase (  )}
 Vorteile:
 \begin{itemize}
 	\item API ist gut dokumentiert

@@ -73,6 +73,8 @@
 \definecolor{bg}{rgb}{0.95,0.95,0.95}
 
 
+
+
 \newcolumntype{R}[2]{%
     >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
     l%
@@ -119,6 +121,8 @@
 % Table Stylings
 % http://tex.stackexchange.com/a/13748
 %%%%%%%%%%%%%%%%%%%%
+
+\setlength\parindent{0pt}
 
 \newcommand*\heading[1]{\bfseries{#1}}
 \newcommand*\beforeheading{\toprule}
