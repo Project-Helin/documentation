@@ -17,7 +17,7 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 
 Wie in der Architektur diskutiert, wurde, für die Kommunikation der Drohnen, für AMQP mit Messaging Broker entschieden.
 Im folgenden werden einige Produkte verglichen: 
-\subsubsection{Firebabse ( ehemals Google Cloud Messaging )}
+\subsubsection{Firebase ( ehemals Google Cloud Messaging )}
 Vorteile:
 \begin{itemize}
 	\item API ist gut dokumentiert
@@ -88,29 +88,34 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 
 \subsubsection{Verwendete Bibliotheken}
 
-\begin{tabularx}{\textwidth}{|X|X|c|X|}
+
+\begin{tabularx}{\textwidth}{|l|X|l|X|}
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
 	Hibernate ORM Mapper & objekt-relationales Mapping zwischen Datenbank und Models  & 5.1.0 & Apache 2.0\\
-	\cmidrule{2-4}
-	& \multicolumn{3}{l|}{\textbf{Begründung:} Hibernate ORM bietet die Erweiterung Hibernate Spatial, welcher als einziger OR-Mapper zu PostGIS Geometrie Objekten abbilden kann. }
-	\\
 	\hline 
 	RabbitMQ Client & Client Komponente zur Kommunikation mit dem Rabbit MQ Broker & 3.6.0 &  Mozilla Public License 1.1, GPL 2, Apache 2.0 \\
 	\hline 
 	jGraphT & Graph Bibliothek für Java, um effizient Operationen auf dem Graph auszuführen & 0.9.2 &  LGPL, EPL \\
 	\hline 
-	Google GSON & JSON Serialisierungs / Deserialisierungs Bibliothek & 2.6.2 & Apache 2.0\\
-	\hline 
-\end{tabularx}
+\end{tabularx} \\
+
+Bemerkungen aus der Evaluation oben stehender Komponenten:
+\begin{itemize}
+	\item{\textbf{Hibernate ORM Mapper:} Hibernate ORM ist der einzige ORM Mapper, der eine Spatial-Extension anbietet. Durch Hibernate Spatial ist es möglich, PostGIS Objekte aus der Datenbank direkt zu Java Objekten zu konvertieren.}
+	\item{\textbf{RabbitMQ Client:} Als Message Broker wurde auf RabbitMQ gesetzt, daher wurde konsequenterweise RabbitMQ Client als Bibliothek verwendet.}
+	\item{\textbf{jGraphT:} Hibernate Spatial arbeitet mit der \Gls{Java Topology Suite} (JTS) zur Abbildung der geografischen Daten. Um aus JTS Objekten einen Graphen zu bilden, kann nur jGraphT verwendet werden.}
+\end{itemize}
 
 \subsection{Onboard-App}
 
 \subsubsection{Entwicklungsumgebung}
-Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk Flight-Controllers, stellt dafür eine Open-Source Android-API bereit. Die API konnte im App integriert werden erlaubt es, dem Flight-Controller direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
+Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk Flight-Controllers, stellt dafür eine Open-Source Android-API bereit. Die API kann im App integriert werden und erlaubt es, dem Flight-Controller direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
 
-Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich fast gleich wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung erzeugen. Das erarbeiten der verschiedenen Setups war teilweise ziemlich aufwendig, je nachdem ob man neben der App noch eine Bodenstation an die Simulation anbinden wollte, die weitere Echtzeitinformationen liefert (siehe Abb. \ref{fig:test-setup-onboard}). Auf Github sind die verschiedenen Setups detailliert erklärt, um den Einstieg in die Entwicklung zu erleichtern.
+Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich nahezu identisch wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung zeigten. \\
+
+Das Erarbeiten der verschiedenen Setups war teilweise ziemlich aufwendig und ist daher in unserem Github Repository dokumentiert, um Entwicklern den Einstieg zu erleichtern. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/test-setup-onboard.png}
@@ -131,14 +136,22 @@ Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der
 	\hline 
 	Dagger  & Dependency Injection Framwork für Android & 2.0.1 &  Apache 2.0 \\
 	\hline 
-\end{tabularx}
+\end{tabularx} \\
+
+Bemerkungen aus der Evaluation oben stehender Komponenten:
+\begin{itemize}
+	\item{\textbf{DroneKit-Android Client:} Es existiert keine gleichwertige Alternative die das \Gls{MAVLink} Protokoll in diesem Umfang abdeckt.}
+	\item{\textbf{AMQP Messaging Library:} Ist Voraussetzung für die Lyra Bibliothek um diesr das \Gls{AMQP} Protokoll zuverfügung zu stellen.}
+	\item{\textbf{Lyra:} Die Bibliothek ist auf der RabbitMQ Seite als 'highly available RabbitMQ Java client' gelistet und erfüllt somit unsere Kriterien. \cite[]{lyra-page} }
+	\item{\textbf{Dagger:} Ein von Google gewartetes leichtgewichtiges  Dependency Injection Framework.}
+\end{itemize}
 
 \subsubsection{Kommunikation zum Server}
 
 Die Kommunikation vom Onboard-App zum Server sollte bidirektional sein. 
 Gemäss den nicht-funktionalen Anforderungen darf der Verbindungsabbruch keinen Einfluss auf die Mission haben.
 Aufgrund der schlechten Erfahrung mit WebSocket auf mobilen Geräten und der ständigen Verbindungsabbrüche, kam diese nicht in Frage.
-Eine alternative war Messaging. Wegen der zeitlichen Unabhängigkeit, vom Server und App, haben Verbindungsabbrüche keine schlimmen Konsequenzen.\\
+Eine Alternative war Messaging. Wegen der zeitlichen Unabhängigkeit, vom Server und App, haben Verbindungsabbrüche keine schlimmen Konsequenzen.\\
 
 Um bei Verbindungsabbrüchen die Mission nicht zu gefährden, wird die gesamte Mission vor dem Start übertragen, damit sie ausgeführt werden kann. Einzelne Wegpunke sind somit nicht auf eine stabile Internetverbindung angewiesen, da die Route bereits von Anfang bekannt ist. \\
 Verbindungsabbrüche auf dem Mobiltelefon haben zweierlei Konsequenzen:	\\
@@ -227,6 +240,14 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 	Newton.Json & Json zu Object mapper & 8.0.3 & MIT \\
 	\hline 
 \end{tabularx}
+
+Bemerkungen aus der Evaluation oben stehender Komponenten:
+\begin{itemize}
+	\item{\textbf{Paypal Forms:} Einzige OpenSource Paypal Integration für Android, alternativen sind kostenpflichtig.}
+	\item{\textbf{Xamarin Forms:} Ermöglicht Crossplattform UI sehr einfach zu entwickeln.}
+	\item{\textbf{Websocket.PCL:} Einzige gut gewartete Implementation der WebSockets in Xamarin}
+	\item{\textbf{Newton.Json:} Die Bibliothek weisst die höchste Anzahl Downloads auf.}
+\end{itemize}
 
 \subsection{Sicherheit}
 Es ist essentiell, dass die Sicherheit bei der Kommunkation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte (siehe auch NFRs). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ-Broker und die Queue-Namen geheim zu halten: \\
