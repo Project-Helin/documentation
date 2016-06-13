@@ -17,7 +17,7 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 
 Wie in der Architektur diskutiert, wurde, für die Kommunikation der Drohnen, für AMQP mit Messaging Broker entschieden.
 Im folgenden werden einige Produkte verglichen: 
-\subsubsection{Firebabse ( ehemals Google Cloud Messaging )}
+\subsubsection{Firebase ( ehemals Google Cloud Messaging )}
 Vorteile:
 \begin{itemize}
 	\item API ist gut dokumentiert
@@ -111,9 +111,11 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 \subsection{Onboard-App}
 
 \subsubsection{Entwicklungsumgebung}
-Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk Flight-Controllers, stellt dafür eine Open-Source Android-API bereit. Die API konnte im App integriert werden erlaubt es, dem Flight-Controller direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
+Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk Flight-Controllers, stellt dafür eine Open-Source Android-API bereit. Die API kann im App integriert werden und erlaubt es, dem Flight-Controller direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
 
-Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich fast gleich wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung erzeugen. Das erarbeiten der verschiedenen Setups war teilweise ziemlich aufwendig, je nachdem ob man neben der App noch eine Bodenstation an die Simulation anbinden wollte, die weitere Echtzeitinformationen liefert (siehe Abb. \ref{fig:test-setup-onboard}). Auf Github sind die verschiedenen Setups detailliert erklärt, um den Einstieg in die Entwicklung zu erleichtern.
+Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich nahezu identisch wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung zeigten. \\
+
+Das Erarbeiten der verschiedenen Setups war teilweise ziemlich aufwendig und ist daher in unserem Github Repository dokumentiert, um Entwicklern den Einstieg zu erleichtern. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/test-setup-onboard.png}
@@ -149,7 +151,7 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 Die Kommunikation vom Onboard-App zum Server sollte bidirektional sein. 
 Gemäss den nicht-funktionalen Anforderungen darf der Verbindungsabbruch keinen Einfluss auf die Mission haben.
 Aufgrund der schlechten Erfahrung mit WebSocket auf mobilen Geräten und der ständigen Verbindungsabbrüche, kam diese nicht in Frage.
-Eine alternative war Messaging. Wegen der zeitlichen Unabhängigkeit, vom Server und App, haben Verbindungsabbrüche keine schlimmen Konsequenzen.\\
+Eine Alternative war Messaging. Wegen der zeitlichen Unabhängigkeit, vom Server und App, haben Verbindungsabbrüche keine schlimmen Konsequenzen.\\
 
 Um bei Verbindungsabbrüchen die Mission nicht zu gefährden, wird die gesamte Mission vor dem Start übertragen, damit sie ausgeführt werden kann. Einzelne Wegpunke sind somit nicht auf eine stabile Internetverbindung angewiesen, da die Route bereits von Anfang bekannt ist. \\
 Verbindungsabbrüche auf dem Mobiltelefon haben zweierlei Konsequenzen:	\\
