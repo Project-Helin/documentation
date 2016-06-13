@@ -10,70 +10,34 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 	\caption{Übersicht wichtigsten Schnittstellen und deren Verbindungen }
 	\label{fig:component-overview}
 \end{figure}
-
 \section{Implementierung}
 
 \subsection{Messaging Provider}
+In der Architektur wurde entschieden, dass die Kommunikation zwischen dem Server und der Drohne über das \Gls{AMQP}-Protokoll geschieht. \\
+\newpage
+Im folgender Tabelle werden einige Produkte verglichen: \\
 \begin{tabularx}{\textwidth}{|l|X|X|X|}
 	\hline
 	& \textbf{Firebase \footnote{ehemals Google Cloud Messaging}} & \textbf{RabbitMQ} & \textbf{ActiveMQ} \\
 	\hline
 	\textbf{Vorteile} & 
-	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{API Dokumentation} \item{Android Support} \end{itemize}  & 
-	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Opensource} \item{Automatische  Verbindungswiederherstellung} \end{itemize}  &
-	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Opensource} \end{itemize} \\
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{API Dokumentation} \item{Android Unterstützung} \end{itemize}  & 
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Opensource} \item{Automatischer  \mbox{Reconnect}} \end{itemize}  &
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Opensource} \end{itemize} \\
 	
 	\hline 
 	
 	
 	\textbf{Nachteile} & 
-	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Kostenpflichtig \footnote{ab 100 Verbindungen}} \item{Android Support} \end{itemize}  & 
-	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Betrieb on premisies} \item{Automatische  Verbindungswiederherstellung} \end{itemize}  &
-	\begin{itemize}[noitemsep, topsep=1pt, wide = 1em] \item{Opensource} \end{itemize} \\
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Kostenpflichtig \footnote{ab 100 Verbindungen}} \item{Variable Latenzzeit \ref{gcm-latenc}} \end{itemize}  & 
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Betrieb on premisies} \end{itemize}  &
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Keine Android \mbox{Unterstützung}} \end{itemize} \\
 
 	\hline 
-
 \end{tabularx} \\
 
-Wie in der Architektur diskutiert, wurde, für die Kommunikation der Drohnen, für AMQP mit Messaging Broker entschieden.
-Im folgenden werden einige Produkte verglichen: 
-\subsubsection{Firebase (  )}
-Vorteile:
-\begin{itemize}
-	\item API ist gut dokumentiert
-	\item Android wird unterstützt
-\end{itemize} 
-Nachteile:
-\begin{itemize}
-	\item Ist Kostenpflichtig ( ab 100 Verbindungen )
-	\item Hat unterschiedliche Latenzen gemäss Erfrahungsbericht \ref{gcm-latenc}
-\end{itemize}
-
-\subsubsection{RabbitMQ}
-Vorteile:
-\begin{itemize}
-	\item Ist opensource
-	\item Kann Verbindung wiederherstellen bei Unterbrüchen
-\end{itemize}
-
-Nachteile:
-\begin{itemize}
-	\item Muss auf dem eigenen Server installiert werden
-\end{itemize}
-
-\subsubsection{ActiveMQ}
-Vorteile:
-\begin{itemize}
-	\item Ist Open Source
-\end{itemize}
-
-Nachteile:
-\begin{itemize}
-	\item Kann nicht auf Android betrieben werden
-\end{itemize}
-
 \subsubsection{Entscheid}
-Aufgrund unserer Anforderungen dass vom Android aus auf den Messaging Broker verbunden werden kann, und beim Verbindungsunterbrüche keine negativen Auswirkung haben sollten, kam nur RabbitMQ in Frage.
+Aufgrund unserer Anforderungen wurde Entschieden, dass RabbitMQ verwendet wird. RabbitMQ unterstützt sowohl die Android Plattform (OnboardApp) als auch eine Funktionalität zum automaitschen Wiederverbinden.
 
 \subsection{Server}
 
@@ -93,7 +57,7 @@ An dieser Stelle sollte angemerkt werden, dass der De-Facto-Standard SpringMVC d
 Während der Implementierung kristallisierten sich mehrere Schwächen des Frameworks heraus. 
 Im Anhang \ref{ch:play_pitfalls} wird anhand einiger Beispiele erklärt, warum wir Play mit Java nur eingeschränkt weiterempfehlen können und welche Probleme damit aufgetreten sind.
 
-\subsubsection{Kommunikation mit Drohnen}
+\subsubsection{Kommunikation mit den Drohnen}
 
 Wie in der Architektur beschrieben, kommunizieren die Drohnen über AMQP mit dem Messaging-Broker. Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss en möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Auf Grund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.\\
 

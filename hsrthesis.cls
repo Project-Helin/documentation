@@ -110,6 +110,7 @@
 
 %\usepackage{float}
 \usepackage{natbib}
+\bibliographystyle{plain}  
 
 %\usepackage[round, sort, compress, authoryear]{natbib}
 \usepackage[autostyle]{csquotes}  
