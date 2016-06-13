@@ -139,8 +139,9 @@
 
 		% title
 		\begin{center}
-			\Large\thesistype , \departement\\[2ex]
-			\huge\thesistitle\\[2ex]
+			\Large\thesistype , \departement\\[3ex]
+			\huge\thesistitle\\[1ex]
+			\LARGE\thesissubtitle\\[3ex]
 			\large\school\\[1ex]
 			\normalsize\term\\
 			\normalsize\thedate
