@@ -105,6 +105,14 @@
 \usepackage{url}
 \usepackage{breakurl}
 
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={blue!95!black},
+    citecolor={blue!95!black},
+    urlcolor={blue!95!black}
+}
+
 \usepackage{glossaries}
 
 
