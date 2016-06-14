@@ -103,7 +103,7 @@
 \usepackage[hyphens]{url}
 \usepackage{hyperref}
 \usepackage{url}
-%\usepackage{breakurl}
+\usepackage{breakurl}
 
 \usepackage{glossaries}
 
