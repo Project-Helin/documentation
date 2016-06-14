@@ -2,7 +2,7 @@
 
 \section{Einleitung}
 
-Ziel dieser Arbeit ist es eine Multi-Tenant-fähige Plattform zu konzipieren, zu entwickeln und zu veröffentlichen. Diese soll es Anbietern von Produkten und Services ermöglichen, ihre Drohnen für einen begrenzten Zeitraum oder für bestimmte Aufgaben zur Verfügung zu stellen. Das Ausführen einer Aufgabe soll, bis auf das beladen der Drohne, komplett automatisiert ablaufen. \\
+Ziel dieser Arbeit ist es, eine mandantefähige Plattform zu konzipieren, zu entwickeln und zu veröffentlichen. Diese soll es Anbietern von Produkten und Services ermöglichen, ihre Drohnen für einen begrenzten Zeitraum oder für bestimmte Aufgaben zur Verfügung zu stellen. Das Ausführen einer Aufgabe soll, bis auf das beladen der Drohne, komplett automatisiert ablaufen. \\
 
 Sobald ein Kunde eine Bestellung über eine App tätigt, wird automatisch eine Route zu seiner Position berechnet, die über vordefinierte, sichere Zonen führt. Über ein auf der Drohne angebrachtes Smartphone, werden Anweisungen für die Beladung angezeigt. Sobald die Vorbereitungen abgeschlossen sind, bewegt sich die Drohne mit Hilfe von GPS entlang der berechneten Route, erfüllt ihre Aufgabe und kehrt wieder zurück. Während der Mission werden laufend Telemetriedaten an den Server geschickt, welcher diese für den Anbieter visualisiert.\\
 
@@ -44,7 +44,7 @@ Diese Entwicklung zeigt, dass die Zulassung von autonomen Drohnen auch in der Sc
 
 \section{System Kontext}
 
-Project Helin hat drei verschiedene Nutzerarten: Customers (Kunden), Administrators (Anbieter) und Drone-Operators. Diese werden im Kapitel Anforderung noch genauer beschrieben.\\
+Project Helin hat drei verschiedene Nutzerarten: Customer (Kunde), Administrator (Anbieter) und Drone-Operator (Drohnen Operator). Diese werden im Kapitel Anforderung noch genauer beschrieben.\\
 
 In Abbildung \ref{fig:system-context-diagram} sind die externen Schnittstellen, sowie die Aktoren dargestellt. Google OAuth und Paypal werden auf der Customer-App für die Authentifizierung und das Payment eingesetzt. Die 3DR-Service-App wird auf dem Onboard-App benötigt um die Kommunikation mit dem Flight-Controller der Drohne zu ermöglichen. Für die Kartendarstellungen auf der Administrations-Webseite werden von Open Street Map gehostete Karten verwendet.
 
