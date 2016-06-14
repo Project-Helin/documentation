@@ -2,7 +2,7 @@
 
 \section{Einleitung}
 
-Um die vom Team erstellte Plattform auch unter realen Bedingungen testen zu können, wurde ein Versuchsaufbau mit zwei Drohnen erstellt, die es ermöglichen Produkte zu transportieren und über dem Kunden mit einem Fallschirm abzuwerfen. Der Aufbau der Drohnen beinhaltete die Zusammenstellung der passenden Komponenten, den Zusammenbau der Drohnen und die Planung und Erstellung von zusätzlichen Halterungen für die obengenannten spezifischen Anforderungen.\\
+Um die vom Team erstellte Plattform auch unter realen Bedingungen testen zu können, wurde ein Versuchsaufbau mit zwei Drohnen erstellt, welche es ermöglichen Produkte zu transportieren und über dem Kunden mit einem Fallschirm abzuwerfen. Der Aufbau der Drohnen beinhaltete die Zusammenstellung der passenden Komponenten, den Zusammenbau der Drohnen und die Planung und Erstellung von zusätzlichen Halterungen für die obengenannten spezifischen Anforderungen.\\
 
 \subsection{Kommunikationshardware}
 \label{sec:communication-hardware}
@@ -110,7 +110,7 @@ Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, da
 
 \subsection{Fallschirmgrösse}
 
-Für den Fallschirm musste die optimale Grösse berechnet werden. Aufgrund der Resultate aus dem Tragfähigkeitstests wird die Grösse für eine $1/2$-Liter Flasche berechnet.
+Für den Fallschirm musste die optimale Grösse berechnet werden. Aufgrund der Resultate aus dem Tragfähigkeitstests (Kapitel \ref{sec:drone-gewichttest}) wird die Grösse für eine $1/2$-Liter Flasche berechnet.
 Eine PET-Flasche die von einem ein Meter hohen Tisch fällt, bleibt unbeschädigt. Aus diesem Grund haben wir die Geschwindigkeit für diesen Aufprall errechnet.
 
 \begin{equation}
@@ -309,6 +309,8 @@ Um die maximale Akku Laufzeit zu testen wurde die Drohne ohne zusätzliches Gewi
 \end{tabularx}
 
 \subsubsection{Tragfähigkeitstests}
+\label{sec:drone-gewichttest}
+
 Um das maximale Gewicht zu prüfen, welches auf unsere Drohnen geladen werden kann, wurden Tests mit dem Zielgewicht von ca. 500g durchgeführt. Dies Entspricht dem Gewicht einer $1/2$-Liter Flasche oder einem leichten Defibrilator. Ausserdem war das Mobiltelefon (ca. 150g) während des Tests auf der Drohne angebracht.  \\
 
 \begin{tabularx}{\textwidth}{|c|c|c|c|X|}
@@ -341,14 +343,16 @@ Grundsätzlich können, über das von uns verwendete \Gls{MAVLink} Protokoll, al
 \label{fig:arduScreenshot}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth] {images/SyriaUplift.jpg}
+	\caption{Uplift Team und die Syrien-Drohne Quelle: \protect\url{http://uplift.aero/}}
+	\label{fig:uplift}
+\end{figure}
+
 Auch andere Projekte könnten von unserem System profititeren. Uplift Aero beispielsweise, ist ein Startup, dass Hilfsgüter mit Hilfe von Drohnen von der Türkei aus nach Syrien fliegen wollte. Sie haben für ihre Flugzeuge (Grafik \ref{fig:uplift}) die selben Flugcontroller wie wir verwendet, mussten lediglich eine andere Firmware aufspielen. Dies beweist wie flexibel und vielseitig die von uns eingesetzte Hardware verwendet werden kann.
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\textwidth] {images/SyriaUplift.jpg}
-\caption{Uplift Team und die Syrien-Drohne Quelle: \protect\url{http://uplift.aero/}}
-\label{fig:uplift}
-\end{figure}
+
 
 
 
