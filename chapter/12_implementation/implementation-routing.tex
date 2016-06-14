@@ -45,11 +45,12 @@ Der Nachteil dieser Lösung zeigt sich bei grösseren Polygonen, wo unnötigerwe
 \newpage
 \subsubsection{Zweites Konzept: Visibility Graph}
 Das nächste Konzept orientiert sich an einem 'Visibility Graphen'. 
-\cite[p.1]{IEEEPaper} 
+\cite[]{IEEEPaper} 
 
 \blockquote{Using visibility graphs for determining the shortest path is very practical and intuitive. The visibility graph of a set of nonintersecting polygonal obstacles in the plane is an undirected graph whose vertices are the vertices of the obstacles and whose edges are pairs of vertices such that the open line segment between each two vertices does not intersect any of the obstacles.}
+
 In unserem Fall haben wir den Gedanken umgedreht. Wir haben den Graphen in einem Polygon mit potentiellen Löchern berechnet. Diese Löcher stellen Enklaven für Bäume oder Gebäude dar. Das Konzept ist aber identisch, angewendet auf unser Beispiel Polygon ergibt sich folgende Abstraktion:
-\begin{figure}[h]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/routing/visibilityGraph.png}
 	\caption{Visibility Graph in einer Flugzone}
@@ -59,16 +60,22 @@ Wie in der Grafik \ref{fig:visibility-graph} gezeigt wird, verlaufen deutlich we
 Dies ist eine deutliche Verbesserung gegenüber dem ersten Konzept. Der Nachteil ist, dass die innere Ecke des L-förmigen Polygons sicher angeflogen wird, da es die vermeintlich kürzeste Route in einem nächsten Schritt darstellen würde. Aus diesem Grund haben wir uns gegen den Einsatz dieses Konzepts entschieden.\\
 
 \subsubsection{Drittes Konzept: Straight Skeleton}
-Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet.
+Da die Pfadfindung von \Gls{UAV} bereits ein weit erarbeitetes und erforschtes Gebiet ist, waren wir der Überzeugung, dass bereits verwendete Konzepte vereinfacht und abstrahiert werden konnten um unser Problem zu lösen. Während vollständig autonome Drohnen an Hindernissen vorbei navigieren müssen, können wir uns auf einen bestehenden Flugkorridor verlassen.
+\blockquote{The idea behind this method is toassign a function similar to the electrostatic potential to each obstacle and then derive the topological structure of the free space in the form of minimum potential valleys. The robot is positioned at the start point, and then the goal generates a strong attractive force. By the action of the force, the robot moves along the steepest descent of the potential to the goal, at the same time the obstacle generates a repulsive force to keep robot away from colliding with them} 
 
-Diese Lösung scheint ideal, da sie einen Flug in der Mitte bevorzugt und nur bei wechseln in eine andere Flugzone an den Rand fliegt.
-
+Die Kernaussage des zitierten Papers \cite[]{SkeletonUAV} ist, dass ein Pfad den grösstmöglichen Abstand zu den Hindernissen aufweisen soll. Auf unseren Fall übertragen, sind die Polygonränder die Hindernisse. Somit muss gewährleistet werden, dass die Drohne den grössten Abstand zu den Rändern aufweisst. Aus diesem Grund erscheint diese Lösung für uns sehr geeignet, da Sie mittenbetonte Routen vorschlägt. \\
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/routing/skeleton.png}
 	\caption{Skeleton in Polygon}
 	\label{fig:skeleton-in-polygon}
 \end{figure}
+Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet. Der Felkel-Algorithmus, welcher dieses Skeleton aus einem 2-dimensionalen Polygon berechnet ist bereits in CGAL implementiert \cite{SkeletonCGAL} und war uns im weiteren Verlauf des Projektes von grossem Nutzen.\\
+
+
+
+
+
 
 \subsection{Routing Algorithmus}
 Nach der Herleitung des Graphen aus den Zonen, musste nun der passende Algorithmus gefunden werden um einen möglichst effizienten Weg von A nach B zu finden. Es kamen 4 Algorithmen in Frage, wobei ein Algorithmus sich als besonders geeignet herausstellte.
@@ -84,8 +91,8 @@ Wir haben uns für den Dijkstra Algorithmus entschieden. Er liefert ohne Metrik 
 Damit die Route 2-Dimensional berechnet werden kann, werden die Höhen erst zum Schluss berücksichtigt. Das Höhenhandling bildet den abschliessenden Schritt bei der Berechnung einer Route und wird in zwei Schritten durchgeführt:
 
 \begin{itemize}
-	\item{\textbf{Eindeutigkeit der Höhe:} In einem ersten Schritt werden die Zonen nach Höhe absteigend sortiert und Überlagerungen zu Gunsten der Höheren Zone entfernt.}
-	\item{\textbf{Bestimmen der Zugehörigkeit des Knotens:} Angefangen bei der höchsten Zone werden die Liniensegmente mit der jeweiligen Zonen höhe versehen. Bei Linien, welche die Zone verlassen, wird ein Punkt am Schnittpunkt eingefügt.}
+	\item{\textbf{Eindeutigkeit der Höhe:} In einem ersten Schritt werden die Zonen nach Höhe absteigend sortiert und Überlagerungen zu Gunsten der höheren Zone entfernt.}
+	\item{\textbf{Bestimmen der Zugehörigkeit des Knotens:} Angefangen bei der höchsten Zone werden die Liniensegmente mit der jeweiligen Zonenhöhe versehen. Bei Linien, welche die Zone verlassen, wird ein Punkt am Schnittpunkt eingefügt.}
 \end{itemize}
 \begin{figure}[h]
 	\centering
@@ -98,4 +105,4 @@ Wie gemäss der Abbildung \ref{fig:polygon-border-example} ersichtlich ist, ist 
 \subsection{Wahl der Rückroute}
 Das Bilden der Rückroute erfolgt in einem sehr einfachen Verfahren. Bei der aktuellen Lösung werden Start und Endpunkt mit der dazugehörigen Aktion versehen. Im Falle des Endpunktes ist es in unserem Fall der Abwurf.
 \\
-Nun kann dieser Pfad genommen, umgedreht und angehängt werden, wobei der letzte Punkt entfernt wird. So ist garantiert, dass die Drohne den gleichen Rückweg wie Hinweg verwendet um die Mission zu erfüllen. Diese Liste wird nun an den Autopiloten übertragen.
+Nun kann dieser Pfad genommen, umgedreht und angehängt werden, wobei der letzte Punkt entfernt wird. So ist garantiert, dass die Drohne den gleichen Rückweg wie Hinweg verwendet um die Mission zu erfüllen. Diese Liste wird verwendet um dem Autopiloten mit Wegpunkten zu versorgen.

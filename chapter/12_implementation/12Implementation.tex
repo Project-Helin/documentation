@@ -13,7 +13,7 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 \section{Implementierung}
 
 \subsection{Messaging Provider}
-In der Architektur wurde entschieden, dass zur Kommunikation zwischen Server und Drohne ein \Gls{Message Broker} verwendet wird. Das genaue Produkt wurde allerdings noch nicht festgelegt. Folgende Broker wurden evaluiert:  \\
+In der Architektur wurde entschieden, dass zur Kommunikation zwischen Server und Drohne ein \cite{Message-Broker} verwendet wird. Das genaue Produkt wurde allerdings noch nicht festgelegt. Folgende Broker wurden evaluiert:  \\
 \begin{tabularx}{\textwidth}{|l|X|X|X|}
 	\hline
 	&\textbf{RabbitMQ} & \textbf{ActiveMQ} \\
@@ -38,7 +38,9 @@ Aufgrund unserer Anforderungen wurde Entschieden, dass RabbitMQ verwendet wird. 
 \subsection{Server}
 
 \subsubsection{Play Framework}
-Für den Server Teil wurde das Play Framework mit Java ausgewählt, denn grösstenteils mussten CRUD Operationen auf einer Weboberfläche dargestellt werden. Gründe die unsere Entscheidung untermauerten:
+Für eine Anwendung in diesem Umfang ist der De-Facto-Standard SpringMVC. Da Spring aber ein schwergewichtiges Framework ist und wir eine neuere, leicht gewichtigere Alternative in der Praxis evaluieren wollten, haben wir uns für das Play Framework.
+
+Zusätzliche Gründe die unsere Entscheidung für Play unterstützt haben:
 
 \begin{itemize}
     \item Fortschrittlicher O/R-Mapper im Framework integriert
@@ -48,8 +50,7 @@ Für den Server Teil wurde das Play Framework mit Java ausgewählt, denn grösst
     \item RabbitMQ Anbindung möglich
     \item WebSocket Anbindung möglich
 \end{itemize}
-An dieser Stelle sollte angemerkt werden, dass der De-Facto-Standard SpringMVC diese Liste ebenfalls vollständig abdeckt. Da wir bereits Erfahrungen mit SpringMVC gesammelt haben und Neugierig waren, ob die vielen guten Kommentare zu Play, auch in der Praxis berechtigt sind, entschieden wir uns zugunsten von Play.
-\\
+
 Während der Implementierung kristallisierten sich mehrere Schwächen des Frameworks heraus. 
 Im Anhang \ref{ch:play_pitfalls} wird anhand einiger Beispiele erklärt, warum wir Play mit Java nur eingeschränkt weiterempfehlen können und welche Probleme damit aufgetreten sind.
 
@@ -73,11 +74,11 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
-	Hibernate ORM Mapper & objekt-relationales Mapping zwischen Datenbank und Models  & 5.1.0 & Apache 2.0\\
+	Hibernate ORM Mapper & objekt-relationales Mapping zwischen Datenbank und Java Objekten  & 5.1.0 & Apache 2.0\\
 	\hline 
 	RabbitMQ Client & Client Komponente zur Kommunikation mit dem Rabbit MQ Broker & 3.6.0 &  Mozilla Public License 1.1, GPL 2, Apache 2.0 \\
 	\hline 
-	jGraphT & Graph Bibliothek für Java, um effizient Operationen auf dem Graph auszuführen & 0.9.2 &  LGPL, EPL \\
+	jGraphT & Graph-Bibliothek für Java, um effizient Operationen auf dem Graph auszuführen & 0.9.2 &  LGPL, EPL \\
 	\hline 
 \end{tabularx} \\
 
@@ -95,7 +96,7 @@ Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste e
 
 Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich nahezu identisch wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung zeigten. \\
 
-Das Erarbeiten der verschiedenen Setups war teilweise ziemlich aufwendig und ist daher in unserem Github Repository dokumentiert, um Entwicklern den Einstieg zu erleichtern. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
+Die verschiedenen Möglichkeiten, dass System zu testen sind im Github Repository dokumentiert. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/test-setup-onboard.png}
@@ -122,8 +123,8 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 \begin{itemize}
 	\item{\textbf{DroneKit-Android Client:} Es existiert keine gleichwertige Alternative die das \Gls{MAVLink} Protokoll in diesem Umfang abdeckt.}
 	\item{\textbf{AMQP Messaging Library:} Ist Voraussetzung für die Lyra Bibliothek um dieser das \Gls{AMQP} Protokoll zur Verfügung zu stellen.}
-	\item{\textbf{Lyra:} Die Bibliothek ist auf der RabbitMQ Seite als 'highly available RabbitMQ Java client' gelistet und erfüllt somit unsere Kriterien. \cite[]{lyra-page} }
-	\item{\textbf{Dagger:} Ein von Google gewartetes leichtgewichtiges  Dependency Injection Framework.}
+	\item{\textbf{Lyra:} Die Bibliothek wird vom Hersteller der Message-Oriented-Middleware empfohlen. \cite[]{lyra-page} }
+	\item{\textbf{Dagger:} Wird von Google entwickelt und unterstützt Dependency Injection zur Kompilierzeit.}
 \end{itemize}
 
 \subsubsection{Kommunikation zum Server}
@@ -170,16 +171,6 @@ Da beide Varianten die nicht-funktionalen Anforderungen erfüllen, haben wir uns
 
 \subsection{Customer App}
 Gemäss Aufgabenstellung sollte ein Prototyp für eine App, mit welchem Bestellungen am System abgegeben können, entwickelt werden.
-Diese App wurde als letzte Komponente entwickelt, da sie erst getestet werden konnte als die Server- und Onboard-App-Komponenten fertiggestellt waren.
-
-Um manuelle Tests der Bestell-API möglich zu machen, wurde in der Administrations-Seite eine "'Fake Order"' Funktionen eingeführt. 
-Diese imitiert eine Bestellung des Kunden und schickt eine Anfrage mit vordefinierten Koordinaten und Produkten an das System.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth] {images/customer-app-fake-order.png}
-	\caption{Fake Order über die Administrationsseite abschicken}
-\end{figure}
 
 Anders als die Onboard-App, welche native mit Java entwickelt wurde und nur auf Android läuft, entschieden wir uns beim Bestell-App für eine Cross-Plattform Lösung, welche Android und iOS unterstützt. \\
 
@@ -213,18 +204,18 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 	\hline 
 	Newton.Json & Json zu Object mapper & 8.0.3 & MIT \\
 	\hline 
-\end{tabularx}
+\end{tabularx}\\
 
 Bemerkungen aus der Evaluation oben stehender Komponenten:
 \begin{itemize}
-	\item{\textbf{Paypal Forms:} Einzige OpenSource Paypal Integration für Android, alternativen sind kostenpflichtig.}
-	\item{\textbf{Xamarin Forms:} Ermöglicht Crossplattform UI sehr einfach zu entwickeln.}
+	\item{\textbf{Paypal Forms:} Einziges Paypal Plugin für Xamarin.Forms}
+	\item{\textbf{Xamarin.Forms:} Ermöglicht Crossplattform UI sehr einfach zu entwickeln.}
 	\item{\textbf{Websocket.PCL:} Einzige gut gewartete Implementation der WebSockets in Xamarin}
 	\item{\textbf{Newton.Json:} Die Bibliothek weisst die höchste Anzahl Downloads auf.}
 \end{itemize}
 
 \subsection{Sicherheit}
-Es ist essentiell, dass die Sicherheit bei der Kommunkation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte (siehe auch NFRs). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ-Broker und die Queue-Namen geheim zu halten: \\
+Es ist essentiell, dass die Sicherheit bei der Kommunkation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte (siehe NFR \ref{sec:message-security}). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ-Broker und die Queue-Namen geheim zu halten: \\
 
 Die Onboard-App registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Registrierung der Drohne, wird ein Token sowie der Benutzer und das Kennwort für die Verbindung zu RabbitMQ an die Onboard-App geschickt. Mit diesen Informationen kann sich die App mit dem Messaging Broker über eine verschlüsselte Leitung verbinden.\\
 
@@ -249,7 +240,7 @@ Folgende Statistiken wurden am Ende der Arbeit erstellt um einen Eindruck der Gr
 	\label{fig:code-metrics}
 \end{figure}
 
-In Abbildung \ref{fig:code-metrics} sind vor allem der geringe Anteil von Methoden mit hoher essentieller Komplexität\cite[S. 79]{MCCABE} hervorzuheben. Alle Methoden mit hoher Komplexität wurden vom Team geprüft, konnten aber nicht mehr verbessert werden. Hauptsächlich sind dies 'equals' Methoden von grösseren DTOs oder es handelt sich um MessageConverter, die einfach alle verschiedenen Messagetypen verschieden behandeln müssen. Das folgende Beispiel zeigt die Methode mit der höchsten zyklomatischen Komplexität der Server-Applikation (Essentielle Komplexität = 10, Cyclomatische Komplexität = 10). \\
+In Abbildung \ref{fig:code-metrics} sind vor allem der geringe Anteil von Methoden mit hoher essentieller Komplexität\cite[S. 79]{MCCABE} hervorzuheben. Alle Methoden mit hoher Komplexität wurden vom Team geprüft, konnten aber nicht mehr verbessert werden. Hauptsächlich sind dies 'equals' Methoden von grösseren \Gls{DTO}s oder es handelt sich um MessageConverter, die einfach alle verschiedenen Messagetypen verschieden behandeln müssen. Das folgende Beispiel zeigt die Methode mit der höchsten zyklomatischen Komplexität der Server-Applikation (Essentielle Komplexität = 10, Zyklomatische Komplexität = 10). \\
 
 
 \begin{lstlisting}
@@ -282,7 +273,6 @@ private Message parseMessageWithoutCare(String messageAsJson) {
 Da diese Methode gut strukturiert ist und auch gut verstanden werden kann, gibt es keinen Grund, diese auf Grund der Metrik anzupassen.
 
 \section{Qualitätssicherung}
-
 \label{quality-assurance}
 
 \subsection{Prozesse}
@@ -302,7 +292,7 @@ Damit konnten viele Fehler früh entdeckt werden und die Code-Qualität konnte �
 
 \subsection{Continous Integration}
 
-Als Build-Server haben wir TeamCity verwendet. Dort waren alle Projekte (ausser Customer-App) jeweils mit einem Build für den develop- und master-branch eingerichtet. Alle Builds führten die nötigen Tests aus und produzierten ein entsprechendes Artifact für das Deployment. Das Deployment für den Server wurde ebenfalls automatisiert.
+Als Build-Server haben wir TeamCity verwendet. Dort sind alle Projekte (ausser Customer-App) jeweils mit einem Build für den develop- und master-branch eingerichtet. Alle Builds führten die Tests aus und produzierten ein entsprechendes Artifact für das Deployment. Das Deployment für den Server wurde ebenfalls automatisiert.
 
 \subsection{Testing}
 
@@ -312,10 +302,10 @@ Je nach Plattform wurden andere Formen von Tests durchgeführt:
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=1\textwidth] {images/test-count-chart.png}
-	\caption{Anzahl Tests über die Zeit. Grün (erfolgreiche Tests) und Grau ( ausgeschlossene )}
+	\caption{Anzahl Tests über die Zeit. Grün (erfolgreiche Tests) und Grau (ausgeschlossene)}
 \end{figure}
 
-Auf dem Server wurden vor allem E2E- und Integration-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bei den meisten Kompoonenten bewusst gegen Unit-Tests entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Bei der Routenberechnung hingegen konnte sehr gut mit Unit-Tests gearbeitet werden.\\
+Auf dem Server wurden vor allem Gls{E2E}- und Gls{Integration}-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bei den meisten Kompoonenten bewusst gegen Unit-Tests entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Bei der Routenberechnung hingegen konnte sehr gut mit Unit-Tests gearbeitet werden.\\
 
 Wir haben darauf geachtet, dass immer nur die minimale Integrationsstufe gewählt wurde. Für die Simulation eines Benutzers (E2E) wurde Selenium verwendet, das wiederum einen Firefox Browser verwendet. Für die Api- und Messaging-Controller wurden Integrationtests verwendet, welche keinen Browser benötigen.\\
 
