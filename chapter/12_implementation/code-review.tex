@@ -1,15 +1,15 @@
 \newpage
-\chapter{Code Review} 
+\chapter{Code-Reviews} 
 
 \section{20.04.16 - Review Prototyp Routing}
-Folgende Code Änderungen wurden reviewed von KP und MS :
+Folgende Code-Änderungen wurden reviewed von KP und MS :
 \begin{itemize}
 	\item{Anbindung Hibernate Spatial}
 	\item{Verwendung von SFCGAL: SFCGAL ist eine Libary, welches von PostGIS verwendet wird. Es musste geprüfut werden ob SFCGAL richtig installiert wurde.}
 	\item{Helper Klasse für WKT und Polygon Verarbeitung}
 \end{itemize}
 
-Während dem Code Review wurden die folgenden Anpassungen gemacht:
+Während dem Code-Review wurden die folgenden Anpassungen gemacht:
 \begin{itemize}
 	\item{Fehlende Test hinzugefügt}
 	\item{Kommentar hinzugefügt, wo Kontext nicht klar war}
@@ -23,7 +23,7 @@ Während dem Code Review wurden die folgenden Anpassungen gemacht:
     }
 	\end{lstlisting}
 	\item{Methoden unbenannt nach Java Standard: WGS84Helper -> Wgs84Helper }
-	\item{In manchen Test wurde WKT ( Well Known Text ) statt WKB ( Well Known Binary ) für Polygon verwendet. Beide Formate sind unlesbar, aber WKT bietet den Vorteil, dass es einfacher ersichtlich ist, um was für ein Art Polygon es sich handelt.}
+	\item{In manchen Tests wurde WKT ( Well Known Text ) statt WKB ( Well Known Binary ) für Polygone verwendet. WKT ist viel besser lesbar, weshalb wir dies überall geändert haben.}
 	\begin{lstlisting}
     geometry = GisHelper.convertFromWkbToGeometry("0103000020E6100000010000000F000000FFBE7D4109A2214002A052D59E9E9C4740");
     // korrigiert zu
@@ -42,7 +42,7 @@ Folgende Code Änderungen wurden reviewed von MS und MA:
 \end{itemize}
 Während dem Code Review wurden die folgenden Anpassungen gemacht:
 \begin{itemize}
-	\item{Queue mit Exception implementierung verbessert:
+	\item{Queue mit Exception-implementierung verbessert:
 	\begin{lstlisting}
     if (connection.isOpen()) {
         while (messagesToSend.peek() != null) {
@@ -52,8 +52,8 @@ Während dem Code Review wurden die folgenden Anpassungen gemacht:
         }
     }
 	\end{lstlisting}
-	An dieser Stelle wurde messagesToSend.get() durch peek() und remove() ersetzt, damit beim werfen der Exception, durch möglichen Verbindungsabbruch die Meldung nicht verloren geht.}
-	\item{Entfernen von connectionClose() auf dem Server. Die Methode existiert bereits als Methode mit einer Verbindung im Funktionsaufruf, aus diesem Grund ist die Methode redundant und wird nicht benötigt.}
+	An dieser Stelle wurde messagesToSend.get() durch peek() und remove() ersetzt, damit beim Werfen der Exception, durch möglichen Verbindungsabbruch die Meldung nicht verloren geht.}
+
 \end{itemize}
 \section{03.06.2015 - Gesamt Code Review}
 
@@ -61,29 +61,27 @@ Dieses Code Review wurde von Mirko Stocker durchgeführt und betrifft den ganzen
 
 \subsection{Onboard-App}
 	 
-Die wichtigsten Findings betrafen potentielle Concurrency Probleme, sowie Unschönheiten in den Android-Lifecycle Methoden.
+Die wichtigsten Findings betrafen potentielle Concurrency-Probleme, sowie Unschönheiten in den Android-Lifecycle Methoden.
 
 \subsubsection{Concurrency}
 
 Beim Herstellen einer Verbindung mit dem Messagingserver wurde ein neuer Thread gestartet und dort die Variablen "'connection"' und "'channel"' zugewiesen.
-Dies könnte potentiell Probleme verursachen und die Variablen wurden deshalb mit volatile Ergänzt.
+Dies könnte potentiell Probleme verursachen und die Variablen wurden deshalb mit volatile Ergänzt, was den Zugriff von mehreren Threads ermöglicht.
 
 \subsubsection{Lifecycle}
 
-In vielen Fragments und Activities wurde die OnDestroy Methode verwendet um Resourcen abzuräumen.
+In vielen Fragments und Activities wurde die OnDestroy Methode verwendet um Resourcen abzuräumen.\\
 Die Ausführung von OnDestroy ist aber nicht garantiert.
 Deshalb wurde der Code in die OnPause-Methode verschoben und wird nun garantiert ausgeführt, wenn die Activity oder das Fragment vom Betriebssystem beendet wird.
 
-Einige Methoden die Handler registrieren, wurden sowohl in den OnCreate-Methoden, wie auch in den  OnResume Methoden ausgeführt.
- Dies ist keine saubere Lösung. Dieser Code wird nun deshalb nurnoch im OnResume ausgeführt.
+Einige Methoden, die Handler registrieren, wurden sowohl in den OnCreate-Methoden, wie auch in den OnResume Methoden ausgeführt. Dieser Code wird nun deshalb nur noch im OnResume ausgeführt.
 
 \subsection{Server}
 
 Der Code wurde als gut lesbar und verständlich bewertet, es wurden manche Inkonsistenzen aufgezeigt.
 
 \subsubsection{Transaction}
-Bei manchen stellen wurde die Datenbank Transkation mittels einer Annotation deklariert.
-Dies ist die bevorzugte Variante innerhalb der Controller beim Plays Framework.
+An manchen stellen wurde die Datenbank-Transaktion mittels einer Annotation deklariert an anderen Stellen mit Hilfe eines Methodenaufrufs. 
 \begin{lstlisting}
 @Transactional
 public Result addDrone(UUID projectId) {
@@ -92,7 +90,7 @@ public Result addDrone(UUID projectId) {
     return redirect(routes.ProjectsDronesController.index(projectId));
 }
 \end{lstlisting}
-Alternativ kann die Transkation auch programmatisch geöffnet werden.
+
 \begin{lstlisting}
 public void onDroneInfoReceived(UUID droneId, DroneInfoMessage droneInfoMessage) {
     jpaApi.withTransaction(()-> {
@@ -100,13 +98,8 @@ public void onDroneInfoReceived(UUID droneId, DroneInfoMessage droneInfoMessage)
     });
 }
 \end{lstlisting}
-Es ist unklar warum die Transkation nicht einheitlich geöffnet wurde.
-Der Grund liegt daran, dass in Controllern, welche mit einem Browser Session verlinkt sind die Transkation deklarativ geöffnet wurde.
-Leider funktionniert die Annotation nicht in Controllern, welche kein Browser Session haben.
-In unserem Fall wären alle Controller, welche vom Eingang eines RabbitMQ Messages angestossen werden.
 
-Daneben haben auch alle API-Controller, welche vom Customer-App aufgerufen werden keien Session.
-Daher wurde dort die Transkation programmatisch geöffnet.
+An den meisten Stellen war es nötig die Methodenvariante zu verwenden, da normale Klassen die Annotation nicht verwenden können. In einzelnen Controllern waren Annotationen aber möglich und wurden nicht eingesetzt.
 
 \subsubsection{Neue Java 8 Methoden verwenden}
 Bei den Collections wurden in Java 8 nützliche Methoden hinzugefügt. So kann etwa die folgende Methode gekürzt werden:
@@ -131,7 +124,7 @@ public void addWebSocketConnection(UUID missionId, WebSocketConnection webSocket
 
 
 \subsubsection{Long running jobs innerhalb der Consumer}
-Im DroneConnection wird auf einem Queue ein Consumer registriert, welcher eintreffende Messages verarbietet:
+In der DroneConnection Klasse wird auf einer Messaging-Queue ein Consumer registriert, welcher eintreffende Messages verarbeitet:
 \begin{lstlisting}
 Consumer consumer = new DefaultConsumer(channel) {
     @Override
@@ -150,7 +143,7 @@ Im Interface von Consumer steht folgendes:
 The Consumers on a particular Channel are invoked serially on one or more dispatch threads. Consumers should avoid executing long-running code because this will delay dispatch of messages to other Consumers on the same Channel	
 \end{quote}
 
-In unserem Fall wird beim Eintreffen der Messages vieles angestossen. Da die Queues pro Drohne sind, ist das blockieren der Queues von Vorteil und beschränkt sich auf eine Drone. Als Long-Runing code kann nur die Transkation betrachtet werden, welche allenfalls blockiern kann. Dies ist aber auch der Fall bei einem Event-Basierten System. Am Code wurde nicht verändert, jedoch wurde aber der Code dokumentiert.
+In unserem Fall wird beim Eintreffen der Messages vieles angestossen. Da die Queues pro Drohne sind, ist das Blockieren der Queues von Vorteil und beschränkt sich auf eine Drone. Als Long-Runing code kann nur die Transkation betrachtet werden, welche allenfalls blockieren kann. Dies ist aber auch der Fall bei einem eventbasierten System. Am Code wurde nicht verändert, jedoch wurde aber der Code dokumentiert.
 
 \subsubsection{Fehlende Security Annotation bei den REST Controllern}
 \begin{lstlisting}
@@ -169,11 +162,8 @@ Im oberen Beispiel wird eine Route mit dem Security Annotation versehen, welche 
 \subsubsection{Sonstige Anregungen}
 \begin{itemize}
 	\item{Code ist gut lesbar}
-	\item{Message Controller in einem seprate package verschieben, damit diese sichtlich von den restlichen Controllern getrennt sind}
-	\item{Optional als alternative zur Methoden mit der Namensgebung xxxOrNull()}
+	\item{Message Controller in ein separates verschieben, damit diese klar von den restlichen Controllern getrennt sind}
+	\item{Optional als Alternative zu Methoden mit der Namensgebung xxxOrNull()}
 	\item{
-	Beim Play Framework können in der Route eigene Datentypen angegeben werden.
-	So kann zum Beispiel statt String, direkt ein Wert vom Type Position erwartet werden.
-	Das parser der String Werte zum Position wrid von einem PathBindable-Implementierung gemacht.
-	Dies macht die Routen lesbarer. }
+	Beim Play Framework könnten in der Routendefinition eigene Datentypen verwendet werden. }
 \end{itemize}
