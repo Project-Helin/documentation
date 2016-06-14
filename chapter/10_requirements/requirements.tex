@@ -12,7 +12,7 @@ Bei den Personas handelt es sich um fiktive Personen.
 \begin{minipage}{0.25\textwidth}% adapt widths of minipages to your needs
 \centering
 \includegraphics[width=1.0\textwidth]{images/persona-diego.jpg}
-
+\captionof{figure}{Diego\protect\footnotemark[1]}
 \label{fig:diego}
 \end{minipage}%
 \hfill%
@@ -20,19 +20,19 @@ Bei den Personas handelt es sich um fiktive Personen.
 Diego ist \textbf{23 Jahre alt} und wohnt in einer WG in Uster.
 Diego hat eine Informatik-Lehre mit BMS abgeschlossen und ist auf der Suche nach einer neuen beruflichen oder schulischen Herausforderung.
 \paragraph{Technisches Verhalten}
-Arbeitet täglich acht Stunden mit dem PC. Nutzt gerne neue Technologien. Besitzt ein Android-Smartphone der neusten Generation. Die Android Updates macht er immer sofort. Interessiert sich für neue Technologien und sieht sich regelmässig Kickstarter Projekte an.
+Er arbeitet täglich acht Stunden mit dem PC und nutzt gerne neue Technologien. Er Besitzt ein Android-Smartphone der neusten Generation. Die Android Updates macht er immer sofort. Interessiert sich für neue Technologien und sieht sich regelmässig Kickstarter Projekte an.
 \paragraph{Ziele}
-Möchte sich weiterbilden und neue Herausforderungen finden. Möchte neue Technologien entdecken und einsetzen.
+Er will sich weiterbilden und neue Herausforderungen finden. Er möchte neue Technologien entdecken und einsetzen.
 \end{minipage}
-\captionof{figure}{Persona Diego: Freie Lizenz; Quelle \protect\url{http://blog.placeit.net/free-avatar-pack/}}
 
+\footnotetext[1]{ Freie Lizenz, \protect\url{Quelle: http://blog.placeit.net/free-avatar-pack/}}
 \newpage
 
 \subsection{Persona Stefanie: Administrator}
 \begin{minipage}{0.25\textwidth}% adapt widths of minipages to your needs
 \centering
 	\includegraphics[width=1\textwidth]{images/persona-stefanie.jpg}
-	
+	\captionof{figure}{Stefanie \protect\footnotemark[1]}
 	\label{fig:stefanie}
 \end{minipage}
 \hfill %
@@ -48,28 +48,29 @@ Sie kommuniziert geschäftlich hauptsächlich per E-Mail. Mit Freunden unterhäl
 \paragraph{Ziele}
 Sie möchte mit neuen und innovativen Ideen Events für Besucher spannender gestalten.
 \end{minipage}
-\captionof{figure}{Persona Stefanie: Freie Lizenz; Quelle
-	 \protect\url{http://blog.placeit.net/free-avatar-pack/}}
+
 \subsection{Persona Ricardo: Drone Operator}
 \begin{minipage}{0.25\textwidth}
 \centering
 	\includegraphics[width=1\textwidth]{images/persona-ricardo.jpg}
+	\captionof{figure}{Ricardo \protect\footnotemark[1]}
 	\label{fig:ricardo}
 \end{minipage}
 \hfill %
 \begin{minipage}{0.70\textwidth}
-Ricardo ist \textbf{26 Jahre} alt und wohnhaft in Wetzikon. Der ausgebildete Schlosser hat zur Zeit keinen festen Job. Er lebt das Leben von Tag zu Tag und geniest, es keine festen Verpflichtungen zu haben.
+Ricardo ist \textbf{26 Jahre} alt und wohnhaft in Wetzikon. Der ausgebildete Schlosser hat zur Zeit keinen festen Job. Er lebt das Leben von Tag zu Tag und geniesst, es keine festen Verpflichtungen zu haben.
 \paragraph{Technisches Verhalten}
 Er nutzt den PC selten, vorallem aber zum Surfen im Internet. Als Mobiltelefon besitzt er ein altes Telefon mit Android. Er möchte sich auch kein neues Gerät kaufen, da er ausser WhatsApp und der Taschenlampe das Gerät sowieso nicht verwendet.
 \paragraph{Kommunikationsverhalten}
 Er verwendet hauptsächlich sein Mobiltelefon zur Kommunikation. Mit Freunden ist er über WhatsApp in Kontakt.
 \paragraph{Ziele}
-Ricardo möchte gerne am Openair etwas Geld dazu verdienen und ohne grosse Einarbeitungszeit den Anforderungen der Eventtechnikfirma genügen.
+Ricardo möchte gerne am mit kleinen Jobs etwas Geld dazu verdienen und ohne grosse Einarbeitungszeit den Anforderungen der Eventtechnikfirma genügen.
 \end{minipage}
-\captionof{figure}{Persona Ricardo: Freie Lizenz; Quelle	 \protect\url{http://blog.placeit.net/free-avatar-pack/}}
+
+\footnotetext[1]{ Freie Lizenz, \protect\url{Quelle: http://blog.placeit.net/free-avatar-pack/}}
 \section{Szenario}
 
-Um eine bessere Übersicht über die Anforderungen zu erhalten wurde folgendes Szenario erstellt:\\
+Um eine bessere Übersicht über die Anforderungen zu erhalten wurde folgendes Szenario erstellt. Die rechtliche Situation wird dabei ausser Acht gelassen:\\
 
 \textbf{Stefanie} hat in einem Facebook-Post von Project Helin erfahren und möchte deshalb am nächsten Openair, das ihre Firma organisiert, einen Getränke-Lieferservice mit Drohnen anbieten. Sie registriert sich und ihre Organisation auf my.helin.ch und lässt sich von einem lokalen Anbieter zwei Drohnen bauen, die die Getränke tragen und abwerfen können. Nach dem Aufbau des Festgeländes zeichnet sie die Flugzonen auf my.helin.ch auf der Karte ein. Sie engagiert ausserdem Ricardo, der für die Drohnen beladen und warten soll. Dieser lädt das Onboard-App herunter und installiert es auf den zwei Smartphones, die auf den Drohnen montiert werden. Um die Drohnen mit dem Server zu verbinden, kann er die Adresse des Servers und einen Code eingeben, den Stefanie auf der Webseite abgeschrieben hat.\\
 
@@ -99,7 +100,7 @@ Die funktionalen Anforderungen leiten sich aus der Aufgabenstellung, sowie den m
 \item Als Administrator möchte ich Produkte verwalten können (CRUD).
 \item Als Administrator möchte ich Produkte einem Projekt hinzufügen können (zusätzlich)
 \item Als Administrator möchte ich Services (zum Beispiel Drone Selfies) verwalten können (CRUD). (optional)
-\item Als Administrator möchte ich Flug-, Lade- und Abwurfzonen verwalten können.
+\item Als Administrator möchte ich Flug-, Lade- und Abwurfzonen verwalten können (CRUD).
 \item Als Administrator möchte ich Bestellungen verwalten können (CRUD) (teilweise ausgeschlossen).
 \item Als Administrator möchte ich Telemetriedaten der Drohne, sowie die berechnete Route vor, nach, und während der Auslieferung einer Bestellung ansehen können.
 \item Als Administrator möchte ich Bestellungen abbrechen können. (ausgeschlossen)
@@ -141,7 +142,7 @@ Gemäss den anfänglichen Anforderungen sollte der Administrator die Möglichkei
 
 \subsubsection{Mission abbrechen}
 
-Das Abbrechen einer Mission wurde aus dem Scope entfernt, da sich einerseits Fragen über den sinvollen Einsatz eines solchen Features stellten und dafür andere Tasks wie das Payment priorisiert werden konnten.
+Das Abbrechen einer Mission wurde aus dem Scope entfernt, da sich einerseits Fragen über den sinvollen Einsatz eines solchen Features stellten und dafür andere Tasks wie die Bezahlung im App priorisiert werden konnten.
 
 \subsection{Nachträglich hinzugefügte Anforderungen}
 
@@ -211,7 +212,7 @@ Usability-Tests und Anforderungen in der Accessability wurden bewusst und in Abs
 Aus den funktionalen Anforderungen ergibt sich das folgende Domainmodel.
 \begin{landscape}
 \begin{figure}[h]
-	\includegraphics[width=0.75\paperheight]{images/domainmodell.png}
+	\includegraphics[width=0.75\paperheight]{images/domainmodell.pdf}
 	\caption{Domain-Model}
 	\label{fig:domain-model}
 \end{figure}

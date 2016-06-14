@@ -11,7 +11,7 @@ Die folgende Architektur soll es ermöglichen, eine Flotte von Drohnen automatis
 Da der Flight-Controller bereits vor der Arbeit evaluiert wurde, wird dieser als vorgegebene Limitierung angesehen.
 
 \subsection{Onboard-App}
-Während der gesamten Arbeit wird davon ausgegangen, dass das Onboard-App im Vordergrund verwendet wird und keine anderen Applikationen im Vordergrund laufen.
+Während der gesamten Arbeit wird davon ausgegangen, dass das Onboard-App im Vordergrund verwendet wird.
 
 
 \section{Übersicht}
@@ -20,7 +20,7 @@ Die Abbildung \ref{fig:architecture-overview} zeigt eine Übersicht der verschie
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{images/Overview-Diagram.png}
+	\includegraphics[width=1\textwidth]{images/Overview-Diagram.pdf}
 	\caption{Übersicht der Project Helin Architektur }
 	\label{fig:architecture-overview}
 \end{figure}
@@ -44,13 +44,13 @@ Aus den in den Anforderungen definierten Zielen, ergeben sich für die Server-Ko
 
 \begin{itemize}
 	\item Bietet Benutzeroberfläche für Administratoren
-	\item Verwaltet CRUD für alle nötigen Klassen (siehe Domain Model)
+	\item Verwaltet \Gls{CRUD} für alle nötigen Klassen (siehe Domain Model)
 	\item Verwaltet Verbindungen zu Onboard-Apps und Customer-Apps
 	\item Berechnet Flugrouten basierend auf den erhaltenen Bestellungs-Koordinaten
 \end{itemize}
 
 \subsection{Layers}
-Die Architektur des Servers basiert auf dem {MVC Pattern \cite{MVC}}, da dieses für CRUD Applikationen mit Benutzeroberfläche besonders geeignet ist und dafür viele geeignete Frameworks zur Verfügung stehen.\\
+Die Architektur des Servers basiert auf dem {MVC Pattern \cite{MVC}}, da dieses für \Gls{CRUD} Applikationen mit Benutzeroberfläche besonders geeignet ist und dafür viele geeignete Frameworks zur Verfügung stehen.\\
 
 Für Komponenten die aus unterschiedlichen Controllern verwendet werden, wurde zusätzlich eine Service Komponente verwendet. Die Services stellen Abstraktionen für wichtige Funktionen wie das Messaging und die Routenberechnung bereit.\\
 
@@ -175,19 +175,32 @@ Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schni
 	\\ \hline
 \end{tabular}
 
+
+
 \section{Kommunikations-Architektur}
 \label{sec:communication-architecture}
-Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht. Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. Für die Kommunikation mit dem Onboard-App wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen. Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne). Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
-	
-Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
 
-Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und WebSockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät.\\
+Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht.
+Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. \\
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/Communication-Overview-Diagram.png}
 	\caption{Übersicht der Kommunikations-Architektur mit den jeweiligen Protokollen. }
 	\label{fig:communication-architecture-overview}
 \end{figure}
+
+
+Für die Kommunikation mit dem Onboard-App wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen.
+Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne).
+Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
+
+Aufgrund der schlechten Erfahrung mit WebSocket auf mobilen Geräten und der Probleme mit bei Verbindungsabbrüche, kam diese nicht in Frage. Als Alternative blieb nur Messaging übrig, welches wegen der zeitlichen Unabhängigkeit der Verbindung, vom Server und dem Onboard-App, keine Konsequenzen hat. \\
+
+	
+Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
+
+Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und WebSockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät. Zusätzlich ist eine Verbindungswiederherstellung der Verbindung viel einfacher, da das Navigieren oder Neuladen der Seite ausreicht. \\
+
 
 \subsection{Verwendete Enterprise Integration Patterns}
 Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns die je nach Anforderungen verwendet werden können.({\cite{EIP}}) Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
@@ -200,7 +213,7 @@ Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverl�
 Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist ausserdem in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
 %
 \subsubsection{Event-driven Consumer}
-{Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit auf Grund von Nachrichten Aktionen auszuführen. Beispielsweise:
+{Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit Aktionen auf Grund von Nachrichten auszuführen. Beispielsweise:
 %
 \begin{itemize}
 	\item Drohne erhält neue Mission vom Server und soll dies dem Drone-Operator anzeigen.
