@@ -72,7 +72,7 @@ Stellt die grafische Benutzeroberfläche zur Verfügung und rendert diese basier
 		\item Data-Access-Layer
 		\item Service-Layer
 		\item Model-Layer
-		\item Messages
+		\item Commons
 	\end{itemize}
 	\\ \hline
 \end{tabular}
@@ -95,8 +95,8 @@ Der Model-Layer enthält die Datenmodelle. (siehe Domain Model)
 	\end{itemize}&
 	\begin{itemize}
 		\item Controller-Layer
-		\item AMQP-Library
-		\item Messages
+		\item Messaging
+		\item Commons
 	\end{itemize}
 	\\ \hline
 \end{tabular}
@@ -133,7 +133,7 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 	\end{itemize}&
 	\begin{itemize}
 		\item Activities-Layer
-		\item AMQP-Library
+		\item Messaging
 		\item Commons
 	\end{itemize}
 	\\ \hline
@@ -154,7 +154,7 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 \subsection{Layer}
 
 \subsubsection{View-Layer}
-Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schnittstellen zum Zahlungsanbieter und Identifikationsprovider an.
+Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schnittstellen zum Zahlungsanbieter (Payment) und Identifikationsprovider (Authentication) an.
 
 \subsubsection{Service-Layer}
 \begin{tabular}{|p{.70\textwidth}|p{.30\textwidth}|} \hline
@@ -190,14 +190,14 @@ Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt w
 \end{figure}
 
 
-Für die Kommunikation mit dem Onboard-App wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen.
+Für die Kommunikation mit dem Onboard-App wird Messaging verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen.
 Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne).
 Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
 
 Aufgrund der schlechten Erfahrung mit WebSocket auf mobilen Geräten und der Probleme mit bei Verbindungsabbrüche, kam diese nicht in Frage. Als Alternative blieb nur Messaging übrig, welches wegen der zeitlichen Unabhängigkeit der Verbindung, vom Server und dem Onboard-App, keine Konsequenzen hat. \\
 
 	
-Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
+Bei der Anbindung der Customer-App ist die Plattformunabhängigkeit der Schnittstelle höher gewichtet als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbin 5ndung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
 
 Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und WebSockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät. Zusätzlich ist eine Verbindungswiederherstellung der Verbindung viel einfacher, da das Navigieren oder Neuladen der Seite ausreicht. \\
 
@@ -206,14 +206,14 @@ Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und
 Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns die je nach Anforderungen verwendet werden können.({\cite{EIP}}) Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
 %
 \subsubsection{Point-to-Point Channel}
-Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverlässigen Nachrichtenaustausch zu ermöglichen, wird jede Drohne bzw. jede App über einen separaten Point-to-Point Channel	\cite[S. 103]{EIP}} angebunden. Der Channel wird nach der Registrierung zugeteilt und stellt den Point-to-Point Kanal zwischen Drohne und Server dar. Dies garantiert dem Server, eine Nachricht an nur eine Drohne zu schicken.
+Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverlässigen Nachrichtenaustausch zu ermöglichen, wird jede Drohne bzw. jede App über einen separaten Point-to-Point Channel	\cite[Seite 103]{EIP}} angebunden. Der Channel wird nach der Registrierung zugeteilt und stellt den Point-to-Point Kanal zwischen Drohne und Server dar. Dies garantiert dem Server, eine Nachricht an nur eine Drohne zu schicken.
 %
 \subsubsection{At-most-once}
 
 Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist ausserdem in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
 %
 \subsubsection{Event-driven Consumer}
-{Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit Aktionen auf Grund von Nachrichten auszuführen. Beispielsweise:
+{Event-driven Consumer \cite[Seite 442]{EIP}} Systeme bieten die Möglichkeit Aktionen auf Grund von Nachrichten auszuführen. Beispielsweise:
 %
 \begin{itemize}
 	\item Drohne erhält neue Mission vom Server und soll dies dem Drone-Operator anzeigen.
