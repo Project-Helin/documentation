@@ -134,7 +134,7 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 
 Gemäss den nicht-funktionalen Anforderungen soll ein Verbindungsabbruch zum Server keinen Einfluss auf die Ausführung der Lieferung haben. Deshalb wird die Flugroute vor dem Start auf den \Gls{Flight-Controller} übertragen, somit kann die Mission auch ohne Online-Verbindung erfolgreich abgeschlossen werden. \\
 
-Sollte die Verbindung zwischen Server und Onboard-App unterbrochen sein, sollte wenn möglich verhindert werden, dass Nachrichten verloren gehen. Bei unterbrochener Verbindung wird dies wie folgt erreicht:\\
+Sollte die Verbindung zwischen Server und Onboard-App unterbrochen sein, sollte verhindert werden, dass Nachrichten verloren gehen. Bei unterbrochener Verbindung wird dies wie folgt erreicht:
 \begin{itemize}
 	\item{\textbf{Nachricht vom Server zum Onboard-App} \\
 		Dieses Szenario wird durch RabbitMQ abgefangen. Der Messaging-Broker persistiert die Nachrichten solange bis die Onboard-App wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf.
@@ -143,20 +143,22 @@ Sollte die Verbindung zwischen Server und Onboard-App unterbrochen sein, sollte 
 		Hier steht der Broker nicht zur Verfügung und die Speicherung der Nachrichten musste implementiert werden. Dazu verwenden wir eine Queue in der alle Nachrichten gespeichert werden und erst entfernt werden, wenn sie verschickt wurden.
 	}
 \end{itemize}
-Mit diesen Massnahmen haben wir einen guten Kompromiss zwischen Zuverlässigkeit und Implementationsaufwand erreicht.
+Mit diesen Massnahmen haben wir eine gute Balance zwischen Zuverlässigkeit und Implementationsaufwand erreicht.
 }
 
 
 \subsubsection{Verbindungswiederherstellung}
 Gemäss den nicht-funktionalen Anforderungen, muss sichergestellt werden, dass nach einem Unterbruch der Internetverbindung eine Verbindungswiederherstellung stattfindet. Sobald die Verbindung mit dem Internet wieder besteht, soll nach 30 Sekunden wieder eine Verbindung zum Message-Broker bestehen. \\
 
-Bei der Konfiguration von AMQP bestanden mehrere Möglichkeiten. Einerseits war der bekannte Backoff Algorithmus eine Option. Dieser Algorithmus arbeitet nach einem incrementellen Prinzip. Je länger der Unterbruch dauert, desto länger dauert es bis er die Verbindung wieder versucht aufzubauen. Auf der anderen Seite stand ein einfacher Interval-Algorithmus. Dieser versucht alle drei Sekunden die Verbindung wiederherzustellen, bis zum erfolgreichen Verbindungsaufbau. \\
+Bei der Konfiguration der Verbindungswiederherstellung bestand die Wahl zwischen fixen oder inkrementellen Zeitabständen, nach denen eine Wiederherstellung versucht wird. Um das exakte Verhalten zu evaluieren, wurden Versuche gemacht, bei denen die Verbindung für 3 Sekunden unterbrochen wurde.
+
+Einerseits war der bekannte Backoff Algorithmus eine Option. Dieser Algorithmus arbeitet nach einem incrementellen Prinzip. Je länger der Unterbruch dauert, desto länger dauert es bis er die Verbindung wieder versucht aufzubauen. Auf der anderen Seite stand ein einfacher Interval-Algorithmus. Dieser versucht alle drei Sekunden die Verbindung wiederherzustellen, bis zum erfolgreichen Verbindungsaufbau. \\
 Mit diesen Erkenntnissen haben wir folgende Messung gemacht:
 \begin{table}
 	\centering
 	\begin{tabular}{|r|r|r|}
 		\hline
-		\textbf{Versuch} & \textbf{Backoff (s) } & \textbf{Interval 3s (s)} \\
+		\textbf{Versuch} & \textbf{Backoff [s] } & \textbf{Interval 3s [s])} \\
 		\hline
 		1 & 17 & 7 \\
 		2 &	7 & 7 \\
