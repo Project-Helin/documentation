@@ -150,15 +150,14 @@ Mit diesen Massnahmen haben wir eine gute Balance zwischen Zuverlässigkeit und 
 \subsubsection{Verbindungswiederherstellung}
 Gemäss den nicht-funktionalen Anforderungen, muss sichergestellt werden, dass nach einem Unterbruch der Internetverbindung eine Verbindungswiederherstellung stattfindet. Sobald die Verbindung mit dem Internet wieder besteht, soll nach 30 Sekunden wieder eine Verbindung zum Message-Broker bestehen. \\
 
-Bei der Konfiguration der Verbindungswiederherstellung bestand die Wahl zwischen fixen oder inkrementellen Zeitabständen, nach denen eine Wiederherstellung versucht wird. Um das exakte Verhalten zu evaluieren, wurden Versuche gemacht, bei denen die Verbindung für 3 Sekunden unterbrochen wurde.
+Bei der Konfiguration der Verbindungswiederherstellung bestand die Wahl zwischen fixen oder inkrementellen Zeitabständen, nach denen eine Wiederherstellung versucht wird. Um das exakte Verhalten zu evaluieren, wurden Versuche gemacht, bei denen die Verbindung für 3 Sekunden unterbrochen wurde (siehe Tabelle \ref{tbl:backoff}).\\
 
-Einerseits war der bekannte Backoff Algorithmus eine Option. Dieser Algorithmus arbeitet nach einem incrementellen Prinzip. Je länger der Unterbruch dauert, desto länger dauert es bis er die Verbindung wieder versucht aufzubauen. Auf der anderen Seite stand ein einfacher Interval-Algorithmus. Dieser versucht alle drei Sekunden die Verbindung wiederherzustellen, bis zum erfolgreichen Verbindungsaufbau. \\
-Mit diesen Erkenntnissen haben wir folgende Messung gemacht:
 \begin{table}
+	
 	\centering
 	\begin{tabular}{|r|r|r|}
 		\hline
-		\textbf{Versuch} & \textbf{Backoff [s] } & \textbf{Interval 3s [s])} \\
+		\textbf{Versuch} & \textbf{Mit inkrementellem Intervall [s] } & \textbf{Mit fixem Intervall [s])} \\
 		\hline
 		1 & 17 & 7 \\
 		2 &	7 & 7 \\
@@ -167,14 +166,11 @@ Mit diesen Erkenntnissen haben wir folgende Messung gemacht:
 		5 & 10 & 7 \\
 		\hline
 	\end{tabular}
-	\caption{Anzahl Sekunden für den Reconnect nach jedem Versuch}
+	\caption{Benötigte Zeit für Verbindungswiederherstellung}
+	\label{tbl:backoff}
 \end{table}
-Aus diesen Erkenntnissen standen beide Möglichkeiten offen, denn beide erfüllen die Anforderungen und haben somit auch keine Auswirkungen auf die Qualität. Am Ende wurde bewusst auf den BackOff Algorithmus gesetzt. Der Backoff Algorithmus benötigt zwar deutlich länger für einen Reconnect als das fixe Zeitinterval. Die hetrogene Verteilung der Wiederverbindungszeiten spricht aber für den Backoff Algorithmus. Sollte es zu Probleme auf der Serverseite kommen, so werden nicht alle Geräte gleichzeitig einen Reconnect probieren - der Reconnect passiert somit gestaffelt. Dies bringt zusätzlich Stabilität ins System.
 
-\subsubsection{Android Process Lifecycle} 
-Da die OnboardApp auf einem Android Betriebssystem läuft, mussten gewisse Voraussetzungen geprüft werden. Im Grund kann davon ausgegangen werden, dass die Applikation immer im Vordergrund steht. Es ist doch sehr unwahrscheinlich, dass die Appliaktion in den Hintergrund rückt, weil eine andere Applikation verwendet wird. \\
-Laut Android Dokumentation ist das Verhalten einer Applikation im Hintergrund nicht deterministisch \cite{androidGuide}. Sollte eine Applikation im Hintergrund gewisse Garantien haben, so muss von einem Service und der spezifischen Implementierung eines Services gesprochen werden. Im Fall der OnboardApp und den getroffenen Annahmen, wurde davon abgesehen, da die Applikation während des Fluges nicht gewechselt wird.\\
-
+Da beide Varianten die nicht-funktionalen Anforderungen erfüllen, haben wir uns nach den Versuchen für ein inkrementelles Intervall entschieden um das Smartphone nicht unnötig zu belasten.
 
 \subsection{Customer App}
 Gemäss Aufgabenstellung sollte ein Prototyp für eine App, mit welchem Bestellungen am System abgegeben können, entwickelt werden.
