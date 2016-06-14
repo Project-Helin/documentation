@@ -20,15 +20,14 @@ Falls die Beladung automatisiert wird, oder keine Beladung notwendig ist, benöt
 	}
 	\item{\textbf{Arduino} \\
 	Bei der Arduino Hardware Plattform kann auf einem beliebigen Arduino Board implementiert werden, welches als USB Host Device arbeiten kann. Zusätzlich muss ein GSM Shield 2 verwendet werden um eine GSM Verbindung aufbauen zu können. Eine Option auf WLAN existiert nur durch zusätzliche Komponenten.}
+
 	\item{\textbf{Pixhawk Controller mit GSM Modul} \\
-	Es existieren GSM Module, wie etwa DroneCell \ref{drone-cell}, um am Pixhawk anzuschliessen. Diese werden aber dazu genutzt um Telemetriedaten zu übertragen. Da die verwendete Firmware für Pixhawk opensource ist, besteht die Möglichkeit die Firmware anzupassen, um bidirektionale Kommunikation über das GSM Module zu ermöglichen.
+	Es existieren GSM Module, wie etwa DroneCell \cite{drone-cell}, die am Pixhawk angeschlossen werden können. Diese ersetzen die Funkverbindung und ermöglichen die Kommunikation über 4G.
 	}
 
 \end{itemize}
 
-Die ersten zwei Alternativen bringen zusätzlich mit sich, dass sie externe Stromversorgung benötigen. Somit muss, um eine stabile Betriebsspannung zu generieren, auf die Bordstromversorgung zurückgegriffen werden und ein \Gls{BEC}, welches für eine konstante Spannung sorgt, für die Servo-Stromversorgung verwendet werden. \\
-
-Abschliessend kann gesagt werden, dass das von uns verwendete Smartphone (Nexus 4) 139 Gramm schwer ist. Die Lösung mit dem Raspberry PI 3 schlägt mit 40 Gramm zu buche. Die Einsparung von 100 Gramm bringt einen Verzicht auf ein Display und den Zwang einer zusätzlichen Stromversorgung mit sich.
+Die ersten zwei Alternativen benötigen zusätzlich eine externe Stromversorgung. Somit muss ein \Gls{BEC} (Battery Eliminator Circuit) verwendet werden um eine stabile Spannung für die jeweilige Komponente zu liefern. \\
 
 
 \section{Ablieferungskonzept}
@@ -91,8 +90,8 @@ Nachteile:
 \begin{itemize}
 	\item Ware kann Schaden nehmen
 	\item Ware kann Personen verletzen bei Versagen des Fallschirms
-	\item Einweg Fallschirme (Kosten und Abfall)
-	\item Windlage kann Fallschirm Flugrichtung beeinflussen
+	\item Einweg-Fallschirme (Kosten und Abfall)
+	\item Windlage kann Fallschirm-Flugrichtung beeinflussen
 \end{itemize}
 
 
@@ -192,7 +191,9 @@ Ersatzteilen und einen hohen Marktanteil der Komponenten geachtet. Besonders wic
 	Kleinmaterial & diverse & CHF & 50.00\\\hline
 	\hline
 	\textbf{Total} & & \textbf{CHF/USD} & $\boldsymbol{\approx 900.00}$\\\hline
-\end{tabularx}
+\end{tabularx}\\
+
+Es wurde ein Wechselkurs von 1:1 angenommen.
 
 \subsection{Frame und Antrieb}
 
@@ -228,13 +229,13 @@ Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kan
 
 \subsection{Ausbaustufen}
 
-Während des Projekts wurde die Hardware laufend den Bedürfnissen angepasst. Daher sind mehrere Versionen der Drohne entstanden, die für die Versuche genutzt wurden und geholfen haben Risiken früh auszuschliessen.
+Während des Projekts wurde die Hardware laufend den Bedürfnissen angepasst. Daher sind mehrere Versionen der Drohne entstanden, die für die Versuche genutzt wurden und halfen Risiken früh auszuschliessen.
 
 \subsubsection{Version 1}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\textwidth] {images/hardware/prototype1.jpg}
+	\includegraphics[width=1.0\textwidth] {images/hardware/prototype1.jpg}
 	\caption{Erster Prototyp ohne Landegestell und ohne Smartphone}
 	\label{fig:prototyp-1}
 \end{figure}
@@ -245,7 +246,7 @@ Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Erfahrungen mit
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\textwidth] {images/hardware/prototype2.jpg}
+	\includegraphics[width=1.0\textwidth] {images/hardware/prototype2.jpg}
 	\caption{Drohnen Aufbau mit Smartphone}
 	\label{fig:prototyp-2}
 \end{figure}
