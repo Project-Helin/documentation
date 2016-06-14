@@ -13,25 +13,21 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 \section{Implementierung}
 
 \subsection{Messaging Provider}
-In der Architektur wurde entschieden, dass die Kommunikation zwischen dem Server und der Drohne über das \Gls{AMQP}-Protokoll geschieht. \\
-\newpage
-Im folgender Tabelle werden einige Produkte verglichen: \\
+In der Architektur wurde entschieden, dass zur Kommunikation zwischen Server und Drohne ein \Gls{Message Broker} verwendet wird. Das genaue Produkt wurde allerdings noch nicht festgelegt. Folgende Broker wurden evaluiert:  \\
 \begin{tabularx}{\textwidth}{|l|X|X|X|}
 	\hline
-	& \textbf{Firebase \footnote{ehemals Google Cloud Messaging}} & \textbf{RabbitMQ} & \textbf{ActiveMQ} \\
+	&\textbf{RabbitMQ} & \textbf{ActiveMQ} \\
 	\hline
 	\textbf{Vorteile} & 
-	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{API Dokumentation} \item{Android Unterstützung} \end{itemize}  & 
-	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Opensource} \item{Automatischer  \mbox{Reconnect}} \end{itemize}  &
-	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Opensource} \end{itemize} \\
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Open Source} \item{Automatischer  \mbox{Reconnect}} \end{itemize}  &
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Open Source} \end{itemize} \\
 	
 	\hline 
 	
 	
 	\textbf{Nachteile} & 
-	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Kostenpflichtig \footnote{ab 100 Verbindungen}} \item{Variable Latenzzeit \ref{gcm-latenc}} \end{itemize}  & 
-	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Betrieb on premisies} \end{itemize}  &
-	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Keine Android \mbox{Unterstützung}} \end{itemize} \\
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Eigene Infrastruktur benötigt} \end{itemize}  &
+	\begin{itemize}[noitemsep, topsep=1pt, leftmargin=15pt] \item{Keine Android Unterstützung} \end{itemize} \\
 
 	\hline 
 \end{tabularx} \\
