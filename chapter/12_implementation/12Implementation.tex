@@ -6,7 +6,7 @@
 Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigsten Komponenten und deren Verbindungen untereinander. Dieses Design orientiert sich an der Kommunikationsarchitektur, die in Kapitel \ref{sec:communication-architecture} beschrieben wurde.
 
 \begin{figure}[H]
-	\includegraphics[width=1.0\textwidth]{images/component-overview.png}
+	\includegraphics[width=1.0\textwidth]{images/component-overview.pdf}
 	\caption{Übersicht wichtigsten Schnittstellen und deren Verbindungen }
 	\label{fig:component-overview}
 \end{figure}
@@ -62,7 +62,7 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\paperwidth] {images/drone-communication-diagram.png}
+	\includegraphics[width=0.8\paperwidth] {images/drone-communication-diagram.pdf}
 	\caption{Objekt-Diagramm der Kommunkationsstruktur}
 	\label{fig:drone-communication-diagram}
 \end{figure}
@@ -305,7 +305,7 @@ Je nach Plattform wurden andere Formen von Tests durchgeführt:
 	\caption{Anzahl Tests über die Zeit. Grün (erfolgreiche Tests) und Grau (ausgeschlossene)}
 \end{figure}
 
-Auf dem Server wurden vor allem Gls{E2E}- und Gls{Integration}-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bei den meisten Kompoonenten bewusst gegen Unit-Tests entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Bei der Routenberechnung hingegen konnte sehr gut mit Unit-Tests gearbeitet werden.\\
+Auf dem Server wurden vor allem \Gls{E2E}- und \Gls{Integration}-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bei den meisten Kompoonenten bewusst gegen Unit-Tests entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Bei der Routenberechnung hingegen konnte sehr gut mit Unit-Tests gearbeitet werden.\\
 
 Wir haben darauf geachtet, dass immer nur die minimale Integrationsstufe gewählt wurde. Für die Simulation eines Benutzers (E2E) wurde Selenium verwendet, das wiederum einen Firefox Browser verwendet. Für die Api- und Messaging-Controller wurden Integrationtests verwendet, welche keinen Browser benötigen.\\
 
