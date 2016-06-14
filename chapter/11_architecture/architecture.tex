@@ -175,19 +175,33 @@ Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schni
 	\\ \hline
 \end{tabular}
 
+
+
 \section{Kommunikations-Architektur}
 \label{sec:communication-architecture}
-Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht. Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. Für die Kommunikation mit dem Onboard-App wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen. Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne). Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
-	
-Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
 
-Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und WebSockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät.\\
+Die Abbildung \ref{fig:communication-architecture-overview} zeigt die Kommunikations-Architektur in der Übersicht.
+Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt werden um die Anforderungen erfüllen zu können. \\
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/Communication-Overview-Diagram.png}
 	\caption{Übersicht der Kommunikations-Architektur mit den jeweiligen Protokollen. }
 	\label{fig:communication-architecture-overview}
 \end{figure}
+
+
+Für die Kommunikation mit dem Onboard-App wird Messaging ({\Gls{AMQP}) verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen.
+Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne).
+Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
+
+Aufgrund der schlechten Erfahrung mit WebSocket auf mobilen Geräten und der Probleme mit bei Verbindungsabbrüche, kam diese nicht in Frage. Als Alternative blieb nur Messaging übrig, welches wegen der zeitlichen Unabhängigkeit der Verbindung, vom Server und dem Onboard-App, keine Konsequenzen hat. \\
+
+	
+Bei der Anbindung der Customer-App steht die Platzformunabhängigkeit der Schnittstelle mehr im Vordergrund als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
+
+Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und WebSockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät.\\
+
+
 
 \subsection{Verwendete Enterprise Integration Patterns}
 Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns die je nach Anforderungen verwendet werden können.({\cite{EIP}}) Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
