@@ -5,7 +5,7 @@
 Folgende Code-Änderungen wurden reviewed von KP und MS :
 \begin{itemize}
 	\item{Anbindung Hibernate Spatial}
-	\item{Verwendung von SFCGAL: SFCGAL ist eine Libary, welches von PostGIS verwendet wird. Es musste geprüfut werden ob SFCGAL richtig installiert wurde.}
+	\item{Verwendung von SFCGAL: SFCGAL ist eine Library, welches von PostGIS verwendet wird. Es musste geprüft werden ob SFCGAL richtig installiert wurde.}
 	\item{Helper Klasse für WKT und Polygon Verarbeitung}
 \end{itemize}
 
@@ -38,7 +38,7 @@ Während dem Code-Review wurden die folgenden Anpassungen gemacht:
 Folgende Code-Änderungen wurden reviewed von MS und MA:
 \begin{itemize}
 	\item{Message Handling Server}
-	\item{Server Message Persistance}
+	\item{Server Message Persistence}
 	\item{Message Handling Onboard-App}
 \end{itemize}
 Während dem Code-Review wurden die folgenden Anpassungen gemacht:
@@ -73,7 +73,7 @@ Dies könnte potentiell Probleme verursachen und die Variablen wurden deshalb mi
 
 \subsubsection{Lifecycle}
 
-In vielen Fragments und Activities wurde die OnDestroy Methode verwendet um Resourcen abzuräumen.\\
+In vielen Fragments und Activities wurde die OnDestroy Methode verwendet um Ressourcen abzuräumen.\\
 Die Ausführung von OnDestroy ist aber nicht garantiert.
 Deshalb wurde der Code in die OnPause-Methode verschoben und wird nun garantiert ausgeführt, wenn die Activity oder das Fragment vom Betriebssystem beendet wird.
 
@@ -127,7 +127,7 @@ public void addWebSocketConnection(UUID missionId, WebSocketConnection webSocket
 
 
 \subsubsection{Long running jobs innerhalb der Consumer}
-In der DroneConnection Klasse wird auf einer Messaging-Queue ein Consumer registriert, welcher eintreffende Messages verarbeitet:
+In der DroneConnection Klasse wird auf einer Messaging-Queue ein Consumer registriert, welche eintreffende Messages verarbeitet:
 \begin{lstlisting}
 Consumer consumer = new DefaultConsumer(channel) {
     @Override

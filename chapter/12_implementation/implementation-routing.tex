@@ -14,7 +14,7 @@ Um Kollisionen mit statischen Objekten zu vermeiden und sichere Flugwege zu erha
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/routing/simpleProject_example.png}
-	\caption{Einfaches Demo Projekt an der HSR}
+	\caption{Verschiedene Flugzonen am Beispiel der HSR}
 	\label{fig:demo-project}
 \end{figure}
 Jedes Polygon bildet eine Zone ab. Jede Zone enthält eine Flughöhe sowie einen Typ:
@@ -26,7 +26,7 @@ Jedes Polygon bildet eine Zone ab. Jede Zone enthält eine Flughöhe sowie einen
 \end{itemize}
 
 \subsection{Von der Zone zum Graph}
-Normalerweise wird eine Routenberechnung mit Hilfe eines Graphen durchgeführt, der durch die möglichen Wege (z.B. Strassen) definiert ist. Da die Zonen aber eine Fläche bilden, mussten diese zuerst in einen Graphen umgewandelt werden. \\
+Normalerweise wird eine Routenberechnung mit Hilfe eines Graphen durchgeführt, der durch die möglichen Wege (z.B. Strassen) definiert ist \cite{graph-routing}. Da die Zonen aber eine Fläche bilden, mussten diese zuerst in einen Graphen umgewandelt werden. \\
 
 Folgende Lösungsmöglichkeiten wurden evaluiert:
 
@@ -70,7 +70,7 @@ Die Kernaussage des zitierten Papers \cite[]{SkeletonUAV} ist, dass ein Pfad den
 	\caption{Skeleton in Polygon}
 	\label{fig:skeleton-in-polygon}
 \end{figure}
-Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet. Der Felkel-Algorithmus, welcher dieses Skeleton aus einem 2-dimensionalen Polygon berechnet ist bereits in \Gls{CGAL} implementiert \cite{SkeletonCGAL} und war uns im weiteren Verlauf des Projektes von grossem Nutzen.\\
+Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet. Der Felkel-Algorithmus, welcher diesen Skeleton aus einem 2-dimensionalen Polygon berechnet ist bereits in \Gls{CGAL} implementiert \cite{SkeletonCGAL} und war uns im weiteren Verlauf des Projektes von grossem Nutzen.\\
 
 
 

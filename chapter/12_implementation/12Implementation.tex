@@ -211,7 +211,7 @@ Zusätzlich wurde für PostGIS die Erweiterung \Gls{SFCGAL} verwendet, welche di
 \subsection{Sicherheit}
 Es ist essentiell, dass die Sicherheit bei der Kommunikation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte (siehe NFR \ref{sec:message-security}). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ Message Broker und die Queue-Namen geheim zu halten: \\
 
-Die Onboard-App registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Registrierung der Drohne, wird ein Token sowie der Benutzer und das Kennwort für die Verbindung zu RabbitMQ an die Onboard-App geschickt. Mit diesen Informationen kann sich die App mit dem Messaging Broker über eine verschlüsselte Leitung verbinden.\\
+Die Onboard-App registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Registrierung der Drohne, werden ein Token sowie der Benutzer und das Kennwort für die Verbindung zu RabbitMQ an die Onboard-App geschickt. Mit diesen Informationen kann sich die App mit dem Messaging Broker über eine verschlüsselte Leitung verbinden.\\
 
 Für die darauf folgende Kommunikation mit dem Broker, werden mit Hilfe des Tokens zwei Queues erzeugt: 
 \begin{itemize}
@@ -248,7 +248,7 @@ Folgende Statistiken wurden am Ende der Arbeit erstellt um einen Eindruck der Gr
 	\label{table:code-metrics}
 \end{table}
 
-In der Tabelle \ref{table:code-metrics} sind vor allem der geringe Anteil von Methoden mit hoher essentieller Komplexität\cite[]{MCCABE} hervorzuheben. Alle Methoden mit hoher Komplexität wurden vom Team geprüft, konnten aber nicht mehr verbessert werden. Hauptsächlich sind dies 'equals' Methoden von grösseren \Gls{DTO}s oder es handelt sich um MessageConverter, die einfach alle verschiedenen Messagetypen verschieden behandeln müssen. Das folgende Beispiel zeigt die Methode mit der höchsten zyklomatischen Komplexität der Server-Applikation (Essentielle Komplexität = 10, Zyklomatische Komplexität = 10). \\
+In der Tabelle \ref{table:code-metrics} ist vor allem der geringe Anteil von Methoden mit hoher essentieller Komplexität\cite[]{MCCABE} hervorzuheben. Alle Methoden mit hoher Komplexität wurden vom Team geprüft, konnten aber nicht mehr verbessert werden. Hauptsächlich sind dies 'equals' Methoden von grösseren \Gls{DTO} oder es handelt sich um MessageConverter, die einfach alle verschiedenen Messagetypen verschieden behandeln müssen. Das folgende Beispiel zeigt die Methode mit der höchsten zyklomatischen Komplexität der Server-Applikation (Essentielle Komplexität = 10, Zyklomatische Komplexität = 10). \\
 
 
 \begin{lstlisting}
@@ -294,7 +294,7 @@ Die Überprüfung eines Issues beinhaltet folgende Aufgaben:
 	\item{Akzeptanzkriterien aus der User-Story manuell prüfen}
 	\item{Code-Review durchführen (Intensität je nach Grösse und Komplexität des geschriebenen Codes)}
 	\item{Code auf Verstösse gegen Style-Guide prüfen}
-	\item{Prüfen der Tests vorhanden sind}
+	\item{Tests prüfen}
 \end{itemize}
 
 Damit konnten viele Fehler früh entdeckt werden und die Code-Qualität konnte über die ganze Projektdauer konstant gehalten werden.
