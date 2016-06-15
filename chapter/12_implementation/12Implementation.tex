@@ -15,6 +15,7 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 \subsection{Message Broker}
 In der Architektur wurde festgelegt, dass der Server und die Onboard-App über Messaging kommunizieren. Messages, die über Message Oriented Middleware (\Gls{MOM}) transportiert werden, benötigen einen Message Broker der als Drehscheibe fungiert. 
 \\
+
 Ein geeigneter Message Broker muss sowohl vom Server als auch von der Onboard-App angesprochen werden und folglich mit beiden kompatibel sein. Diese Anforderung verunmöglicht den Einsatz von allen \Gls{JMS}-kompatiblen Message Brokern, da \Gls{JMS} nicht mit der Android Plattform kompatibel ist.
 Ausserdem muss der Message Broker kostenfrei sein, somit fallen sämtliche cloubasierten Anbieter weg. Als plattformunabhänige Alternative, die on premises installiert werden kann, kommt somit ein \Gls{AMQP}-fähiger Broker in Frage. Am Ende fiel der Entscheid auf RabbitMQ als Produkt, dies auch aus dem einfachen Grund, weil RabbitMQ einen Message Broker und die passenden Bibliotheken aus einer Hand liefert. \\
 
