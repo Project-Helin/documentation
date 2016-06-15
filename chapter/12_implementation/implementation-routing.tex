@@ -63,14 +63,14 @@ Dies ist eine deutliche Verbesserung gegenüber dem ersten Konzept. Der Nachteil
 Da die Pfadfindung von \Gls{UAV} bereits ein weit erarbeitetes und erforschtes Gebiet ist, waren wir der Überzeugung, dass bereits verwendete Konzepte vereinfacht und abstrahiert werden konnten, um unser Problem zu lösen. Während vollständig autonome Drohnen an Hindernissen vorbei navigieren müssen, können wir uns auf einen bestehenden Flugkorridor verlassen.
 \blockquote{The idea behind this method is to assign a function similar to the electrostatic potential to each obstacle and then derive the topological structure of the free space in the form of minimum potential valleys. The robot is positioned at the start point, and then the goal generates a strong attractive force. By the action of the force, the robot moves along the steepest descent of the potential to the goal, at the same time the obstacle generates a repulsive force to keep robot away from colliding with them} 
 
-Die Kernaussage des zitierten Papers \cite[]{SkeletonUAV} ist, dass ein Pfad den grösstmöglichen Abstand zu den Hindernissen aufweisen soll. Auf unseren Fall übertragen, sind die Polygonränder die Hindernisse. Somit muss gewährleistet werden, dass die Drohne den grössten Abstand zu den Rändern aufweisst. Aus diesem Grund erscheint diese Lösung für uns sehr geeignet, da Sie mittenbetonte Routen vorschlägt. \\
+Die Kernaussage des zitierten Papers \cite[]{SkeletonUAV} ist, dass ein Pfad den grösstmöglichen Abstand zu den Hindernissen aufweisen soll. Auf unseren Fall übertragen, sind die Polygonränder die Hindernisse. Somit muss gewährleistet werden, dass die Drohne den grössten Abstand zu den Rändern aufweisst. Aus diesem Grund erscheint diese Lösung für uns sehr geeignet, da sie mittenbetonte Routen vorschlägt. \\
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/routing/skeleton.png}
 	\caption{Skeleton in Polygon}
 	\label{fig:skeleton-in-polygon}
 \end{figure}
-Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet. Der Felkel-Algorithmus, welcher dieses Skeleton aus einem 2-dimensionalen Polygon berechnet ist bereits in CGAL implementiert \cite{SkeletonCGAL} und war uns im weiteren Verlauf des Projektes von grossem Nutzen.\\
+Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet. Der Felkel-Algorithmus, welcher dieses Skeleton aus einem 2-dimensionalen Polygon berechnet ist bereits in \Gls{CGAL} implementiert \cite{SkeletonCGAL} und war uns im weiteren Verlauf des Projektes von grossem Nutzen.\\
 
 
 
