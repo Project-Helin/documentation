@@ -19,15 +19,15 @@ Falls die Beladung automatisiert wird, oder keine Beladung notwendig ist, benöt
 	Bereits ab dem leichtgewichtigen Raspberry PI Zero sind die nötigen Funktionen vorhanden. Zusätzlich muss hier auf ein GSM Modem zurückgegriffen werden um eine permanente Internetverbindung aufzubauen. Bei Verwendung eines Raspberry PI 3 kann sogar auf ein eingebautes WLAN Interface verwendet werden.
 	}
 	\item{\textbf{Arduino} \\
-	Bei der Arduino Hardware Plattform kann auf einem beliebigen Arduino Board implementiert werden, welches als USB Host Device arbeiten kann. Zusätzlich muss ein GSM Shield 2 verwendet werden um eine GSM Verbindung aufbauen zu können. Eine Option auf WLAN existiert nur durch zusätzliche Komponenten.}
+	Es könnte eine Arduino Plattform verwendet werden mit einem GSM Shield 2, das eine mobile Internetverbindung ermöglicht. Eine WLAN Verbindung ist nur mit einem zusätzlichen Modul möglich.}
 
 	\item{\textbf{Pixhawk Controller mit GSM Modul} \\
-	Es existieren GSM Module, wie etwa DroneCell \cite{drone-cell}, die am Pixhawk angeschlossen werden können. Diese ersetzen die Funkverbindung und ermöglichen die Kommunikation über 4G.
+	Es existieren GSM Module, wie etwa DroneCell \cite{drone-cell}, die am Pixhawk angeschlossen werden können. Diese ersetzen die Telemetrie-Funkverbindung und ermöglichen die Kommunikation über 4G.
 	}
 
 \end{itemize}
 
-Die ersten zwei Alternativen benötigen zusätzlich eine externe Stromversorgung. Somit muss ein \Gls{BEC} (Battery Eliminator Circuit) verwendet werden um eine stabile Spannung für die jeweilige Komponente zu liefern. \\
+Die ersten zwei Alternativen benötigen zusätzlich eine externe Stromversorgung. Somit muss ein \Gls{BEC} (Battery Eliminator Circuit) verwendet werden, um eine stabile Spannung für die jeweilige Komponente zu liefern. \\
 
 
 \section{Ablieferungskonzept}
@@ -43,7 +43,6 @@ Vorteile:
 	\item Kunde bestätigt Lieferung
 	\item Ware kann keinen Schaden nehmen
 	\item Kunde kann entscheiden, wann es sicher genug ist, damit die Drohne starten kann
-	\item Die Lieferung ist punktgenau
 \end{itemize}
 
 
@@ -67,7 +66,7 @@ Vorteile:
 Nachteile:
 \begin{itemize}
 	\item Drohne kann Personen verletzen, während sie sich in Bodennähe befindet
-	\item Landung kann schwierig sein je nach Gelände
+	\item Landung kann, je nach Gelände, schwierig sein
 	\item Fremde Personen haben physischen Zugriff auf die Drohne
 \end{itemize}
 
