@@ -11,7 +11,7 @@ Um den Einstieg für die Zielgruppe zu erleichtern, wurde eine Webseite erstellt
 \end{figure}
 \newpage
 
-Ausserdem wurde die Plattform auf \url{my.helin.ch} freigeschaltet und kann frei genutzt werden.
+Ausserdem wurde die Plattform auf \url{https://my.helin.ch} freigeschaltet und kann frei genutzt werden.
 
 \begin{figure}[H]
 	\centering
@@ -28,7 +28,7 @@ Die \Gls{Single-Page-Applications} für das Zeichnen von Zonen, das Testen eines
 \end{figure}
 
 \newpage
-Die verschiedenen Apps können aus dem jeweiligen App-Store oder direkt heruntergeladen werden.
+Das Customer-App für Android (links), das Customer-App für iOS (mitte) und das Onboard-App (rechts) können aus dem jeweiligen App-Store bzw. direkt heruntergeladen werden.
 
 \begin{figure}[H]
 	\centering
@@ -52,7 +52,7 @@ Die verschiedenen Apps können aus dem jeweiligen App-Store oder direkt herunter
 \end{figure}
 
 
-Die Drohne zusammen mit dem Onboard-App konnte auf einen Stand gebracht werden in dem sie mehrere Lieferungen hintereinander ohne Schwierigkeiten ausführen kann.
+Die Drohne zusammen mit dem Onboard-App konnte auf einen Stand gebracht werden, mit dem sie mehrere Lieferungen hintereinander ohne Schwierigkeiten ausführen kann.
 
 \begin{figure}[H]
 	\centering
@@ -82,7 +82,7 @@ Die Drohne zusammen mit dem Onboard-App konnte auf einen Stand gebracht werden i
 
 \subsection{Zusammenfassung der Ergebnisse}
 
-Während dieser Arbeit hat das Team eine Plattform konzipiert und entwickelt, die es jedem Anbieter ermöglicht einen autonomen Drohnen-Lieferservice für ein von ihm definiertes Gebiet aufzubauen. Die Plattform wurde auf einem Server als Software as a Service zur Verfügung gestellt. Ausserdem wurde der gesamte Code des Projekts auf Github veröffentlicht und steht unter einer \Gls{MIT-Lizenz} als Open-Source-Software zur Verfügung. Die Tests mit den zwei eigens aufgebauten Drohnen zeigen, dass das System als ganzes funktioniert. \\
+Während dieser Arbeit hat das Team eine Plattform konzipiert und entwickelt, die es jedem Anbieter ermöglicht, einen autonomen Drohnen-Lieferservice für ein von ihm definiertes Gebiet aufzubauen. Die Plattform wurde auf einem Server als Software as a Service zur Verfügung gestellt. Ausserdem wurde der gesamte Code des Projekts auf Github veröffentlicht und steht unter einer \Gls{MIT-Lizenz} als Open Source Software zur Verfügung. Die Tests mit den zwei eigens aufgebauten Drohnen zeigen, dass das System als ganzes funktioniert. \\
 
 Folgende Ergebnisse sind besonders hervozuheben:
 
@@ -91,7 +91,7 @@ Folgende Ergebnisse sind besonders hervozuheben:
 	\item Cross-Plattform Bestell-App (iOS, Android) für Kunden
 	\item Android App zur Steuerung der Drohne über das Internet
 	\item Verfolgung der Drohnen-Telemetrie während, vor und nach der Lieferung einer Bestellung
-	\item Automatisierte dynamische Routenberechnung über vordefinierte Flugzonen abhängig von der Position des Kunden
+	\item Automatisierte dynamische Routenberechnung über vordefinierte Flugzonen, abhängig von der Position des Kunden
 	\item Automatisierte Verteilung von Lieferaufträgen an die Drohnen
 	\item Getestete Vorlage für den Aufbau einer Lieferdrohne
 	\item Vorgefertigte 3D-Modelle für den 3D-Druck der Smartphone-Halterung und der Abwurfvorrichtung
@@ -104,7 +104,7 @@ Die entwickelte Plattform zeigt erst einen Bruchteil der Möglichkeiten, die in 
 
 \subsection{Empfohlene Weiterentwicklungen}
 
-Während des Projekts sind weitere Ideen entstanden, die aber grössere Änderungen benötigen oder getestet werden müssen. Sie müssen für einen produktiven Einsatz aber nicht zwingend umgesetzt werden.
+Während des Projekts sind weitere Ideen entstanden, die aber grössere Änderungen benötigen oder getestet werden müssen. 
 
 \subsubsection{Plattform}
 
@@ -113,11 +113,14 @@ Während des Projekts sind weitere Ideen entstanden, die aber grössere Änderun
 	\item Aktion am Zielort wählbar oder vom Produkt abhängig machen
 	\item Test ob es auch mit Radio-Telemetry am Onboard-App funktioniert
 	\item Flight-Controller ohne MAVLink auch unterstützen (z.B. DJI-Onboard-SDK \cite{dji-sdk})
+	\item Globale Flugzonen
+	\item Kollisionsvermeidung von Drohnen auf denselben Routen
+	\item Objekte mit Kollisionspotential (z.B. Gebäude, Bäume) automatisiert aus Flugzonen ausschliessen
 \end{itemize}
 
 \subsubsection{Drohnen Hardware} 
 \begin{itemize}
-	\item Testen in Kombination mit Obstacle Avoidance (z.B. Intel RealSense\cite{realsense} Hardware)
+	\item Testen in Kombination mit Obstacle Avoidance (z.B. Intel RealSense\cite{realsense}) Hardware
 		\item Tests mit anderen Arten von Drohnen (siehe Abschnitt \ref{sec:drone-alternatives})
 	\item Smartphone ersetzen durch Embedded-System (siehe Alternativen im Abschnitt \ref{sec:communication-architecture}) 
 
