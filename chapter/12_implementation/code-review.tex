@@ -39,7 +39,7 @@ Folgende Code-Änderungen wurden reviewed von MS und MA:
 \begin{itemize}
 	\item{Message Handling Server}
 	\item{Server Message Persistance}
-	\item{Message Handling Onboard app}
+	\item{Message Handling Onboard-App}
 \end{itemize}
 Während dem Code-Review wurden die folgenden Anpassungen gemacht:
 \begin{itemize}
@@ -82,7 +82,7 @@ Einige Methoden, die Handler registrieren, wurden sowohl in den OnCreate-Methode
 Der Code wurde als gut lesbar und verständlich bewertet, es wurden manche Inkonsistenzen aufgezeigt.
 
 \subsubsection{Transaction}
-An manchen stellen wurde die Datenbank-Transaktion mittels einer Annotation deklariert an anderen Stellen mit Hilfe eines Methodenaufrufs. 
+An manchen Stellen wurde die Datenbank-Transaktion mittels einer Annotation deklariert, an anderen Stellen mit Hilfe eines Methodenaufrufs. 
 \begin{lstlisting}
 @Transactional
 public Result addDrone(UUID projectId) {
@@ -144,7 +144,7 @@ Im Interface von Consumer steht folgendes:
 The Consumers on a particular Channel are invoked serially on one or more dispatch threads. Consumers should avoid executing long-running code because this will delay dispatch of messages to other Consumers on the same Channel	
 \end{quote}
 
-In unserem Fall wird beim Eintreffen der Messages vieles angestossen. Da die Queues pro Drohne sind, ist das Blockieren der Queues von Vorteil und beschränkt sich auf eine Drone. Als Long-Runing code kann nur die Transkation betrachtet werden, welche allenfalls blockieren kann. Dies ist aber auch der Fall bei einem eventbasierten System. Am Code wurde nicht verändert, jedoch wurde aber der Code dokumentiert.
+In unserem Fall wird beim Eintreffen der Messages vieles angestossen. Da die Queues pro Drohne sind, ist das Blockieren der Queues von Vorteil und beschränkt sich auf eine Drohne. Als Long-Runing Code kann nur die Transkation betrachtet werden, welche allenfalls blockieren kann. Dies ist aber auch der Fall bei einem eventbasierten System. Am Code wurde nicht verändert, jedoch wurde der Code dokumentiert.
 
 \subsubsection{Fehlende Security Annotation bei den REST Controllern}
 \begin{lstlisting}
