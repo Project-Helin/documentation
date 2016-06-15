@@ -52,7 +52,7 @@ Aus den in den Anforderungen definierten Zielen, ergeben sich für die Server-Ko
 \subsection{Layers}
 Die Architektur des Servers basiert auf dem {MVC Pattern \cite{MVC}}, da dieses für \Gls{CRUD} Applikationen mit Benutzeroberfläche besonders geeignet ist und dafür viele geeignete Frameworks zur Verfügung stehen.\\
 
-Für Komponenten die aus unterschiedlichen Controllern verwendet werden, wurde zusätzlich eine Service Komponente verwendet. Die Services stellen Abstraktionen für wichtige Funktionen wie das Messaging und die Routenberechnung bereit.\\
+Für Komponenten die aus unterschiedlichen Controllern verwendet werden, wurde zusätzlich eine Service Komponente verwendet. Die Services stellen Abstraktionen für wichtige Funktionen, wie das Messaging und die Routenberechnung bereit.\\
 
 Die Verantwortlichkeiten und Kollaborationen der Layer werden nachfolgend genauer definiert.
 
@@ -191,15 +191,14 @@ Wichtig sind vor allem die verschiedenen verwendeten Protokolle, die benötigt w
 
 
 Für die Kommunikation mit dem Onboard-App wird Messaging verwendet, um bidirektionale Kommunikation zu ermöglichen und die höchstmögliche Zuverlässigkeit zu erreichen.
-Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig um Live-Updates zu ermöglichen (Verfolgung der Drohne).
+Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig, um Live-Updates zu ermöglichen (Verfolgung der Drohne).
 Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
 
-Aufgrund der schlechten Erfahrung mit WebSocket auf mobilen Geräten und der Probleme mit bei Verbindungsabbrüche, kam diese nicht in Frage. Als Alternative blieb nur Messaging übrig, welches wegen der zeitlichen Unabhängigkeit der Verbindung, vom Server und dem Onboard-App, keine Konsequenzen hat. \\
+Aufgrund der schlechten Erfahrung mit WebSockets auf mobilen Geräten und den Problemen bei Verbindungsabbrüchen, kam diese nicht in Frage. Deshalb haben wir uns für Messaging entschieden. Es bietet eine grössere Unabhängigkeit zwischen den Kommunikationspartnern und ist robuster bezüglich den zu erwartenden Verbindungsabbrüchen. \\
 
-	
-Bei der Anbindung der Customer-App ist die Plattformunabhängigkeit der Schnittstelle höher gewichtet als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
+Bei der Anbindung der Customer-App ist die Plattformunabhängigkeit der Schnittstelle höher gewichtet als die Zuverlässigkeit der bidirektionalen Verbindung. Deswegen wird bei dieser App vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Einzig die Liveupdates der Drohnenposition werden über WebSockets gesendet. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
 
-Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und WebSockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät. Zusätzlich ist eine Verbindungswiederherstellung der Verbindung viel einfacher, da das Navigieren oder Neuladen der Seite ausreicht. \\
+Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und WebSockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät. Zusätzlich ist eine Verbindungswiederherstellung viel einfacher, da das Navigieren oder Neuladen der Seite ausreicht. \\
 
 
 \subsection{Verwendete Enterprise Integration Patterns}
