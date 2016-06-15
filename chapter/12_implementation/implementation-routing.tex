@@ -31,7 +31,7 @@ Normalerweise wird eine Routenberechnung mit Hilfe eines Graphen durchgeführt, 
 Folgende Lösungsmöglichkeiten wurden evaluiert:
 
 \subsubsection{Erstes Konzept: Direkte Route}
-Dieses Konzept umfasste den Ansatz den Start und den Endpunkt direkt zu verbinden, und bei einem Verlassen des Polygons dem Rand zu folgen (siehe Abb.  \ref{fig:first-concet-routing}).
+Dieses Konzept umfasste den Ansatz den Start und den Endpunkt direkt zu verbinden, und bei einem Verlassen des Polygons dem Rand zu folgen (siehe Abb. \ref{fig:first-concet-routing}).
 
 \begin{figure}[H]
 	\centering
@@ -63,7 +63,7 @@ Dies ist eine deutliche Verbesserung gegenüber dem ersten Konzept. Der Nachteil
 Da die Pfadfindung von \Gls{UAV} bereits ein weit erarbeitetes und erforschtes Gebiet ist, waren wir der Überzeugung, dass bereits verwendete Konzepte vereinfacht und abstrahiert werden konnten, um unser Problem zu lösen. Während vollständig autonome Drohnen an Hindernissen vorbei navigieren müssen, können wir uns auf einen bestehenden Flugkorridor verlassen.
 \blockquote{The idea behind this method is to assign a function similar to the electrostatic potential to each obstacle and then derive the topological structure of the free space in the form of minimum potential valleys. The robot is positioned at the start point, and then the goal generates a strong attractive force. By the action of the force, the robot moves along the steepest descent of the potential to the goal, at the same time the obstacle generates a repulsive force to keep robot away from colliding with them} 
 
-Die Kernaussage des zitierten Papers \cite[]{SkeletonUAV} ist, dass ein Pfad den grösstmöglichen Abstand zu den Hindernissen aufweisen soll. Auf unseren Fall übertragen, sind die Polygonränder die Hindernisse. Somit muss gewährleistet werden, dass die Drohne den grössten Abstand zu den Rändern aufweisst. Aus diesem Grund erscheint diese Lösung für uns sehr geeignet, da Sie mittenbetonte Routen vorschlägt. \\
+Die Kernaussage des zitierten Papers \cite[]{SkeletonUAV} ist, dass ein Pfad den grösstmöglichen Abstand zu den Hindernissen aufweisen soll. Auf unseren Fall übertragen, sind die Polygonränder die Hindernisse. Somit muss gewährleistet werden, dass die Drohne den grössten Abstand zu den Rändern aufweisst. Aus diesem Grund erscheint diese Lösung für uns sehr geeignet, da sie mittenbetonte Routen vorschlägt. \\
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{images/routing/skeleton.png}
@@ -73,8 +73,12 @@ Die Kernaussage des zitierten Papers \cite[]{SkeletonUAV} ist, dass ein Pfad den
 Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet. Der Felkel-Algorithmus, welcher dieses Skeleton aus einem 2-dimensionalen Polygon berechnet ist bereits in \Gls{CGAL} implementiert \cite{SkeletonCGAL} und war uns im weiteren Verlauf des Projektes von grossem Nutzen.\\
 
 
+
+
+
+
 \subsection{Routing Algorithmus}
-Nach der Herleitung des Graphen aus den Zonen, musste nun der passende Algorithmus gefunden werden um einen möglichst effizienten Weg von A nach B zu finden. Es kamen 4 Algorithmen in Frage, wobei ein Algorithmus sich als besonders geeignet herausstellte.
+Nach der Herleitung des Graphen aus den Zonen, musste nun der passende Algorithmus gefunden werden, um einen möglichst effizienten Weg von A nach B zu finden. Es kamen vier Algorithmen in Frage, wobei ein Algorithmus sich als besonders geeignet herausstellte.
 \begin{itemize}
 	\item{\textbf{BFS:} (\textit{Breadth-first search}) Die Breitensuche durchsucht einen Baum in der Breite. Sie bringt garantiert eine Lösung, wenn eine Lösung vorhanden ist und kann problemlos mit Zyklen im Graph umgehen. Bei der Lösung handelt es sich aber nicht um de 'optimale Lösung' (kürzester Pfad). Die Lösung liefert den Pfad mit den wenigsten Knoten. \cite{AiClass}}
 	\item{\textbf{DFS:} (\textit{Depth-first search}) Die Tiefensuche fängt an einem Knoten an und arbeitet sich dann in die Tiefe. Das Problem ist, dass sie sehr anfällig auf Zyklen ist und ohne weitere Hilfsmittel (loop detection oder pruning) nicht terminieren kann. \cite{AiClass}}
@@ -87,7 +91,7 @@ Wir haben uns für den Dijkstra Algorithmus entschieden. Er liefert ohne Metrik 
 Damit die Route 2-Dimensional berechnet werden kann, werden die Höhen erst zum Schluss berücksichtigt. Das Höhenhandling bildet den abschliessenden Schritt bei der Berechnung einer Route und wird in zwei Schritten durchgeführt:
 
 \begin{itemize}
-	\item{\textbf{Eindeutigkeit der Höhe:} In einem ersten Schritt werden die Zonen nach Höhe absteigend sortiert und Überlagerungen zu Gunsten der höheren Zone entfernt.}
+	\item{\textbf{Eindeutigkeit der Höhe:} In einem ersten Schritt werden die Zonen nach Höhe absteigend sortiert und Überlagerungen zugunsten der höheren Zone entfernt.}
 	\item{\textbf{Bestimmen der Zugehörigkeit des Knotens:} Angefangen bei der höchsten Zone werden die Liniensegmente mit der jeweiligen Zonenhöhe versehen. Bei Linien, welche die Zone verlassen, wird ein Punkt am Schnittpunkt eingefügt.}
 \end{itemize}
 \begin{figure}[h]

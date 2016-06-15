@@ -9,14 +9,14 @@ Um die vom Team erstellte Plattform auch unter realen Bedingungen testen zu kön
 Da die Drohne eine Verbindung zum Server benötigt, muss geeignete Kommunikationshardware installiert werden. Aus folgenden Gründen haben wir uns für ein Android-Smartphone entschieden:
 \begin{itemize}
 	\item{Der Status der Drohne und Anweisungen zur Beladung können angezeigt werden}
-	\item{Die Anbindung an den Flight-Controller ist über eine bestehende API möglich}
+	\item{Die Anbindung an den \Gls{Flight-Controller} ist über eine bestehende API möglich}
 	\item{Das Android-Betriebssystem stellt die Kommunikation über WLAN oder GSM zur Verfügung}
 \end{itemize}
 
 Falls die Beladung automatisiert wird, oder keine Beladung notwendig ist, benötigt man nicht zwingend ein Smartphone. Um Gewicht und Platz auf der Drohne zu sparen gibt es folgende Alternativen:
 \begin{itemize}
 	\item{\textbf{Raspberry PI} \\
-	Bereits ab dem leichtgewichtigen Raspberry PI zero sind die nötigen Funktionen vorhanden. Zusätzlich muss hier auf ein GSM Modem zurückgegriffen werden um eine permanente Internetverbindung aufzubauen. Bei Verwendung eines Raspberry PI 3 kann sogar auf ein eingebautes WLAN Interface verwendet werden.
+	Bereits ab dem leichtgewichtigen Raspberry PI Zero sind die nötigen Funktionen vorhanden. Zusätzlich muss hier auf ein GSM Modem zurückgegriffen werden um eine permanente Internetverbindung aufzubauen. Bei Verwendung eines Raspberry PI 3 kann sogar auf ein eingebautes WLAN Interface verwendet werden.
 	}
 	\item{\textbf{Arduino} \\
 	Bei der Arduino Hardware Plattform kann auf einem beliebigen Arduino Board implementiert werden, welches als USB Host Device arbeiten kann. Zusätzlich muss ein GSM Shield 2 verwendet werden um eine GSM Verbindung aufbauen zu können. Eine Option auf WLAN existiert nur durch zusätzliche Komponenten.}
@@ -162,8 +162,8 @@ Der Durchmesser des Prototypenfallschirms muss somit etwa $1.12 \text{m}$ betrag
 Bei der Zusammenstellung der Komponenten haben wir vor allem auf die gute Verfügbarkeit von
 Ersatzteilen und einen hohen Marktanteil der Komponenten geachtet. Besonders wichtig erschien uns, dass ein Anbieter nicht an einen Hersteller gebunden ist, sondern die Drohne an seine Bedürfnisse (Zuladung, Reichweite, Geschwindigkeit) anpassen kann. Es sollten also möglichst wenige Voraussetzungen bestehen um die Plattform nutzen zu können. Folgende Anforderungen sind allerdings unabdingbar:
 \begin{itemize}
-	\item Flight-Controller muss \Gls{MAVLink} Protokoll unterstüzen
-	\item Onboard-App muss über MAVLink mit dem Flight-Controller verbunden sein. (Über USB oder eine Funk-Telemetrieverbindung.)
+	\item \Gls{Flight-Controller} muss \Gls{MAVLink} Protokoll unterstüzen
+	\item Onboard-App muss über \Gls{MAVLink} mit dem \Gls{Flight-Controller} verbunden sein. (Über USB oder eine Funk-Telemetrieverbindung.)
 \end{itemize}
 
 \subsection{Teile-Liste}
@@ -207,9 +207,9 @@ Der Frame, die Motoren und ESCs wurden als Kit gekauft. Es handelt sich dabei um
 
 \subsection{Flight-Controller}
 
-Der Flight-Controller ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst, alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches Abfliegen von Wegpunkten.
+Der \Gls{Flight-Controller} ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst, alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches Abfliegen von Wegpunkten.
 
-Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open-Source ist und auch bei vielen anderen Projekten eingesetzt wird. Sie unterstützt ausserdem das \Gls{MAVLink} Protokoll.
+Als \Gls{Flight-Controller} setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open-Source ist und auch bei vielen anderen Projekten eingesetzt wird. Sie unterstützt ausserdem das \Gls{MAVLink} Protokoll.
 \begin{figure}[H]
 		\centering
 	\begin{minipage}[b]{0.45\textwidth}
@@ -265,16 +265,16 @@ Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeit
 	\begin{minipage}[b]{0.35\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{images/hardware/case-model.png}
-		\caption{3D-Modell der Halterung}
+		\caption{Halterung 3D-Modell}
 		\label{fig:case-model}
 	\end{minipage}
 \end{figure}
 
-Es wurde eine Halterung konzipiert (siehe Abb.\ref{fig:case-model}), welche wir im 3D-Druck Verfahren produzieren liessen.
+Es wurde eine Halterung konzipiert (siehe Abb. \ref{fig:case-model}), welche wir im 3D-Druck Verfahren produzieren liessen.
 Die Handy-Halterung konnte auch gleich genutzt werden, um das GPS-Modul an einer passenden Stelle zu positionieren.
 
 \subsubsection{Version 4}
-Nachdem mit der Drohne zahlreiche autonome Testflüge unternommen wurden, musste eine Möglichkeit erarbeitet werden, wie die Lieferung an den Kunden gebracht werden kann ( Abschnitt \ref{chap:ablieferung} ).
+Nachdem mit der Drohne zahlreiche autonome Testflüge unternommen wurden, musste eine Möglichkeit erarbeitet werden, wie die Lieferung an den Kunden gebracht werden kann (Abschnitt  \ref{chap:ablieferung}).
 
 \begin{figure}[H]
 	\centering
@@ -324,7 +324,7 @@ Um das maximale Gewicht zu prüfen, welches auf unsere Drohnen geladen werden ka
 
 Auch mit 3S Akkus ist es also möglich eine PET-Flasche zu transportieren. Allerdings empfehlen wir für Gewichte über 300 Gramm 4S-Akkus zu verwenden.\\
 
-Aus den Tragfähigkeitstests schliessen wir, dass auch ein Defibrillator (siehe Aufgabenstellung) mit einer von uns erstellten Drohne transportierbar ist. Folgende Textpassage \cite[p.3]{FleckUAV} bestätigt, dass in einem ähnlichen Gewichtsbereich bereits Produkte existieren.
+Aus den Tragfähigkeitstests schliessen wir, dass auch ein Defibrillator (siehe Aufgabenstellung) mit einer von uns erstellten Drohne transportierbar ist. Folgende Textpassage \cite[S.3]{FleckUAV} bestätigt, dass in einem ähnlichen Gewichtsbereich bereits Produkte existieren.
 
 \blockquote{I identified the two lightest weight defibrillators on the market in the U.S. at the time of the exploration (March 2013): the Schiller FRED EasyPort (600 grams) and the HeartSine samaritan PAD 300P (1100 grams). The former model is not designed for layperson use, but is far and away the lightest defibrillator available.}
 
