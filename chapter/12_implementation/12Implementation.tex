@@ -281,11 +281,6 @@ Als Build-Server haben wir TeamCity verwendet. Dort sind alle Projekte (ausser C
 Je nach Plattform wurden andere Formen von Tests durchgeführt:
 
 \subsubsection{Server}
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=1\textwidth] {images/test-count-chart.png}
-	\caption{Anzahl Tests über die Zeit. Grün (erfolgreiche Tests) und Grau (ausgeschlossene)}
-\end{figure}
 
 Auf dem Server wurden vor allem \Gls{E2E}- und \Gls{Integration}-Tests verwendet um die Funktionalität zu prüfen. Wir haben uns bei den meisten Kompoonenten bewusst gegen \Gls{Unit-Tests} entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Bei der Routenberechnung hingegen konnte sehr gut mit Unit-Tests gearbeitet werden.\\
 
