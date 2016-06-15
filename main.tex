@@ -104,6 +104,7 @@
 \input{chapter/19_conclusion/conclusion}
 
 \part{Anhang}
+\appendix
 \newpage
 
 \renewcommand \thechapter{\Alph{chapter}}
@@ -225,41 +226,36 @@
 
 % List of figures & glossary
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\begingroup
+\chapter{\label{table_index}Abbildungsverzeichnis}
+\renewcommand{\chapter}[2]{}
 \listoffigures
+\endgroup
+
+
 
 \clearpage
 
-\printglossary[style=altlist,title=Glossar]
+
 
 % Bibliography
 %%%%%%%%%%%%%%
+
+
 \bibliographystyle {alpha}
+
+\addtocounter{chapter}{1}
+\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}Literaturverzeichnis}
+\renewcommand{\bibname}{L. Literaturverzeichnis}
+
 \bibliography{index/bibliography}
 
+
+\cleardoublepage
+\phantomsection
+\addtocounter{chapter}{1}
+\addcontentsline{toc}{chapter}{\protect\numberline{\thechapter}Glossar}
+\printglossary[style=altlist,title=M. Glossar]
 
 
 \end{document}
-
-% Templates
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-%\input{chapter/99_demo/demo}
-
-% List of figures & glossary
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\listoffigures
-
-\clearpage
-
-\printglossary[style=altlist,title=Glossar]
-
-% Bibliography
-%%%%%%%%%%%%%%
-\bibliographystyle {alpha}
-\bibliography{index/bibliography}
-
-
-
-\end{document} 
