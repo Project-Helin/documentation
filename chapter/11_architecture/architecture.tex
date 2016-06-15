@@ -47,6 +47,7 @@ Aus den in den Anforderungen definierten Zielen, ergeben sich für die Server-Ko
 	\item Verwaltet \Gls{CRUD} für alle nötigen Klassen (siehe Domain Model Abb. \ref{fig:domain-model})
 	\item Verwaltet Verbindungen zu Onboard-Apps und Customer-Apps
 	\item Berechnet Flugrouten basierend auf den erhaltenen Bestellungs-Koordinaten
+	\item Persistiert alle Daten
 \end{itemize}
 
 \subsection{Layer}
@@ -90,12 +91,11 @@ Der Model-Layer enthält die Datenmodelle. (siehe Domain Model Abb. \ref{fig:dom
 		\item Verwaltet Verbindungen zu den Drohnen
 		\item Deserialisiert eingehende Nachrichten
 		\item Leitet eingehende Nachrichten von Drohnen an den Controller-Layer weiter	
-		\item Leitet eingehende Nachrichten von Customer an den Controller-Layer weiter	
+		\item Leitet eingehende Nachrichten vom Kunden-App an den Controller-Layer weiter	
 		\item Berechnet Flugrouten basierend auf den vorgegebenen Flugzonen
 	\end{itemize}&
 	\begin{itemize}
 		\item Controller-Layer
-		\item Messaging
 		\item Commons
 	\end{itemize}
 	\\ \hline
@@ -169,8 +169,6 @@ Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schni
 	\begin{itemize}
 		\item View-Layer
 		\item WebSockets-Library
-		\item Identifikationsprovider
-		\item Zahlungsanbieter
 	\end{itemize}
 	\\ \hline
 \end{tabular}
@@ -194,7 +192,7 @@ Für die Kommunikation mit dem Onboard-App wird Messaging verwendet, um bidirekt
 Eine bidirektionale bzw. beidseitig initiierbare Kommunikation ist bei allen Geräten nötig, um Live-Updates zu ermöglichen (Verfolgung der Drohne).
 Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem Server und den Onboard-App den Nicht-Funktionalen-Anforderungen gerecht werden, die im Bezug auf Verbindungsabbrüche und Verbindungswiederherstellung bestehen.\\
 
-Aufgrund der schlechten Erfahrung mit WebSockets auf mobilen Geräten und den Problemen bei Verbindungsabbrüchen, kam diese nicht in Frage. Deshalb haben wir uns für Messaging entschieden. Es bietet eine grössere Unabhängigkeit zwischen den Kommunikationspartnern und ist robuster bezüglich den zu erwartenden Verbindungsabbrüchen. \\
+Aufgrund der schlechten Erfahrung mit WebSockets auf mobilen Geräten und den Problemen bei Verbindungsabbrüchen, kamen diese nicht in Frage. Messaging bietet ausserdem eine grössere Unabhängigkeit zwischen den Kommunikationspartnern und ist robuster bezüglich den zu erwartenden Verbindungsabbrüchen. \\
 
 Bei der Anbindung der Customer-App ist die Plattformunabhängigkeit der Schnittstelle höher gewichtet als die Zuverlässigkeit der bidirektionalen Verbindung. Deswegen wird bei dieser App vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Einzig die Liveupdates der Drohnenposition werden über WebSockets gesendet. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
 
