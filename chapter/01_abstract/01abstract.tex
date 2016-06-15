@@ -4,7 +4,7 @@
 
 Die folgende Arbeit beschreibt einen Prototyp eines automatisierten Drohnen-Liefersystems, den das Team konzipiert, entwickelt und getestet hat. Um die Tests unter realen Bedingungen durchführen zu können, sind zusätzlich zwei Multicopter zusammengestellt und gebaut worden.\\
 
-Um ein System aufzubauen, dass eine Flotte von Drohnen über eine zentrale Applikation verwalten kann, ist jede Drohne über ein Smartphone an eine Message Oriented Middleware (RabbitMQ) angebunden. Ausserdem verbindet sich die App über das \Gls{MAVLink} Protokoll mit dem \Gls{Flight-Controller} (Autopilot) der Drohne. 
+Um ein System aufzubauen, dass eine Flotte von Drohnen über eine zentrale Applikation verwalten kann, ist jede Drohne über ein Smartphone an eine Message Oriented Middleware (\Gls{MOM}) angebunden. Ausserdem verbindet sich die App über das \Gls{MAVLink} Protokoll mit dem \Gls{Flight-Controller} (Autopilot) der Drohne. 
 Die entwickelte Android-App für das Smartphone sendet laufend Telemetrie-Daten an den Server und dient zusätzlich als Benutzer-Interface für die Beladung. \\
 
 Der zentrale Server berechnet aufgrund der Position des Kunden eine Route, die nur über vordefinierte und sichere Flugzonen führt. Anbieter können die Flugzonen über eine Benutzeroberfläche definieren und damit statische Hindernisse umgehen. Während einer Lieferung kommuniziert der Server mit allen Clients bidirektional um sowohl Kunden, wie auch Anbietern eine Echtzeitverfolgung der Drohnen zu ermöglichen. \\
