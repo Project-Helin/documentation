@@ -13,9 +13,9 @@ Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigst
 \section{Implementierung}
 
 \subsection{Message Broker}
-In der Architektur wurde festgelegt, dass der Server und die Onboard-App über Messaging kommunizieren. Um dies zu implementieren, wollten wir einen eigenen Broker auf unserem Server verwenden, um möglichst unabhängig von kostenpflichtigen Cloud-Anbietern zu sein. \\
+In der Architektur wurde festgelegt, dass der Server und die Onboard-App über Messaging kommunizieren. Um dies zu implementieren, entschieden wir einen eigenen Broker auf unserem Server verwenden, um möglichst unabhängig von kostenpflichtigen Cloud-Anbietern zu sein. \\
 
-Ein geeigneter Message Broker muss sowohl vom Server als auch von der Onboard-App angesprochen werden können. Diese Anforderung verunmöglicht den Einsatz von allen \Gls{JMS}-kompatiblen Message Brokern, da \Gls{JMS} nicht mit der Android Plattform kompatibel ist. Als plattformunabhängige Alternative, kommt somit nur ein \Gls{AMQP}-fähiger Broker in Frage. Dafür stehen zwar mehrere Produkte zur Auswahl, aber nur RabbitMQ kann den Broker und alle Client-Bibliotheken liefern.\\
+Ein geeigneter Message Broker muss sowohl vom Server als auch von der Onboard-App angesprochen werden können. Diese Anforderung verunmöglicht den Einsatz von allen \Gls{JMS}-kompatiblen Message Brokern, da \Gls{JMS} nicht mit der Android Plattform kompatibel ist. Als plattformunabhängige Alternative, kommt somit nur ein \Gls{AMQP}-fähiger Broker in Frage. Dafür stehen zwar mehrere Produkte zur Auswahl, aber nur RabbitMQ kann den Broker und alle Client-Bibliotheken liefern. Aus diesen Gründen haben wir uns für RabbitMQ entschieden\\
 
 \subsection{Server}
 
@@ -181,16 +181,16 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 	\hline 
 	Websocket.PCL & Plattformübergreifende WebSocket Anbindung & 1.1.9 & MIT \\
 	\hline 
-	Newton.Json & Json zu Object mapper & 8.0.3 & MIT \\
+	Newtonsoft.Json & JSON converter & 8.0.3 & MIT \\
 	\hline 
 \end{tabularx}\\
 
 Bemerkungen aus der Evaluation oben stehender Komponenten:
 \begin{itemize}
 	\item{\textbf{PayPal Forms:} Einziges PayPal Plugin für Xamarin.Forms}
-	\item{\textbf{Xamarin.Forms:} Ermöglicht Crossplattform UI, sehr einfach zu entwickeln}
+	\item{\textbf{Xamarin.Forms:} Ermöglicht Crossplattform UI}
 	\item{\textbf{Websocket.PCL:} Einzige gut gewartete Implementation von WebSockets in Xamarin}
-	\item{\textbf{Newton.Json:} Die Bibliothek weist die höchste Anzahl Downloads auf}
+	\item{\textbf{Newtonsoft.Json:} Die Bibliothek hat die höchste Verwendungsrate}
 \end{itemize}
 
 \subsection{Datenbank}
@@ -221,7 +221,7 @@ Für die darauf folgende Kommunikation mit dem Broker, werden mit Hilfe des Toke
 
 Über diese Queues können jetzt Nachrichten ausgetauscht werden. \\
 
-Ein Angreifer müsste mit dieser Methode den Token herausfinden und auch die Zugangsdaten für den Broker kennen, um mit einer Drohne zu kommunizieren. Falls jemand es aber doch schaffen würde, die Benutzerdaten auszulesen, gibt es trotzdem noch $2^{122}$ mögliche Tokens, die durchprobiert werden müssten. \\
+Ein Angreifer müsste mit dieser Methode den Token herausfinden und auch die Zugangsdaten für den Broker kennen, um mit einer Drohne zu kommunizieren. Falls jemand es aber doch schaffen würde, die Benutzerdaten auszulesen, gibt es trotzdem noch $2^{122}$ mögliche Tokens, die durchprobiert werden müssten.\\
 
 \section{Projektgrösse}
 
@@ -241,7 +241,7 @@ Folgende Statistiken wurden am Ende der Arbeit erstellt um einen Eindruck der Gr
 		\hline
 		\textbf{Anzahl Klassen} & 174 & 49 & 36 & 259 \\
 		\hline
-		\textbf{Anzahl Methoden mit hoher \mbox{zyklomatischer} Komplexität} & 1.73\% & 1.57\% & N/A & 1.46\% \\
+		\textbf{Anzahl Methoden mit hoher \mbox{essentieller} Komplexität} & 1.73\% & 1.57\% & N/A & 1.46\% \\
 		\hline
 	\end{tabularx}
 	\caption{Code Metriken nach Abschluss der Arbeit}
