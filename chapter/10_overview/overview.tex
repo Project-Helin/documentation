@@ -12,7 +12,7 @@ In der weiteren Dokumentation werden die Anforderungen, die Architektur, die wic
 
 \section{Ausgangslage}
 
-Alle Multicopter verfügen bereits in der Grundausstattung über einen \Gls{Flight-Controller}, der die Befehle der Fernbedienung in Steuerbefehle für die Motoren übersetzt. Zusätzlich nutzen viele Modelle zusätzliche Sensoren (GPS, Beschleunigungsmesser), um autonome Flüge zu ermöglichen und den Copter stabil halten. \\
+Alle Multicopter verfügen bereits in der Grundausstattung über einen \Gls{Flight-Controller}, der die Befehle der Fernbedienung in Steuerbefehle für die Motoren übersetzt. Ausserdem nutzen viele Modelle zusätzliche Sensoren (GPS, Beschleunigungsmesser), um autonome Flüge zu ermöglichen und den Copter stabil halten. \\
 
 Um laufend Telemetriedaten zu erhalten und Funktionen steuern zu können, wird in den meisten Fällen über Funk mit dem Copter kommuniziert. Dafür wird ein mobiles Gerät verwendet (Smartphone, Tablet, Notebook) auf dem eine Bodenstationssoftware läuft. Dies ermöglicht die Steuerung in einem Umkreis von ca. 2 km. Zusätzlich können mit Hilfe einer Bodenstationssoftware fixe Routen auf den \Gls{Flight-Controller} gespeichert werden, die dann im Automatikmodus autonom geflogen werden.
 
@@ -28,10 +28,10 @@ Dieses bewährte System hat allerdings einige Einschränkungen:
 
 Project Helin soll nun alle diese Einschränkungen aufheben. Damit können Anbieter neue Dienstleistungen erbringen, die nur mit autonomen Flugdrohnen in einer sinnvollen Effizienz möglich sind. Beispielsweise macht es nur in den seltensten Fällen Sinn, Lieferungen mit Drohnen auszuführen, wenn diese von Hand geflogen werden müssen. \\
 
-Bis jetzt gibt es kein vergleichbares System, dass mit Drohnen über das Internet (4G) live kommuniziert und gleichzeitig die Anbindung von zusätzlichen Systemen erlaubt.
+Bis jetzt gibt es kein vergleichbares offenes System, dass mit Drohnen über das Internet (4G) live kommuniziert und gleichzeitig die Anbindung von zusätzlichen Systemen erlaubt.
 
 \section{Gesetzliche Rahmenbedingungen}
-Für den Flug mit Drohnen in der Schweiz gelten die Vorgaben des Bundesamtes für Zivilluftfahrt (BAZL), die für uns relevanten Punkte umfassen:
+Für den Flug mit Drohnen in der Schweiz gelten die Vorgaben des Bundesamtes für Zivilluftfahrt (BAZL). Die für uns relevanten Punkte umfassen:
 \begin{itemize}
 	\item{\blockquote{Für den Betrieb von Drohnen und Flugmodellen mit einem Gewicht von über 30 Kilogramm braucht es eine Bewilligung des BAZL.} \cite{drohne-bazl}}
 	\item{\blockquote{Über Menschenansammlungen bzw. im Umkreis von 100 Metern von Menschenansammlungen dürfen Drohnen grundsätzlich nicht betrieben werden.} \cite{drohne-bazl}}
@@ -46,7 +46,7 @@ Diese Entwicklung zeigt, dass die Zulassung von autonomen Drohnen auch in der Sc
 
 Project Helin hat drei verschiedene Nutzerarten: Customer (Kunde), Administrator (Anbieter) und Drone-Operator (Drohnen Operator). Diese werden im Kapitel Anforderungen noch genauer beschrieben.\\
 
-In Abbildung \ref{fig:system-context-diagram} sind die externen Schnittstellen, sowie die Aktoren dargestellt. Google OAuth und PayPal werden auf der Customer-App für die Authentifizierung und das Payment eingesetzt. Die 3DR-Service-App wird auf dem Onboard-App benötigt um die Kommunikation mit dem Flight-Controller der Drohne zu ermöglichen. Für die Kartendarstellungen auf der Administrations-Webseite werden von Open Street Map gehostete Karten verwendet.
+In Abbildung \ref{fig:system-context-diagram} sind die externen Schnittstellen, sowie die Aktoren dargestellt. Google OAuth und PayPal werden auf der Customer-App für die Authentifizierung und das Payment eingesetzt. Die 3DR-Service-App wird auf dem Onboard-App benötigt um die Kommunikation mit dem \Gls{Flight-Controller} der Drohne zu ermöglichen. Für die Kartendarstellungen auf der Administrations-Webseite werden von Open Street Map gehostete Karten verwendet.
 
 
 \begin{figure}[h]
