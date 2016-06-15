@@ -42,7 +42,7 @@ Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm vo
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\paperwidth] {images/drone-communication-diagram.pdf}
-	\caption{Objekt-Diagramm der Kommunkationsstruktur}
+	\caption{Objekt-Diagramm der Kommunikationsstruktur}
 	\label{fig:drone-communication-diagram}
 \end{figure}
 
@@ -75,7 +75,7 @@ Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste e
 
 Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den \Gls{Flight-Controller} simuliert. Die Simulation verhält sich nahezu identisch wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung zeigen. \\
 
-Die verschiedenen Möglichkeiten, das System zu testen sind im Github Repository dokumentiert. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
+Die verschiedenen Möglichkeiten, das System zu testen sind im GitHub Repository dokumentiert. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/test-setup-onboard.png}
@@ -88,7 +88,7 @@ Die verschiedenen Möglichkeiten, das System zu testen sind im Github Repository
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
-	DroneKit-Android Client & Android API für \Gls{MAVLink} Protokoll zum ansteuern der Drohne & 1.5.1 & Apache 2.0\\
+	DroneKit-Android Client & Android API für \Gls{MAVLink} Protokoll zum Ansteuern der Drohne & 1.5.1 & Apache 2.0\\
 	\hline 
 	AMQP Messaging Library & Messaging für Android & 3.6.0 &  Mozilla Public License 1.1, GPL 2,  Apache 2.0 \\
 	\hline 
@@ -209,7 +209,7 @@ Die Entscheidung zu Gunsten von PostgreSQL wurde getroffen, da zwei Teammitglied
 Zusätzlich wurde für PostGIS die Erweiterung \Gls{SFCGAL} verwendet, welche die Geometriebibliothek \Gls{CGAL} in PostGIS verfügbar macht. Dies ermöglicht noch weitere Funktionen in der Datenbank zu nutzen, welche auf geometrischen Objekten ausgeführt werden können.
 
 \subsection{Sicherheit}
-Es ist essentiell, dass die Sicherheit bei der Kommunkation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte (siehe NFR \ref{sec:message-security}). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ Message Broker und die Queue-Namen geheim zu halten: \\
+Es ist essentiell, dass die Sicherheit bei der Kommunikation zwischen Server und Drohne gewährleistet ist, da sonst die Kontrolle über eine Drohne übernommen werden könnte (siehe NFR \ref{sec:message-security}). Um diese Sicherheit zu gewährleisten wurde ein Prozess eingeführt, der es ermöglicht die Zugangsdaten für den RabbitMQ Message Broker und die Queue-Namen geheim zu halten: \\
 
 Die Onboard-App registriert sich über einen HTTPS Request beim Server. Bei erfolgreicher Registrierung der Drohne, wird ein Token sowie der Benutzer und das Kennwort für die Verbindung zu RabbitMQ an die Onboard-App geschickt. Mit diesen Informationen kann sich die App mit dem Messaging Broker über eine verschlüsselte Leitung verbinden.\\
 
@@ -293,7 +293,7 @@ Die Überprüfung eines Issues beinhaltet folgende Aufgaben:
 \begin{itemize}
 	\item{Akzeptanzkriterien aus der User-Story manuell prüfen}
 	\item{Code-Review durchführen (Intensität je nach Grösse und Komplexität des geschriebenen Codes)}
-	\item{Code auf Vertösse gegen Style-Guide prüfen}
+	\item{Code auf Verstösse gegen Style-Guide prüfen}
 	\item{Prüfen der Tests vorhanden sind}
 \end{itemize}
 
@@ -309,11 +309,11 @@ Je nach Plattform wurden andere Formen von Tests durchgeführt:
 
 \subsubsection{Server}
 
-Auf dem Server wurden vor allem \Gls{E2E-Test}s und \Gls{Integration-Test}s verwendet, um die Funktionalität zu prüfen. Wir haben uns bei den meisten Kompoonenten bewusst gegen \Gls{Unit-Tests} entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Bei der Routenberechnung hingegen konnte sehr gut mit Unit-Tests gearbeitet werden.\\
+Auf dem Server wurden vor allem \Gls{E2E-Test}s und \Gls{Integration-Test}s verwendet, um die Funktionalität zu prüfen. Wir haben uns bei den meisten Komponenten bewusst gegen \Gls{Unit-Tests} entschieden, da auf dem Server nur wenig Logik zu finden ist, die nicht von der Datenbank oder der RabbitMQ-Connection abhängt. Unit-Tests hätten deswegen nur einen ganz kleinen Teil der Anwendungen abdecken können und wären in den meisten Fällen sehr aufwendig gewesen. Bei der Routenberechnung hingegen konnte sehr gut mit Unit-Tests gearbeitet werden.\\
 
 Wir haben darauf geachtet, dass immer nur die minimale Integrationsstufe gewählt wurde. Für die Simulation eines Benutzers (E2E) wurde Selenium verwendet, das wiederum einen Firefox Browser verwendet. Für die Api- und Messaging-Controller wurden Integrationtests verwendet, welche keinen Browser benötigen.\\
 
-Es wurde eine \textbf{durchschnittliche Testabdeckung von 72\%} über das ganze Projekt erreicht. In wichtigen Packages liegt diese aber meist über 85\%.
+Es wurde eine \textbf{durchschnittliche Testabdeckung von 72\%} über das ganze Projekt erreicht. In wichtigen Packages liegen diese aber meist über 85\%.
 
 \subsubsection{Onboard-App}
 

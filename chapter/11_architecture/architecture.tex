@@ -13,6 +13,7 @@ Da der \Gls{Flight-Controller} bereits vor der Arbeit evaluiert wurde, wird dies
 \subsection{Onboard-App}
 Während der gesamten Arbeit wird davon ausgegangen, dass das Onboard-App im Vordergrund verwendet wird.
 
+\newpage
 
 \section{Übersicht}
 
@@ -24,6 +25,8 @@ Die Abbildung \ref{fig:architecture-overview} zeigt eine Übersicht der verschie
 	\caption{Übersicht der Project Helin Architektur }
 	\label{fig:architecture-overview}
 \end{figure}
+
+\newpage
 
 \section{Logische Architektur}
 
@@ -37,6 +40,7 @@ Abbildung \ref{fig:logical-architecture-overview} zeigt die Hauptkomponenten, so
 	\label{fig:logical-architecture-overview}
 \end{figure}
 
+\newpage
 \section{Server}
 
 \subsection{Anforderungen}
@@ -105,6 +109,7 @@ Der Model-Layer enthält die Datenmodelle. (siehe Domain Model Abb. \ref{fig:dom
 
 Der Data Access Layer bietet die Möglichkeit auf die Persistence Library zuzugreifen und stellt dafür die wichtigsten Funktionen zur Verfügung. 
 
+\newpage
 \section{Onboard-App}
 
 \subsection{Anforderungen}
@@ -128,7 +133,7 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 		\item Verwaltet Verbindung zur Drohne
 		\item Verwaltet Verbindung zum Server
 		\item Deserialisiert eingehende Nachrichten.
-		\item Leitet eingehende Nachrichten vom Server and den Activities-Layer oder andere Services weiter
+		\item Leitet eingehende Nachrichten vom Server und den Activities-Layer oder andere Services weiter
 		\item Ermöglicht das Senden von Nachrichten an den Server
 	\end{itemize}&
 	\begin{itemize}
@@ -139,7 +144,7 @@ Die App enthält die normalen Android-Application-Layer wie Activities und Views
 	\\ \hline
 \end{tabular}
 
-
+\newpage
 \section{Customer-App}
 
 \subsection{Anforderungen}
@@ -163,7 +168,7 @@ Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schni
 	\begin{itemize}
 		\item Verwaltet Verbindung zum Server
 		\item Deserialisiert eingehende Nachrichten.
-		\item Leitet eingehende Nachrichten vom Server and den Activities-Layer weiter
+		\item Leitet eingehende Nachrichten vom Server und den Activities-Layer weiter
 		\item Ermöglicht das Senden von Nachrichten an den Server
 	\end{itemize}&
 	\begin{itemize}
@@ -174,6 +179,7 @@ Ist zuständig für die Darstellung der Benutzeroberfläche und bindet die Schni
 \end{tabular}
 
 
+\newpage
 
 \section{Kommunikations-Architektur}
 \label{sec:communication-architecture}
@@ -207,7 +213,7 @@ Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverl�
 %
 \subsubsection{At-most-once}
 
-Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist ausserdem in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
+Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Mission oder einen Befehl nur einmal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once-delivery ist ausserdem in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
 %
 \subsubsection{Event-driven Consumer}
 {Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit, Aktionen auf Grund von Nachrichten auszuführen. Beispielsweise:
@@ -218,6 +224,7 @@ Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Missi
 	\item Smartphone des Kunden erhält neue Position der Drohne, auf der Karte wird die Position der Drohne angezeigt.
 \end{itemize}
 
+\newpage
 \section{Bestellprozess}
 
 Die Abbildung \ref{fig:registerDrone} beschreibt den Bestellprozess und die damit zusammenhängende Kommunikation. \\
