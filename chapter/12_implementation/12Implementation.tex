@@ -3,7 +3,7 @@
 
 \section{Übersicht}
 
-Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigsten Komponenten und deren Verbindungen untereinander. Dieses Design orientiert sich an der Kommunikationsarchitektur, die in Kapitel \ref{sec:communication-architecture} beschrieben wurde.
+Abbildung \ref{fig:component-overview} zeigt eine grobe Übersicht der wichtigsten Komponenten und deren Verbindungen untereinander. Dieses Design orientiert sich an der Kommunikationsarchitektur, die in Kapitel \ref{sec:communication-architecture} beschrieben ist.
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/component-overview.pdf}
@@ -20,13 +20,13 @@ Ein geeigneter Message Broker muss sowohl vom Server als auch von der Onboard-Ap
 \subsection{Server}
 
 \subsubsection{Play Framework}
-Für eine Anwendung in diesem Umfang ist der De-Facto-Standard SpringMVC. Da Spring aber ein schwergewichtiges Framework ist und wir eine neuere, leichtgewichtigere Alternative in der Praxis evaluieren wollten, haben wir uns für das Play Framework entschieden.
-\\
+Für eine Anwendung in diesem Umfang ist der De-Facto-Standard SpringMVC. Da Spring aber ein schwergewichtiges Framework ist und wir eine neuere, leichtgewichtigere Alternative in der Praxis evaluieren wollten, haben wir uns für das Play Framework entschieden.\\
+
 Zusätzliche Gründe die unsere Entscheidung für Play unterstützt haben:
 
 \begin{itemize}
     \item Fortschrittlicher O/R-Mapper im Framework integriert
-    \item Vorgegebene MVC-Architektur (Speziell geeignet für \Gls{CRUD}-Operationen)
+    \item Vorgegebene MVC-Architektur (speziell geeignet für \Gls{CRUD}-Operationen)
     \item Schnelle Implementation durch Spezialisierung auf diese Anwendungsart 
     \item Alle Entwickler des Projekts sind versiert in Java
     \item RabbitMQ Anbindung möglich
@@ -75,7 +75,7 @@ Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste e
 
 Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den \Gls{Flight-Controller} simuliert. Die Simulation verhält sich nahezu identisch wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung zeigen. \\
 
-Die verschiedenen Möglichkeiten, dass System zu testen sind im Github Repository dokumentiert. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
+Die verschiedenen Möglichkeiten, das System zu testen sind im Github Repository dokumentiert. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
 
 \begin{figure}[H]
 	\includegraphics[width=1.0\textwidth]{images/test-setup-onboard.png}
