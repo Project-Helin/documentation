@@ -37,7 +37,7 @@ Abbildung \ref{fig:logical-architecture-overview} zeigt die Hauptkomponenten, so
 	\label{fig:logical-architecture-overview}
 \end{figure}
 
-\section{Server-Komponente}
+\section{Server}
 
 \subsection{Anforderungen}
 Aus den in den Anforderungen definierten Zielen, ergeben sich für die Server-Komponente folgende Anforderungen:
@@ -49,7 +49,7 @@ Aus den in den Anforderungen definierten Zielen, ergeben sich für die Server-Ko
 	\item Berechnet Flugrouten basierend auf den erhaltenen Bestellungs-Koordinaten
 \end{itemize}
 
-\subsection{Layers}
+\subsection{Layer}
 Die Architektur des Servers basiert auf dem {MVC Pattern \cite{MVC}}, da dieses für \Gls{CRUD} Applikationen mit Benutzeroberfläche besonders geeignet ist und dafür viele geeignete Frameworks zur Verfügung stehen.\\
 
 Für Komponenten die aus unterschiedlichen Controllern verwendet werden, wurde zusätzlich eine Service Komponente verwendet. Die Services stellen Abstraktionen für wichtige Funktionen, wie das Messaging und die Routenberechnung bereit.\\
