@@ -90,7 +90,7 @@ Der Model-Layer enthält die Datenmodelle. (siehe Domain Model Abb. \ref{fig:dom
 		\item Verwaltet Verbindungen zu den Drohnen
 		\item Deserialisiert eingehende Nachrichten
 		\item Leitet eingehende Nachrichten von Drohnen an den Controller-Layer weiter	
-		\item Leitet eingehende Nachrichten von Customers an den Controller-Layer weiter	
+		\item Leitet eingehende Nachrichten von Customer an den Controller-Layer weiter	
 		\item Berechnet Flugrouten basierend auf den vorgegebenen Flugzonen
 	\end{itemize}&
 	\begin{itemize}
@@ -101,7 +101,7 @@ Der Model-Layer enthält die Datenmodelle. (siehe Domain Model Abb. \ref{fig:dom
 	\\ \hline
 \end{tabular}
 
-\subsubsection{Data-Access-Layer (DAL)}
+\subsubsection{Data Access Layer (DAL)}
 
 Der Data Access Layer bietet die Möglichkeit auf die Persistence Library zuzugreifen und stellt dafür die wichtigsten Funktionen zur Verfügung. 
 
@@ -227,13 +227,13 @@ Order Cargo (Abb. \ref{fig:registerDrone}) beschreibt den Bestellprozess und die
 
 Der Kunde bestellt mittels der App ein Produkt (Customer-App), der Server bestätigt ihm die Bestellung und schlägt einen Abwurfort vor. Sollte der Abwurfort dem Kunden nicht entsprechen, so kann er den Prozess abbrechen und ihn noch einmal auslösen, sobald er sich an einer passenderen Stelle befindet.\\
 
-Der Server analysiert die Eignung der verfügbaren Drohnen und bestimmt im Anschluss eine, welche den Auftrag ausführen kann und zeigt die Mission dem Drone-Operator an. Sollte die Drohne bereit sein, so kann er diesen Auftrag bestätigen. Im Falle einer nötigen Wartungsarbeit kann der Auftrag zu diesem Zeitpunkt auch abgelehnt werden. Sobald der Auftrag angenommen wurde, erhält der Drone-Operator genaue Angaben zur Beladung der Drohne. Anschliessend wird die Ladung bestätigt und der Server kann dem Kunden mitteilen, dass die Drone startklar ist. Während des Fluges erhält der Kunde Benachrichtigungen vom Server mit der aktuellen Position der Drohne. Sobald die Ladung abgeworfen wurde, fliegt die Drohne zur Ladezone zurück und bestätigt dem Server die Ankunft. So kann gewährleistet werden, dass bekannt ist, ab wann die Drohne wieder verfügbar ist. \\
+Der Server analysiert die Eignung der verfügbaren Drohnen und bestimmt im Anschluss eine, welche den Auftrag ausführen kann und zeigt die Mission dem Drone-Operator an. Sollte die Drohne bereit sein, so kann er diesen Auftrag bestätigen. Im Falle einer nötigen Wartungsarbeit kann der Auftrag zu diesem Zeitpunkt auch abgelehnt werden. Sobald der Auftrag angenommen wurde, erhält der Drone-Operator genaue Angaben zur Beladung der Drohne. Anschliessend wird die Ladung bestätigt und der Server kann dem Kunden mitteilen, dass die Drohne startklar ist. Während des Fluges erhält der Kunde Benachrichtigungen vom Server mit der aktuellen Position der Drohne. Sobald die Ladung abgeworfen wurde, fliegt die Drohne zur Ladezone zurück und bestätigt dem Server die Ankunft. So kann gewährleistet werden, dass bekannt ist, ab wann die Drohne wieder verfügbar ist. \\
 
 Der Bezahl- und Anmeldeprozess wird hier aus Übersichtsgründen nicht dargestellt.
 \begin{figure}[H]
 	\centering
 	\includegraphics[height=1.0\textheight]{images/sequence_diagram.pdf}
-	\caption{Übersicht der Project Helin Architektur }
+	\caption{Ablauf der Bestellung eines Produkts}
 	\label{fig:registerDrone}
 \end{figure}
 
