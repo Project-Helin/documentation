@@ -21,7 +21,7 @@ Ausserdem muss der Message Broker kostenfrei sein, somit fallen sämtliche cloub
 \subsection{Server}
 
 \subsubsection{Play Framework}
-Für eine Anwendung in diesem Umfang ist der De-Facto-Standard SpringMVC. Da Spring aber ein schwergewichtiges Framework ist und wir eine neuere, leicht gewichtigere Alternative in der Praxis evaluieren wollten, haben wir uns für das Play Framework.
+Für eine Anwendung in diesem Umfang ist der De-Facto-Standard SpringMVC. Da Spring aber ein schwergewichtiges Framework ist und wir eine neuere, leichtgewichtigere Alternative in der Praxis evaluieren wollten, haben wir uns für das Play Framework.
 
 Zusätzliche Gründe die unsere Entscheidung für Play unterstützt haben:
 
@@ -36,7 +36,7 @@ Zusätzliche Gründe die unsere Entscheidung für Play unterstützt haben:
 
 \subsubsection{Kommunikation mit den Drohnen}
 
-Wie in der Architektur beschrieben, kommunizieren die Drohnen über AMQP mit dem Messaging-Broker. Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss en möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Auf Grund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.\\
+Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss es möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Auf Grund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.\\
 
 Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm von Instanzen, die die Kommunikation mit den Drohnen erlauben, sobald die Applikation gestartet ist.
 
