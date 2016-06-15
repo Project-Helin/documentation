@@ -145,9 +145,9 @@
 	\renewcommand{\maketitle}{
 		\begin{titlepage}
 		% Logos
-		\begin{picture}(0,200)(0,-100)
-      		\put(-60, -30){\includegraphics[height=30mm]{images/hsrlogo.png}}
-      		%\put(200, -15){\includegraphics[height=20mm]{images/partnerlogo.png}}
+		\begin{picture}(0,150)(0,-100)
+      		\put(0, 0){\includegraphics[height=30mm]{images/hsrlogo.png}}
+      		\put(350, 0){\includegraphics[height=30mm]{images/helin.png}}
 		\end{picture}
 
 		% title
