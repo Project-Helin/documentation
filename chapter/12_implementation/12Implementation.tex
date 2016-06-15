@@ -35,7 +35,7 @@ Zusätzliche Gründe die unsere Entscheidung für Play unterstützt haben:
 
 \subsubsection{Kommunikation mit den Drohnen}
 
-Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss es möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Auf Grund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.\\
+Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss es möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Aufgrund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.\\
 
 Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm von Instanzen, welche die Kommunikation mit den Drohnen erlauben, sobald die Applikation gestartet ist.
 
@@ -71,9 +71,9 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 \subsection{Onboard-App}
 
 \subsubsection{Entwicklungsumgebung}
-Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk Flight-Controllers, stellt dafür eine Open-Source Android-API bereit. Die API kann im App integriert werden und erlaubt es, dem Flight-Controller direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
+Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk \Gls{Flight-Controller}s, stellt dafür eine Open Source Android-API bereit. Die API kann im App integriert werden und erlaubt es, dem \Gls{Flight-Controller} direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
 
-Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich nahezu identisch wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung zeigten. \\
+Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den \Gls{Flight-Controller} simuliert. Die Simulation verhält sich nahezu identisch wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung zeigen. \\
 
 Die verschiedenen Möglichkeiten, dass System zu testen sind im Github Repository dokumentiert. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
 
@@ -88,21 +88,21 @@ Die verschiedenen Möglichkeiten, dass System zu testen sind im Github Repositor
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
-	DroneKit-Android Client & Android API für MAV-Link Protokoll zum ansteuern der Drohne & 1.5.1 & Apache 2.0\\
+	DroneKit-Android Client & Android API für \Gls{MAVLink} Protokoll zum ansteuern der Drohne & 1.5.1 & Apache 2.0\\
 	\hline 
 	AMQP Messaging Library & Messaging für Android & 3.6.0 &  Mozilla Public License 1.1, GPL 2,  Apache 2.0 \\
 	\hline 
 	Lyra  & High availability Messaging & 0.4.3 &  Apache 2.0 \\
 	\hline 
-	Dagger  & Dependency Injection Framwork für Android & 2.0.1 &  Apache 2.0 \\
+	Dagger  & Dependency Injection Framework für Android & 2.0.1 &  Apache 2.0 \\
 	\hline 
 \end{tabularx} \\
 
 Bemerkungen aus der Evaluation oben stehender Komponenten:
 \begin{itemize}
 	\item{\textbf{DroneKit-Android Client:} Es existiert keine gleichwertige Alternative die das \Gls{MAVLink} Protokoll in diesem Umfang abdeckt.}
-	\item{\textbf{AMQP Messaging Library:} Ist Voraussetzung für die Lyra Bibliothek um dieser das \Gls{AMQP} Protokoll zur Verfügung zu stellen.}
-	\item{\textbf{Lyra:} Die Bibliothek wird vom Hersteller der Message-Oriented-Middleware empfohlen. \cite[]{lyra-page} }
+	\item{\textbf{Lyra:} Die Bibliothek wird vom Hersteller der Message-Oriented-Middleware (\Gls{MOM}) empfohlen. \cite[]{lyra-page} }
+	\item{\textbf{AMQP Messaging Library:} Ermöglicht den Zugriff auf den RabbitMQ Message Broker.}
 	\item{\textbf{Dagger:} Wird von Google entwickelt und unterstützt Dependency Injection zur Kompilierzeit.}
 \end{itemize}
 
@@ -113,10 +113,10 @@ Gemäss den nicht-funktionalen Anforderungen soll ein Verbindungsabbruch zum Ser
 Sollte die Verbindung zwischen Server und Onboard-App unterbrochen sein, sollte verhindert werden, dass Nachrichten verloren gehen. Bei unterbrochener Verbindung wird dies wie folgt erreicht:
 \begin{itemize}
 	\item{\textbf{Nachricht vom Server zum Onboard-App} \\
-		Dieses Szenario wird durch RabbitMQ abgefangen. Der Messaging-Broker persistiert die Nachrichten solange bis die Onboard-App wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf.
+		Dieses Szenario wird durch RabbitMQ abgefangen. Der Message Broker persistiert die Nachrichten solange bis die Onboard-App wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf.
 	}
 	\item{\textbf{Nachricht vom Onboard-App an den Server} \\
-		Hier steht der Broker nicht zur Verfügung und die Speicherung der Nachrichten musste implementiert werden. Dazu verwenden wir eine Queue in der alle Nachrichten gespeichert werden und erst entfernt werden, wenn sie verschickt wurden.
+		Hier steht der Message Broker nicht zur Verfügung und die Speicherung der Nachrichten musste implementiert werden. Dazu verwenden wir eine Queue in der alle Nachrichten gespeichert werden und erst entfernt werden, wenn sie verschickt wurden.
 	}
 \end{itemize}
 Mit diesen Massnahmen haben wir eine gute Balance zwischen Zuverlässigkeit und Implementationsaufwand erreicht.
@@ -124,16 +124,16 @@ Mit diesen Massnahmen haben wir eine gute Balance zwischen Zuverlässigkeit und 
 
 
 \subsubsection{Verbindungswiederherstellung}
-Gemäss den nicht-funktionalen Anforderungen, muss sichergestellt werden, dass nach einem Unterbruch der Internetverbindung eine Verbindungswiederherstellung stattfindet. Sobald die Verbindung mit dem Internet wieder besteht, soll nach 30 Sekunden wieder eine Verbindung zum Message-Broker bestehen. \\
+Gemäss den nicht-funktionalen Anforderungen, muss sichergestellt werden, dass nach einem Unterbruch der Internetverbindung eine Verbindungswiederherstellung stattfindet. Sobald die Verbindung mit dem Internet wieder besteht, soll nach 30 Sekunden wieder eine Verbindung zum Message Broker bestehen. \\
 
-Bei der Konfiguration der Verbindungswiederherstellung bestand die Wahl zwischen fixen oder inkrementellen Zeitabständen, nach denen eine Wiederherstellung versucht wird. Um das exakte Verhalten zu evaluieren, wurden Versuche gemacht, bei denen die Verbindung für 3 Sekunden unterbrochen wurde (siehe Tabelle \ref{tbl:backoff}).\\
+Bei der Konfiguration der Verbindungswiederherstellung bestand die Wahl zwischen fixen oder inkrementellen Zeitabständen, nach denen eine Wiederherstellung versucht wird. Um das exakte Verhalten zu evaluieren, wurden Versuche gemacht, bei denen die Verbindung für drei Sekunden unterbrochen wurde (siehe Tabelle \ref{tbl:backoff}).\\
 
 \begin{table}
 	
 	\centering
 	\begin{tabular}{|r|r|r|}
 		\hline
-		\textbf{Versuch} & \textbf{Mit inkrementellem Intervall [s] } & \textbf{Mit fixem Intervall [s])} \\
+		\textbf{Versuch} & \textbf{Mit inkrementellem Intervall [s] } & \textbf{Mit fixem Intervall [s]} \\
 		\hline
 		1 & 17 & 7 \\
 		2 &	7 & 7 \\
@@ -151,7 +151,7 @@ Da beide Varianten die nicht-funktionalen Anforderungen erfüllen, haben wir uns
 \subsection{Customer App}
 Gemäss Aufgabenstellung sollte ein Prototyp für eine App, mit welchem Bestellungen am System abgegeben können, entwickelt werden.
 
-Anders als die Onboard-App, welche native mit Java entwickelt wurde und nur auf Android läuft, entschieden wir uns beim Bestell-App für eine Cross-Plattform Lösung, welche Android und iOS unterstützt. \\
+Anders als die Onboard-App, welche native mit Java entwickelt wurde und nur auf Android läuft, entschieden wir uns beim Customer-App für eine Cross-Plattform Lösung, welche Android und iOS unterstützt. \\
 
 Auch wenn gemäss der Aufgabenstellung keine iOS App gefordert war, stellte sich doch die Frage ob man die iPhone-Kunden ausschliessen soll und spätere Entwickler zwingt, einen grossen Teil des Codes in einer nativen iOS App duplizieren zu müssen. Mit einem Marktanteil von 42.2\% (Zahlen 2015) \cite{ios-user} von iOS Benutzern in der Schweiz, ist anzunehmen, dass zu einem späteren Zeitpunkt eine iPhone App implementiert werden muss.\\
 
@@ -159,13 +159,13 @@ Deshalb wurde auf Xamarin Forms gesetzt, welches ermöglicht, die ganzen Service
 
 Die App wurde in einer minimalen Ausbaustufe erstellt, erfüllt aber bereits alle nötigen funktionalen Anforderungen. In Abbildung \ref{fig:customer-app-flow} wird gezeigt, wie ein Benutzer durch die App navigieren kann. 
 
-Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlung der Ware, sowie die Anzeige der Drohnenposition während des Anflugs.  
+Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlung der Bestellung, sowie die Anzeige der Drohnenposition während des Anflugs.  
 
 \begin{landscape}
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\paperheight] {images/customer-app-pages.png}
-		\caption{Übersicht der Customer App mit allen Verknüpfungen zwischen den Screens}
+		\caption{Übersicht der Customer-App mit allen Verknüpfungen zwischen den Screens}
 		\label{fig:customer-app-flow}
 	\end{figure}
 \end{landscape}
@@ -175,9 +175,9 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
-	Paypal Forms & PayPal integration für Xamarin.Forms & 2.0.4 & MIT \\
+	Paypal Forms & PayPal Integration für Xamarin.Forms & 2.0.4 & MIT \\
 	\hline 
-	Xamarin Forms & Plattform übergreifende Komponente für Xamarin & 2.2.0.45 & \url{https://www.xamarin.com/license} \\
+	Xamarin Forms & Plattformübergreifende Komponente für Xamarin & 2.2.0.45 & \url{https://www.xamarin.com/license} \\
 	\hline 
 	Websocket.PCL & Plattformübergreifende WebSocket Anbindung & 1.1.9 & MIT \\
 	\hline 
@@ -189,8 +189,8 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 \begin{itemize}
 	\item{\textbf{PayPal Forms:} Einziges PayPal Plugin für Xamarin.Forms}
 	\item{\textbf{Xamarin.Forms:} Ermöglicht Crossplattform UI sehr einfach zu entwickeln.}
-	\item{\textbf{Websocket.PCL:} Einzige gut gewartete Implementation der WebSockets in Xamarin}
-	\item{\textbf{Newton.Json:} Die Bibliothek weisst die höchste Anzahl Downloads auf.}
+	\item{\textbf{Websocket.PCL:} Einzige gut gewartete Implementation von WebSockets in Xamarin}
+	\item{\textbf{Newton.Json:} Die Bibliothek weist die höchste Anzahl Downloads auf.}
 \end{itemize}
 
 \subsection{Datenbank}
