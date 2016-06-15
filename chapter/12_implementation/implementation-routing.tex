@@ -31,7 +31,7 @@ Normalerweise wird eine Routenberechnung mit Hilfe eines Graphen durchgeführt, 
 Folgende Lösungsmöglichkeiten wurden evaluiert:
 
 \subsubsection{Erstes Konzept: Direkte Route}
-Dieses Konzept umfasste den Ansatz den Start und den Endpunkt direkt zu verbinden, und bei einem Verlassen des Polygons dem Rand zu folgen (siehe Abb.\ref{fig:first-concet-routing}).
+Dieses Konzept umfasste den Ansatz den Start und den Endpunkt direkt zu verbinden, und bei einem Verlassen des Polygons dem Rand zu folgen (siehe Abb.  \ref{fig:first-concet-routing}).
 
 \begin{figure}[H]
 	\centering
@@ -39,7 +39,7 @@ Dieses Konzept umfasste den Ansatz den Start und den Endpunkt direkt zu verbinde
 	\caption{Erstes Konzept}
 	\label{fig:first-concet-routing}
 \end{figure}
-Es wurde ausserdem ein Rand (\textit{Rot}) hinzugefügt.Diese Massnahme wurde getroffen, um allfällige GPS Ungenauigkeiten zu berücksichtigen.\\
+Es wurde ausserdem ein Rand (\textit{Rot}) hinzugefügt. Diese Massnahme wurde getroffen, um allfällige GPS Ungenauigkeiten zu berücksichtigen.\\
 
 Der Nachteil dieser Lösung zeigt sich bei grösseren Polygonen, wo unnötigerweise dem Rand entlang geflogen wird, obwohl ein Flug durch die Mitte viel sicherer wäre.
 \newpage
@@ -56,12 +56,12 @@ In unserem Fall haben wir den Gedanken umgedreht. Wir haben den Graphen in einem
 	\caption{Visibility Graph in einer Flugzone}
 	\label{fig:visibility-graph}
 \end{figure}
-Wie in der Grafik \ref{fig:visibility-graph} gezeigt wird, verlaufen deutlich weniger Flugrouten entlang der Kante des Polygons. \\
+Wie in der Abbildung \ref{fig:visibility-graph} gezeigt wird, verlaufen deutlich weniger Flugrouten entlang der Kante des Polygons. \\
 Dies ist eine deutliche Verbesserung gegenüber dem ersten Konzept. Der Nachteil ist, dass die innere Ecke des L-förmigen Polygons sicher angeflogen wird, da es die vermeintlich kürzeste Route in einem nächsten Schritt darstellen würde. Aus diesem Grund haben wir uns gegen den Einsatz dieses Konzepts entschieden.\\
 
 \subsubsection{Drittes Konzept: Straight Skeleton}
-Da die Pfadfindung von \Gls{UAV} bereits ein weit erarbeitetes und erforschtes Gebiet ist, waren wir der Überzeugung, dass bereits verwendete Konzepte vereinfacht und abstrahiert werden konnten um unser Problem zu lösen. Während vollständig autonome Drohnen an Hindernissen vorbei navigieren müssen, können wir uns auf einen bestehenden Flugkorridor verlassen.
-\blockquote{The idea behind this method is toassign a function similar to the electrostatic potential to each obstacle and then derive the topological structure of the free space in the form of minimum potential valleys. The robot is positioned at the start point, and then the goal generates a strong attractive force. By the action of the force, the robot moves along the steepest descent of the potential to the goal, at the same time the obstacle generates a repulsive force to keep robot away from colliding with them} 
+Da die Pfadfindung von \Gls{UAV} bereits ein weit erarbeitetes und erforschtes Gebiet ist, waren wir der Überzeugung, dass bereits verwendete Konzepte vereinfacht und abstrahiert werden konnten, um unser Problem zu lösen. Während vollständig autonome Drohnen an Hindernissen vorbei navigieren müssen, können wir uns auf einen bestehenden Flugkorridor verlassen.
+\blockquote{The idea behind this method is to assign a function similar to the electrostatic potential to each obstacle and then derive the topological structure of the free space in the form of minimum potential valleys. The robot is positioned at the start point, and then the goal generates a strong attractive force. By the action of the force, the robot moves along the steepest descent of the potential to the goal, at the same time the obstacle generates a repulsive force to keep robot away from colliding with them} 
 
 Die Kernaussage des zitierten Papers \cite[]{SkeletonUAV} ist, dass ein Pfad den grösstmöglichen Abstand zu den Hindernissen aufweisen soll. Auf unseren Fall übertragen, sind die Polygonränder die Hindernisse. Somit muss gewährleistet werden, dass die Drohne den grössten Abstand zu den Rändern aufweisst. Aus diesem Grund erscheint diese Lösung für uns sehr geeignet, da Sie mittenbetonte Routen vorschlägt. \\
 \begin{figure}[H]
@@ -70,11 +70,7 @@ Die Kernaussage des zitierten Papers \cite[]{SkeletonUAV} ist, dass ein Pfad den
 	\caption{Skeleton in Polygon}
 	\label{fig:skeleton-in-polygon}
 \end{figure}
-Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet. Der Felkel-Algorithmus, welcher dieses Skeleton aus einem 2-dimensionalen Polygon berechnet ist bereits in CGAL implementiert \cite{SkeletonCGAL} und war uns im weiteren Verlauf des Projektes von grossem Nutzen.\\
-
-
-
-
+Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe eines Skeletons. Dieses Konzept kann nachvollzogen werden, indem man sich das Polygon 3-dimensional vorstellt und dann  von der Mitte aus, parallel zu den Kanten schneidet. Der entstandene Grat ist hier als Linie sichtbar und wird als Skeleton bezeichnet. Der Felkel-Algorithmus, welcher dieses Skeleton aus einem 2-dimensionalen Polygon berechnet ist bereits in \Gls{CGAL} implementiert \cite{SkeletonCGAL} und war uns im weiteren Verlauf des Projektes von grossem Nutzen.\\
 
 
 \subsection{Routing Algorithmus}
