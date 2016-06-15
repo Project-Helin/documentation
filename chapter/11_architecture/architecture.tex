@@ -8,7 +8,7 @@ Die folgende Architektur soll es ermöglichen, eine Flotte von Drohnen automatis
 \section{Einschränkungen}
 
 \subsection{Flight-Controller}
-Da der Flight-Controller bereits vor der Arbeit evaluiert wurde, wird dieser als vorgegebene Limitierung angesehen.
+Da der \Gls{Flight-Controller} bereits vor der Arbeit evaluiert wurde, wird dieser als vorgegebene Limitierung angesehen.
 
 \subsection{Onboard-App}
 Während der gesamten Arbeit wird davon ausgegangen, dass das Onboard-App im Vordergrund verwendet wird.
@@ -44,7 +44,7 @@ Aus den in den Anforderungen definierten Zielen, ergeben sich für die Server-Ko
 
 \begin{itemize}
 	\item Bietet Benutzeroberfläche für Administratoren
-	\item Verwaltet \Gls{CRUD} für alle nötigen Klassen (siehe Domain Model)
+	\item Verwaltet \Gls{CRUD} für alle nötigen Klassen (siehe Domain Model Abb. \ref{fig:domain-model})
 	\item Verwaltet Verbindungen zu Onboard-Apps und Customer-Apps
 	\item Berechnet Flugrouten basierend auf den erhaltenen Bestellungs-Koordinaten
 \end{itemize}
@@ -79,7 +79,7 @@ Stellt die grafische Benutzeroberfläche zur Verfügung und rendert diese basier
 
 \subsubsection{Model-Layer}
 
-Der Model-Layer enthält die Datenmodelle. (siehe Domain Model)
+Der Model-Layer enthält die Datenmodelle. (siehe Domain Model Abb. \ref{fig:domain-model})
 
 \subsubsection{Service-Komponente}
 
@@ -110,7 +110,7 @@ Der Data Access Layer bietet die Möglichkeit auf die Persistence Library zuzugr
 \subsection{Anforderungen}
 
 \begin{itemize}
-	\item Kommuniziert mit dem Flight-Controller der Drohne
+	\item Kommuniziert mit dem \Gls{Flight-Controller} der Drohne
 	\item Kommuniziert mit dem Server
 	\item Bietet eine Benutzeroberfläche für den Drone-Operator 
 \end{itemize}
@@ -197,23 +197,23 @@ Ausserdem muss die eingesetzte Technologie für die Kommunikation zwischen dem S
 Aufgrund der schlechten Erfahrung mit WebSocket auf mobilen Geräten und der Probleme mit bei Verbindungsabbrüche, kam diese nicht in Frage. Als Alternative blieb nur Messaging übrig, welches wegen der zeitlichen Unabhängigkeit der Verbindung, vom Server und dem Onboard-App, keine Konsequenzen hat. \\
 
 	
-Bei der Anbindung der Customer-App ist die Plattformunabhängigkeit der Schnittstelle höher gewichtet als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbin 5ndung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
+Bei der Anbindung der Customer-App ist die Plattformunabhängigkeit der Schnittstelle höher gewichtet als die Zuverlässigkeit der bidirektionalen Verbindung. Einzig die Liveupdates der Drohnenposition werden über diese Verbindung gesendet. Deswegen wird dort vor allem HTTP verwendet und nur wo nötig WebSockets eingesetzt. Damit können in Zukunft auch andere Geräte verwendet werden um das System anzusprechen, ohne dass sie ein Messaging-Protokoll unterstützen müssen.\\
 
 Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und WebSockets, da dort die Wahrscheinlichkeit eines Verbindungsabbruchs viel geringer ist als bei einem mobilen Gerät. Zusätzlich ist eine Verbindungswiederherstellung der Verbindung viel einfacher, da das Navigieren oder Neuladen der Seite ausreicht. \\
 
 
 \subsection{Verwendete Enterprise Integration Patterns}
-Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns die je nach Anforderungen verwendet werden können.({\cite{EIP}}) Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
+Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns die je nach Anforderungen verwendet werden können. {\cite{EIP} Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
 %
 \subsubsection{Point-to-Point Channel}
-Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverlässigen Nachrichtenaustausch zu ermöglichen, wird jede Drohne bzw. jede App über einen separaten Point-to-Point Channel	\cite[Seite 103]{EIP}} angebunden. Der Channel wird nach der Registrierung zugeteilt und stellt den Point-to-Point Kanal zwischen Drohne und Server dar. Dies garantiert dem Server, eine Nachricht an nur eine Drohne zu schicken.
+Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverlässigen Nachrichtenaustausch zu ermöglichen, wird jede Drohne bzw. jede App über einen separaten Point-to-Point Channel	\cite[S. 103]{EIP}} angebunden. Der Channel wird nach der Registrierung zugeteilt und stellt den Point-to-Point Kanal zwischen Drohne und Server dar. Dies garantiert dem Server, eine Nachricht an nur eine Drohne zu schicken.
 %
 \subsubsection{At-most-once}
 
 Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist ausserdem in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
 %
 \subsubsection{Event-driven Consumer}
-{Event-driven Consumer \cite[Seite 442]{EIP}} Systeme bieten die Möglichkeit Aktionen auf Grund von Nachrichten auszuführen. Beispielsweise:
+{Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit Aktionen auf Grund von Nachrichten auszuführen. Beispielsweise:
 %
 \begin{itemize}
 	\item Drohne erhält neue Mission vom Server und soll dies dem Drone-Operator anzeigen.
@@ -225,7 +225,7 @@ Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Missi
 
 Order Cargo (Abbildung \ref{fig:registerDrone}) beschreibt den Bestellprozess und die damit zusammenhängende Kommunikation. \\
 
-Der Kunde bestellt mittels der App ein Produkt, der Server bestätigt ihm die Bestellung und schlägt einen Abwurfort vor. Sollte der Abwurfort dem Kunden nicht entsprechen, so kann er den Prozess abbrechen und ihn noch einmal auslösen, sobald er sich an einer passenderen Stelle befindet.\\
+Der Kunde bestellt mittels der App ein Produkt (Customer-App), der Server bestätigt ihm die Bestellung und schlägt einen Abwurfort vor. Sollte der Abwurfort dem Kunden nicht entsprechen, so kann er den Prozess abbrechen und ihn noch einmal auslösen, sobald er sich an einer passenderen Stelle befindet.\\
 
 Der Server analysiert die Eignung der verfügbaren Drohnen und bestimmt im Anschluss eine, welche den Auftrag ausführen kann und zeigt die Mission dem Drone-Operator an. Sollte die Drohne bereit sein, so kann er diesen Auftrag bestätigen. Im Falle einer nötigen Wartungsarbeit kann der Auftrag zu diesem Zeitpunkt auch abgelehnt werden. Sobald der Auftrag angenommen wurde, erhält der Drone-Operator genaue Angaben zur Beladung der Drohne. Anschliessend wird die Ladung bestätigt und der Server kann dem Kunden mitteilen, dass die Drone startklar ist. Während des Fluges erhält der Kunde Benachrichtigungen vom Server mit der aktuellen Position der Drohne. Sobald die Ladung abgeworfen wurde, fliegt die Drohne zur Ladezone zurück und bestätigt dem Server die Ankunft. So kann gewährleistet werden, dass bekannt ist, ab wann die Drohne wieder verfügbar ist. \\
 
