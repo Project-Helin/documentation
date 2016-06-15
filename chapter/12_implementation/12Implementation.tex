@@ -20,13 +20,13 @@ Ein geeigneter Message Broker muss sowohl vom Server als auch von der Onboard-Ap
 \subsection{Server}
 
 \subsubsection{Play Framework}
-Für eine Anwendung in diesem Umfang ist der De-Facto-Standard SpringMVC. Da Spring aber ein schwergewichtiges Framework ist und wir eine neuere, leichtgewichtigere Alternative in der Praxis evaluieren wollten, haben wir uns für das Play Framework.
-
+Für eine Anwendung in diesem Umfang ist der De-Facto-Standard SpringMVC. Da Spring aber ein schwergewichtiges Framework ist und wir eine neuere, leichtgewichtigere Alternative in der Praxis evaluieren wollten, haben wir uns für das Play Framework entschieden.
+\\
 Zusätzliche Gründe die unsere Entscheidung für Play unterstützt haben:
 
 \begin{itemize}
     \item Fortschrittlicher O/R-Mapper im Framework integriert
-    \item Vorgegebene MVC-Architektur (Speziell geeignet für CRUD-Operationen)
+    \item Vorgegebene MVC-Architektur (Speziell geeignet für \Gls{CRUD}-Operationen)
     \item Schnelle Implementation durch Spezialisierung auf diese Anwendungsart 
     \item Alle Entwickler des Projekts sind versiert in Java
     \item RabbitMQ Anbindung möglich
@@ -37,7 +37,7 @@ Zusätzliche Gründe die unsere Entscheidung für Play unterstützt haben:
 
 Um die Möglichkeit zu haben mit einzelnen Drohnen zu kommunizieren, müssen auf dem Server zur Laufzeit alle Verbindungen zu allen Drohnen bekannt sein. Ausserdem muss es möglich sein, eingehende Nachrichten an einem zentralen Punkt abzuarbeiten. Auf Grund der bestehenden MVC-Struktur der Play-Applikation haben wir uns entschieden, auch die Nachrichten aus dem Messaging-System in Controllern zu behandeln, wie es normalerweise nur mit HTTP-Requests geschieht.\\
 
-Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm von Instanzen, die die Kommunikation mit den Drohnen erlauben, sobald die Applikation gestartet ist.
+Die Abbildung \ref{fig:drone-communication-diagram} zeigt ein Objekt-Diagramm von Instanzen, welche die Kommunikation mit den Drohnen erlauben, sobald die Applikation gestartet ist.
 
 \begin{figure}[H]
 	\centering
@@ -65,7 +65,7 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 \begin{itemize}
 	\item{\textbf{Hibernate ORM Mapper:} Hibernate ORM ist der einzige ORM Mapper, der eine Spatial-Extension anbietet. Durch Hibernate Spatial ist es möglich, PostGIS Objekte aus der Datenbank direkt zu Java Objekten zu konvertieren.}
 	\item{\textbf{RabbitMQ Client:} Als Message Broker wurde auf RabbitMQ gesetzt, daher wurde konsequenterweise RabbitMQ Client als Bibliothek verwendet.}
-	\item{\textbf{jGraphT:} Hibernate Spatial arbeitet mit der \Gls{Java Topology Suite} (JTS) zur Abbildung der geografischen Daten. Um aus JTS Objekten einen Graphen zu bilden, kann nur jGraphT verwendet werden.}
+	\item{\textbf{jGraphT:} Hibernate Spatial arbeitet mit der Java Topology Suite (\Gls{JTS}) zur Abbildung der geografischen Daten. Um aus \Gls{JTS} Objekten einen Graphen zu bilden, kann nur jGraphT verwendet werden.}
 \end{itemize}
 
 \subsection{Onboard-App}
