@@ -135,7 +135,7 @@ A &= \frac{2 \cdot m_{\text{Pet}} \cdot g}{\rho \cdot c_{w} \cdot v_{\text{sink}
 \end{split}
 \end{equation}
 
-Nun lässt sich der Durchmesser ($d$) über die Öffnungsfläche $A = \pi \cdot r^2$ berechnen. Wir näheren an, dass der Öffnungsdurchmesser dem Fallschirmdurchmesser entspricht.
+Nun lässt sich der Durchmesser ($d$) über die Öffnungsfläche $A = \pi \cdot r^2$ berechnen. Wir nähern an, dass der Öffnungsdurchmesser dem Fallschirmdurchmesser entspricht.
 
 \begin{equation}
 \begin{split}
@@ -205,7 +205,7 @@ Der Frame, die Motoren und ESCs wurden als Kit gekauft. Es handelt sich dabei um
 
 \subsection{Flight-Controller}
 
-Der \Gls{Flight-Controller} ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst, alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglicht der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches Abfliegen von Wegpunkten.
+Der \Gls{Flight-Controller} ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst, alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglicht der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches Abfliegen von Wegpunkten.\\
 
 Als \Gls{Flight-Controller} setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open Source ist und auch bei vielen anderen Projekten eingesetzt wird. Die Firmware unterstützt ausserdem das \Gls{MAVLink} Protokoll.
 \begin{figure}[H]
@@ -237,7 +237,7 @@ Während des Projekts wurde die Hardware laufend den Bedürfnissen angepasst. Da
 	\label{fig:prototyp-1}
 \end{figure}
 
-Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Erfahrungen mit dem GPS und den verschiedenen Flugmodi zu sammeln, wurde in der ersten Iteration nur die Drohne in einem minimalen Flugzustand aufgebaut.
+Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Erfahrungen mit dem GPS und den verschiedenen Flugmodi zu sammeln, wurden nur die nötigsten Teile installiert.
 
 \subsubsection{Version 2}
 
@@ -249,6 +249,7 @@ Um das Zusammenspiel der Hardwarekomponenten zu testen und erste Erfahrungen mit
 \end{figure}
 
 Um die Risiken R08 (Ardupilot Handhabung) und R09 (Ardupilot API) frühzeitig auszuschliessen (siehe Tabelle \ref{table:risk-table}), wurde das Smartphone provisorisch auf die Drohne montiert, und mit einem ersten Prototypen der Onboard-App getestet. \\
+
 Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeitet werden musste, um es sicher zu transportieren und bedienbar zu positionieren.
 \subsubsection{Version 3}
 \begin{figure}[H]
@@ -260,15 +261,15 @@ Nach dem Test wurde uns klar, dass eine Befestigung für das Smartphone erarbeit
 		\label{fig:prototyp-3}
 	\end{minipage}
 	\hfill
-	\begin{minipage}[b]{0.35\textwidth}
+	\begin{minipage}[b]{0.37\textwidth}
 		\centering
 		\includegraphics[width=\textwidth]{images/hardware/case-model.png}
-		\caption{Halterung 3D-Modell}
+		\caption{Halterung Modell}
 		\label{fig:case-model}
 	\end{minipage}
 \end{figure}
 
-Es wurde eine Halterung konzipiert (siehe Abb. \ref{fig:case-model}), welche wir im 3D-Druck Verfahren produzieren liessen.
+Es wurde eine Halterung konzipiert (siehe Abb. \ref{fig:case-model}), welche wir modellieren und im 3D-Druck Verfahren produzieren liessen.
 Die Handy-Halterung konnte auch gleich genutzt werden, um das GPS-Modul an einer passenden Stelle zu positionieren.
 
 \subsubsection{Version 4}
