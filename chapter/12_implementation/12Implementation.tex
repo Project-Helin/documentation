@@ -226,15 +226,29 @@ Ein Angreifer müsste mit dieser Methode den Token herausfinden und auch die Zug
 \section{Projektgrösse}
 
 Folgende Statistiken wurden am Ende der Arbeit erstellt um einen Eindruck der Grösse des Projekts zu erhalten.\\
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1.0\textwidth] {images/code-metrics.png}
+\begin{table}[H]
+	\begin{tabularx}{\textwidth}{|X|r|r|r|r|}
+		\hline
+		\textbf{Metrik} & \textbf{Server} & \textbf{Onboard-App} & 
+		\textbf{Customer-App} & \textbf{Total} \\
+		\hline
+		\hline
+		\textbf{Lines of Code} & 12071 & 2174 & 1188 & 15433 \\
+		\hline
+		\textbf{Anteil Lines of Code Tests} & 29.34\% & 13.58\% & 0.00\% & 24.85\% \\
+		\hline
+		\textbf{Anteil Lines of Code Kommentare} & 4.03\% & 1.33\% & 0.00\% & 3.18\% \\
+		\hline
+		\textbf{Anzahl Klassen} & 174 & 49 & 36 & 259 \\
+		\hline
+		\textbf{Anzahl Methoden mit hoher \mbox{zyklomatischer} Komplexität} & 1.73\% & 1.57\% & N/A & 1.46\% \\
+		\hline
+	\end{tabularx}
 	\caption{Code Metriken nach Abschluss der Arbeit}
-	\label{fig:code-metrics}
-\end{figure}
+	\label{table:code-metrics}
+\end{table}
 
-In Abbildung \ref{fig:code-metrics} sind vor allem der geringe Anteil von Methoden mit hoher essentieller Komplexität\cite[S. 79]{MCCABE} hervorzuheben. Alle Methoden mit hoher Komplexität wurden vom Team geprüft, konnten aber nicht mehr verbessert werden. Hauptsächlich sind dies 'equals' Methoden von grösseren \Gls{DTO}s oder es handelt sich um MessageConverter, die einfach alle verschiedenen Messagetypen verschieden behandeln müssen. Das folgende Beispiel zeigt die Methode mit der höchsten zyklomatischen Komplexität der Server-Applikation (Essentielle Komplexität = 10, Zyklomatische Komplexität = 10). \\
+In der Tabelle \ref{table:code-metrics} sind vor allem der geringe Anteil von Methoden mit hoher essentieller Komplexität\cite[S. 79]{MCCABE} hervorzuheben. Alle Methoden mit hoher Komplexität wurden vom Team geprüft, konnten aber nicht mehr verbessert werden. Hauptsächlich sind dies 'equals' Methoden von grösseren \Gls{DTO}s oder es handelt sich um MessageConverter, die einfach alle verschiedenen Messagetypen verschieden behandeln müssen. Das folgende Beispiel zeigt die Methode mit der höchsten zyklomatischen Komplexität der Server-Applikation (Essentielle Komplexität = 10, Zyklomatische Komplexität = 10). \\
 
 
 \begin{lstlisting}
