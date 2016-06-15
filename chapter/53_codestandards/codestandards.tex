@@ -11,7 +11,7 @@ In Java wird klassicherweise der Autor im Javadoc Kommentar in der Klasse angege
 public class MyTestClass{
 }
 \end{lstlisting}
-Der Autor in der Klasse suggeriert, dass nur ein Autor für diese Klasse existiert und für diese Klasse verantwortlich ist. Dies sollte aber nicht der fall sein, da jedes Teammitglied verantwortlich für die gesammte Code-Qualität ist und zudem ist die Angabe auf der Klasse heutzutage mit einem Version Control System redundant.
+Der Autor in der Klasse suggeriert, dass nur ein Autor für diese Klasse existiert und für diese Klasse verantwortlich ist. Dies sollte aber nicht der fall sein, da jedes Teammitglied verantwortlich für die gesamte Code-Qualität ist und zudem ist die Angabe auf der Klasse heutzutage mit einem Version Control System redundant.
 
 \subsubsection{Javadoc}
 Generell sollte Javadoc nur dort verwendet werden, wo es nötig ist. Da es sich bei Projekt Helin nicht um eine API handelt, sollten auch die Methoden und Parameter nicht redundant dokumentiert werden. Ein Beispiel für eine schlechte Javadoc Dokumentation sieht folgendermassen aus:
@@ -49,6 +49,6 @@ public final class ConfigUtil {
 \subsubsection{Code}
 Für die Formatierung und den Static Check werden die 'Code Inspection' von IntelliJ IDEA verwendet.
 \\
-Es handelt sich bei den 'Code Inspections' um konfigurierbare Regeln, welche mit dem Projekt in das Repository eingecheckt werden (code-style.xml). Die Entwicklungsumgebung führt die 'Code Inspections' vor dem Einchecken aus und weisst gegebenenfals auf Unstimmigkeiten hin.
+Es handelt sich bei den 'Code Inspections' um konfigurierbare Regeln, welche mit dem Projekt in das Repository eingecheckt werden (code-style.xml). Die Entwicklungsumgebung führt die 'Code Inspections' vor dem Einchecken aus und weist gegebenenfals auf Unstimmigkeiten hin.
 Da sich die standard Regeln von IntelliJ bereits in anderen Projekten bewährt haben, wurde von einem eigenen Standard abgesehen.
 \newpage
