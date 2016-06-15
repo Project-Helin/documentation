@@ -80,10 +80,10 @@ Die Abbildung \ref{fig:skeleton-in-polygon} illustriert die Lösung mithilfe ein
 \subsection{Routing Algorithmus}
 Nach der Herleitung des Graphen aus den Zonen, musste nun der passende Algorithmus gefunden werden, um einen möglichst effizienten Weg von A nach B zu finden. Es kamen vier Algorithmen in Frage, wobei ein Algorithmus sich als besonders geeignet herausstellte.
 \begin{itemize}
-	\item{\textbf{BFS:} (\textit{Breadth-first search}) Die Breitensuche durchsucht einen Baum in der Breite. Sie bringt garantiert eine Lösung, wenn eine Lösung vorhanden ist und kann problemlos mit Zyklen im Graph umgehen. Bei der Lösung handelt es sich aber nicht um de 'optimale Lösung' (kürzester Pfad). Die Lösung liefert den Pfad mit den wenigsten Knoten. \cite{AiClass}}
+	\item{\textbf{BFS:} (\textit{Breadth-first search}) Die Breitensuche durchsucht einen Baum in der Breite. Sie bringt garantiert eine Lösung, wenn eine Lösung vorhanden ist und kann problemlos mit Zyklen im Graph umgehen. Bei der Lösung handelt es sich aber nicht um die 'optimale Lösung' (kürzester Pfad). Die Lösung liefert den Pfad mit den wenigsten Knoten. \cite{AiClass}}
 	\item{\textbf{DFS:} (\textit{Depth-first search}) Die Tiefensuche fängt an einem Knoten an und arbeitet sich dann in die Tiefe. Das Problem ist, dass sie sehr anfällig auf Zyklen ist und ohne weitere Hilfsmittel (loop detection oder pruning) nicht terminieren kann. \cite{AiClass}}
 	\item{\textbf{A-Star:} Der A-Star Algorithmus arbeitet mit einer Heuristik und funktioniert effizienter als die zwei bereits genannten Algorithmen. Allerdings ist der Aufwand für die Umsetzung deutlich höher. \cite{AiClass}}
-	\item{\textbf{Dijkstra:} Der Dijkstra-Algorithmus ist ebenfalls ein klassischer Graphpropagierungsalgorithmus. Der Vorteil ist, dass er grundsätzlich ohne Heuristik auskommt und robust mit Zyklen umgehen kann. Ausserdem können die Kanten mit einem Gewicht versehen werden und dadurch, der kürzeste Weg berechnet werden.}
+	\item{\textbf{Dijkstra:} Der Dijkstra-Algorithmus ist einer der bekanntesten Algorithmen in diesem Bereich. Der Vorteil ist, dass er grundsätzlich ohne Heuristik auskommt und robust mit Zyklen umgehen kann. Ausserdem können die Kanten mit einem Gewicht versehen werden und dadurch, der kürzeste Weg berechnet werden.}
 \end{itemize}
 Wir haben uns für den Dijkstra Algorithmus entschieden. Er liefert ohne Metrik eine ähnliche Lösung wie die BFS-Suche, kann aber im Nachhinein erweitert werden um effizientere Routen zu liefern.
 
