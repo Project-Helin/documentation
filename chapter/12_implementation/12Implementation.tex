@@ -151,7 +151,7 @@ Da beide Varianten die nicht-funktionalen Anforderungen erfüllen, haben wir uns
 \subsection{Customer App}
 Gemäss Aufgabenstellung sollte ein Prototyp für eine App, mit welchem Bestellungen am System abgegeben können, entwickelt werden.
 
-Anders als die Onboard-App, welche native mit Java entwickelt wurde und nur auf Android läuft, entschieden wir uns beim Bestell-App für eine Cross-Plattform Lösung, welche Android und iOS unterstützt. \\
+Anders als die Onboard-App, welche native mit Java entwickelt wurde und nur auf Android läuft, entschieden wir uns beim Customer-App für eine Cross-Plattform Lösung, welche Android und iOS unterstützt. \\
 
 Auch wenn gemäss der Aufgabenstellung keine iOS App gefordert war, stellte sich doch die Frage ob man die iPhone-Kunden ausschliessen soll und spätere Entwickler zwingt, einen grossen Teil des Codes in einer nativen iOS App duplizieren zu müssen. Mit einem Marktanteil von 42.2\% (Zahlen 2015) \cite{ios-user} von iOS Benutzern in der Schweiz, ist anzunehmen, dass zu einem späteren Zeitpunkt eine iPhone App implementiert werden muss.\\
 
@@ -159,13 +159,13 @@ Deshalb wurde auf Xamarin Forms gesetzt, welches ermöglicht, die ganzen Service
 
 Die App wurde in einer minimalen Ausbaustufe erstellt, erfüllt aber bereits alle nötigen funktionalen Anforderungen. In Abbildung \ref{fig:customer-app-flow} wird gezeigt, wie ein Benutzer durch die App navigieren kann. 
 
-Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlung der Ware, sowie die Anzeige der Drohnenposition während des Anflugs.  
+Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlung der Bestellung, sowie die Anzeige der Drohnenposition während des Anflugs.  
 
 \begin{landscape}
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\paperheight] {images/customer-app-pages.png}
-		\caption{Übersicht der Customer App mit allen Verknüpfungen zwischen den Screens}
+		\caption{Übersicht der Customer-App mit allen Verknüpfungen zwischen den Screens}
 		\label{fig:customer-app-flow}
 	\end{figure}
 \end{landscape}
@@ -175,9 +175,9 @@ Besonders wichtig ist die Anzeige des berechneten Abwurfpunktes vor der Bezahlun
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
-	Paypal Forms & PayPal integration für Xamarin.Forms & 2.0.4 & MIT \\
+	Paypal Forms & PayPal Integration für Xamarin.Forms & 2.0.4 & MIT \\
 	\hline 
-	Xamarin Forms & Plattform übergreifende Komponente für Xamarin & 2.2.0.45 & \url{https://www.xamarin.com/license} \\
+	Xamarin Forms & Plattformübergreifende Komponente für Xamarin & 2.2.0.45 & \url{https://www.xamarin.com/license} \\
 	\hline 
 	Websocket.PCL & Plattformübergreifende WebSocket Anbindung & 1.1.9 & MIT \\
 	\hline 
@@ -189,8 +189,8 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 \begin{itemize}
 	\item{\textbf{PayPal Forms:} Einziges PayPal Plugin für Xamarin.Forms}
 	\item{\textbf{Xamarin.Forms:} Ermöglicht Crossplattform UI sehr einfach zu entwickeln.}
-	\item{\textbf{Websocket.PCL:} Einzige gut gewartete Implementation der WebSockets in Xamarin}
-	\item{\textbf{Newton.Json:} Die Bibliothek weisst die höchste Anzahl Downloads auf.}
+	\item{\textbf{Websocket.PCL:} Einzige gut gewartete Implementation von WebSockets in Xamarin}
+	\item{\textbf{Newton.Json:} Die Bibliothek weist die höchste Anzahl Downloads auf.}
 \end{itemize}
 
 \subsection{Datenbank}
