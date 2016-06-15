@@ -6,7 +6,7 @@ Ziel dieser Arbeit ist es, eine mandantefähige Plattform zu konzipieren, zu ent
 
 Sobald ein Kunde eine Bestellung über eine App tätigt, wird automatisch eine Route zu seiner Position berechnet, die über vordefinierte, sichere Zonen führt. Über ein auf der Drohne angebrachtes Smartphone, werden Anweisungen für die Beladung angezeigt. Sobald die Vorbereitungen abgeschlossen sind, bewegt sich die Drohne mit Hilfe von GPS entlang der berechneten Route, erfüllt ihre Aufgabe und kehrt wieder zurück. Während der Mission werden laufend Telemetriedaten an den Server geschickt, welcher diese für den Anbieter visualisiert.\\
 
-Project Helin wird als Open-Source Software veröffentlicht und kann dann von jedem Interessertien gehostet und weiterentwickelt werden.\\
+Project Helin wird als Open Source Software veröffentlicht und kann dann von jedem Interessertien gehostet und weiterentwickelt werden.\\
 
 In der weiteren Dokumentation werden die Anforderungen, die Architektur, die wichtigsten Punkte der Umsetzung sowie der Aufbau eines Anwendungsbeispiels mit zwei echten Drohnen beschrieben.
 
@@ -14,7 +14,7 @@ In der weiteren Dokumentation werden die Anforderungen, die Architektur, die wic
 
 Alle Multicopter verfügen bereits in der Grundausstattung über einen \Gls{Flight-Controller}, der die Befehle der Fernbedienung in Steuerbefehle für die Motoren übersetzt. Zusätzlich nutzen viele Modelle zusätzliche Sensoren (GPS, Beschleunigungsmesser) um autonome Flüge zu ermöglichen und den Copter stabil halten. \\
 
-Um laufend Telemetriedaten zu erhalten und Funktionen steuern zu können, wird in den meisten Fällen über Funk mit dem Copter kommuniziert. Dafür wird ein Mobiles Gerät verwendet (Smartphone, Tablet, Notebook) auf dem eine Bodensationssoftware läuft. Dies ermöglicht die Steuerung in einem Umkreis von ca. 2km. Zusätzlich können mit Hilfe einer Bodenstationssoftware fixe Routen auf den Flight-Controller gespeichert werden, die dann im Automatikmodus autonom geflogen werden.
+Um laufend Telemetriedaten zu erhalten und Funktionen steuern zu können, wird in den meisten Fällen über Funk mit dem Copter kommuniziert. Dafür wird ein Mobiles Gerät verwendet (Smartphone, Tablet, Notebook) auf dem eine Bodensationssoftware läuft. Dies ermöglicht die Steuerung in einem Umkreis von ca. 2km. Zusätzlich können mit Hilfe einer Bodenstationssoftware fixe Routen auf den \Gls{Flight-Controller} gespeichert werden, die dann im Automatikmodus autonom geflogen werden.
 
 \newpage
 Dieses bewährte System hat allerdings einige Einschränkungen: 
@@ -38,7 +38,7 @@ Für den Flug mit Drohnen in der Schweiz gelten die Vorgaben des Bundesamtes fü
 	\item{\blockquote{Ein automatisierter Flug (autonomer Betrieb) innerhalb des Sichtbereiches des «Piloten» ist erlaubt, sofern dieser bei Bedarf jederzeit in die Steuerung eingreifen kann.}
 	\cite{drohne-bazl}}
 \end{itemize}
-In anderen Ländern gelten eher schärfere Regelungen, so ist etwa in den Vereinigten Staaten eine Registrierung für Freizeitdrohnen ab 250g erforderlich \cite[Seite 26]{pwc-drone}. In vielen Ländern werden die gesetzlichen Rahmenbedingungen aktuell angepasst, so dass auch Drohnen ausser Sichtweite betrieben werden können. Zum Beispiel kann in Polen mit einer theoretischer und praktischen Prüfung eine Lizenz erworben werden um Flüge ausser Sichtweite durchzuführen \cite[Seite 21]{pwc-drone}.\\
+In anderen Ländern gelten eher schärfere Regelungen, so ist etwa in den Vereinigten Staaten eine Registrierung für Freizeitdrohnen ab 250g erforderlich \cite[]{pwc-drone}. In vielen Ländern werden die gesetzlichen Rahmenbedingungen aktuell angepasst, so dass auch Drohnen ausser Sichtweite betrieben werden können. Zum Beispiel kann in Polen mit einer theoretischer und praktischen Prüfung eine Lizenz erworben werden um Flüge ausser Sichtweite durchzuführen \cite[]{pwc-drone}.\\
 
 Diese Entwicklung zeigt, dass die Zulassung von autonomen Drohnen auch in der Schweiz zukünftig denkbar ist. 
 
