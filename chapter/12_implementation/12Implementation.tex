@@ -71,9 +71,9 @@ Bemerkungen aus der Evaluation oben stehender Komponenten:
 \subsection{Onboard-App}
 
 \subsubsection{Entwicklungsumgebung}
-Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk Flight-Controllers, stellt dafür eine Open Source Android-API bereit. Die API kann im App integriert werden und erlaubt es, dem Flight-Controller direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
+Um den \Gls{Flight-Controller} mit \Gls{MAVLink} ansprechen zu können, musste eine Android/Java Library gefunden werden, die dies ermöglicht. Die Firma 3DR, der Hersteller des Pixhawk \Gls{Flight-Controller}s, stellt dafür eine Open Source Android-API bereit. Die API kann im App integriert werden und erlaubt es, dem \Gls{Flight-Controller} direkt Befehle zu erteilen. Ausserdem kann man über diese Schnittstelle auch Telemetriedaten auslesen und Events handeln, z.B. Höhenänderungen. Damit war es möglich, die Drohne vom App und damit auch vom Server aus zu steuern.\\
 
-Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den Flight-Controller simuliert. Die Simulation verhält sich nahezu identisch wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung zeigen. \\
+Um während der Entwicklung laufend Tests durchzuführen, ohne jedes Mal mit der echten Drohne zu testen, verwendeten wir eine Software, die den \Gls{Flight-Controller} simuliert. Die Simulation verhält sich nahezu identisch wie ein richtiger Controller und hilft herauszufinden, ob die gesendeten Befehle die erwartete Wirkung zeigen. \\
 
 Die verschiedenen Möglichkeiten, dass System zu testen sind im Github Repository dokumentiert. In der Abbildung \ref{fig:test-setup-onboard} wird ein Setup gezeigt, bei dem die Onboard-App im Android Emulator läuft (rechts unten). Gleichzeitig zeigt die Bodenstationssoftware die Echtzeit-Daten des simulierten Fluges an.
 
@@ -88,7 +88,7 @@ Die verschiedenen Möglichkeiten, dass System zu testen sind im Github Repositor
 	\hline
 	\textbf{Name} & \textbf{Verwendungszweck} & \textbf{Version} & \textbf{Lizenz} \\
 	\hline \hline
-	DroneKit-Android Client & Android API für MAV-Link Protokoll zum ansteuern der Drohne & 1.5.1 & Apache 2.0\\
+	DroneKit-Android Client & Android API für \Gls{MAVLink} Protokoll zum ansteuern der Drohne & 1.5.1 & Apache 2.0\\
 	\hline 
 	AMQP Messaging Library & Messaging für Android & 3.6.0 &  Mozilla Public License 1.1, GPL 2,  Apache 2.0 \\
 	\hline 
@@ -101,8 +101,8 @@ Die verschiedenen Möglichkeiten, dass System zu testen sind im Github Repositor
 Bemerkungen aus der Evaluation oben stehender Komponenten:
 \begin{itemize}
 	\item{\textbf{DroneKit-Android Client:} Es existiert keine gleichwertige Alternative die das \Gls{MAVLink} Protokoll in diesem Umfang abdeckt.}
-	\item{\textbf{AMQP Messaging Library:} Ist Voraussetzung für die Lyra Bibliothek um dieser das \Gls{AMQP} Protokoll zur Verfügung zu stellen.}
-	\item{\textbf{Lyra:} Die Bibliothek wird vom Hersteller der Message-Oriented-Middleware empfohlen. \cite[]{lyra-page} }
+	\item{\textbf{Lyra:} Die Bibliothek wird vom Hersteller der Message-Oriented-Middleware (\Gls{MOM}) empfohlen. \cite[]{lyra-page} }
+	\item{\textbf{AMQP Messaging Library:} Ermöglicht den Zugriff auf den RabbitMQ Message Broker.}
 	\item{\textbf{Dagger:} Wird von Google entwickelt und unterstützt Dependency Injection zur Kompilierzeit.}
 \end{itemize}
 
@@ -113,10 +113,10 @@ Gemäss den nicht-funktionalen Anforderungen soll ein Verbindungsabbruch zum Ser
 Sollte die Verbindung zwischen Server und Onboard-App unterbrochen sein, sollte verhindert werden, dass Nachrichten verloren gehen. Bei unterbrochener Verbindung wird dies wie folgt erreicht:
 \begin{itemize}
 	\item{\textbf{Nachricht vom Server zum Onboard-App} \\
-		Dieses Szenario wird durch RabbitMQ abgefangen. Der Messaging-Broker persistiert die Nachrichten solange bis die Onboard-App wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf.
+		Dieses Szenario wird durch RabbitMQ abgefangen. Der Message Broker persistiert die Nachrichten solange bis die Onboard-App wieder verfügbar ist. Es besteht somit kein zusätzlicher Handlungsbedarf.
 	}
 	\item{\textbf{Nachricht vom Onboard-App an den Server} \\
-		Hier steht der Broker nicht zur Verfügung und die Speicherung der Nachrichten musste implementiert werden. Dazu verwenden wir eine Queue in der alle Nachrichten gespeichert werden und erst entfernt werden, wenn sie verschickt wurden.
+		Hier steht der Message Broker nicht zur Verfügung und die Speicherung der Nachrichten musste implementiert werden. Dazu verwenden wir eine Queue in der alle Nachrichten gespeichert werden und erst entfernt werden, wenn sie verschickt wurden.
 	}
 \end{itemize}
 Mit diesen Massnahmen haben wir eine gute Balance zwischen Zuverlässigkeit und Implementationsaufwand erreicht.
@@ -124,16 +124,16 @@ Mit diesen Massnahmen haben wir eine gute Balance zwischen Zuverlässigkeit und 
 
 
 \subsubsection{Verbindungswiederherstellung}
-Gemäss den nicht-funktionalen Anforderungen, muss sichergestellt werden, dass nach einem Unterbruch der Internetverbindung eine Verbindungswiederherstellung stattfindet. Sobald die Verbindung mit dem Internet wieder besteht, soll nach 30 Sekunden wieder eine Verbindung zum Message-Broker bestehen. \\
+Gemäss den nicht-funktionalen Anforderungen, muss sichergestellt werden, dass nach einem Unterbruch der Internetverbindung eine Verbindungswiederherstellung stattfindet. Sobald die Verbindung mit dem Internet wieder besteht, soll nach 30 Sekunden wieder eine Verbindung zum Message Broker bestehen. \\
 
-Bei der Konfiguration der Verbindungswiederherstellung bestand die Wahl zwischen fixen oder inkrementellen Zeitabständen, nach denen eine Wiederherstellung versucht wird. Um das exakte Verhalten zu evaluieren, wurden Versuche gemacht, bei denen die Verbindung für 3 Sekunden unterbrochen wurde (siehe Tabelle \ref{tbl:backoff}).\\
+Bei der Konfiguration der Verbindungswiederherstellung bestand die Wahl zwischen fixen oder inkrementellen Zeitabständen, nach denen eine Wiederherstellung versucht wird. Um das exakte Verhalten zu evaluieren, wurden Versuche gemacht, bei denen die Verbindung für drei Sekunden unterbrochen wurde (siehe Tabelle \ref{tbl:backoff}).\\
 
 \begin{table}
 	
 	\centering
 	\begin{tabular}{|r|r|r|}
 		\hline
-		\textbf{Versuch} & \textbf{Mit inkrementellem Intervall [s] } & \textbf{Mit fixem Intervall [s])} \\
+		\textbf{Versuch} & \textbf{Mit inkrementellem Intervall [s] } & \textbf{Mit fixem Intervall [s]} \\
 		\hline
 		1 & 17 & 7 \\
 		2 &	7 & 7 \\
