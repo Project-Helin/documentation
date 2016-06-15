@@ -202,7 +202,7 @@ Die Anbindung an die Administrationsoberfläche erfolgt ebenfalls über HTTP und
 
 
 \subsection{Verwendete Enterprise Integration Patterns}
-Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns die je nach Anforderungen verwendet werden können. {\cite{EIP} Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
+Messaging-Systeme und Protokolle bieten eine grosse Auswahl an Patterns, die je nach Anforderungen verwendet werden können. {\cite{EIP} Für dieses Projekt benötigen wir nur einen kleinen Teil davon um den gestellten Anforderungen gerecht zu werden.
 %
 \subsubsection{Point-to-Point Channel}
 Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverlässigen Nachrichtenaustausch zu ermöglichen, wird jede Drohne bzw. jede App über einen separaten Point-to-Point Channel	\cite[S. 103]{EIP}} angebunden. Der Channel wird nach der Registrierung zugeteilt und stellt den Point-to-Point Kanal zwischen Drohne und Server dar. Dies garantiert dem Server, eine Nachricht an nur eine Drohne zu schicken.
@@ -212,8 +212,8 @@ Um zwischen einer registrierten Drohne und dem Server einen sicheren und zuverl�
 Die Fehlersemantik At-most-once gibt die Sicherheit, dass eine Drohne eine Mission oder einen Befehl nur ein Mal erhält. Ansonsten müsste das System idempotent gebaut werden. Exactly-once delivery ist ausserdem in der Praxis eigentlich unmöglich umzusetzen, weshalb wir uns für diese Alternative entschieden haben. 
 %
 \subsubsection{Event-driven Consumer}
-{Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit Aktionen auf Grund von Nachrichten auszuführen. Beispielsweise:
-%
+{Event-driven Consumer \cite[S. 442]{EIP}} Systeme bieten die Möglichkeit, Aktionen auf Grund von Nachrichten auszuführen. Beispielsweise:
+
 \begin{itemize}
 	\item Drohne erhält neue Mission vom Server und soll dies dem Drone-Operator anzeigen.
 	\item Server erhält neue Position von der Drohne und soll diese Nachricht dem Kunden weiterleiten und dem Administrator auf dem Web-Client anzeigen.
@@ -238,7 +238,7 @@ Der Bezahl- und Anmeldeprozess wird hier aus Übersichtsgründen nicht dargestel
 
 \section{Missionen}
 
-Wie im Domainmodel (Abb. \ref{fig:domain-model}) ersichtlich, enthalten alle Bestellungen mindestens eine Mission. Die Mission wiederum enthält alle Informationen, die für die Auslieferung notwendig sind. Das folgende Diagramm (Abb. \ref{fig:mission-state}) zeigt die möglichen Zustände einer Mission, von der Bestellung bis zur Rückkehr nach der Lieferung.
+Wie im Domain Model (Abb. \ref{fig:domain-model}) ersichtlich, enthalten alle Bestellungen mindestens eine Mission. Die Mission wiederum enthält alle Informationen, die für die Auslieferung notwendig sind. Das folgende Diagramm (Abb. \ref{fig:mission-state}) zeigt die möglichen Zustände einer Mission, von der Bestellung bis zur Rückkehr nach der Lieferung.
 
 \begin{figure}[h]
 	\centering
