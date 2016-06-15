@@ -25,7 +25,8 @@ Während dem Code-Review wurden die folgenden Anpassungen gemacht:
 	\item{Methoden unbenannt nach Java Standard: WGS84Helper -> Wgs84Helper }
 	\item{In manchen Tests wurde WKT ( Well Known Text ) statt WKB ( Well Known Binary ) für Polygone verwendet. WKT ist viel besser lesbar, weshalb wir dies überall geändert haben.}
 	\begin{lstlisting}
-    geometry = GisHelper.convertFromWkbToGeometry("0103000020E6100000010000000F000000FFBE7D4109A2214002A052D59E9E9C4740");
+    geometry = GisHelper.convertFromWkbToGeometry("0103000020E6100000010000000F00000" +
+                                                  "0FFBE7D4109A2214002A052D59E9E9C4740");
     // korrigiert zu
     String pointTypeString = "POLYGON ((35 10, 45 45, 15 40, 10 20, 35 10))";
     Polygon pointType = (Polygon) GisHelper.convertFromWktToGeometry(pointTypeString);
@@ -34,15 +35,15 @@ Während dem Code-Review wurden die folgenden Anpassungen gemacht:
 \newpage
 
 \section{13.05.2016 - Review Message Handling \& Message Queue}
-Folgende Code Änderungen wurden reviewed von MS und MA:
+Folgende Code-Änderungen wurden reviewed von MS und MA:
 \begin{itemize}
 	\item{Message Handling Server}
 	\item{Server Message Persistance}
 	\item{Message Handling Onboard app}
 \end{itemize}
-Während dem Code Review wurden die folgenden Anpassungen gemacht:
+Während dem Code-Review wurden die folgenden Anpassungen gemacht:
 \begin{itemize}
-	\item{Queue mit Exception-implementierung verbessert:
+	\item{Queue mit Exception-Implementierung verbessert:
 	\begin{lstlisting}
     if (connection.isOpen()) {
         while (messagesToSend.peek() != null) {
