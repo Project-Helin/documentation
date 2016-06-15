@@ -4,7 +4,7 @@
 
 Ziel dieser Arbeit ist es, eine mandantefähige Plattform zu konzipieren, zu entwickeln und zu veröffentlichen. Diese soll es Anbietern von Produkten und Services ermöglichen, ihre Drohnen für einen begrenzten Zeitraum oder für bestimmte Aufgaben zur Verfügung zu stellen. Das Ausführen einer Aufgabe soll, bis auf das Beladen der Drohne, komplett automatisiert ablaufen. \\
 
-Sobald ein Kunde eine Bestellung über eine App tätigt, wird automatisch eine Route zu seiner Position berechnet, die über vordefinierte, sichere Zonen führt. Über ein auf der Drohne angebrachtes Smartphone, werden Anweisungen für die Beladung angezeigt. Sobald die Vorbereitungen abgeschlossen sind, bewegt sich die Drohne mit Hilfe von GPS entlang der berechneten Route, erfüllt ihre Aufgabe und kehrt wieder zurück. Während der Mission werden laufend Telemetriedaten an den Server geschickt, welcher diese für den Anbieter visualisiert.\\
+Sobald ein Kunde eine Bestellung über eine App tätigt, wird automatisch eine Route zu seiner Position berechnet, die über vordefinierte, sichere Zonen führt. Über ein auf der Drohne angebrachtes Smartphone, werden Anweisungen für die Beladung angezeigt. Sobald die Vorbereitungen abgeschlossen sind, bewegt sich die Drohne, mit Hilfe von GPS, entlang der berechneten Route, erfüllt ihre Aufgabe und kehrt wieder zurück. Während der Mission werden laufend Telemetriedaten an den Server geschickt, welcher diese für den Anbieter visualisiert.\\
 
 Project Helin wird als Open Source Software veröffentlicht und kann dann von jedem Interessertien gehostet und weiterentwickelt werden.\\
 
@@ -12,9 +12,9 @@ In der weiteren Dokumentation werden die Anforderungen, die Architektur, die wic
 
 \section{Ausgangslage}
 
-Alle Multicopter verfügen bereits in der Grundausstattung über einen \Gls{Flight-Controller}, der die Befehle der Fernbedienung in Steuerbefehle für die Motoren übersetzt. Zusätzlich nutzen viele Modelle zusätzliche Sensoren (GPS, Beschleunigungsmesser) um autonome Flüge zu ermöglichen und den Copter stabil halten. \\
+Alle Multicopter verfügen bereits in der Grundausstattung über einen \Gls{Flight-Controller}, der die Befehle der Fernbedienung in Steuerbefehle für die Motoren übersetzt. Zusätzlich nutzen viele Modelle zusätzliche Sensoren (GPS, Beschleunigungsmesser), um autonome Flüge zu ermöglichen und den Copter stabil halten. \\
 
-Um laufend Telemetriedaten zu erhalten und Funktionen steuern zu können, wird in den meisten Fällen über Funk mit dem Copter kommuniziert. Dafür wird ein mobiles Gerät verwendet (Smartphone, Tablet, Notebook) auf dem eine Bodensationssoftware läuft. Dies ermöglicht die Steuerung in einem Umkreis von ca. 2km. Zusätzlich können mit Hilfe einer Bodenstationssoftware fixe Routen auf den \Gls{Flight-Controller} gespeichert werden, die dann im Automatikmodus autonom geflogen werden.
+Um laufend Telemetriedaten zu erhalten und Funktionen steuern zu können, wird in den meisten Fällen über Funk mit dem Copter kommuniziert. Dafür wird ein mobiles Gerät verwendet (Smartphone, Tablet, Notebook) auf dem eine Bodenstationssoftware läuft. Dies ermöglicht die Steuerung in einem Umkreis von ca. 2 km. Zusätzlich können mit Hilfe einer Bodenstationssoftware fixe Routen auf den \Gls{Flight-Controller} gespeichert werden, die dann im Automatikmodus autonom geflogen werden.
 
 \newpage
 Dieses bewährte System hat allerdings einige Einschränkungen: 
@@ -23,7 +23,7 @@ Dieses bewährte System hat allerdings einige Einschränkungen:
 	\item{Reichweite ist begrenzt}
 	\item{Daten der Flüge sind nur für einen Benutzer einsehbar (Lokale Speicherung der Daten)}
 	\item{Flugrouten müssen von Hand eingegeben werden}
-	\item{Keine zentrale Komponente, auf die andere Systeme (z.B. Bestell-Apps) zugreifen und Aktionen der Drohnen auslösen können.}
+	\item{Keine zentrale Komponente, auf die andere Systeme (z.B. Bestell-Apps) zugreifen und Aktionen der Drohnen auslösen können}
 \end{itemize}
 
 Project Helin soll nun alle diese Einschränkungen aufheben. Damit können Anbieter neue Dienstleistungen erbringen, die nur mit autonomen Flugdrohnen in einer sinnvollen Effizienz möglich sind. Beispielsweise macht es nur in den seltensten Fällen Sinn, Lieferungen mit Drohnen auszuführen, wenn diese von Hand geflogen werden müssen. \\
@@ -31,7 +31,7 @@ Project Helin soll nun alle diese Einschränkungen aufheben. Damit können Anbie
 Bis jetzt gibt es kein vergleichbares System, dass mit Drohnen über das Internet (4G) live kommuniziert und gleichzeitig die Anbindung von zusätzlichen Systemen erlaubt.
 
 \section{Gesetzliche Rahmenbedingungen}
-Für den Flug mit Drohnen in der Schweiz gelten die Vorgaben des Bundesamtes für Zivilluftfahrt (BAZL). Die für uns relevanten Punkte umfassen:
+Für den Flug mit Drohnen in der Schweiz gelten die Vorgaben des Bundesamtes für Zivilluftfahrt (BAZL), die für uns relevanten Punkte umfassen:
 \begin{itemize}
 	\item{\blockquote{Für den Betrieb von Drohnen und Flugmodellen mit einem Gewicht von über 30 Kilogramm braucht es eine Bewilligung des BAZL.} \cite{drohne-bazl}}
 	\item{\blockquote{Über Menschenansammlungen bzw. im Umkreis von 100 Metern von Menschenansammlungen dürfen Drohnen grundsätzlich nicht betrieben werden.} \cite{drohne-bazl}}
