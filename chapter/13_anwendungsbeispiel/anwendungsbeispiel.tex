@@ -2,7 +2,7 @@
 
 \section{Einleitung}
 
-Um die vom Team erstellte Plattform auch unter realen Bedingungen testen zu können, wurde ein Versuchsaufbau mit zwei Drohnen erstellt, welche es ermöglichen Produkte zu transportieren und über dem Kunden mit einem Fallschirm abzuwerfen. Der Aufbau der Drohnen beinhaltete die Zusammenstellung der passenden Komponenten, den Zusammenbau der Drohnen und die Planung und Erstellung von zusätzlichen Halterungen für die obengenannten spezifischen Anforderungen.\\
+Um die vom Team erstellte Plattform auch unter realen Bedingungen testen zu können, wurde ein Versuchsaufbau mit zwei Drohnen erstellt, welche es ermöglichen Produkte zu transportieren und über dem Kunden mit einem Fallschirm abzuwerfen. Der Aufbau der Drohnen beinhaltete die Zusammenstellung der passenden Komponenten, den Zusammenbau der Drohnen und die Planung und Erstellung von zusätzlichen Halterungen für die obengenannten Anforderungen.\\
 
 \subsection{Kommunikationshardware}
 \label{sec:communication-hardware}
@@ -36,7 +36,7 @@ Um ein möglichst sicheres und einfaches Ablieferungsverfahren zu finden, wurden
 
 \subsection{Landung ohne automatischen Abwurf}
 
-Bei diesem Konzept landet die Drohne an der Position des Kunden und dieser kann dann selbst das Paket von der Drohne lösen. Er wird dann mit Hilfe der Onboard-App aufgefordert den Erhalt der Bestellung zu bestätigen. Nach der Bestätigung startet die Drohne einen Countdown, hebt danach ab und fliegt zur Ausgangsposition zurück. Der Kunde kann den Countdown unterbrechen und erneut starten.
+Bei diesem Konzept landet die Drohne an der Position des Kunden und dieser kann dann selbst das Paket von der Drohne lösen. Er wird dann mit Hilfe der Onboard-App aufgefordert den Erhalt der Bestellung zu bestätigen. Nach der Bestätigung startet die Drohne einen Countdown, hebt danach ab und fliegt zur Ausgangsposition zurück. Der Kunde kann den Countdown unterbrechen und erneut starten.\\
 
 Vorteile:
 \begin{itemize}
@@ -57,7 +57,7 @@ Nachteile:
 
 \subsection{Landung mit automatischem Abwurf}
 
-Dieses System ermöglicht es ohne Fallschirm die Ware abzuwerfen. Dabei Landet die Drohne, löst die Ladung und startet sofort wieder. Es gibt keinerlei Interaktion mit dem Kunden.
+Dieses System ermöglicht es ohne Fallschirm die Ware abzuwerfen. Dabei Landet die Drohne, löst die Ladung und startet sofort wieder. Es gibt keinerlei Interaktion mit dem Kunden.\\
 
 Vorteile:
 \begin{itemize}
@@ -75,7 +75,7 @@ Nachteile:
 
 \subsection{Abwurf mit Fallschirm}
 
-Dabei wird ein Fallschirm an der Ware befestigt. Die Drohne löst die Ladung in einer vorgegebenen Höhe und die Ladung schwebt zu Boden.
+Dabei wird ein Fallschirm an der Ware befestigt. Die Drohne löst die Ladung in einer vorgegebenen Höhe und die Ladung schwebt zu Boden.\\
 
 Vorteile:
 \begin{itemize}
@@ -108,9 +108,7 @@ Nachteile:
 Die Nutzwertanalyse in Abbildung \ref{fig:nutzwertanalyse_abwurf} zeigt klar, dass die letzte Variante die meisten Vorteile bringt. Wichtig ist auch, dass ein Abwurf im gelandeten Zustand weiterhin möglich bleibt, ohne die mechanischen Komponenten zu verändern. Deshalb haben wir uns für einen Abwurf mit dem Fallschirm entschieden.
 
 \subsection{Fallschirmgrösse}
-
-Für den Fallschirm musste die optimale Grösse berechnet werden. Aufgrund der Resultate aus dem Tragfähigkeitstests (Kapitel \ref{sec:drone-gewichttest}) wird die Grösse für eine $1/2$-Liter Flasche berechnet.
-Eine PET-Flasche die von einem ein Meter hohen Tisch (h) fällt, bleibt unbeschädigt. Aus diesem Grund haben wir die Geschwindigkeit für diesen Aufprall errechnet.
+Wir nehmen an, dass eine 0.5 Liter PET-Flasche die von einem ein Meter hohen Tisch (h = Höhe) fällt, unbeschädigt bleibt. Basierend auf dieser Annahme haben wir die Geschwindigkeit für diesen Aufprall errechnet.
 
 \begin{equation}
 \label{eq:pet}
@@ -128,7 +126,7 @@ Nun musste der Fallschirm dimensioniert werden.
 	\caption{Skizze des physikalischen Modells eines Fallschirms}
 	\label{fig:fallschirm-berechnung}
 \end{figure}
-Einfachheitshalber wird angenommen, dass der Fallschirm die Form einer Kugelkalotte, wie dies in der Grafik \ref{fig:fallschirm-berechnung} dargestellt, hat und ein Zielgewicht von 500g. Die Fläche des Fallschirms kann anhand der folgender Gleichung ausgedrückt werden:
+Einfachheitshalber wird angenommen, dass der Fallschirm die Form einer Kugelkalotte (Abb. \ref{fig:fallschirm-berechnung}) hat und ein Gewicht von 500g trägt. Die Fläche des Fallschirms kann anhand der folgender Gleichung ausgedrückt werden:
 
 
 \begin{equation}
