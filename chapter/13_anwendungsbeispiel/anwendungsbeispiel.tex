@@ -9,7 +9,7 @@ Um die vom Team erstellte Plattform auch unter realen Bedingungen testen zu kön
 Da die Drohne eine Verbindung zum Server benötigt, muss geeignete Kommunikationshardware installiert werden. Aus folgenden Gründen haben wir uns für ein Android-Smartphone entschieden:
 \begin{itemize}
 	\item{Der Status der Drohne und Anweisungen zur Beladung können angezeigt werden}
-	\item{Die Anbindung an den Flight-Controller ist über eine bestehende API möglich}
+	\item{Die Anbindung an den \Gls{Flight-Controller} ist über eine bestehende API möglich}
 	\item{Das Android-Betriebssystem stellt die Kommunikation über WLAN oder GSM zur Verfügung}
 \end{itemize}
 
@@ -162,8 +162,8 @@ Der Durchmesser des Prototypenfallschirms muss somit etwa $1.12 \text{m}$ betrag
 Bei der Zusammenstellung der Komponenten haben wir vor allem auf die gute Verfügbarkeit von
 Ersatzteilen und einen hohen Marktanteil der Komponenten geachtet. Besonders wichtig erschien uns, dass ein Anbieter nicht an einen Hersteller gebunden ist, sondern die Drohne an seine Bedürfnisse (Zuladung, Reichweite, Geschwindigkeit) anpassen kann. Es sollten also möglichst wenige Voraussetzungen bestehen um die Plattform nutzen zu können. Folgende Anforderungen sind allerdings unabdingbar:
 \begin{itemize}
-	\item Flight-Controller muss \Gls{MAVLink} Protokoll unterstüzen
-	\item Onboard-App muss über MAVLink mit dem Flight-Controller verbunden sein. (Über USB oder eine Funk-Telemetrieverbindung.)
+	\item \Gls{Flight-Controller} muss \Gls{MAVLink} Protokoll unterstüzen
+	\item Onboard-App muss über \Gls{MAVLink} mit dem \Gls{Flight-Controller} verbunden sein. (Über USB oder eine Funk-Telemetrieverbindung.)
 \end{itemize}
 
 \subsection{Teile-Liste}
@@ -207,9 +207,9 @@ Der Frame, die Motoren und ESCs wurden als Kit gekauft. Es handelt sich dabei um
 
 \subsection{Flight-Controller}
 
-Der Flight-Controller ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst, alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches Abfliegen von Wegpunkten.
+Der \Gls{Flight-Controller} ist das Herzstück eines Multicopters. Im Unterschied zu anderen ferngesteuerten Fahr- und Flugzeugen kann ein Multicopter nur über ein Fly-by-Wire System kontrolliert werden. Das heisst, alle Befehle, die von der Fernbedienung gesendet werden, müssen interpretiert und umgewandelt werden, damit die Motoren eine Bewegung in die gewünschte Richtung erzeugen können. In Kombination mit einem GPS Modul (Abb. \ref{fig:gps-module}) ermöglich der Controller verschiedene Flugmodi, wie beispielsweise das Schweben an einem Punkt oder automatisches Abfliegen von Wegpunkten.
 
-Als Flight-Controller setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open-Source ist und auch bei vielen anderen Projekten eingesetzt wird. Sie unterstützt ausserdem das \Gls{MAVLink} Protokoll.
+Als \Gls{Flight-Controller} setzen wir ein Pixhawk ein. Es ist sehr vielseitig und kann gut mit zusätzlichen Sensoren erweitert werden, ausserdem unterstützt es gängige Firmwares, die auch auf günstigeren Controllern laufen. Als Firmware für das Pixhawk setzen wir ArduCopter ein, da sie komplett Open-Source ist und auch bei vielen anderen Projekten eingesetzt wird. Sie unterstützt ausserdem das \Gls{MAVLink} Protokoll.
 \begin{figure}[H]
 		\centering
 	\begin{minipage}[b]{0.45\textwidth}
